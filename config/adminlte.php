@@ -207,9 +207,11 @@ return [
     |
     */
 
-    'enabled_laravel_mix' => false,
+    'enabled_laravel_mix' => true,
     'laravel_mix_css_path' => 'css/app.css',
     'laravel_mix_js_path' => 'js/app.js',
+    'laravel_mix_js_path' => 'js/jquery.mask.min.js',
+    'laravel_mix_js_path' => 'js/common.js',
 
     /*
     |--------------------------------------------------------------------------
