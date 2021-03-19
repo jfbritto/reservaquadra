@@ -304,6 +304,11 @@ return [
         //     'url'        => '#',
         // ],
         [
+            'text'       => 'Login',
+            'icon_color' => 'blue',
+            'url'        => '/login',
+        ],
+        [
             'text'       => 'Reservar',
             'icon_color' => 'green',
             'url'        => '/',
@@ -312,13 +317,13 @@ return [
             'text'       => 'Quadras',
             'icon_color' => 'cyan',
             'url'        => 'quadras',
-            // 'can'        => 'admin',
+            'can'        => 'admin',
         ],
         [
             'text'       => 'Reservas',
             'icon_color' => 'yellow',
             'url'        => 'reservas',
-            // 'can'        => 'admin',
+            'can'        => 'admin',
         ],
     ],
 
