@@ -64,18 +64,6 @@ $(document).ready(function () {
         let name = $(this).data('name');
 
         $("#court-chosen").html(name);
-        
-        $("#reset").show();
-
-        $("#list-courts").html(`
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <strong>Quadra escolhida: </strong> ${name}
-                    </div>
-                </div>
-            </div>
-        `);
 
         Swal.queue([
             {
@@ -122,6 +110,18 @@ $(document).ready(function () {
      
                                 });
 
+                                $("#reset").show();
+
+                                $("#list-courts").html(`
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body text-center">
+                                                <strong>Quadra escolhida: </strong> ${name}
+                                            </div>
+                                        </div>
+                                    </div>
+                                `);
+
                                 $("html, body").animate({ scrollTop: (($("#list-available-week-days").offset().top) -12) }, 800);
 
                             }else{
@@ -158,16 +158,6 @@ $(document).ready(function () {
 
         $("#available-day-chosen").html(`${week_day_description[week_day]}, ${dateFormat(day)}`);
         $("#reservation_date").val(day)
-
-        $("#list-available-week-days").html(`
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <strong>Dia escolhido: </strong> ${week_day_description[week_day]}, ${dateFormat(day)}
-                    </div>
-                </div>
-            </div>
-        `)
         
         Swal.queue([
             {
@@ -211,6 +201,16 @@ $(document).ready(function () {
                                     `);
      
                                 });
+
+                                $("#list-available-week-days").html(`
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body text-center">
+                                                <strong>Dia escolhido: </strong> ${week_day_description[week_day]}, ${dateFormat(day)}
+                                            </div>
+                                        </div>
+                                    </div>
+                                `);
 
                                 $("html, body").animate({ scrollTop: (($("#list-available-times").offset().top) -12) }, 800);
 
