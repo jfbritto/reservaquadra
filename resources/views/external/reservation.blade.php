@@ -57,7 +57,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="phone_reserved">Telefone</label>
-                                <input type="text" required name="phone_reserved" id="phone_reserved" class="form-control phone" placeholder="Informe seu nª">
+                                <input type="text" required name="phone_reserved" id="phone_reserved" class="form-control phone" placeholder="Informe seu nº">
                             </div>
                         </div>
                     </div>
