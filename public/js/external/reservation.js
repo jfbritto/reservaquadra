@@ -1,6 +1,13 @@
 $(document).ready(function () {
     loadCourts();
 
+    function resetScreen() {
+        $("#reset").hide(``);
+        $("#list-courts").html(``);
+        $("#list-available-week-days").html(``);
+        $("#list-available-times").html(``);
+    }
+
     function loadCourts() {
         $.post(window.location.origin + "/listar-quadras", {})
             .then(function (data) {
@@ -57,6 +64,18 @@ $(document).ready(function () {
         let name = $(this).data('name');
 
         $("#court-chosen").html(name);
+        
+        $("#reset").show();
+
+        $("#list-courts").html(`
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <strong>Quadra escolhida: </strong> ${name}
+                    </div>
+                </div>
+            </div>
+        `);
 
         Swal.queue([
             {
@@ -140,6 +159,16 @@ $(document).ready(function () {
         $("#available-day-chosen").html(`${week_day_description[week_day]}, ${dateFormat(day)}`);
         $("#reservation_date").val(day)
 
+        $("#list-available-week-days").html(`
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <strong>Dia escolhido: </strong> ${week_day_description[week_day]}, ${dateFormat(day)}
+                    </div>
+                </div>
+            </div>
+        `)
+        
         Swal.queue([
             {
                 title: "Carregando...",
@@ -147,7 +176,7 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + `/listar-horarios-disponiveis/${id_court}/${week_day}`, {
+                    $.post(window.location.origin + `/listar-horarios-disponiveis/${id_court}/${week_day}/${day}`, {
                         
                     })
                     .then(function (data) {
@@ -175,7 +204,9 @@ $(document).ready(function () {
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
                                             <span>De <b>${item.start_time}</b> às <b>${item.end_time}</b></span>
                                             <span class="badge badge-success badge-pill">R$ ${moneyFormat(item.price)}</span>
-                                            <button class="btn btn-success btn-sm chose-time" data-id="${item.id}" data-start_time="${item.start_time}" data-end_time="${item.end_time}" data-price="${item.price}" >Escolher</button>
+                                            ${item.reserved == null?`
+                                                <button class="btn btn-success btn-sm chose-time" data-id="${item.id}" data-start_time="${item.start_time}" data-end_time="${item.end_time}" data-price="${item.price}" >Escolher</button>
+                                            `:`<button class="btn btn-warning btn-sm" disabled >Reservado</button>`}
                                         </li>
                                     `);
      
@@ -248,10 +279,8 @@ $(document).ready(function () {
                                 $("#formReservation").each(function () {
                                     this.reset();
                                 });
-                                
-                                $("#list-courts").html("");
-                                $("#list-available-week-days").html("");
-                                $("#list-available-times").html("");
+
+                                resetScreen();
 
                                 $("#modalReservation").modal("hide");
                                 loadCourts();
@@ -281,6 +310,13 @@ $(document).ready(function () {
             },
         ]);
     });
+
+    $("#reset").on("click", function(){
+
+        resetScreen();
+        loadCourts();
+
+    })
     
 
 });

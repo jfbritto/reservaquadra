@@ -1,9 +1,5 @@
 @extends('adminlte::page')
 
-@section('css')
-	<link rel="stylesheet" href="/css/estilo.css">
-@stop
-
 @section('title', 'Registrar')
 
 @section('content_header')

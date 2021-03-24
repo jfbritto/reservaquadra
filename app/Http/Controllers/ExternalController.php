@@ -87,10 +87,10 @@ class ExternalController extends Controller
         return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
     }
 
-    public function list_available_day_times($id, $day) 
+    public function list_available_day_times($id, $week_day, $day) 
     {
 
-        $response = $this->availableDateService->list_day_times($id, $day);
+        $response = $this->availableDateService->list_day_times($id, $week_day, $day);
 
         if($response['status'] == 'success')
             return response()->json(['status'=>'success', 'data'=>$response['data']], 201);

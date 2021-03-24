@@ -452,6 +452,16 @@ return [
                 ],
             ],
         ],
+        'Estilo' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => '/css/estilo.css',
+                ],
+            ],
+        ],
     ],
 
     /*

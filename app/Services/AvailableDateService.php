@@ -72,14 +72,17 @@ class AvailableDateService
         return $response;
     }
 
-    public function list_day_times($id, $day)
+    public function list_day_times($id, $week_day, $day)
     {
         $response = [];
 
         try{
-            $return = DB::select( DB::raw("select avd.*, crt.name as court_name 
-                                           from available_dates avd join courts crt on crt.id=avd.id_court 
-                                           where avd.active = 1 and crt.active = 1 and avd.id_court = ".$id." and avd.week_day = ".$day." 
+            $return = DB::select( DB::raw("select avd.*, crt.name as court_name, res.id as reserved, res.status
+                                           from 
+                                                available_dates avd 
+                                                join courts crt on crt.id=avd.id_court 
+                                                left join reservations res on res.id_available_date=avd.id and res.reservation_date = '".$day." '
+                                           where avd.active = 1 and crt.active = 1 and avd.id_court = ".$id." and avd.week_day = ".$week_day." 
                                            order by avd.week_day, avd.start_time"));
 
             $response = ['status' => 'success', 'data' => $return];

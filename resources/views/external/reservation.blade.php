@@ -12,9 +12,11 @@
 
 @section('content')
     
-    <div class="row pb-5" id="list-courts"></div>
+    <a href="#" class="btn btn-danger btn-block mb-3" id="reset" style="display: none;">Resetar escolha</a>
 
-    <div class="row pb-5" id="list-available-week-days"></div>
+    <div class="row" id="list-courts"></div>
+
+    <div class="row" id="list-available-week-days"></div>
 
     <div class="list-group pb-5" id="list-available-times"></div>
 

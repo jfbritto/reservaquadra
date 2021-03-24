@@ -13,7 +13,7 @@ Route::post('/register', 'UserController@store');
 Route::get('/', 'ExternalController@index');
 Route::post('/listar-quadras', 'ExternalController@list_courts');
 Route::post('/listar-dias-disponiveis/{id}', 'ExternalController@list_week_days');
-Route::post('/listar-horarios-disponiveis/{id}/{day}', 'ExternalController@list_available_day_times');
+Route::post('/listar-horarios-disponiveis/{id}/{week_day}/{day}', 'ExternalController@list_available_day_times');
 Route::post('/reservar-horario', 'ExternalController@store');
 
 Route::group(['middleware' => ['auth']], function(){
@@ -36,5 +36,6 @@ Route::group(['middleware' => ['auth']], function(){
     //reservas
     Route::get('/reservas', 'ReservationController@index');
     Route::post('/reservas/listar', 'ReservationController@list');
+    Route::post('/reservas/change-status', 'ReservationController@change_status');
 
 });

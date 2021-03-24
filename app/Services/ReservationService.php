@@ -35,10 +35,39 @@ class ReservationService
         $response = [];
 
         try{
-            $return = DB::select( DB::raw("select res.*, avd.week_day, avd.price, avd.start_time, avd.end_time from reservations res join available_dates avd on avd.id=res.id_available_date order by res.reservation_date"));
+            $return = DB::select( DB::raw(" select 
+                                                res.*, avd.week_day, avd.price, avd.start_time, avd.end_time 
+                                            from reservations res 
+                                                join available_dates avd on avd.id=res.id_available_date 
+                                            order by 
+                                                res.status desc, res.reservation_date"));
 
             $response = ['status' => 'success', 'data' => $return];
         }catch(Exception $e){
+            $response = ['status' => 'error', 'data' => $e->getMessage()];
+        }
+
+        return $response;
+    }
+
+    public function change_status(array $data)
+    {
+        $response = [];
+
+        try{
+
+            DB::beginTransaction();
+
+            $reservation = DB::table('reservations')
+                        ->where('id', $data['id'])
+                        ->update(['status' => $data['status']]);
+
+            DB::commit();
+
+            $response = ['status' => 'success', 'data' => $reservation];
+
+        }catch(Exception $e){
+            DB::rollBack();
             $response = ['status' => 'error', 'data' => $e->getMessage()];
         }
 
