@@ -48,7 +48,7 @@ $(document).ready(function () {
 
                                     $("#list").append(`
                                         <tr>
-                                            <td class="align-middle text-center" colspan="4">Nenhuma reserva efetuada</td>
+                                            <td class="align-middle text-center" colspan="8">Nenhuma reserva efetuada</td>
                                         </tr>
                                     `);  
 

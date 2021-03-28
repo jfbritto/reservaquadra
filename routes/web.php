@@ -38,4 +38,11 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post('/reservas/listar', 'ReservationController@list');
     Route::post('/reservas/change-status', 'ReservationController@change_status');
 
+    //alunos
+    Route::get('/alunos', 'UserController@student');
+    Route::post('/alunos/listar', 'UserController@list_student');
+    Route::post('/alunos/cadastrar', 'UserController@store_student');
+    Route::post('/alunos/editar', 'UserController@update_student');
+    Route::post('/alunos/deletar', 'UserController@destroy');
+
 });

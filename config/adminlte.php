@@ -325,6 +325,12 @@ return [
             'url'        => 'reservas',
             'can'        => 'admin',
         ],
+        [
+            'text'       => 'Alunos',
+            'icon_color' => 'pink',
+            'url'        => 'alunos',
+            'can'        => 'admin',
+        ],
     ],
 
     /*
