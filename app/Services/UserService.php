@@ -84,7 +84,7 @@ class UserService
         $response = [];
 
         try{
-            $return = DB::select( DB::raw("select usr.* from users usr where usr.active = 1 and usr.group = ".$group." order by usr.name"));
+            $return = DB::select( DB::raw("select usr.* from users usr where usr.active = 1 and usr.group in (".implode(',',$group).") order by usr.name"));
 
             $response = ['status' => 'success', 'data' => $return];
         }catch(Exception $e){

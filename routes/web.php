@@ -45,4 +45,11 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post('/alunos/editar', 'UserController@update_student');
     Route::post('/alunos/deletar', 'UserController@destroy');
 
+    //funcionarios
+    Route::get('/funcionarios', 'UserController@employee');
+    Route::post('/funcionarios/listar', 'UserController@list_employee');
+    Route::post('/funcionarios/cadastrar', 'UserController@store_employee');
+    Route::post('/funcionarios/editar', 'UserController@update_employee');
+    Route::post('/funcionarios/deletar', 'UserController@destroy');
+
 });

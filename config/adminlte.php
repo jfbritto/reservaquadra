@@ -331,6 +331,12 @@ return [
             'url'        => 'alunos',
             'can'        => 'admin',
         ],
+        [
+            'text'       => 'Funcionários',
+            'icon_color' => 'orange',
+            'url'        => 'funcionarios',
+            'can'        => 'admin',
+        ],
     ],
 
     /*

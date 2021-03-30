@@ -41,7 +41,7 @@ class UserController extends Controller
     public function list_student() 
     {
 
-        $response = $this->userService->list(4);
+        $response = $this->userService->list([4]);
 
         if($response['status'] == 'success')
             return response()->json(['status'=>'success', 'data'=>$response['data']], 201);
@@ -64,6 +64,69 @@ class UserController extends Controller
 
         return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
     }
+
+
+
+
+
+
+    public function employee()
+    {
+        return view('user.employee.home');
+    }
+
+    //adicionar user
+    public function store_employee(Request $request)
+    {
+        $data = [
+            'id_company' => 1,
+            'name' => trim($request->name),
+            'email' => trim($request->email) ,
+            'password' => bcrypt(trim(123456)),
+            'group' => trim($request->group),
+        ];
+
+        $response = $this->userService->store($data);
+
+        if($response['status'] == 'success')
+            return response()->json(['status'=>'success'], 201);
+
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);
+    }
+
+    public function list_employee() 
+    {
+
+        $response = $this->userService->list([2,3]);
+
+        if($response['status'] == 'success')
+            return response()->json(['status'=>'success', 'data'=>$response['data']], 201);
+
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+    }
+
+    public function update_employee(Request $request) 
+    {
+        $data = [
+            'id' => trim($request->id),
+            'name' => trim($request->name),
+            'email' => trim($request->email)
+        ];
+
+        $response = $this->userService->update($data);
+
+        if($response['status'] == 'success')
+            return response()->json(['status'=>'success'], 201);
+
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+    }
+
+
+
+
+
+
+
 
     public function destroy(Request $request) 
     {
