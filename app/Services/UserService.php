@@ -94,4 +94,19 @@ class UserService
         return $response;
     }
 
+    public function find($id)
+    {
+        $response = [];
+
+        try{
+            $return = DB::select( DB::raw("select usr.* from users usr where id = ".$id.""));
+
+            $response = ['status' => 'success', 'data' => $return];
+        }catch(Exception $e){
+            $response = ['status' => 'error', 'data' => $e->getMessage()];
+        }
+
+        return $response;
+    }
+
 }

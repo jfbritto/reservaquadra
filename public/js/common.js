@@ -2,6 +2,8 @@
 const week_day_description = {1:'Segunda',2:'Terça',3:'Quarta',4:'Quinta',5:'Sexta',6:'Sábado',7:'Domingo'};
 
 $('.money').mask('#.##0,00', {reverse: true});
+$('.zip_code').mask('00000-000');
+$('.cpf').mask('000.000.000-00');
 
 
 var SPMaskBehavior = function (val) {

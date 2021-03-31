@@ -12,8 +12,8 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + "/alunos/listar", {
-                        
+                    $.get(window.location.origin + "/alunos/encontrar", {
+                        id:$("#id_usr").val()
                     })
                         .then(function (data) {
                             if (data.status == "success") {
@@ -22,25 +22,26 @@ $(document).ready(function () {
                                 $("#list").html(``);
 
                                 if(data.data.length > 0){
-                                    
-                                    // $('#table').DataTable( {
-                                    //     "ajax": data.data
-                                    // } );
 
-                                    data.data.forEach(item => {
+                                    let item = data.data[0];
+                                    $(".name_user").html(item.name);
 
-                                        $("#list").append(`
-                                            <tr>
-                                                <td class="align-middle">${item.name}</td>
-                                                <td class="align-middle">${item.email}</td>
-                                                <td class="align-middle" style="text-align: right">
-                                                    <a title="Abrir" href="/alunos/exibir/${item.id}" class="btn btn-info open-student"><i style="color: white" class="fas fa-eye"></i></a>
-                                                    <a title="Editar" data-id="${item.id}" data-name="${item.name}" data-email="${item.email}" data-birth="${item.birth}" data-cpf="${item.cpf}" data-rg="${item.rg}" data-civil_status="${item.civil_status}" data-profession="${item.profession}" data-zip_code="${item.zip_code}" data-uf="${item.uf}" data-city="${item.city}" data-neighborhood="${item.neighborhood}" data-address="${item.address}" data-address_number="${item.address_number}" data-complement="${item.complement}" data-start_date="${item.start_date}" data-health_plan="${item.health_plan}" data-how_met="${item.how_met}" href="#" class="btn btn-warning edit-student"><i style="color: white" class="fas fa-edit"></i></a>
-                                                    <a title="Deletar" data-id="${item.id}" href="#" class="btn btn-danger delete-student"><i class="fas fa-trash-alt"></i></a>
-                                                </td>
-                                            </tr>
-                                        `);       
-                                    });
+                                    $("#name").html(item.name);
+                                    $("#email").html(item.email);
+                                    $("#birth").html(dateFormat(item.birth));
+                                    $("#cpf").html(item.cpf);
+                                    $("#rg").html(item.rg);
+                                    $("#civil_status").html(item.civil_status);
+                                    $("#profession").html(item.profession);
+                                    $("#zip_code").html(item.zip_code);
+                                    $("#city").html(`${item.city} - ${item.uf}`);
+                                    $("#neighborhood").html(item.neighborhood);
+                                    $("#address").html(`${item.address}, ${item.address_number}`);
+                                    $("#complement").html(item.complement);
+                                    $("#start_date").html(dateFormat(item.start_date));
+                                    $("#health_plan").html(item.health_plan);
+                                    $("#how_met").html(item.how_met);
+
 
                                 }else{
 

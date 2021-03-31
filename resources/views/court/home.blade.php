@@ -8,14 +8,18 @@
 
 @section('content')
     
-    <div class="card card-default">
-        <div class="card-header">
-            <button style="float: right;" type="button" class="btn btn-success" data-toggle="modal" data-target="#modalStoreCourt"><i class="fas fa-plus-circle"></i></button>
+    <div class="card">
+        <div class="card-header border-0">
+            <h3 class="card-title"> </h3>
+            <div class="card-tools">
+                <a href="#" class="btn btn-tool btn-sm" data-toggle="modal" data-target="#modalStoreCourt">
+                <i class="fas fa-plus"></i>
+                </a>
+            </div>
         </div>
-        <div class="card-body">
-
+        <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-condensed table-hover table-sm">
+                <table class="table table-striped table-valign-middle table-hover">
                     <thead>
                         <tr>
                             <th>Nome</th>
@@ -25,7 +29,6 @@
                     <tbody id="list"></tbody>
                 </table>
             </div>
-
         </div>
     </div>
 

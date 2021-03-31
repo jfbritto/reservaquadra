@@ -40,6 +40,8 @@ Route::group(['middleware' => ['auth']], function(){
 
     //alunos
     Route::get('/alunos', 'UserController@student');
+    Route::get('/alunos/exibir/{id}', 'UserController@show_student');
+    Route::get('/alunos/encontrar', 'UserController@find_student');
     Route::post('/alunos/listar', 'UserController@list_student');
     Route::post('/alunos/cadastrar', 'UserController@store_student');
     Route::post('/alunos/editar', 'UserController@update_student');

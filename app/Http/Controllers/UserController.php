@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\UserService;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -19,13 +20,44 @@ class UserController extends Controller
         return view('user.student.home');
     }
 
+    public function show_student($id)
+    {
+        return view('user.student.show', ['id' => $id]);
+    }
+
+    public function find_student() 
+    {
+        $id = $_GET['id'];
+        $response = $this->userService->find($id);
+
+        if($response['status'] == 'success')
+            return response()->json(['status'=>'success', 'data'=>$response['data']], 201);
+
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+    }
+
     //adicionar user
     public function store_student(Request $request)
     {
         $data = [
             'id_company' => 1,
             'name' => trim($request->name),
-            'email' => trim($request->email) ,
+            'email' => trim($request->email),
+            'birth' => trim($request->birth),
+            'cpf' => trim($request->cpf),
+            'rg' => trim($request->rg),
+            'civil_status' => trim($request->civil_status),
+            'profession' => trim($request->profession),
+            'zip_code' => trim($request->zip_code),
+            'uf' => trim($request->uf),
+            'city' => trim($request->city),
+            'neighborhood' => trim($request->neighborhood),
+            'address' => trim($request->address),
+            'address_number' => trim($request->address_number),
+            'complement' => trim($request->complement),
+            'start_date' => trim($request->start_date),
+            'health_plan' => trim($request->health_plan),
+            'how_met' => trim($request->how_met),
             'password' => bcrypt(trim(123456)),
             'group' => 4,
         ];

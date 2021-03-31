@@ -8,11 +8,10 @@
 
 @section('content')
     
-    <div class="card card-default">
-        <div class="card-body">
-
+    <div class="card">
+        <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-condensed table-hover table-sm">
+                <table class="table table-striped table-valign-middle table-hover">
                     <thead>
                         <tr>
                             <th>Cliente</th>
@@ -28,7 +27,6 @@
                     <tbody id="list"></tbody>
                 </table>
             </div>
-
         </div>
     </div>
 
