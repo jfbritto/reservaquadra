@@ -74,12 +74,55 @@ CREATE TABLE IF NOT EXISTS `reservaquadra`.`reservations` (
   `reservation_date` DATE NULL,
   `name_reserved` VARCHAR(45) NULL,
   `phone_reserved` VARCHAR(45) NULL,
-  `status` CHAR(1) NULL,
+  `status` VARCHAR(5) NOT NULL,
   `created_at` DATETIME NULL,
   `updated_at` DATETIME NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `reservaquadra`.`contracts` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_plan` INT NOT NULL,
+  `id_user` INT NOT NULL,
+  `start_date` DATE NOT NULL,
+  `end_date` DATE NOT NULL,
+  `expiration_day` VARCHAR(5) NOT NULL,
+  `status` VARCHAR(5) NOT NULL,
+  `price_per_month` DECIMAL(10,2) NOT NULL,
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `reservaquadra`.`plans` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_company` INT NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
+  `months` INT NOT NULL,
+  `status` VARCHAR(5) NOT NULL,
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `reservaquadra`.`invoices` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_user` INT DEFAULT NULL,
+  `id_contract` INT DEFAULT NULL,
+  `due_date` DATE NOT NULL,
+  `price` DECIMAL(10,2) NOT NULL,
+  `discount` DECIMAL(10,2) DEFAULT NULL,
+  `paid_price` DECIMAL(10,2) DEFAULT NULL,
+  `paid_date` DATETIME DEFAULT NULL,
+  `generate_date` DATETIME NOT NULL,
+  `id_user_generated` INT NOT NULL,
+  `id_user_received` INT DEFAULT NULL,
+  `id_type` INT NOT NULL,
+  `status` VARCHAR(5) NOT NULL,
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
 
 
 

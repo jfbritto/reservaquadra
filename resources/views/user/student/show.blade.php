@@ -131,6 +131,158 @@
 
         </div>
     </div>
+
+
+    <div class="row">
+        <div class="col-md-6">
+        
+            <div class="card">
+                <div class="card-header border-0">
+                    <h3 class="card-title"> Contratos </h3>
+                    <div class="card-tools">
+                        <a href="#" class="btn btn-tool btn-sm" data-toggle="modal" data-target="#modalStoreContract" id="btn-new-contract">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-valign-middle table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Data inicio</th>
+                                    <th>Plano</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="list-contracts"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+
+            <div class="card">
+                <div class="card-header border-0">
+                    <h3 class="card-title"> Faturas </h3>
+                    <!-- <div class="card-tools">
+                        <a href="#" class="btn btn-tool btn-sm" data-toggle="modal" data-target="#modalStoreContract" id="btn-new-contract">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </div> -->
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-valign-middle table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Vencimento</th>
+                                    <th>Valor</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="list-invoices"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+        
+            <div class="card">
+                <div class="card-header border-0">
+                    <h3 class="card-title"> Próximas Aulas </h3>
+                    <div class="card-tools">
+                        <a href="#" class="btn btn-tool btn-sm" data-toggle="modal" data-target="#modalStoreStudent">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+
+            <div class="card">
+                <div class="card-header border-0">
+                    <h3 class="card-title">  </h3>
+                    <div class="card-tools">
+                        <a href="#" class="btn btn-tool btn-sm" data-toggle="modal" data-target="#modalStoreStudent">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalStoreContract">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cadastrar Contrato</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form id="formStoreContract">
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="id_plan">Plano</label>
+                                <select required name="id_plan" id="id_plan" class="form-control">
+                                    <option data-months="3" value="1">Teste</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="start_date_contract">Data inicio</label>
+                                <input type="date" required name="start_date_contract" id="start_date_contract" class="form-control" value="{{date('Y-m-d')}}">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="expiration_day">Dia vencimento</label>
+                                <input type="number" required name="expiration_day" id="expiration_day" class="form-control" placeholder="Informe o melhor dia para o vencimento" max="30">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="price_per_month">Mensalidade</label>
+                                <input type="text" required name="price_per_month" id="price_per_month" class="form-control money" placeholder="Informe o valor das mensalidades">
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" form="formStoreContract">Salvar</button>
+            </div>
+            </div>
+        </div>
+    </div>
     
 @stop
 

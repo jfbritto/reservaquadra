@@ -1,9 +1,12 @@
 $(document).ready(function () {
 
-    loadStudents();
+    loadStudent();
+    loadPlans();
+    loadContracts();
+    loadInvoices();
 
-    // LISTAR ALUNOS
-    function loadStudents()
+    // LISTAR DADOS DO ALUNO
+    function loadStudent()
     {
         Swal.queue([
             {
@@ -19,7 +22,6 @@ $(document).ready(function () {
                             if (data.status == "success") {
 
                                 Swal.close();
-                                $("#list").html(``);
 
                                 if(data.data.length > 0){
 
@@ -42,17 +44,7 @@ $(document).ready(function () {
                                     $("#health_plan").html(item.health_plan);
                                     $("#how_met").html(item.how_met);
 
-
-                                }else{
-
-                                    $("#list").append(`
-                                        <tr>
-                                            <td class="align-middle text-center" colspan="4">Nenhum aluno cadastrado</td>
-                                        </tr>
-                                    `);  
-
                                 }
-
 
                             } else if (data.status == "error") {
                                 // showError(data.message);
@@ -72,9 +64,159 @@ $(document).ready(function () {
         ]);
     }
 
+    // LISTAR PLANOS NO SELECT
+    function loadPlans()
+    {
 
-    // CADASTRAR ALUNO
-    $("#formStoreStudent").submit(function (e) {
+        $.get(window.location.origin + "/planos/listar", {
+
+        })
+        .then(function (data) {
+            if (data.status == "success") {
+
+                $("#id_plan").html(``);
+                
+                $("#id_plan").html(`<option data-months="" value="">-- Selecione --</option>`);
+
+                if(data.data.length > 0){
+
+                    data.data.forEach(item => {
+                        
+                        $("#id_plan").append(`
+                            <option data-months="${item.months}" value="${item.id}">${item.name}</option>
+                        `)
+
+                    });
+
+                }
+
+            } else if (data.status == "error") {
+                Swal.fire({
+                    icon: "error",
+                    text: data.message,
+                    showConfirmButton: false,
+                    showCancelButton: true,
+                    cancelButtonText: "OK",
+                    onClose: () => {},
+                });
+            }
+        })
+        .catch();
+
+    }
+
+    // LISTAR CONTRATOS
+    function loadContracts()
+    {
+
+        $.get(window.location.origin + `/contratos/listar/${$("#id_usr").val()}`, {
+
+        })
+        .then(function (data) {
+            if (data.status == "success") {
+
+                if(data.data.length > 0){
+
+                    $("#list-contracts").html(``);
+                    $("#btn-new-contract").hide();
+
+                    data.data.forEach(item => {
+
+                        $("#list-contracts").append(`
+                            <tr>
+                                <td class="align-middle">${dateFormat(item.start_date)}</td>
+                                <td class="align-middle">${item.plan_name}</td>
+                                <td class="align-middle">${item.status=='A'?`<span class="badge bg-success">Ativo</span>`:`<span class="badge bg-warning">${item.status}</span>`}</td>
+                                <td class="align-middle" style="text-align: right">
+                                    
+                                </td>
+                            </tr>
+                        `);       
+                    });
+
+                }else{
+
+                    $("#list").append(`
+                        <tr>
+                            <td class="align-middle text-center" colspan="4">Nenhum contrato cadastrado</td>
+                        </tr>
+                    `);  
+
+                }
+
+            } else if (data.status == "error") {
+                // showError(data.message);
+                Swal.fire({
+                    icon: "error",
+                    text: data.message,
+                    showConfirmButton: false,
+                    showCancelButton: true,
+                    cancelButtonText: "OK",
+                    onClose: () => {},
+                });
+            }
+        })
+        .catch();
+
+    }
+
+    // LISTAR FATURAS
+    function loadInvoices()
+    {
+
+        $.get(window.location.origin + `/faturas/listar/${$("#id_usr").val()}`, {
+
+        })
+        .then(function (data) {
+            if (data.status == "success") {
+
+                if(data.data.length > 0){
+
+                    $("#list-invoices").html(``);
+
+                    data.data.forEach(item => {
+
+                        $("#list-invoices").append(`
+                            <tr>
+                                <td class="align-middle">${dateFormat(item.due_date)}</td>
+                                <td class="align-middle">${moneyFormat(item.price)}</td>
+                                <td class="align-middle">${item.status=='A'?`<span class="badge bg-success">Aberta</span>`:`<span class="badge bg-warning">${item.status}</span>`}</td>
+                                <td class="align-middle" style="text-align: right">
+                                    
+                                </td>
+                            </tr>
+                        `);       
+                    });
+
+                }else{
+
+                    $("#list").append(`
+                        <tr>
+                            <td class="align-middle text-center" colspan="4">Nenhum contrato cadastrado</td>
+                        </tr>
+                    `);  
+
+                }
+
+            } else if (data.status == "error") {
+                // showError(data.message);
+                Swal.fire({
+                    icon: "error",
+                    text: data.message,
+                    showConfirmButton: false,
+                    showCancelButton: true,
+                    cancelButtonText: "OK",
+                    onClose: () => {},
+                });
+            }
+        })
+        .catch();
+
+    }
+
+
+    // CADASTRAR CONTRATO
+    $("#formStoreContract").submit(function (e) {
         e.preventDefault();
 
         Swal.queue([
@@ -84,34 +226,25 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + "/alunos/cadastrar", {
-                        name: $("#name").val(),
-                        email: $("#email").val(),
-                        birth: $("#birth").val(),
-                        cpf: $("#cpf").val(),
-                        rg: $("#rg").val(),
-                        civil_status: $("#civil_status option:selected").val(),
-                        profession: $("#profession").val(),
-                        zip_code: $("#zip_code").val(),
-                        uf: $("#uf").val(),
-                        city: $("#city").val(),
-                        neighborhood: $("#neighborhood").val(),
-                        address: $("#address").val(),
-                        address_number: $("#address_number").val(),
-                        complement: $("#complement").val(),
-                        start_date: $("#start_date").val(),
-                        health_plan: $("#health_plan").val(),
-                        how_met: $("#how_met option:selected").val(),
+                    $.post(window.location.origin + "/contratos/cadastrar", {
+                        id_plan: $("#id_plan option:selected").val(),
+                        id_user: $("#id_usr").val(),
+                        start_date: $("#start_date_contract").val(),
+                        expiration_day: $("#expiration_day").val(),
+                        months: $("#id_plan option:selected").data('months'),
+                        price_per_month: $("#price_per_month").val(),
                     })
                         .then(function (data) {
                             if (data.status == "success") {
 
-                                $("#formStoreStudent").each(function () {
+                                $("#formStoreContract").each(function () {
                                     this.reset();
                                 });
                                 
-                                loadStudents();
-                                $("#modalStoreStudent").modal("hide");
+                                loadStudent();
+                                loadContracts();
+                                loadInvoices();
+                                $("#modalStoreContract").modal("hide");
 
                                 Swal.fire({
                                     icon: "success",
@@ -138,6 +271,25 @@ $(document).ready(function () {
             },
         ]);
     });
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
 
 
     // EDITAR ALUNO
@@ -205,7 +357,7 @@ $(document).ready(function () {
                                     this.reset();
                                 });
                                 
-                                loadStudents();
+                                loadStudent();
                                 $("#modalEditStudent").modal("hide");
 
                                 Swal.fire({
@@ -266,7 +418,7 @@ $(document).ready(function () {
                                     .then(function (data) {
                                         if (data.status == "success") {
                                                         
-                                            loadStudents();
+                                            loadStudent();
             
                                             Swal.fire({
                                                 icon: "success",
