@@ -13,6 +13,11 @@ class PlanController extends Controller
     {
         $this->planService = $planService;
     }
+
+    public function index()
+    {
+        return view('plan.home');
+    }
     
     public function store(Request $request) 
     {
@@ -31,30 +36,27 @@ class PlanController extends Controller
         return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
     }
     
-    // public function update(Request $request) 
-    // {
-    //     $data = [
-    //         'id' => trim($request->id),
-    //         'name' => trim($request->name),
-    //         'city' => trim($request->city),
-    //         'neighborhood' => trim($request->neighborhood),
-    //         'reference' => trim($request->reference),
-    //         'description' => trim($request->description)
-    //     ];
+    public function update(Request $request) 
+    {
+        $data = [
+            'id' => trim($request->id),
+            'name' => trim($request->name),
+            'months' => trim($request->months),
+        ];
 
-    //     $response = $this->planService->update($data);
+        $response = $this->planService->update($data);
 
-    //     if($response['status'] == 'success')
-    //         return response()->json(['status'=>'success'], 201);
+        if($response['status'] == 'success')
+            return response()->json(['status'=>'success'], 201);
 
-    //     return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
-    // }
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+    }
     
     // public function destroy(Request $request) 
     // {
     //     $data = [
     //         'id' => trim($request->id),
-    //         'active' => 0
+    //         'status' => 'D'
     //     ];
 
     //     $response = $this->planService->destroy($data);

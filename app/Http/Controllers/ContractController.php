@@ -19,6 +19,16 @@ class ContractController extends Controller
     
     public function store(Request $request) 
     {
+        // CASO SEJA ENVIADO O ID DO PLANO ANTIGO, O PLANO SERÁ RENOVADO
+        if($request->id_contract_renew){
+            $data = [
+                'id' => trim($request->id_contract_renew),
+                'status' => "R",
+            ];
+
+            $response = $this->contractService->renew($data);
+        }
+
         $end_date = date("Y-m-d", strtotime("+ ".$request->months." months"));
 
         $price_formated = str_replace(".", "", trim($request->price_per_month));
@@ -44,7 +54,7 @@ class ContractController extends Controller
                 
                 $due_date = date('Y-m-'.$expiration_day.'', strtotime("+ ".$i." months"));
                 
-                $data2 = [
+                $data = [
                     'id_user' => trim($request->id_user),
                     'id_contract' => trim($response['data']->id),
                     'due_date' => $due_date,
@@ -55,7 +65,7 @@ class ContractController extends Controller
                     'status' => "A"
                 ];    
 
-                $response2 = $this->invoiceService->store($data2);
+                $response2 = $this->invoiceService->store($data);
             }
         }
 
@@ -84,20 +94,42 @@ class ContractController extends Controller
     //     return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
     // }
     
-    // public function destroy(Request $request) 
-    // {
-    //     $data = [
-    //         'id' => trim($request->id),
-    //         'active' => 0
-    //     ];
+    public function destroy(Request $request) 
+    {
+        $data = [
+            'id' => trim($request->id),
+            'cancel_date' => date('Y-m-d H:i:s'),
+            'id_user_canceled' => auth()->user()->id,
+            'status' => 'C'
+        ];
 
-    //     $response = $this->contractService->destroy($data);
+        $response = $this->contractService->destroy($data);
+        
+        if($response['status'] == 'success'){
 
-    //     if($response['status'] == 'success')
-    //         return response()->json(['status'=>'success'], 201);
+            $pendent_invoices = $this->invoiceService->list_all_open_by_contract($request->id);
+    
+            if($pendent_invoices['data']){
+                foreach ($pendent_invoices['data'] as $invoice) {
+                    
+                    $data = [
+                        'id' => trim($invoice->id),
+                        'cancel_date' => date('Y-m-d H:i:s'),
+                        'id_user_canceled' => auth()->user()->id,
+                        'status' => "C"
+                    ];
+    
+                    $this->invoiceService->cancel($data);
+    
+                }
+            }
+        }
 
-    //     return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
-    // }
+        if($response['status'] == 'success')
+            return response()->json(['status'=>'success'], 201);
+
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+    }
     
     public function list($id_student) 
     {

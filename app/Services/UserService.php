@@ -65,7 +65,7 @@ class UserService
 
             $result = DB::table('users')
                         ->where('id', $data['id'])
-                        ->update(['active' => $data['active']]);
+                        ->update(['status' => $data['status']]);
 
             DB::commit();
 
@@ -84,7 +84,7 @@ class UserService
         $response = [];
 
         try{
-            $return = DB::select( DB::raw("select usr.* from users usr where usr.active = 1 and usr.group in (".implode(',',$group).") order by usr.name"));
+            $return = DB::select( DB::raw("select usr.* from users usr where usr.status = 'A' and usr.group in (".implode(',',$group).") order by usr.name"));
 
             $response = ['status' => 'success', 'data' => $return];
         }catch(Exception $e){

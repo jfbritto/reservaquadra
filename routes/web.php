@@ -42,12 +42,17 @@ Route::group(['middleware' => ['auth']], function(){
     // contratos
     Route::get('/contratos/listar/{id_student}', 'ContractController@list');
     Route::post('/contratos/cadastrar', 'ContractController@store');
+    Route::post('/contratos/cancelar', 'ContractController@destroy');
     
     // faturas
-    Route::get('/faturas/listar/{id_student}', 'InvoiceController@list');
+    Route::get('/faturas/listar/{id_student}', 'InvoiceController@list_next_open');
+    Route::post('/faturas/receber', 'InvoiceController@receive');
     
     // planos
+    Route::get('/planos', 'PlanController@index');
     Route::get('/planos/listar', 'PlanController@list');
+    Route::post('/planos/cadastrar', 'PlanController@store');
+    Route::post('/planos/editar', 'PlanController@update');
 
     //alunos
     Route::get('/alunos', 'UserController@student');

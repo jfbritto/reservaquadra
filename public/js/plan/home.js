@@ -1,9 +1,9 @@
 $(document).ready(function () {
 
-    loadCourts();
+    loadPlans();
 
-    // LISTAR QUADRAS
-    function loadCourts()
+    // LISTAR PLANOS
+    function loadPlans()
     {
         Swal.queue([
             {
@@ -12,7 +12,7 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + "/quadra/listar", {
+                    $.get(window.location.origin + "/planos/listar", {
                         
                     })
                         .then(function (data) {
@@ -28,9 +28,9 @@ $(document).ready(function () {
                                         $("#list").append(`
                                             <tr>
                                                 <td class="align-middle">${item.name}</td>
+                                                <td class="align-middle">${item.months}</td>
                                                 <td class="align-middle" style="text-align: right">
-                                                    <a title="Horários" href="#" data-id="${item.id}" data-name="${item.name}" class="btn btn-primary list-dates"><i style="color: white" class="fas fa-clock"></i></a>
-                                                    <a title="Editar" data-id="${item.id}" data-name="${item.name}" data-city="${item.city}" data-neighborhood="${item.neighborhood}" data-reference="${item.reference}" data-description="${item.description}" href="#" class="btn btn-warning edit-court"><i style="color: white" class="fas fa-edit"></i></a>
+                                                    <a title="Editar" data-id="${item.id}" data-name="${item.name}" data-months="${item.months}" href="#" class="btn btn-warning edit-court"><i style="color: white" class="fas fa-edit"></i></a>
                                                     <a title="Deletar" data-id="${item.id}" href="#" class="btn btn-danger delete-court"><i class="fas fa-trash-alt"></i></a>
                                                 </td>
                                             </tr>
@@ -41,7 +41,7 @@ $(document).ready(function () {
 
                                     $("#list").append(`
                                         <tr>
-                                            <td class="align-middle text-center" colspan="2">Nenhuma quadra cadastrada</td>
+                                            <td class="align-middle text-center" colspan="3">Nenhum plano cadastrado</td>
                                         </tr>
                                     `);  
 
@@ -67,8 +67,8 @@ $(document).ready(function () {
     }
 
 
-    // CADASTRAR QUADRA
-    $("#formStoreCourt").submit(function (e) {
+    // CADASTRAR PLANO
+    $("#formStorePlan").submit(function (e) {
         e.preventDefault();
 
         Swal.queue([
@@ -78,22 +78,19 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + "/quadra/cadastrar", {
+                    $.post(window.location.origin + "/planos/cadastrar", {
                         name: $("#name").val(),
-                        city: $("#city").val(),
-                        neighborhood: $("#neighborhood").val(),
-                        reference: $("#reference").val(),
-                        description: $("#description").val(),
+                        months: $("#months").val(),
                     })
                         .then(function (data) {
                             if (data.status == "success") {
 
-                                $("#formStoreCourt").each(function () {
+                                $("#formStorePlan").each(function () {
                                     this.reset();
                                 });
                                 
-                                loadCourts();
-                                $("#modalStoreCourt").modal("hide");
+                                loadPlans();
+                                $("#modalStorePlan").modal("hide");
 
                                 Swal.fire({
                                     icon: "success",
@@ -122,27 +119,21 @@ $(document).ready(function () {
     });
 
 
-    // EDITAR QUADRA
+    // EDITAR PLANO
     $("#list").on("click", ".edit-court", function(){
 
         let id = $(this).data('id');
         let name = $(this).data('name');
-        let city = $(this).data('city');
-        let neighborhood = $(this).data('neighborhood');
-        let reference = $(this).data('reference');
-        let description = $(this).data('description');
+        let months = $(this).data('months');
 
         $("#id_edit").val(id);
         $("#name_edit").val(name);
-        $("#city_edit").val(city);
-        $("#neighborhood_edit").val(neighborhood);
-        $("#reference_edit").val(reference);
-        $("#description_edit").val(description);
+        $("#months_edit").val(months);
 
-        $("#modalEditCourt").modal("show");
+        $("#modalEditPlan").modal("show");
     });
 
-    $("#formEditCourt").submit(function (e) {
+    $("#formEditPlan").submit(function (e) {
         e.preventDefault();
 
         Swal.queue([
@@ -152,23 +143,20 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + "/quadra/editar", {
+                    $.post(window.location.origin + "/planos/editar", {
                         id: $("#id_edit").val(),
                         name: $("#name_edit").val(),
-                        city: $("#city_edit").val(),
-                        neighborhood: $("#neighborhood_edit").val(),
-                        reference: $("#reference_edit").val(),
-                        description: $("#description_edit").val(),
+                        months: $("#months_edit").val(),
                     })
                         .then(function (data) {
                             if (data.status == "success") {
 
-                                $("#formEditCourt").each(function () {
+                                $("#formEditPlan").each(function () {
                                     this.reset();
                                 });
                                 
-                                loadCourts();
-                                $("#modalEditCourt").modal("hide");
+                                loadPlans();
+                                $("#modalEditPlan").modal("hide");
 
                                 Swal.fire({
                                     icon: "success",
@@ -197,7 +185,7 @@ $(document).ready(function () {
     });
 
 
-    // "DELETAR" QUADRA
+    // "DELETAR" PLANO
     $("#list").on("click", ".delete-court", function(){
         
         let id = $(this).data('id');
@@ -228,7 +216,7 @@ $(document).ready(function () {
                                     .then(function (data) {
                                         if (data.status == "success") {
                                                         
-                                            loadCourts();
+                                            loadPlans();
             
                                             Swal.fire({
                                                 icon: "success",

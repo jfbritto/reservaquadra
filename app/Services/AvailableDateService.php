@@ -40,7 +40,7 @@ class AvailableDateService
 
             $courts = DB::table('available_dates')
                         ->where('id', $data['id'])
-                        ->update(['active' => $data['active']]);
+                        ->update(['status' => $data['status']]);
 
             DB::commit();
 
@@ -61,7 +61,7 @@ class AvailableDateService
         try{
             $return = DB::select( DB::raw("select avd.*, crt.name as court_name 
                                            from available_dates avd join courts crt on crt.id=avd.id_court 
-                                           where avd.active = 1 and crt.active = 1 and avd.id_court = ".$id." 
+                                           where avd.status = 'A' and crt.status = 'A' and avd.id_court = ".$id." 
                                            order by avd.week_day, avd.start_time"));
 
             $response = ['status' => 'success', 'data' => $return];
@@ -82,7 +82,7 @@ class AvailableDateService
                                                 available_dates avd 
                                                 join courts crt on crt.id=avd.id_court 
                                                 left join reservations res on res.id_available_date=avd.id and res.reservation_date = '".$day." '
-                                           where avd.active = 1 and crt.active = 1 and avd.id_court = ".$id." and avd.week_day = ".$week_day." 
+                                           where avd.status = 'A' and crt.status = 'A' and avd.id_court = ".$id." and avd.week_day = ".$week_day." 
                                            order by avd.week_day, avd.start_time"));
 
             $response = ['status' => 'success', 'data' => $return];

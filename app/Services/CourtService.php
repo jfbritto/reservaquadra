@@ -68,7 +68,7 @@ class CourtService
 
             $courts = DB::table('courts')
                         ->where('id', $data['id'])
-                        ->update(['active' => $data['active']]);
+                        ->update(['status' => $data['status']]);
 
             DB::commit();
 
@@ -87,7 +87,7 @@ class CourtService
         $response = [];
 
         try{
-            $return = DB::select( DB::raw("select * from courts where active = 1 order by name"));
+            $return = DB::select( DB::raw("select * from courts where status = 'A' order by name"));
 
             $response = ['status' => 'success', 'data' => $return];
         }catch(Exception $e){

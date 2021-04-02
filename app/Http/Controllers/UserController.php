@@ -164,7 +164,7 @@ class UserController extends Controller
     {
         $data = [
             'id' => trim($request->id),
-            'active' => 0
+            'status' => 'D'
         ];
 
         $response = $this->userService->destroy($data);

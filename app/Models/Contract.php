@@ -15,6 +15,8 @@ class Contract extends Model
         'expiration_day',
         'status',
         'price_per_month',
+        'cancel_date',
+        'id_user_canceled',
         'created_at',
         'updated_at',
     ];

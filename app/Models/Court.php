@@ -14,7 +14,7 @@ class Court extends Model
         'neighborhood',
         'reference',
         'description',
-        'active',
+        'status',
         'created_at',
         'updated_at',
     ];

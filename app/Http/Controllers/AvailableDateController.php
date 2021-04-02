@@ -40,7 +40,7 @@ class AvailableDateController extends Controller
     {
         $data = [
             'id' => trim($request->id),
-            'active' => 0
+            'status' => 'D'
         ];
 
         $response = $this->availableDateService->destroy($data);

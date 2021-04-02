@@ -17,7 +17,7 @@ class User extends Authenticatable
         'email',
         'password',
         'group',
-        'active',
+        'status',
         'birth',
         'rg',
         'cpf',

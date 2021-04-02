@@ -315,28 +315,46 @@ return [
             'url'        => '/',
         ],
         [
-            'text'       => 'Quadras',
-            'icon'       => 'fas fa-fw fa-clipboard-list' ,
-            'url'        => 'quadras',
-            'can'        => 'admin',
-        ],
-        [
             'text'       => 'Reservas',
             'icon'       => 'fas fa-fw fa-clipboard-list' ,
             'url'        => 'reservas',
             'can'        => 'admin',
         ],
         [
-            'text'       => 'Alunos',
-            'icon'       => 'fas fa-fw fa-users' ,
-            'url'        => 'alunos',
-            'can'        => 'admin',
+            'text'    => 'Usuários',
+            'icon'    => 'fas fa-fw fa-users',
+            'submenu' => [
+                [
+                    'text'       => 'Alunos',
+                    'icon'       => 'fas fa-fw fa-users' ,
+                    'url'        => 'alunos',
+                    'can'        => 'admin',
+                ],
+                [
+                    'text'       => 'Funcionários',
+                    'icon'       => 'fas fa-fw fa-users' ,
+                    'url'        => 'funcionarios',
+                    'can'        => 'admin',
+                ],
+            ],
         ],
         [
-            'text'       => 'Funcionários',
-            'icon'       => 'fas fa-fw fa-users' ,
-            'url'        => 'funcionarios',
-            'can'        => 'admin',
+            'text'    => 'Configurações',
+            'icon'    => 'fas fa-fw fa-cog',
+            'submenu' => [
+                [
+                    'text'       => 'Quadras',
+                    'icon'       => 'fas fa-fw fa-clipboard-list' ,
+                    'url'        => 'quadras',
+                    'can'        => 'admin',
+                ],
+                [
+                    'text'       => 'Planos',
+                    'icon'       => 'fas fa-fw fa-puzzle-piece' ,
+                    'url'        => 'planos',
+                    'can'        => 'admin',
+                ],
+            ],
         ],
     ],
 

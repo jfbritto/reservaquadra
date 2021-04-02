@@ -30,30 +30,59 @@ class InvoiceService
         return $response;
     }
 
-    // public function update(array $data)
-    // {
-    //     $response = [];
+    public function receive(array $data)
+    {
+        $response = [];
 
-    //     try{
+        try{
 
-    //         DB::beginTransaction();
+            DB::beginTransaction();
 
-    //         $result = DB::table('users')
-    //                     ->where('id', $data['id'])
-    //                     ->update(['name' => $data['name'],
-    //                             'email' => $data['email']]);
+            $result = DB::table('invoices')
+                        ->where('id', $data['id'])
+                        ->update(['discount' => $data['discount'],
+                                'paid_price' => $data['paid_price'],
+                                'paid_date' => $data['paid_date'],
+                                'id_user_received' => $data['id_user_received'],
+                                'status' => $data['status']]);
 
-    //         DB::commit();
+            DB::commit();
 
-    //         $response = ['status' => 'success', 'data' => $result];
+            $response = ['status' => 'success', 'data' => $result];
 
-    //     }catch(Exception $e){
-    //         DB::rollBack();
-    //         $response = ['status' => 'error', 'data' => $e->getMessage()];
-    //     }
+        }catch(Exception $e){
+            DB::rollBack();
+            $response = ['status' => 'error', 'data' => $e->getMessage()];
+        }
 
-    //     return $response;
-    // }
+        return $response;
+    }
+
+    public function cancel(array $data)
+    {
+        $response = [];
+
+        try{
+
+            DB::beginTransaction();
+
+            $result = DB::table('invoices')
+                        ->where('id', $data['id'])
+                        ->update(['cancel_date' => $data['cancel_date'],
+                                'id_user_canceled' => $data['id_user_canceled'],
+                                'status' => $data['status']]);
+
+            DB::commit();
+
+            $response = ['status' => 'success', 'data' => $result];
+
+        }catch(Exception $e){
+            DB::rollBack();
+            $response = ['status' => 'error', 'data' => $e->getMessage()];
+        }
+
+        return $response;
+    }
 
     // public function destroy(array $data)
     // {
@@ -65,7 +94,7 @@ class InvoiceService
 
     //         $result = DB::table('users')
     //                     ->where('id', $data['id'])
-    //                     ->update(['active' => $data['active']]);
+    //                     ->update(['status' => $data['status']]);
 
     //         DB::commit();
 
@@ -79,12 +108,27 @@ class InvoiceService
     //     return $response;
     // }
 
-    public function list($id_student)
+    public function list_next_open($id_student)
     {
         $response = [];
 
         try{
-            $return = DB::select( DB::raw("select * from invoices where id_user = ".$id_student." order by due_date"));
+            $return = DB::select( DB::raw("select * from invoices where id_user = ".$id_student." and status = 'A' order by due_date limit 1"));
+
+            $response = ['status' => 'success', 'data' => $return];
+        }catch(Exception $e){
+            $response = ['status' => 'error', 'data' => $e->getMessage()];
+        }
+
+        return $response;
+    }
+
+    public function list_all_open_by_contract($id_contract)
+    {
+        $response = [];
+
+        try{
+            $return = DB::select( DB::raw("select * from invoices where id_contract = ".$id_contract." and status = 'A' order by due_date"));
 
             $response = ['status' => 'success', 'data' => $return];
         }catch(Exception $e){

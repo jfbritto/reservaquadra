@@ -1,8 +1,12 @@
 $(document).ready(function () {
 
+    // listar dados do aluno
     loadStudent();
+    // listar planos no select
     loadPlans();
+    // listar os contratos do aluno
     loadContracts();
+    // listar as faturas do aluno
     loadInvoices();
 
     // LISTAR DADOS DO ALUNO
@@ -75,14 +79,20 @@ $(document).ready(function () {
             if (data.status == "success") {
 
                 $("#id_plan").html(``);
+                $("#id_plan_renew").html(``);
                 
                 $("#id_plan").html(`<option data-months="" value="">-- Selecione --</option>`);
+                $("#id_plan_renew").html(`<option data-months="" value="">-- Selecione --</option>`);
 
                 if(data.data.length > 0){
 
                     data.data.forEach(item => {
                         
                         $("#id_plan").append(`
+                            <option data-months="${item.months}" value="${item.id}">${item.name}</option>
+                        `)
+                        
+                        $("#id_plan_renew").append(`
                             <option data-months="${item.months}" value="${item.id}">${item.name}</option>
                         `)
 
@@ -115,9 +125,10 @@ $(document).ready(function () {
         .then(function (data) {
             if (data.status == "success") {
 
+                $("#list-contracts").html(``);
+
                 if(data.data.length > 0){
 
-                    $("#list-contracts").html(``);
                     $("#btn-new-contract").hide();
 
                     data.data.forEach(item => {
@@ -128,7 +139,9 @@ $(document).ready(function () {
                                 <td class="align-middle">${item.plan_name}</td>
                                 <td class="align-middle">${item.status=='A'?`<span class="badge bg-success">Ativo</span>`:`<span class="badge bg-warning">${item.status}</span>`}</td>
                                 <td class="align-middle" style="text-align: right">
-                                    
+                                    ${item.faturas_abertas==0?`
+                                        <a title="Renovar" data-id="${item.id}" data-id_plan="${item.id_plan}" data-expiration_day="${item.expiration_day}" data-price_per_month="${item.price_per_month}" href="#" class="btn btn-info renew-contract"><i class="fas fa-retweet"></i></a>`:`
+                                        <a title="Cancelar" data-id="${item.id}" href="#" class="btn btn-danger cancel-contract"><i class="fas fa-ban"></i></a>`}
                                 </td>
                             </tr>
                         `);       
@@ -136,9 +149,11 @@ $(document).ready(function () {
 
                 }else{
 
-                    $("#list").append(`
+                    $("#btn-new-contract").show();
+
+                    $("#list-contracts").append(`
                         <tr>
-                            <td class="align-middle text-center" colspan="4">Nenhum contrato cadastrado</td>
+                            <td class="align-middle text-center" colspan="4">Nenhum contrato ativo encontrado</td>
                         </tr>
                     `);  
 
@@ -170,19 +185,19 @@ $(document).ready(function () {
         .then(function (data) {
             if (data.status == "success") {
 
-                if(data.data.length > 0){
+                $("#list-invoices").html(``);
 
-                    $("#list-invoices").html(``);
+                if(data.data.length > 0){
 
                     data.data.forEach(item => {
 
                         $("#list-invoices").append(`
                             <tr>
-                                <td class="align-middle">${dateFormat(item.due_date)}</td>
-                                <td class="align-middle">${moneyFormat(item.price)}</td>
                                 <td class="align-middle">${item.status=='A'?`<span class="badge bg-success">Aberta</span>`:`<span class="badge bg-warning">${item.status}</span>`}</td>
+                                <td class="align-middle">${dateFormat(item.due_date)}</td>
+                                <td class="align-middle">R$ ${moneyFormat(item.price)}</td>
                                 <td class="align-middle" style="text-align: right">
-                                    
+                                    <a title="Receber" data-id="${item.id}" data-due_date="${item.due_date}" data-price="${item.price}" href="#" class="btn btn-success pay-invoice"><i class="fas fa-comment-dollar"></i></a>
                                 </td>
                             </tr>
                         `);       
@@ -190,9 +205,9 @@ $(document).ready(function () {
 
                 }else{
 
-                    $("#list").append(`
+                    $("#list-invoices").append(`
                         <tr>
-                            <td class="align-middle text-center" colspan="4">Nenhum contrato cadastrado</td>
+                            <td class="align-middle text-center" colspan="4">Nenhuma fatura aberta encontrada</td>
                         </tr>
                     `);  
 
@@ -272,12 +287,238 @@ $(document).ready(function () {
         ]);
     });
 
+    $("#list-contracts").on("click", ".renew-contract", function(){
+        let id = $(this).data('id');
+        let id_plan = $(this).data('id_plan');
+        let expiration_day = $(this).data('expiration_day');
+        let price_per_month = $(this).data('price_per_month');
+
+        $("#id_contract_renew").val(id);
+        $("#id_plan_renew").val(id_plan).change();
+        $("#expiration_day_renew").val(parseInt(expiration_day));
+        $("#price_per_month_renew").val(moneyFormat(price_per_month));
+
+        $("#modalRenewContract").modal("show");
+    });
+
+    // RENOVAR CONTRATO
+    $("#formRenewContract").submit(function (e) {
+        e.preventDefault();
+
+        Swal.queue([
+            {
+                title: "Carregando...",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                    $.post(window.location.origin + "/contratos/cadastrar", {
+                        id_contract_renew: $("#id_contract_renew").val(),
+                        id_plan: $("#id_plan_renew option:selected").val(),
+                        id_user: $("#id_usr").val(),
+                        start_date: $("#start_date_contract_renew").val(),
+                        expiration_day: $("#expiration_day_renew").val(),
+                        months: $("#id_plan_renew option:selected").data('months'),
+                        price_per_month: $("#price_per_month_renew").val(),
+                    })
+                        .then(function (data) {
+                            if (data.status == "success") {
+
+                                $("#formRenewContract").each(function () {
+                                    this.reset();
+                                });
+                                
+                                loadStudent();
+                                loadContracts();
+                                loadInvoices();
+                                $("#modalRenewContract").modal("hide");
+
+                                Swal.fire({
+                                    icon: "success",
+                                    text: "Contrato renovado!",
+                                    showConfirmButton: false,
+                                    showCancelButton: true,
+                                    cancelButtonText: "OK",
+                                    onClose: () => {},
+                                });
+                            } else if (data.status == "error") {
+                                // showError(data.message);
+                                Swal.fire({
+                                    icon: "error",
+                                    text: data.message,
+                                    showConfirmButton: false,
+                                    showCancelButton: true,
+                                    cancelButtonText: "OK",
+                                    onClose: () => {},
+                                });
+                            }
+                        })
+                        .catch();
+                },
+            },
+        ]);
+    });
+
+    $("#list-contracts").on("click", ".cancel-contract", function(){
+        
+        let id = $(this).data('id');
+
+        Swal.fire({
+            title: 'Atenção!',
+            text: "Deseja realmente cancelar o contrato? todas as faturas vinculadas à ele que estão em aberto serão canceladas!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Sim',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Não'
+            }).then((result) => {
+                console.log(result)
+                if (result.value) {
+
+                    Swal.queue([
+                        {
+                            title: "Carregando...",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            onOpen: () => {
+                                Swal.showLoading();
+                                $.post(window.location.origin + "/contratos/cancelar", {
+                                    id: id
+                                })
+                                    .then(function (data) {
+                                        if (data.status == "success") {
+                                                        
+                                            loadStudent();
+                                            loadContracts();
+                                            loadInvoices();
+            
+                                            Swal.fire({
+                                                icon: "success",
+                                                text: "Cancelado com sucesso!",
+                                                showConfirmButton: false,
+                                                showCancelButton: true,
+                                                cancelButtonText: "OK",
+                                                onClose: () => {},
+                                            });
+                                        } else if (data.status == "error") {
+                                            // showError(data.message);
+                                            Swal.fire({
+                                                icon: "error",
+                                                text: data.message,
+                                                showConfirmButton: false,
+                                                showCancelButton: true,
+                                                cancelButtonText: "OK",
+                                                onClose: () => {},
+                                            });
+                                        }
+                                    })
+                                    .catch();
+                            },
+                        },
+                    ]);
+
+                }
+            })
+
+    });
 
 
 
+    // ABRIR MODAL DE RECEBIMENTO
+    $("#list-invoices").on("click", ".pay-invoice", function(){
+        let id_invoice = $(this).data('id');
+        let due_date = $(this).data('due_date');
+        let price = $(this).data('price');
+
+        $("#id_invoice").val(id_invoice);
+        $("#due_date").val(due_date);
+        $("#price").val(moneyFormat(price));
+        $("#paid_price").val(moneyFormat(price));
+
+        $("#modalReceiveInvoice").modal('show');
+    });
+
+    // APLICAR DESCONTO
+    $("#discount").on("keyup", function(){
+
+        let discount = $(this).val();
+        let price = $("#price").val();
+        let paid_price = $("#price").val();
+
+        if(discount){
+
+            discount = discount.replace('.','');
+            discount = discount.replace(',','.');
+            price = price.replace('.','');
+            price = price.replace(',','.');
+    
+            paid_price = parseFloat(price) - parseFloat(discount);
+    
+            if(parseFloat(discount)>parseFloat(price))
+                paid_price = 0;
+            
+            $("#paid_price").val(moneyFormat(paid_price.toFixed(2)));
+        }else{
+            $("#paid_price").val($("#price").val());
+        }
 
 
+    });
 
+    // RECEBER FATURA
+    $("#formReceiveInvoice").submit(function (e) {
+        e.preventDefault();
+
+        Swal.queue([
+            {
+                title: "Carregando...",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                    $.post(window.location.origin + "/faturas/receber", {
+                        id: $("#id_invoice").val(),
+                        discount: $("#discount").val(),
+                        paid_price: $("#paid_price").val(),
+                    })
+                        .then(function (data) {
+                            if (data.status == "success") {
+
+                                $("#formReceiveInvoice").each(function () {
+                                    this.reset();
+                                });
+                                
+                                loadStudent();
+                                loadContracts();
+                                loadInvoices();
+                                $("#modalReceiveInvoice").modal("hide");
+
+                                Swal.fire({
+                                    icon: "success",
+                                    text: "Cadastro efetuado!",
+                                    showConfirmButton: false,
+                                    showCancelButton: true,
+                                    cancelButtonText: "OK",
+                                    onClose: () => {},
+                                });
+                            } else if (data.status == "error") {
+                                // showError(data.message);
+                                Swal.fire({
+                                    icon: "error",
+                                    text: data.message,
+                                    showConfirmButton: false,
+                                    showCancelButton: true,
+                                    cancelButtonText: "OK",
+                                    onClose: () => {},
+                                });
+                            }
+                        })
+                        .catch();
+                },
+            },
+        ]);
+    });
 
     
 

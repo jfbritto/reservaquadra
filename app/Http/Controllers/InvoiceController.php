@@ -58,11 +58,44 @@ class InvoiceController extends Controller
     //     return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
     // }
     
+    public function receive(Request $request) 
+    {
+        if($request->discount){
+            $discount_formated = str_replace(".", "", trim($request->discount));
+            $discount_formated = str_replace(",", ".", $discount_formated);
+        }else{
+            $discount_formated = 0;
+        }
+
+        if($request->paid_price){
+            $paid_price_formated = str_replace(".", "", trim($request->paid_price));
+            $paid_price_formated = str_replace(",", ".", $paid_price_formated);
+        }else{
+            $paid_price_formated = 0;
+        }
+
+        $data = [
+            'id' => trim($request->id),
+            'discount' => $discount_formated,
+            'paid_price' => $paid_price_formated,
+            'paid_date' => date('Y-m-d H:i:s'),
+            'id_user_received' => auth()->user()->id,
+            'status' => "R",
+        ];
+
+        $response = $this->invoiceService->receive($data);
+
+        if($response['status'] == 'success')
+            return response()->json(['status'=>'success'], 201);
+
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+    }
+    
     // public function destroy(Request $request) 
     // {
     //     $data = [
     //         'id' => trim($request->id),
-    //         'active' => 0
+    //         'status' => 'D'
     //     ];
 
     //     $response = $this->invoiceService->destroy($data);
@@ -73,10 +106,10 @@ class InvoiceController extends Controller
     //     return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
     // }
     
-    public function list($id_student) 
+    public function list_next_open($id_student) 
     {
 
-        $response = $this->invoiceService->list($id_student);
+        $response = $this->invoiceService->list_next_open($id_student);
 
         if($response['status'] == 'success')
             return response()->json(['status'=>'success', 'data'=>$response['data']], 201);
