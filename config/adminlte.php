@@ -323,6 +323,7 @@ return [
         [
             'text'    => 'Usuários',
             'icon'    => 'fas fa-fw fa-users',
+            'can'     => 'admin',
             'submenu' => [
                 [
                     'text'       => 'Alunos',
@@ -341,6 +342,7 @@ return [
         [
             'text'    => 'Configurações',
             'icon'    => 'fas fa-fw fa-cog',
+            'can'     => 'admin',
             'submenu' => [
                 [
                     'text'       => 'Quadras',

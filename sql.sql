@@ -1,8 +1,17 @@
+-- drop table available_dates;
+-- drop table companies;
+-- drop table contracts;
+-- drop table courts;
+-- drop table invoices;
+-- drop table plans;
+-- drop table reservations;
+-- drop table users;
+
 create database reservaquadra;
 
 use reservaquadra;
 
-CREATE TABLE IF NOT EXISTS `reservaquadra`.`companies` (
+CREATE TABLE IF NOT EXISTS `companies` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   `responsible` VARCHAR(45) NULL,
@@ -13,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `reservaquadra`.`companies` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `reservaquadra`.`users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '	',
   `id_company` INT NULL,
   `name` VARCHAR(45) NULL,
@@ -41,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `reservaquadra`.`users` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `reservaquadra`.`courts` (
+CREATE TABLE IF NOT EXISTS `courts` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_company` INT NULL,
   `name` VARCHAR(45) NULL,
@@ -55,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `reservaquadra`.`courts` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `reservaquadra`.`available_dates` (
+CREATE TABLE IF NOT EXISTS `available_dates` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_court` INT NULL,
   `week_day` VARCHAR(45) NULL,
@@ -68,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `reservaquadra`.`available_dates` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `reservaquadra`.`reservations` (
+CREATE TABLE IF NOT EXISTS `reservations` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_available_date` INT NULL,
   `reservation_date` DATE NULL,
@@ -80,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `reservaquadra`.`reservations` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `reservaquadra`.`contracts` (
+CREATE TABLE IF NOT EXISTS `contracts` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_plan` INT NOT NULL,
   `id_user` INT NOT NULL,
@@ -96,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `reservaquadra`.`contracts` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `reservaquadra`.`plans` (
+CREATE TABLE IF NOT EXISTS `plans` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_company` INT NOT NULL,
   `name` VARCHAR(45) NOT NULL,
@@ -107,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `reservaquadra`.`plans` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `reservaquadra`.`invoices` (
+CREATE TABLE IF NOT EXISTS `invoices` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_user` INT DEFAULT NULL,
   `id_contract` INT DEFAULT NULL,
