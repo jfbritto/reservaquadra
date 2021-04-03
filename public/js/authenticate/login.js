@@ -24,7 +24,7 @@ $(document).ready(function(){
                           })
     
                         setTimeout(function() {
-                            window.location = "/reservas";
+                            window.location = "/home";
                         }, 1000);
                     }else{
 

@@ -21,6 +21,9 @@ Route::group(['middleware' => ['auth']], function(){
     //logout
     Route::post('/logout', 'AuthenticateController@logout');
 
+    //home
+    Route::get('/home', 'HomeController@index');
+
     //quadra
     Route::get('/quadras', 'CourtController@index');
     Route::post('/quadra/cadastrar', 'CourtController@store');

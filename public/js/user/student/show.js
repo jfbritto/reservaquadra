@@ -40,10 +40,7 @@ $(document).ready(function () {
                                     $("#civil_status").html(item.civil_status);
                                     $("#profession").html(item.profession);
                                     $("#zip_code").html(item.zip_code);
-                                    $("#city").html(`${item.city} - ${item.uf}`);
-                                    $("#neighborhood").html(item.neighborhood);
-                                    $("#address").html(`${item.address}, ${item.address_number}`);
-                                    $("#complement").html(item.complement);
+                                    $("#address").html(`${item.address} ${item.address_number}, ${item.complement}. ${item.neighborhood}, ${item.city} - ${item.uf}`);
                                     $("#start_date").html(dateFormat(item.start_date));
                                     $("#health_plan").html(item.health_plan);
                                     $("#how_met").html(item.how_met);

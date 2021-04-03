@@ -47,37 +47,37 @@
                     <p class="text-muted" id="email"></p>
 
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
 
                     <strong><i class="fas fa-birthday-cake mr-1"></i> Nascimento</strong>
                     <p class="text-muted" id="birth"></p>
 
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
 
                     <strong><i class="fas fa-user mr-1"></i> CPF</strong>
                     <p class="text-muted" id="cpf"></p>
 
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
 
                     <strong><i class="fas fa-user mr-1"></i> RG</strong>
                     <p class="text-muted" id="rg"></p>
                 
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
 
                     <strong><i class="fas fa-ring mr-1"></i> Estado civil</strong>
                     <p class="text-muted" id="civil_status"></p>
 
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
 
                     <strong><i class="fas fa-user-tie mr-1"></i> Profissão</strong>
                     <p class="text-muted" id="profession"></p>
 
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
 
                     <strong><i class="fas fa-calendar-alt mr-1"></i> Data início</strong>
                     <p class="text-muted" id="start_date"></p>
@@ -88,23 +88,11 @@
             <hr>
 
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-10 col-8">
                     <strong><i class="fas fa-map-marker-alt mr-1"></i> Endereço</strong>
                     <p class="text-muted" id="address"></p>
                 </div>
-                <div class="col-md-3">
-                    <strong><i class="fas fa-map-marker-alt mr-1"></i> Bairro</strong>
-                    <p class="text-muted" id="neighborhood"></p>
-                </div>
-                <div class="col-md-2">
-                    <strong><i class="fas fa-map-marker-alt mr-1"></i> Cidade</strong>
-                    <p class="text-muted" id="city"></p>
-                </div>
-                <div class="col-md-2">
-                    <strong><i class="fas fa-map-marker-alt mr-1"></i> Complemento</strong>
-                    <p class="text-muted" id="complement"></p>
-                </div>
-                <div class="col-md-2">
+                <div class="col-md-2 col-4">
                     <strong><i class="fas fa-map-marker-alt mr-1"></i> CEP</strong>
                     <p class="text-muted" id="zip_code"></p>
                 </div>
@@ -114,13 +102,13 @@
             <hr>
 
             <div class="row">    
-                <div class="col-md-6">
+                <div class="col-md-6 col-6">
 
                     <strong><i class="fas fa-first-aid mr-1"></i> Plano de saúde</strong>
                     <p class="text-muted" id="health_plan"></p>
 
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 col-6">
 
                     <strong><i class="fas fa-handshake mr-1"></i> Como conheceu?</strong>
                     <p class="text-muted" id="how_met"></p>

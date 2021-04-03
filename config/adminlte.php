@@ -299,9 +299,9 @@ return [
         //     'url'        => '#',
         // ],
         [
-            'text'       => 'Reservas',
-            'icon'       => 'fas fa-fw fa-tasks' ,
-            'url'        => 'reservas',
+            'text'       => 'Home',
+            'icon'       => 'fas fa-fw fa-home' ,
+            'url'        => 'home',
             'can'        => 'admin',
         ],
         ['header' => 'USUÁRIOS'],
@@ -344,6 +344,13 @@ return [
                 ],
         //     ],
         // ],
+        ['header' => 'OUTROS'],
+        [
+            'text'       => 'Reservas',
+            'icon'       => 'fas fa-fw fa-clipboard-list' ,
+            'url'        => 'reservas',
+            'can'        => 'admin',
+        ],
     ],
 
     /*

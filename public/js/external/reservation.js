@@ -230,7 +230,7 @@ $(document).ready(function () {
         let end_time = $(this).data('end_time');
         let price = $(this).data('price');
 
-        $("#time-chosen").html(`<span>De <b>${start_time}</b> às <b>${end_time}</b></span>`);
+        $("#time-chosen").html(`<span>De ${start_time} às ${end_time}</span>`);
         $("#price-chosen").html(`R$ ${moneyFormat(price)}`);
         $("#id_available_date").val(id);
 
