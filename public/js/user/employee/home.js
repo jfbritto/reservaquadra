@@ -82,10 +82,9 @@ $(document).ready(function () {
                                     this.reset();
                                 });
                                 
-                                loadEmployees();
                                 $("#modalStoreEmployee").modal("hide");
 
-                                showSuccess("Cadastro efetuado!")
+                                showSuccess("Cadastro efetuado!", null, loadEmployees)
                             } else if (data.status == "error") {
                                 showError(data.message)
                             }
@@ -136,10 +135,9 @@ $(document).ready(function () {
                                     this.reset();
                                 });
                                 
-                                loadEmployees();
                                 $("#modalEditEmployee").modal("hide");
 
-                                showSuccess("Edição efetuada!")
+                                showSuccess("Edição efetuada!", null, loadEmployees)
                             } else if (data.status == "error") {
                                 showError(data.message)
                             }
@@ -166,7 +164,6 @@ $(document).ready(function () {
             cancelButtonColor: '#d33',
             cancelButtonText: 'Não'
             }).then((result) => {
-                console.log(result)
                 if (result.value) {
 
                     Swal.queue([
@@ -182,9 +179,7 @@ $(document).ready(function () {
                                     .then(function (data) {
                                         if (data.status == "success") {
                                                         
-                                            loadEmployees();
-            
-                                            showSuccess("Deletado com sucesso!")
+                                            showSuccess("Deletado com sucesso!", null, loadEmployees)
                                         } else if (data.status == "error") {
                                             showError(data.message)
                                         }

@@ -67,16 +67,23 @@ function dateFormat(date)
 
 
 
-function showError(text = null)
+function showError(text = "Ocorreu um erro!")
 {
-    if(text)
-        Swal.fire({ type: 'error', text: text, showConfirmButton: true })
+    Swal.fire({ type: 'error', text: text, showConfirmButton: true })
 }
 
-function showSuccess(title = null, text = null)
+function showSuccess(title = null, text = null, functions = null, param = null)
 {
-    if(title && text == null)
-        Swal.fire({ type: 'success', title: title, showConfirmButton: false, timer: 1500 })
-    else if(title && text)
-        Swal.fire({ type: 'success', title: title, text: text, showConfirmButton: false, timer: 1500 })
+    if(functions){
+        if(title && text == null)
+            Swal.fire({ type: 'success', title: title, showConfirmButton: false, timer: 1000, onClose: () => { functions(param); } })
+        else if(title && text)
+            Swal.fire({ type: 'success', title: title, text: text, showConfirmButton: false, timer: 1000, onClose: () => { functions(param); } })
+    }else{
+        if(title && text == null)
+            Swal.fire({ type: 'success', title: title, showConfirmButton: false, timer: 1000 })
+        else if(title && text)
+            Swal.fire({ type: 'success', title: title, text: text, showConfirmButton: false, timer: 1000 })
+    }
+
 }

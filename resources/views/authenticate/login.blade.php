@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('base.external_base')
 
 @section('title', 'Login')
 

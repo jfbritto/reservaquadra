@@ -38,7 +38,6 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post('/reservas/listar', 'ReservationController@list');
     Route::post('/reservas/change-status', 'ReservationController@change_status');
 
-    
     // contratos
     Route::get('/contratos/listar/{id_student}', 'ContractController@list');
     Route::post('/contratos/cadastrar', 'ContractController@store');
@@ -53,7 +52,8 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/planos/listar', 'PlanController@list');
     Route::post('/planos/cadastrar', 'PlanController@store');
     Route::post('/planos/editar', 'PlanController@update');
-
+    Route::post('/planos/deletar', 'PlanController@destroy');
+    
     //alunos
     Route::get('/alunos', 'UserController@student');
     Route::get('/alunos/exibir/{id}', 'UserController@show_student');
@@ -62,6 +62,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post('/alunos/cadastrar', 'UserController@store_student');
     Route::post('/alunos/editar', 'UserController@update_student');
     Route::post('/alunos/deletar', 'UserController@destroy');
+    Route::post('/alunos/buscar', 'UserController@search_student');
 
     //funcionarios
     Route::get('/funcionarios', 'UserController@employee');

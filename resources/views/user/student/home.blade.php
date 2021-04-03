@@ -10,7 +10,7 @@
     
     <div class="card">
         <div class="card-header border-0">
-            <h3 class="card-title"> <input type="text" class="form-control" placeholder="Buscar pelo nome"> </h3>
+            <h3 class="card-title"> <input type="text" class="form-control" name="search" id="search" placeholder="Buscar pelo nome"> </h3>
             <div class="card-tools">
                 <a href="#" class="btn btn-tool btn-sm" data-toggle="modal" data-target="#modalStoreStudent">
                 <i class="fas fa-plus"></i>

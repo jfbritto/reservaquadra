@@ -52,20 +52,20 @@ class PlanController extends Controller
         return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
     }
     
-    // public function destroy(Request $request) 
-    // {
-    //     $data = [
-    //         'id' => trim($request->id),
-    //         'status' => 'D'
-    //     ];
+    public function destroy(Request $request) 
+    {
+        $data = [
+            'id' => trim($request->id),
+            'status' => 'D'
+        ];
 
-    //     $response = $this->planService->destroy($data);
+        $response = $this->planService->destroy($data);
 
-    //     if($response['status'] == 'success')
-    //         return response()->json(['status'=>'success'], 201);
+        if($response['status'] == 'success')
+            return response()->json(['status'=>'success'], 201);
 
-    //     return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
-    // }
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+    }
     
     public function list() 
     {

@@ -109,4 +109,19 @@ class UserService
         return $response;
     }
 
+    public function search($group, $search)
+    {
+        $response = [];
+
+        try{
+            $return = DB::select( DB::raw("select usr.* from users usr where usr.status = 'A' and usr.group in (".implode(',',$group).") and name like '%".$search."%' order by usr.name"));
+
+            $response = ['status' => 'success', 'data' => $return];
+        }catch(Exception $e){
+            $response = ['status' => 'error', 'data' => $e->getMessage()];
+        }
+
+        return $response;
+    }
+
 }

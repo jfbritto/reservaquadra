@@ -312,7 +312,6 @@ $(document).ready(function () {
             cancelButtonColor: '#d33',
             cancelButtonText: 'Não'
             }).then((result) => {
-                console.log(result)
                 if (result.value) {
 
                     Swal.queue([
@@ -552,7 +551,6 @@ $(document).ready(function () {
             cancelButtonColor: '#d33',
             cancelButtonText: 'Não'
             }).then((result) => {
-                console.log(result)
                 if (result.value) {
 
                     Swal.queue([

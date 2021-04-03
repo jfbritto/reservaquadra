@@ -68,6 +68,7 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
+
                     $.post(window.location.origin + "/quadra/cadastrar", {
                         name: $("#name").val(),
                         city: $("#city").val(),
@@ -82,18 +83,20 @@ $(document).ready(function () {
                                     this.reset();
                                 });
                                 
-                                loadCourts();
+                                
                                 $("#modalStoreCourt").modal("hide");
 
-                                showSuccess("Cadastro efetuado!")
+                                showSuccess("Cadastro efetuado!", null, loadCourts)
                             } else if (data.status == "error") {
                                 showError(data.message)
                             }
                         })
                         .catch();
+
                 },
             },
         ]);
+
     });
 
 
@@ -142,10 +145,9 @@ $(document).ready(function () {
                                     this.reset();
                                 });
                                 
-                                loadCourts();
                                 $("#modalEditCourt").modal("hide");
 
-                                showSuccess("Edição efetuada!")
+                                showSuccess("Edição efetuada!", null, loadCourts)
                             } else if (data.status == "error") {
                                 showError(data.message)
                             }
@@ -172,7 +174,6 @@ $(document).ready(function () {
             cancelButtonColor: '#d33',
             cancelButtonText: 'Não'
             }).then((result) => {
-                console.log(result)
                 if (result.value) {
 
                     Swal.queue([
@@ -188,9 +189,7 @@ $(document).ready(function () {
                                     .then(function (data) {
                                         if (data.status == "success") {
                                                         
-                                            loadCourts();
-            
-                                            showSuccess("Deletado com sucesso!")
+                                            showSuccess("Deletado com sucesso!", null, loadCourts)
                                         } else if (data.status == "error") {
                                             showError(data.message)
                                         }
@@ -231,11 +230,9 @@ $(document).ready(function () {
                                     this.reset();
                                 });
 
-                                listAvailableDates($("#id_court_add").val())
-                                
                                 $("#modalAddAvailableDate").modal("hide");
 
-                                showSuccess("Cadastro efetuado!")
+                                showSuccess("Cadastro efetuado!", null, listAvailableDates, $("#id_court_add").val())
                             } else if (data.status == "error") {
                                 showError(data.message)
                             }
@@ -345,7 +342,6 @@ $(document).ready(function () {
             cancelButtonColor: '#d33',
             cancelButtonText: 'Não'
             }).then((result) => {
-                console.log(result)
                 if (result.value) {
 
                     Swal.queue([
@@ -361,9 +357,7 @@ $(document).ready(function () {
                                     .then(function (data) {
                                         if (data.status == "success") {
                                                         
-                                            listAvailableDates(id_court);
-            
-                                            showSuccess("Deletada com sucesso!")
+                                            showSuccess("Deletada com sucesso!", null, listAvailableDates, id_court)
                                         } else if (data.status == "error") {
                                             showError(data.message)
                                         }

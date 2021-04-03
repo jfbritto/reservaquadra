@@ -231,11 +231,6 @@ return [
             'search' => false,
             'topnav' => false,
         ],
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
         // [
         //     'text'        => 'pages',
         //     'url'         => 'admin/pages',
@@ -304,49 +299,40 @@ return [
         //     'url'        => '#',
         // ],
         [
-            'text'       => 'Login',
-            'icon'       => 'fas fa-fw fa-user' ,
-            'url'        => '/',
-            // 'label'      => 'Faça seu login',
-        ],
-        [
-            'text'       => 'Reservar',
-            'icon'       => 'fas fa-fw fa-clipboard-list' ,
-            'url'        => '/reservar',
-        ],
-        [
             'text'       => 'Reservas',
-            'icon'       => 'fas fa-fw fa-clipboard-list' ,
+            'icon'       => 'fas fa-fw fa-tasks' ,
             'url'        => 'reservas',
             'can'        => 'admin',
         ],
-        [
-            'text'    => 'Usuários',
-            'icon'    => 'fas fa-fw fa-users',
-            'can'     => 'admin',
-            'submenu' => [
+        ['header' => 'USUÁRIOS'],
+        // [
+        //     'text'    => 'Usuários',
+        //     'icon'    => 'fas fa-fw fa-users',
+        //     'can'     => 'admin',
+        //     'submenu' => [
                 [
                     'text'       => 'Alunos',
-                    'icon'       => 'fas fa-fw fa-users' ,
+                    'icon'       => 'fas fa-fw fa-user-graduate' ,
                     'url'        => 'alunos',
                     'can'        => 'admin',
                 ],
                 [
                     'text'       => 'Funcionários',
-                    'icon'       => 'fas fa-fw fa-users' ,
+                    'icon'       => 'fas fa-fw fa-user-friends' ,
                     'url'        => 'funcionarios',
                     'can'        => 'admin',
                 ],
-            ],
-        ],
-        [
-            'text'    => 'Configurações',
-            'icon'    => 'fas fa-fw fa-cog',
-            'can'     => 'admin',
-            'submenu' => [
+        //     ],
+        // ],
+        ['header' => 'CONFIGURAÇÕES'],
+        // [
+        //     'text'    => 'Configurações',
+        //     'icon'    => 'fas fa-fw fa-cog',
+        //     'can'     => 'admin',
+        //     'submenu' => [
                 [
                     'text'       => 'Quadras',
-                    'icon'       => 'fas fa-fw fa-clipboard-list' ,
+                    'icon'       => 'fas fa-fw fa-th-large' ,
                     'url'        => 'quadras',
                     'can'        => 'admin',
                 ],
@@ -356,8 +342,8 @@ return [
                     'url'        => 'planos',
                     'can'        => 'admin',
                 ],
-            ],
-        ],
+        //     ],
+        // ],
     ],
 
     /*

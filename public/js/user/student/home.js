@@ -13,7 +13,7 @@ $(document).ready(function () {
                 onOpen: () => {
                     Swal.showLoading();
                     $.post(window.location.origin + "/alunos/listar", {
-                        
+
                     })
                         .then(function (data) {
                             if (data.status == "success") {
@@ -22,10 +22,6 @@ $(document).ready(function () {
                                 $("#list").html(``);
 
                                 if(data.data.length > 0){
-                                    
-                                    // $('#table').DataTable( {
-                                    //     "ajax": data.data
-                                    // } );
 
                                     data.data.forEach(item => {
 
@@ -101,10 +97,9 @@ $(document).ready(function () {
                                     this.reset();
                                 });
                                 
-                                loadStudents();
                                 $("#modalStoreStudent").modal("hide");
 
-                                showSuccess("Cadastro efetuado!")
+                                showSuccess("Cadastro efetuado!", null, loadStudents)
                             } else if (data.status == "error") {
                                 showError(data.message)
                             }
@@ -181,10 +176,9 @@ $(document).ready(function () {
                                     this.reset();
                                 });
                                 
-                                loadStudents();
                                 $("#modalEditStudent").modal("hide");
 
-                                showSuccess("Edição efetuada!")
+                                showSuccess("Edição efetuada!", null, loadStudents)
                             } else if (data.status == "error") {
                                 showError(data.message)
                             }
@@ -211,7 +205,6 @@ $(document).ready(function () {
             cancelButtonColor: '#d33',
             cancelButtonText: 'Não'
             }).then((result) => {
-                console.log(result)
                 if (result.value) {
 
                     Swal.queue([
@@ -227,9 +220,7 @@ $(document).ready(function () {
                                     .then(function (data) {
                                         if (data.status == "success") {
                                                         
-                                            loadStudents();
-            
-                                            showSuccess("Deletado com sucesso!")
+                                            showSuccess("Deletado com sucesso!", null, loadStudents)
                                         } else if (data.status == "error") {
                                             showError(data.message)
                                         }
@@ -338,10 +329,54 @@ $(document).ready(function () {
 
 
 
+    $("#search").on("keyup", function(){
+
+        let search = $(this).val();
+
+        $.post(window.location.origin + "/alunos/buscar", {
+            search
+        })
+        .then(function (data) {
+            if (data.status == "success") {
+
+                Swal.close();
+                $("#list").html(``);
+
+                if(data.data.length > 0){
+
+                    data.data.forEach(item => {
+
+                        $("#list").append(`
+                            <tr>
+                                <td class="align-middle">${item.name}</td>
+                                <td class="align-middle just-pc">${item.email}</td>
+                                <td class="align-middle" style="text-align: right">
+                                    <a title="Abrir" href="/alunos/exibir/${item.id}" class="btn btn-info open-student"><i style="color: white" class="fas fa-eye"></i></a>
+                                    <a title="Editar" data-id="${item.id}" data-name="${item.name}" data-email="${item.email}" data-birth="${item.birth}" data-cpf="${item.cpf}" data-rg="${item.rg}" data-civil_status="${item.civil_status}" data-profession="${item.profession}" data-zip_code="${item.zip_code}" data-uf="${item.uf}" data-city="${item.city}" data-neighborhood="${item.neighborhood}" data-address="${item.address}" data-address_number="${item.address_number}" data-complement="${item.complement}" data-start_date="${item.start_date}" data-health_plan="${item.health_plan}" data-how_met="${item.how_met}" href="#" class="btn btn-warning edit-student"><i style="color: white" class="fas fa-edit"></i></a>
+                                    <a title="Deletar" data-id="${item.id}" href="#" class="btn btn-danger delete-student"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                        `);       
+                    });
+
+                }else{
+
+                    $("#list").append(`
+                        <tr>
+                            <td class="align-middle text-center" colspan="4">Nenhum aluno cadastrado</td>
+                        </tr>
+                    `);  
+
+                }
 
 
+            } else if (data.status == "error") {
+                showError(data.message)
+            }
+        })
+        .catch();
 
-    
+    })
 
 
 });

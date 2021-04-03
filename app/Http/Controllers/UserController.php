@@ -81,6 +81,17 @@ class UserController extends Controller
         return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
     }
 
+    public function search_student() 
+    {
+        $search = $_POST['search'];
+        $response = $this->userService->search([4], $search);
+
+        if($response['status'] == 'success')
+            return response()->json(['status'=>'success', 'data'=>$response['data']], 201);
+
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+    }
+
     public function update_student(Request $request) 
     {
         $data = [

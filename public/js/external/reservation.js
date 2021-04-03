@@ -263,12 +263,9 @@ $(document).ready(function () {
                                     this.reset();
                                 });
 
-                                resetScreen();
-
                                 $("#modalReservation").modal("hide");
-                                loadCourts();
 
-                                showSuccess("Reserva efetuada!")
+                                showSuccess("Reserva efetuada!", null, ResetAndloadCourts)
                             } else if (data.status == "error") {
                                 showError(data.message)
                             }
@@ -281,10 +278,15 @@ $(document).ready(function () {
 
     $("#reset").on("click", function(){
 
-        resetScreen();
-        loadCourts();
+        ResetAndloadCourts();
 
     })
+
+    function ResetAndloadCourts()
+    {
+        resetScreen();
+        loadCourts();
+    }
     
 
 });

@@ -55,29 +55,29 @@ class PlanService
         return $response;
     }
 
-    // public function destroy(array $data)
-    // {
-    //     $response = [];
+    public function destroy(array $data)
+    {
+        $response = [];
 
-    //     try{
+        try{
 
-    //         DB::beginTransaction();
+            DB::beginTransaction();
 
-    //         $result = DB::table('users')
-    //                     ->where('id', $data['id'])
-    //                     ->update(['status' => $data['status']]);
+            $result = DB::table('plans')
+                        ->where('id', $data['id'])
+                        ->update(['status' => $data['status']]);
 
-    //         DB::commit();
+            DB::commit();
 
-    //         $response = ['status' => 'success', 'data' => $result];
+            $response = ['status' => 'success', 'data' => $result];
 
-    //     }catch(Exception $e){
-    //         DB::rollBack();
-    //         $response = ['status' => 'error', 'data' => $e->getMessage()];
-    //     }
+        }catch(Exception $e){
+            DB::rollBack();
+            $response = ['status' => 'error', 'data' => $e->getMessage()];
+        }
 
-    //     return $response;
-    // }
+        return $response;
+    }
 
     public function list()
     {

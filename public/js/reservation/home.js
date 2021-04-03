@@ -81,7 +81,6 @@ $(document).ready(function () {
             cancelButtonColor: '#d33',
             cancelButtonText: 'Não'
             }).then((result) => {
-                console.log(result)
                 if (result.value) {
 
                     Swal.queue([
@@ -97,10 +96,7 @@ $(document).ready(function () {
                                     .then(function (data) {
                                         if (data.status == "success") {
             
-                                            Swal.close();
-                                            loadReservations();
-                                            
-                                            showSuccess("Reserva confirmada!")
+                                            showSuccess("Reserva confirmada!", null, loadReservations)
                                         } else if (data.status == "error") {
                                             showError(data.message)
                                         }
