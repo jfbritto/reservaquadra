@@ -201,6 +201,8 @@
                                     <option value="5">Sexta</option>
                                     <option value="6">Sábado</option>
                                     <option value="7">Domingo</option>
+                                    <option value="8">Todos os dias</option>
+                                    <option value="9">Dias de semana</option>
                                 </select>
                             </div>
                         </div>

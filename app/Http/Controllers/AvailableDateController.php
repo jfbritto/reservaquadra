@@ -19,16 +19,54 @@ class AvailableDateController extends Controller
         $price_formated = str_replace(".", "", trim($request->price));
         $price_formated = str_replace(",", ".", $price_formated);
 
-        $data = [
-            'id_company' => 1,
-            'id_court' => trim($request->id_court),
-            'week_day' => trim($request->week_day),
-            'start_time' => trim($request->start_time),
-            'end_time' => trim($request->end_time),
-            'price' => $price_formated
-        ];
+        if($request->week_day < 8){
 
-        $response = $this->availableDateService->store($data);
+            $data = [
+                'id_company' => 1,
+                'id_court' => trim($request->id_court),
+                'week_day' => trim($request->week_day),
+                'start_time' => trim($request->start_time),
+                'end_time' => trim($request->end_time),
+                'price' => $price_formated
+            ];
+    
+            $response = $this->availableDateService->store($data);
+            
+        }else{
+
+            if($request->week_day == 8){
+
+                for ($i=1; $i < 8; $i++) { 
+                    $data = [
+                        'id_company' => 1,
+                        'id_court' => trim($request->id_court),
+                        'week_day' => trim($i),
+                        'start_time' => trim($request->start_time),
+                        'end_time' => trim($request->end_time),
+                        'price' => $price_formated
+                    ];
+            
+                    $response = $this->availableDateService->store($data);
+                }
+                
+            }else{
+                
+                for ($i=1; $i < 6; $i++) { 
+                    $data = [
+                        'id_company' => 1,
+                        'id_court' => trim($request->id_court),
+                        'week_day' => trim($i),
+                        'start_time' => trim($request->start_time),
+                        'end_time' => trim($request->end_time),
+                        'price' => $price_formated
+                    ];
+            
+                    $response = $this->availableDateService->store($data);
+                }
+
+            }
+    
+        }
 
         if($response['status'] == 'success')
             return response()->json(['status'=>'success'], 201);
