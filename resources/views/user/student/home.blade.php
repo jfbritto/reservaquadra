@@ -23,7 +23,7 @@
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>Email</th>
+                            <th class="just-pc">Email</th>
                             <th></th>
                         </tr>
                     </thead>

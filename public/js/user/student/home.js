@@ -32,7 +32,7 @@ $(document).ready(function () {
                                         $("#list").append(`
                                             <tr>
                                                 <td class="align-middle">${item.name}</td>
-                                                <td class="align-middle">${item.email}</td>
+                                                <td class="align-middle just-pc">${item.email}</td>
                                                 <td class="align-middle" style="text-align: right">
                                                     <a title="Abrir" href="/alunos/exibir/${item.id}" class="btn btn-info open-student"><i style="color: white" class="fas fa-eye"></i></a>
                                                     <a title="Editar" data-id="${item.id}" data-name="${item.name}" data-email="${item.email}" data-birth="${item.birth}" data-cpf="${item.cpf}" data-rg="${item.rg}" data-civil_status="${item.civil_status}" data-profession="${item.profession}" data-zip_code="${item.zip_code}" data-uf="${item.uf}" data-city="${item.city}" data-neighborhood="${item.neighborhood}" data-address="${item.address}" data-address_number="${item.address_number}" data-complement="${item.complement}" data-start_date="${item.start_date}" data-health_plan="${item.health_plan}" data-how_met="${item.how_met}" href="#" class="btn btn-warning edit-student"><i style="color: white" class="fas fa-edit"></i></a>
@@ -54,15 +54,7 @@ $(document).ready(function () {
 
 
                             } else if (data.status == "error") {
-                                // showError(data.message);
-                                Swal.fire({
-                                    icon: "error",
-                                    text: data.message,
-                                    showConfirmButton: false,
-                                    showCancelButton: true,
-                                    cancelButtonText: "OK",
-                                    onClose: () => {},
-                                });
+                                showError(data.message)
                             }
                         })
                         .catch();
@@ -112,24 +104,9 @@ $(document).ready(function () {
                                 loadStudents();
                                 $("#modalStoreStudent").modal("hide");
 
-                                Swal.fire({
-                                    icon: "success",
-                                    text: "Cadastro efetuado!",
-                                    showConfirmButton: false,
-                                    showCancelButton: true,
-                                    cancelButtonText: "OK",
-                                    onClose: () => {},
-                                });
+                                showSuccess("Cadastro efetuado!")
                             } else if (data.status == "error") {
-                                // showError(data.message);
-                                Swal.fire({
-                                    icon: "error",
-                                    text: data.message,
-                                    showConfirmButton: false,
-                                    showCancelButton: true,
-                                    cancelButtonText: "OK",
-                                    onClose: () => {},
-                                });
+                                showError(data.message)
                             }
                         })
                         .catch();
@@ -207,24 +184,9 @@ $(document).ready(function () {
                                 loadStudents();
                                 $("#modalEditStudent").modal("hide");
 
-                                Swal.fire({
-                                    icon: "success",
-                                    text: "Cadastro efetuado!",
-                                    showConfirmButton: false,
-                                    showCancelButton: true,
-                                    cancelButtonText: "OK",
-                                    onClose: () => {},
-                                });
+                                showSuccess("Edição efetuada!")
                             } else if (data.status == "error") {
-                                // showError(data.message);
-                                Swal.fire({
-                                    icon: "error",
-                                    text: data.message,
-                                    showConfirmButton: false,
-                                    showCancelButton: true,
-                                    cancelButtonText: "OK",
-                                    onClose: () => {},
-                                });
+                                showError(data.message)
                             }
                         })
                         .catch();
@@ -267,24 +229,9 @@ $(document).ready(function () {
                                                         
                                             loadStudents();
             
-                                            Swal.fire({
-                                                icon: "success",
-                                                text: "Deletado com sucesso!",
-                                                showConfirmButton: false,
-                                                showCancelButton: true,
-                                                cancelButtonText: "OK",
-                                                onClose: () => {},
-                                            });
+                                            showSuccess("Deletado com sucesso!")
                                         } else if (data.status == "error") {
-                                            // showError(data.message);
-                                            Swal.fire({
-                                                icon: "error",
-                                                text: data.message,
-                                                showConfirmButton: false,
-                                                showCancelButton: true,
-                                                cancelButtonText: "OK",
-                                                onClose: () => {},
-                                            });
+                                            showError(data.message)
                                         }
                                     })
                                     .catch();
@@ -299,10 +246,7 @@ $(document).ready(function () {
 
 
 
-
-
     // BUSCA DE ENDEREÇO
-
     $("#zip_code").on("keyup", function(){
 
         if($(this).val().length == 9){
@@ -323,7 +267,7 @@ $(document).ready(function () {
                             .then(function (data) {
 
                                 if(data.erro){
-                                    Swal.fire('Erro!', "Cep não encontrado!", 'error');
+                                    showError("Cep não encontrado!")
                                     return false;
                                 }
 

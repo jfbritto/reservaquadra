@@ -64,3 +64,19 @@ function dateFormat(date)
         return `${dia}/${mes}/${ano}`;
     }
 }
+
+
+
+function showError(text = null)
+{
+    if(text)
+        Swal.fire({ type: 'error', text: text, showConfirmButton: true })
+}
+
+function showSuccess(title = null, text = null)
+{
+    if(title && text == null)
+        Swal.fire({ type: 'success', title: title, showConfirmButton: false, timer: 1500 })
+    else if(title && text)
+        Swal.fire({ type: 'success', title: title, text: text, showConfirmButton: false, timer: 1500 })
+}

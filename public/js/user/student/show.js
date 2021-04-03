@@ -51,15 +51,7 @@ $(document).ready(function () {
                                 }
 
                             } else if (data.status == "error") {
-                                // showError(data.message);
-                                Swal.fire({
-                                    icon: "error",
-                                    text: data.message,
-                                    showConfirmButton: false,
-                                    showCancelButton: true,
-                                    cancelButtonText: "OK",
-                                    onClose: () => {},
-                                });
+                                showError(data.message)
                             }
                         })
                         .catch();
@@ -101,14 +93,7 @@ $(document).ready(function () {
                 }
 
             } else if (data.status == "error") {
-                Swal.fire({
-                    icon: "error",
-                    text: data.message,
-                    showConfirmButton: false,
-                    showCancelButton: true,
-                    cancelButtonText: "OK",
-                    onClose: () => {},
-                });
+                showError(data.message)
             }
         })
         .catch();
@@ -160,15 +145,7 @@ $(document).ready(function () {
                 }
 
             } else if (data.status == "error") {
-                // showError(data.message);
-                Swal.fire({
-                    icon: "error",
-                    text: data.message,
-                    showConfirmButton: false,
-                    showCancelButton: true,
-                    cancelButtonText: "OK",
-                    onClose: () => {},
-                });
+                showError(data.message)
             }
         })
         .catch();
@@ -214,15 +191,7 @@ $(document).ready(function () {
                 }
 
             } else if (data.status == "error") {
-                // showError(data.message);
-                Swal.fire({
-                    icon: "error",
-                    text: data.message,
-                    showConfirmButton: false,
-                    showCancelButton: true,
-                    cancelButtonText: "OK",
-                    onClose: () => {},
-                });
+                showError(data.message)
             }
         })
         .catch();
@@ -261,24 +230,9 @@ $(document).ready(function () {
                                 loadInvoices();
                                 $("#modalStoreContract").modal("hide");
 
-                                Swal.fire({
-                                    icon: "success",
-                                    text: "Cadastro efetuado!",
-                                    showConfirmButton: false,
-                                    showCancelButton: true,
-                                    cancelButtonText: "OK",
-                                    onClose: () => {},
-                                });
+                                showSuccess("Cadastro efetuado!")
                             } else if (data.status == "error") {
-                                // showError(data.message);
-                                Swal.fire({
-                                    icon: "error",
-                                    text: data.message,
-                                    showConfirmButton: false,
-                                    showCancelButton: true,
-                                    cancelButtonText: "OK",
-                                    onClose: () => {},
-                                });
+                                showError(data.message)
                             }
                         })
                         .catch();
@@ -333,24 +287,9 @@ $(document).ready(function () {
                                 loadInvoices();
                                 $("#modalRenewContract").modal("hide");
 
-                                Swal.fire({
-                                    icon: "success",
-                                    text: "Contrato renovado!",
-                                    showConfirmButton: false,
-                                    showCancelButton: true,
-                                    cancelButtonText: "OK",
-                                    onClose: () => {},
-                                });
+                                showSuccess("Contrato renovado!")
                             } else if (data.status == "error") {
-                                // showError(data.message);
-                                Swal.fire({
-                                    icon: "error",
-                                    text: data.message,
-                                    showConfirmButton: false,
-                                    showCancelButton: true,
-                                    cancelButtonText: "OK",
-                                    onClose: () => {},
-                                });
+                                showError(data.message)
                             }
                         })
                         .catch();
@@ -393,24 +332,9 @@ $(document).ready(function () {
                                             loadContracts();
                                             loadInvoices();
             
-                                            Swal.fire({
-                                                icon: "success",
-                                                text: "Cancelado com sucesso!",
-                                                showConfirmButton: false,
-                                                showCancelButton: true,
-                                                cancelButtonText: "OK",
-                                                onClose: () => {},
-                                            });
+                                            showSuccess("Cancelado com sucesso!")
                                         } else if (data.status == "error") {
-                                            // showError(data.message);
-                                            Swal.fire({
-                                                icon: "error",
-                                                text: data.message,
-                                                showConfirmButton: false,
-                                                showCancelButton: true,
-                                                cancelButtonText: "OK",
-                                                onClose: () => {},
-                                            });
+                                            showError(data.message)
                                         }
                                     })
                                     .catch();
@@ -494,24 +418,9 @@ $(document).ready(function () {
                                 loadInvoices();
                                 $("#modalReceiveInvoice").modal("hide");
 
-                                Swal.fire({
-                                    icon: "success",
-                                    text: "Cadastro efetuado!",
-                                    showConfirmButton: false,
-                                    showCancelButton: true,
-                                    cancelButtonText: "OK",
-                                    onClose: () => {},
-                                });
+                                showSuccess("Cadastro efetuado!")
                             } else if (data.status == "error") {
-                                // showError(data.message);
-                                Swal.fire({
-                                    icon: "error",
-                                    text: data.message,
-                                    showConfirmButton: false,
-                                    showCancelButton: true,
-                                    cancelButtonText: "OK",
-                                    onClose: () => {},
-                                });
+                                showError(data.message)
                             }
                         })
                         .catch();

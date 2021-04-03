@@ -18,6 +18,6 @@ class Administrator
         if(auth()->user()->group == 1)
             return $next($request);
 
-        return redirect('/login');
+        return redirect('/');
     }
 }

@@ -49,15 +49,7 @@ $(document).ready(function () {
 
 
                             } else if (data.status == "error") {
-                                // showError(data.message);
-                                Swal.fire({
-                                    icon: "error",
-                                    text: data.message,
-                                    showConfirmButton: false,
-                                    showCancelButton: true,
-                                    cancelButtonText: "OK",
-                                    onClose: () => {},
-                                });
+                                showError(data.message)
                             }
                         })
                         .catch();
@@ -92,24 +84,9 @@ $(document).ready(function () {
                                 loadPlans();
                                 $("#modalStorePlan").modal("hide");
 
-                                Swal.fire({
-                                    icon: "success",
-                                    text: "Cadastro efetuado!",
-                                    showConfirmButton: false,
-                                    showCancelButton: true,
-                                    cancelButtonText: "OK",
-                                    onClose: () => {},
-                                });
+                                showSuccess("Cadastro efetuado!")
                             } else if (data.status == "error") {
-                                // showError(data.message);
-                                Swal.fire({
-                                    icon: "error",
-                                    text: data.message,
-                                    showConfirmButton: false,
-                                    showCancelButton: true,
-                                    cancelButtonText: "OK",
-                                    onClose: () => {},
-                                });
+                                showError(data.message)
                             }
                         })
                         .catch();
@@ -158,24 +135,9 @@ $(document).ready(function () {
                                 loadPlans();
                                 $("#modalEditPlan").modal("hide");
 
-                                Swal.fire({
-                                    icon: "success",
-                                    text: "Cadastro efetuado!",
-                                    showConfirmButton: false,
-                                    showCancelButton: true,
-                                    cancelButtonText: "OK",
-                                    onClose: () => {},
-                                });
+                                showSuccess("Edição efetuada!")
                             } else if (data.status == "error") {
-                                // showError(data.message);
-                                Swal.fire({
-                                    icon: "error",
-                                    text: data.message,
-                                    showConfirmButton: false,
-                                    showCancelButton: true,
-                                    cancelButtonText: "OK",
-                                    onClose: () => {},
-                                });
+                                showError(data.message)
                             }
                         })
                         .catch();
@@ -218,24 +180,9 @@ $(document).ready(function () {
                                                         
                                             loadPlans();
             
-                                            Swal.fire({
-                                                icon: "success",
-                                                text: "Deletado com sucesso!",
-                                                showConfirmButton: false,
-                                                showCancelButton: true,
-                                                cancelButtonText: "OK",
-                                                onClose: () => {},
-                                            });
+                                            showSuccess("Deletado com sucesso!")
                                         } else if (data.status == "error") {
-                                            // showError(data.message);
-                                            Swal.fire({
-                                                icon: "error",
-                                                text: data.message,
-                                                showConfirmButton: false,
-                                                showCancelButton: true,
-                                                cancelButtonText: "OK",
-                                                onClose: () => {},
-                                            });
+                                            showError(data.message)
                                         }
                                     })
                                     .catch();
@@ -278,24 +225,9 @@ $(document).ready(function () {
                                 
                                 $("#modalAddAvailableDate").modal("hide");
 
-                                Swal.fire({
-                                    icon: "success",
-                                    text: "Cadastro efetuado!",
-                                    showConfirmButton: false,
-                                    showCancelButton: true,
-                                    cancelButtonText: "OK",
-                                    onClose: () => {},
-                                });
+                                showSuccess("Cadastro efetuado!")
                             } else if (data.status == "error") {
-                                // showError(data.message);
-                                Swal.fire({
-                                    icon: "error",
-                                    text: data.message,
-                                    showConfirmButton: false,
-                                    showCancelButton: true,
-                                    cancelButtonText: "OK",
-                                    onClose: () => {},
-                                });
+                                showError(data.message)
                             }
                         })
                         .catch();
@@ -377,15 +309,7 @@ $(document).ready(function () {
                                 $("#modalAvailableDates").modal("show");
 
                             } else if (data.status == "error") {
-                                // showError(data.message);
-                                Swal.fire({
-                                    icon: "error",
-                                    text: data.message,
-                                    showConfirmButton: false,
-                                    showCancelButton: true,
-                                    cancelButtonText: "OK",
-                                    onClose: () => {},
-                                });
+                                showError(data.message)
                             }
                         })
                         .catch();
@@ -429,24 +353,9 @@ $(document).ready(function () {
                                                         
                                             listAvailableDates(id_court);
             
-                                            Swal.fire({
-                                                icon: "success",
-                                                text: "Deletada com sucesso!",
-                                                showConfirmButton: false,
-                                                showCancelButton: true,
-                                                cancelButtonText: "OK",
-                                                onClose: () => {},
-                                            });
+                                            showSuccess("Deletada com sucesso!")
                                         } else if (data.status == "error") {
-                                            // showError(data.message);
-                                            Swal.fire({
-                                                icon: "error",
-                                                text: data.message,
-                                                showConfirmButton: false,
-                                                showCancelButton: true,
-                                                cancelButtonText: "OK",
-                                                onClose: () => {},
-                                            });
+                                            showError(data.message)
                                         }
                                     })
                                     .catch();

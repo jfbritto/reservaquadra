@@ -49,7 +49,7 @@
 					</div>
 				</form>
 
-				<p class="mb-1 mt-3 text-center"><a href="/login">Logar</a></p>
+				<p class="mb-1 mt-3 text-center"><a href="/">Logar</a></p>
 			</div>
 		</div>
 	</div>

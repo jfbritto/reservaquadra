@@ -306,13 +306,13 @@ return [
         [
             'text'       => 'Login',
             'icon'       => 'fas fa-fw fa-user' ,
-            'url'        => '/login',
+            'url'        => '/',
             // 'label'      => 'Faça seu login',
         ],
         [
             'text'       => 'Reservar',
             'icon'       => 'fas fa-fw fa-clipboard-list' ,
-            'url'        => '/',
+            'url'        => '/reservar',
         ],
         [
             'text'       => 'Reservas',

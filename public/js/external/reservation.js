@@ -15,9 +15,9 @@ $(document).ready(function () {
                     
                     if (data.data.length > 0) {
                         
-                        let count = Math. round(12/(data.data.length));
+                        // let count = Math.round(12/(data.data.length));
 
-                        if(count < 3)
+                        // if(count < 3 || count == 12)
                             count = 3;
 
                         $("#list-courts").append(`
@@ -29,7 +29,9 @@ $(document).ready(function () {
                         data.data.forEach(item => {
 
                             // <img class="card-img-top" src="https://www.rioquente.com.br/images/attractions/0011/01.jpg" alt="Card image cap"></img>
-
+                            // <div class="col-6">
+                            //     <button class="btn btn-primary btn-block details-court" data-id_court="${item.id}">Detalhes</button>
+                            // </div>
                             $("#list-courts").append(`
                                 <div class="col-md-${count} col-sm-6">
                                     <div class="card">
@@ -37,11 +39,8 @@ $(document).ready(function () {
                                             <p class="card-text h4">${item.name}</p>
                                             <p class="card-text">${item.neighborhood}, ${item.city} <br> ${item.reference}</p>
                                             <div class="row">
-                                                <div class="col-6">
-                                                    <button class="btn btn-primary btn-block details-court" data-id_court="${item.id}">Detalhes</button>
-                                                </div>
-                                                <div class="col-6">
-                                                    <button class="btn btn-success btn-block reserve-court" data-id_court="${item.id}" data-name="${item.name}">Selecionar</button>
+                                                <div class="col-12">
+                                                    <button class="btn btn-success btn-block reserve-court" data-id_court="${item.id}" data-name="${item.name}"><i class="fas fa-thumbs-up"></i></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -83,10 +82,10 @@ $(document).ready(function () {
 
                             if(data.data.length > 0){
 
-                                let count = Math. round(12/(data.data.length));
+                                // let count = Math. round(12/(data.data.length));
 
-                                if(count < 3)
-                                    count = 3;
+                                // if(count < 3)
+                                    count = 2;
 
                                 $("#list-available-week-days").append(`
                                     <div class="col-12">
@@ -97,12 +96,12 @@ $(document).ready(function () {
                                 data.data.forEach(item => {
 
                                     $("#list-available-week-days").append(`
-                                        <div class="col-md-${count} col-6">
+                                        <div class="col-sm-4 col-md-${count} col-6">
                                             <div class="card">
                                                 <div class="card-body text-center">
                                                     <p class="card-text h4">${week_day_description[item.week_day]}</p>
                                                     <p class="card-text">${dateFormat(item.day)}</p>
-                                                    <button class="btn btn-${item.available==0?`danger`:`success`} btn-block reserve-day" data-id_court="${id_court}" data-week_day="${item.week_day}" data-day="${item.day}" ${item.available==0?`disabled`:``}>${item.available==0?`Indisponível`:`Selecionar`}</button>    
+                                                    <button title="${item.available==0?`Indisponível`:`Escolher`}" class="btn btn-${item.available==0?`danger`:`success`} btn-block reserve-day" data-id_court="${id_court}" data-week_day="${item.week_day}" data-day="${item.day}" ${item.available==0?`disabled`:``}>${item.available==0?`<i class="fas fa-ban"></i>`:`<i class="fas fa-thumbs-up"></i>`}</button>    
                                                 </div>
                                             </div>
                                         </div>
@@ -131,15 +130,7 @@ $(document).ready(function () {
 
 
                         } else if (data.status == "error") {
-                            // showError(data.message);
-                            Swal.fire({
-                                icon: "error",
-                                text: data.message,
-                                showConfirmButton: false,
-                                showCancelButton: true,
-                                cancelButtonText: "OK",
-                                onClose: () => {},
-                            });
+                            showError(data.message)
                         }
                     })
                     .catch();
@@ -191,12 +182,12 @@ $(document).ready(function () {
                                 data.data.forEach(item => {
 
                                     $("#list-available-times").append(`
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
                                             <span>De <b>${item.start_time}</b> às <b>${item.end_time}</b></span>
                                             <span class="badge badge-success badge-pill">R$ ${moneyFormat(item.price)}</span>
                                             ${item.reserved == null?`
-                                                <button class="btn btn-success btn-sm chose-time" data-id="${item.id}" data-start_time="${item.start_time}" data-end_time="${item.end_time}" data-price="${item.price}" >Escolher</button>
-                                            `:`<button class="btn btn-warning btn-sm" disabled >Reservado</button>`}
+                                                <button class="btn btn-success btn-sm chose-time" data-id="${item.id}" data-start_time="${item.start_time}" data-end_time="${item.end_time}" data-price="${item.price}" title="Reservar"><i class="fas fa-thumbs-up"></i></button>
+                                            `:`<button title="Indisponível" class="btn btn-warning btn-sm" disabled ><i class="fas fa-ban"></i></button>`}
                                         </li>
                                     `);
      
@@ -221,15 +212,7 @@ $(document).ready(function () {
 
 
                         } else if (data.status == "error") {
-                            // showError(data.message);
-                            Swal.fire({
-                                icon: "error",
-                                text: data.message,
-                                showConfirmButton: false,
-                                showCancelButton: true,
-                                cancelButtonText: "OK",
-                                onClose: () => {},
-                            });
+                            showError(data.message)
                         }
                     })
                     .catch();
@@ -285,24 +268,9 @@ $(document).ready(function () {
                                 $("#modalReservation").modal("hide");
                                 loadCourts();
 
-                                Swal.fire({
-                                    icon: "success",
-                                    text: "Cadastro efetuado!",
-                                    showConfirmButton: false,
-                                    showCancelButton: true,
-                                    cancelButtonText: "OK",
-                                    onClose: () => {},
-                                });
+                                showSuccess("Reserva efetuada!")
                             } else if (data.status == "error") {
-                                // showError(data.message);
-                                Swal.fire({
-                                    icon: "error",
-                                    text: data.message,
-                                    showConfirmButton: false,
-                                    showCancelButton: true,
-                                    cancelButtonText: "OK",
-                                    onClose: () => {},
-                                });
+                                showError(data.message)
                             }
                         })
                         .catch();

@@ -5,29 +5,30 @@ $(document).ready(function(){
 
         let email = $("#email").val(); 
         let password = $("#password").val();
-        
+
         Swal.queue([{
             title: 'Carregando...',
             allowOutsideClick: false,
             allowEscapeKey: false,
+            showConfirmButton: false,
             onOpen: () => {
                 Swal.showLoading();
                 $.post("/login", {email, password}, function(data) {
                     if(data.status) {
                         Swal.fire({
-                            icon: 'success',
-                            title: 'Bem vindo',
+                            type: 'success',
+                            title: 'Bem vindo!',
                             text: 'Login realizado com sucesso',
                             showConfirmButton: false,
-                            showCancelButton: false
-                        });
+                            timer: 1500
+                          })
     
                         setTimeout(function() {
                             window.location = "/reservas";
                         }, 1000);
                     }else{
 
-                        Swal.fire('Erro!', data.mensagem, 'error');
+                        showError(data.mensagem)
 
                     }
                 }, 'json');
@@ -51,20 +52,14 @@ $(document).ready(function(){
                 Swal.showLoading();
                 $.post("/register", {name, email, password}, function(data) {
                     if(data.status) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Bem vindo',
-                            text: 'Cadastro realizado com sucesso',
-                            showConfirmButton: false,
-                            showCancelButton: false
-                        });
+                        showSuccess("Cadastro realizado com sucesso!")
     
                         setTimeout(function() {
-                            window.location = "/login";
+                            window.location = "/";
                         }, 1000);
                     }else{
 
-                        Swal.fire('Erro!', data.mensagem, 'error');
+                        showError(data.mensagem)
 
                     }
                 }, 'json');
@@ -74,4 +69,3 @@ $(document).ready(function(){
     });
 
 });
-

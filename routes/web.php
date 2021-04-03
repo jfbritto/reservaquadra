@@ -3,14 +3,14 @@
 use Illuminate\Support\Facades\Route;
 
 //LOGIN
-Route::get('/login', 'AuthenticateController@index')->name('login');
+Route::get('/', 'AuthenticateController@index')->name('login');
 Route::post('/login', 'AuthenticateController@login');
 
 Route::get('/register', 'AuthenticateController@register')->name('register');
 Route::post('/register', 'UserController@store');
 
 //reserva
-Route::get('/', 'ExternalController@index');
+Route::get('/reservar', 'ExternalController@index');
 Route::post('/listar-quadras', 'ExternalController@list_courts');
 Route::post('/listar-dias-disponiveis/{id}', 'ExternalController@list_week_days');
 Route::post('/listar-horarios-disponiveis/{id}/{week_day}/{day}', 'ExternalController@list_available_day_times');
