@@ -30,7 +30,7 @@ $(document).ready(function () {
                                                 <td class="align-middle">${item.name_reserved}</td>
                                                 <td class="align-middle just-pc">${item.phone_reserved}</td>
                                                 <td class="align-middle">${dateFormat(item.reservation_date)}</td>
-                                                <td class="align-middle just-pc">${week_day_description[item.week_day]}</td>
+                                                <td class="align-middle just-pc">${weekDayDescription(item.week_day)}</td>
                                                 <td class="align-middle just-pc">${item.start_time}</td>
                                                 <td class="align-middle just-pc">${item.end_time}</td>
                                                 <td class="align-middle just-pc">${moneyFormat(item.price)}</td>
@@ -125,7 +125,7 @@ $(document).ready(function () {
 
         $("#show-name_reserved").html(name_reserved);
         $("#show-phone_reserved").html(phone_reserved);
-        $("#show-reservation_date").html(`${week_day_description[week_day]}, ${dateFormat(reservation_date)}`);
+        $("#show-reservation_date").html(`${weekDayDescription(week_day)}, ${dateFormat(reservation_date)}`);
         $("#show-hora").html(`${start_time} às ${end_time}`);
         $("#show-price").html(`R$ ${moneyFormat(price)}`);
 

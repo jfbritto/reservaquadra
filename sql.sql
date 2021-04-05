@@ -137,7 +137,18 @@ CREATE TABLE IF NOT EXISTS `invoices` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
 
-
+CREATE TABLE IF NOT EXISTS `scheduled_classes` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_court` INT NOT NULL,
+  `id_user` INT NOT NULL,
+  `week_day` VARCHAR(45) NOT NULL,
+  `start_time` VARCHAR(45) NOT NULL,
+  `end_time` VARCHAR(45) NOT NULL,
+  `status` VARCHAR(5) NOT NULL DEFAULT 'A',
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
 
 
 

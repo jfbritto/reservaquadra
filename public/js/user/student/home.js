@@ -238,7 +238,7 @@ $(document).ready(function () {
 
 
     // BUSCA DE ENDEREÇO
-    $("#zip_code").on("keyup", function(){
+    $("#zip_code, #zip_code_edit").on("keyup", function(){
 
         if($(this).val().length == 9){
 

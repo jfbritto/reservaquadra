@@ -41,7 +41,23 @@ class UserService
             $result = DB::table('users')
                         ->where('id', $data['id'])
                         ->update(['name' => $data['name'],
-                                'email' => $data['email']]);
+                                  'email' => $data['email'],
+                                  'birth' => $data['birth'],
+                                  'cpf' => $data['cpf'],
+                                  'rg' => $data['rg'],
+                                  'civil_status' => $data['civil_status'],
+                                  'profession' => $data['profession'],
+                                  'zip_code' => $data['zip_code'],
+                                  'uf' => $data['uf'],
+                                  'city' => $data['city'],
+                                  'neighborhood' => $data['neighborhood'],
+                                  'address' => $data['address'],
+                                  'address_number' => $data['address_number'],
+                                  'complement' => $data['complement'],
+                                  'start_date' => $data['start_date'],
+                                  'health_plan' => $data['health_plan'],
+                                  'how_met' => $data['how_met'],
+                                ]);
 
             DB::commit();
 

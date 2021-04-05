@@ -1,5 +1,14 @@
 
-const week_day_description = {1:'Segunda',2:'Terça',3:'Quarta',4:'Quinta',5:'Sexta',6:'Sábado',7:'Domingo'};
+function weekDayDescription(day_number)
+{
+    const week_day_description = {1:'Segunda',2:'Terça',3:'Quarta',4:'Quinta',5:'Sexta',6:'Sábado',7:'Domingo'};
+    
+    if(day_number > 0 && day_number < 8){
+        return `${week_day_description[day_number]}`
+    }else{
+        return `Dia não identificado`
+    }
+}
 
 $('.money').mask('#.##0,00', {reverse: true});
 $('.zip_code').mask('00000-000');

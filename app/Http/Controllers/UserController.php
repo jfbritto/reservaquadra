@@ -94,10 +94,26 @@ class UserController extends Controller
 
     public function update_student(Request $request) 
     {
+
         $data = [
             'id' => trim($request->id),
             'name' => trim($request->name),
-            'email' => trim($request->email)
+            'email' => trim($request->email),
+            'birth' => trim($request->birth),
+            'cpf' => trim($request->cpf),
+            'rg' => trim($request->rg),
+            'civil_status' => trim($request->civil_status),
+            'profession' => trim($request->profession),
+            'zip_code' => trim($request->zip_code),
+            'uf' => trim($request->uf),
+            'city' => trim($request->city),
+            'neighborhood' => trim($request->neighborhood),
+            'address' => trim($request->address),
+            'address_number' => trim($request->address_number),
+            'complement' => trim($request->complement),
+            'start_date' => trim($request->start_date),
+            'health_plan' => trim($request->health_plan),
+            'how_met' => trim($request->how_met),
         ];
 
         $response = $this->userService->update($data);

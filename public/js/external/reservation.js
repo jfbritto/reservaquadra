@@ -99,7 +99,7 @@ $(document).ready(function () {
                                         <div class="col-sm-4 col-md-${count} col-6">
                                             <div class="card">
                                                 <div class="card-body text-center">
-                                                    <p class="card-text h4">${week_day_description[item.week_day]}</p>
+                                                    <p class="card-text h4">${weekDayDescription(item.week_day)}</p>
                                                     <p class="card-text">${dateFormat(item.day)}</p>
                                                     <button title="${item.available==0?`Indisponível`:`Escolher`}" class="btn btn-${item.available==0?`danger`:`success`} btn-block reserve-day" data-id_court="${id_court}" data-week_day="${item.week_day}" data-day="${item.day}" ${item.available==0?`disabled`:``}>${item.available==0?`<i class="fas fa-ban"></i>`:`<i class="fas fa-thumbs-up"></i>`}</button>    
                                                 </div>
@@ -147,7 +147,7 @@ $(document).ready(function () {
         let week_day = $(this).data('week_day');
         let day = $(this).data('day');
 
-        $("#available-day-chosen").html(`${week_day_description[week_day]}, ${dateFormat(day)}`);
+        $("#available-day-chosen").html(`${weekDayDescription(week_day)}, ${dateFormat(day)}`);
         $("#reservation_date").val(day)
         
         Swal.queue([
@@ -197,7 +197,7 @@ $(document).ready(function () {
                                     <div class="col-12">
                                         <div class="card">
                                             <div class="card-body text-center">
-                                                <strong>Dia escolhido: </strong> ${week_day_description[week_day]}, ${dateFormat(day)}
+                                                <strong>Dia escolhido: </strong> ${weekDayDescription(week_day)}, ${dateFormat(day)}
                                             </div>
                                         </div>
                                     </div>

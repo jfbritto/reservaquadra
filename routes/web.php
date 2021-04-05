@@ -56,6 +56,11 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post('/planos/cadastrar', 'PlanController@store');
     Route::post('/planos/editar', 'PlanController@update');
     Route::post('/planos/deletar', 'PlanController@destroy');
+
+    // aulas programadas
+    Route::post('/aulas-programadas/cadastrar', 'ScheduledClassesController@store');
+    Route::post('/aulas-programadas/listar/{id}', 'ScheduledClassesController@list');
+    Route::post('/aulas-programadas/deletar', 'ScheduledClassesController@destroy');
     
     //alunos
     Route::get('/alunos', 'UserController@student');

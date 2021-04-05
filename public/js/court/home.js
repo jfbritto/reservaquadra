@@ -284,7 +284,7 @@ $(document).ready(function () {
                                         if(wd != item.week_day)
                                         $("#list-dates").append(`
                                             <tr class="table-active">
-                                                <td colspan="4" class="align-middle font-weight-bold">${week_day_description[item.week_day]}</td>
+                                                <td colspan="4" class="align-middle font-weight-bold">${weekDayDescription(item.week_day)}</td>
                                             </tr>
                                         `);
 

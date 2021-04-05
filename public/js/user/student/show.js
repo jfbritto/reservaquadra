@@ -1,13 +1,7 @@
 $(document).ready(function () {
 
-    // listar dados do aluno
-    loadStudent();
-    // listar planos no select
-    loadPlans();
-    // listar os contratos do aluno
-    loadContracts();
-    // listar as faturas do aluno
-    loadInvoices();
+    // CARREGAR DADOS NA TELA
+    loadAll();
 
     // LISTAR DADOS DO ALUNO
     function loadStudent()
@@ -32,6 +26,7 @@ $(document).ready(function () {
                                     let item = data.data[0];
                                     $(".name_user").html(item.name);
 
+                                    // CARREGAR INFORMAÇÕES NA TELA
                                     $("#name").html(item.name);
                                     $("#email").html(item.email);
                                     $("#birth").html(dateFormat(item.birth));
@@ -44,6 +39,67 @@ $(document).ready(function () {
                                     $("#start_date").html(dateFormat(item.start_date));
                                     $("#health_plan").html(item.health_plan);
                                     $("#how_met").html(item.how_met);
+
+                                    // CARREGAR INFORMAÇÕES NO MODAL
+                                    $("#name_edit").val(item.name);
+                                    $("#email_edit").val(item.email);
+                                    $("#birth_edit").val(item.birth);
+                                    $("#cpf_edit").val(item.cpf);
+                                    $("#rg_edit").val(item.rg);
+                                    $("#civil_status_edit").val(item.civil_status).change();
+                                    $("#profession_edit").val(item.profession);
+                                    $("#zip_code_edit").val(item.zip_code);
+                                    $("#uf_edit").val(item.uf);
+                                    $("#city_edit").val(item.city);
+                                    $("#neighborhood_edit").val(item.neighborhood);
+                                    $("#address_edit").val(item.address);
+                                    $("#address_number_edit").val(item.address_number);
+                                    $("#complement_edit").val(item.complement);
+                                    $("#start_date_edit").val(item.start_date);
+                                    $("#health_plan_edit").val(item.health_plan);
+                                    $("#how_met_edit").val(item.how_met).change();
+
+                                }
+
+                            } else if (data.status == "error") {
+                                showError(data.message)
+                            }
+                        })
+                        .catch();
+                },
+            },
+        ]);
+    }
+
+    // LISTAR QUADRAS
+    function loadCourts()
+    {
+        Swal.queue([
+            {
+                title: "Carregando...",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                    $.post(window.location.origin + "/quadra/listar", {
+                        
+                    })
+                        .then(function (data) {
+                            if (data.status == "success") {
+
+                                Swal.close();
+                                $("#list").html(``);
+
+                                $("#id_court").html(``);
+                                $("#id_court").html(`<option value="">-- Selecione --</option>`);
+
+                                if(data.data.length > 0){
+
+                                    data.data.forEach(item => { 
+                                        $("#id_court").append(`
+                                            <option value="${item.id}">${item.name}</option>
+                                        `)
+                                    });
 
                                 }
 
@@ -100,7 +156,6 @@ $(document).ready(function () {
     // LISTAR CONTRATOS
     function loadContracts()
     {
-
         $.get(window.location.origin + `/contratos/listar/${$("#id_usr").val()}`, {
 
         })
@@ -152,7 +207,6 @@ $(document).ready(function () {
     // LISTAR FATURAS
     function loadInvoices()
     {
-
         $.get(window.location.origin + `/faturas/listar/${$("#id_usr").val()}`, {
 
         })
@@ -222,12 +276,9 @@ $(document).ready(function () {
                                     this.reset();
                                 });
                                 
-                                loadStudent();
-                                loadContracts();
-                                loadInvoices();
                                 $("#modalStoreContract").modal("hide");
 
-                                showSuccess("Cadastro efetuado!")
+                                showSuccess("Cadastro efetuado!", null, loadAll)
                             } else if (data.status == "error") {
                                 showError(data.message)
                             }
@@ -238,6 +289,7 @@ $(document).ready(function () {
         ]);
     });
 
+    // RENOVAR CONTRATO
     $("#list-contracts").on("click", ".renew-contract", function(){
         let id = $(this).data('id');
         let id_plan = $(this).data('id_plan');
@@ -252,7 +304,6 @@ $(document).ready(function () {
         $("#modalRenewContract").modal("show");
     });
 
-    // RENOVAR CONTRATO
     $("#formRenewContract").submit(function (e) {
         e.preventDefault();
 
@@ -279,12 +330,9 @@ $(document).ready(function () {
                                     this.reset();
                                 });
                                 
-                                loadStudent();
-                                loadContracts();
-                                loadInvoices();
                                 $("#modalRenewContract").modal("hide");
 
-                                showSuccess("Contrato renovado!")
+                                showSuccess("Contrato renovado!", null, loadAll)
                             } else if (data.status == "error") {
                                 showError(data.message)
                             }
@@ -295,6 +343,8 @@ $(document).ready(function () {
         ]);
     });
 
+
+    // CANCELAR CONTRATO
     $("#list-contracts").on("click", ".cancel-contract", function(){
         
         let id = $(this).data('id');
@@ -324,11 +374,7 @@ $(document).ready(function () {
                                     .then(function (data) {
                                         if (data.status == "success") {
                                                         
-                                            loadStudent();
-                                            loadContracts();
-                                            loadInvoices();
-            
-                                            showSuccess("Cancelado com sucesso!")
+                                            showSuccess("Cancelado com sucesso!", null, loadAll)
                                         } else if (data.status == "error") {
                                             showError(data.message)
                                         }
@@ -342,7 +388,6 @@ $(document).ready(function () {
             })
 
     });
-
 
 
     // ABRIR MODAL DE RECEBIMENTO
@@ -409,12 +454,9 @@ $(document).ready(function () {
                                     this.reset();
                                 });
                                 
-                                loadStudent();
-                                loadContracts();
-                                loadInvoices();
                                 $("#modalReceiveInvoice").modal("hide");
 
-                                showSuccess("Cadastro efetuado!")
+                                showSuccess("Cadastro efetuado!", null, loadAll)
                             } else if (data.status == "error") {
                                 showError(data.message)
                             }
@@ -426,46 +468,7 @@ $(document).ready(function () {
     });
 
     
-
-
-
-
-
-
-
-
-
-
-
-
     // EDITAR ALUNO
-    $("#list").on("click", ".edit-student", function(){
-
-        let id = $(this).data('id');
-
-        $("#id_edit").val(id);
-
-        $("#name_edit").val($(this).data('name'));
-        $("#email_edit").val($(this).data('email'));
-        $("#birth_edit").val($(this).data('birth'));
-        $("#cpf_edit").val($(this).data('cpf'));
-        $("#rg_edit").val($(this).data('rg'));
-        $("#civil_status_edit").val($(this).data('civil_status')).change();
-        $("#profession_edit").val($(this).data('profession'));
-        $("#zip_code_edit").val($(this).data('zip_code'));
-        $("#uf_edit").val($(this).data('uf'));
-        $("#city_edit").val($(this).data('city'));
-        $("#neighborhood_edit").val($(this).data('neighborhood'));
-        $("#address_edit").val($(this).data('address'));
-        $("#address_number_edit").val($(this).data('address_number'));
-        $("#complement_edit").val($(this).data('complement'));
-        $("#start_date_edit").val($(this).data('start_date'));
-        $("#health_plan_edit").val($(this).data('health_plan'));
-        $("#how_met_edit").val($(this).data('how_met')).change();
-
-        $("#modalEditStudent").modal("show");
-    });
-
     $("#formEditStudent").submit(function (e) {
         e.preventDefault();
 
@@ -477,7 +480,7 @@ $(document).ready(function () {
                 onOpen: () => {
                     Swal.showLoading();
                     $.post(window.location.origin + "/alunos/editar", {
-                        id: $("#id_edit").val(),
+                        id: $("#id_usr").val(),
                         name: $("#name_edit").val(),
                         email: $("#email_edit").val(),
                         birth: $("#birth_edit").val(),
@@ -503,27 +506,11 @@ $(document).ready(function () {
                                     this.reset();
                                 });
                                 
-                                loadStudent();
                                 $("#modalEditStudent").modal("hide");
 
-                                Swal.fire({
-                                    icon: "success",
-                                    text: "Cadastro efetuado!",
-                                    showConfirmButton: false,
-                                    showCancelButton: true,
-                                    cancelButtonText: "OK",
-                                    onClose: () => {},
-                                });
+                                showSuccess("Editado com sucesso!", null, loadAll)
                             } else if (data.status == "error") {
-                                // showError(data.message);
-                                Swal.fire({
-                                    icon: "error",
-                                    text: data.message,
-                                    showConfirmButton: false,
-                                    showCancelButton: true,
-                                    cancelButtonText: "OK",
-                                    onClose: () => {},
-                                });
+                                showError(data.message)
                             }
                         })
                         .catch();
@@ -534,9 +521,9 @@ $(document).ready(function () {
 
 
     // "DELETAR" ALUNO
-    $("#list").on("click", ".delete-student", function(){
+    $("#delete-student").on("click", function(){
         
-        let id = $(this).data('id');
+        let id = $("#id_usr").val();
 
         Swal.fire({
             title: 'Atenção!',
@@ -563,26 +550,9 @@ $(document).ready(function () {
                                     .then(function (data) {
                                         if (data.status == "success") {
                                                         
-                                            loadStudent();
-            
-                                            Swal.fire({
-                                                icon: "success",
-                                                text: "Deletado com sucesso!",
-                                                showConfirmButton: false,
-                                                showCancelButton: true,
-                                                cancelButtonText: "OK",
-                                                onClose: () => {},
-                                            });
+                                            showSuccess("Deletado com sucesso!", null, redirect)
                                         } else if (data.status == "error") {
-                                            // showError(data.message);
-                                            Swal.fire({
-                                                icon: "error",
-                                                text: data.message,
-                                                showConfirmButton: false,
-                                                showCancelButton: true,
-                                                cancelButtonText: "OK",
-                                                onClose: () => {},
-                                            });
+                                            showError(data.message)
                                         }
                                     })
                                     .catch();
@@ -595,13 +565,14 @@ $(document).ready(function () {
 
     });
 
-
-
-
+    // REDIRECIONAR APÓS DELETAR
+    function redirect()
+    {
+        window.location.replace("/alunos");
+    }
 
     // BUSCA DE ENDEREÇO
-
-    $("#zip_code").on("keyup", function(){
+    $("#zip_code_edit").on("keyup", function(){
 
         if($(this).val().length == 9){
 
@@ -621,60 +592,31 @@ $(document).ready(function () {
                             .then(function (data) {
 
                                 if(data.erro){
-                                    Swal.fire('Erro!', "Cep não encontrado!", 'error');
+                                    showError("Cep não encontrado!")
                                     return false;
                                 }
 
-                                if(type == 'add'){
-                                    
-                                    $("#uf").prop("readonly", true)
-                                    $("#city").prop("readonly", true)
-                                    $("#neighborhood").prop("readonly", true)
-                                    $("#address").prop("readonly", true)
-                                    
-                                    $("#uf").val(data.uf);
-                                    $("#city").val(data.localidade);
-                                    $("#neighborhood").val(data.bairro);
-                                    $("#address").val(data.logradouro);
-    
-                                    if(data.uf == "")
-                                        $("#uf").prop("readonly", false)
-    
-                                    if(data.localidade == "")
-                                        $("#city").prop("readonly", false)
-    
-                                    if(data.bairro == "")
-                                        $("#neighborhood").prop("readonly", false)
-    
-                                    if(data.logradouro == "")
-                                        $("#address").prop("readonly", false)
-                                        
-                                }else{
+                                $("#uf_edit").prop("readonly", true)
+                                $("#city_edit").prop("readonly", true)
+                                $("#neighborhood_edit").prop("readonly", true)
+                                $("#address_edit").prop("readonly", true)
+                                
+                                $("#uf_edit").val(data.uf);
+                                $("#city_edit").val(data.localidade);
+                                $("#neighborhood_edit").val(data.bairro);
+                                $("#address_edit").val(data.logradouro);
 
-                                    $("#uf_edit").prop("readonly", true)
-                                    $("#city_edit").prop("readonly", true)
-                                    $("#neighborhood_edit").prop("readonly", true)
-                                    $("#address_edit").prop("readonly", true)
-                                    
-                                    $("#uf_edit").val(data.uf);
-                                    $("#city_edit").val(data.localidade);
-                                    $("#neighborhood_edit").val(data.bairro);
-                                    $("#address_edit").val(data.logradouro);
-    
-                                    if(data.uf == "")
-                                        $("#uf_edit").prop("readonly", false)
-    
-                                    if(data.localidade == "")
-                                        $("#city_edit").prop("readonly", false)
-    
-                                    if(data.bairro == "")
-                                        $("#neighborhood_edit").prop("readonly", false)
-    
-                                    if(data.logradouro == "")
-                                        $("#address_edit").prop("readonly", false)
-                                    
-                                }
+                                if(data.uf == "")
+                                    $("#uf_edit").prop("readonly", false)
 
+                                if(data.localidade == "")
+                                    $("#city_edit").prop("readonly", false)
+
+                                if(data.bairro == "")
+                                    $("#neighborhood_edit").prop("readonly", false)
+
+                                if(data.logradouro == "")
+                                    $("#address_edit").prop("readonly", false)
                                 
                                 Swal.close();
 
@@ -684,18 +626,172 @@ $(document).ready(function () {
                 },
             ]);
 
-
         }
-
-
     })
 
 
+    // CADASTRAR AULA
+    $("#formStoreScheduledClasses").submit(function (e) {
+        e.preventDefault();
 
+        Swal.queue([
+            {
+                title: "Carregando...",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                    $.post(window.location.origin + "/aulas-programadas/cadastrar", {
+                        id_user: $("#id_usr").val(),
+                        id_court: $("#id_court option:selected").val(),
+                        week_day: $("#week_day").val(),
+                        start_time: $("#start_time").val(),
+                        end_time: $("#end_time").val(),
+                        
+                    })
+                        .then(function (data) {
+                            if (data.status == "success") {
 
+                                $("#formStoreScheduledClasses").each(function () {
+                                    this.reset();
+                                });
 
+                                $("#modalStoreScheduledClasses").modal("hide");
 
+                                showSuccess("Aula cadastrada!", null, loadAll)
+                            } else if (data.status == "error") {
+                                showError(data.message)
+                            }
+                        })
+                        .catch();
+                },
+            },
+        ]);
+    });
+
+    // LISTAR AULAS
+    function listScheduledClasses()
+    {
+        let id = $("#id_usr").val();
+
+        Swal.queue([
+            {
+                title: "Carregando...",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                    $.post(window.location.origin + `/aulas-programadas/listar/${id}`, {
+                        
+                    })
+                    .then(function (data) {
+                        if (data.status == "success") {
+
+                            Swal.close();
+                            
+                            $("#list-scheduled-classes").html(``);
+
+                            let wd = ""
+
+                            if(data.data.length > 0){
+
+                                data.data.forEach(item => {
+
+                                    $("#list-scheduled-classes").append(`
+                                        <tr>
+                                            <td class="align-middle">${item.court_name}</td>
+                                            <td class="align-middle">${weekDayDescription(item.week_day)}</td>
+                                            <td class="align-middle">${item.start_time} às ${item.end_time}</td>
+                                            <td class="align-middle" style="text-align: right">
+                                                <a title="Deletar" data-id="${item.id}" href="#" class="btn btn-danger delete-scheduled-classes"><i class="fas fa-trash-alt"></i></a>
+                                            </td>
+                                        </tr>
+                                    `);
+                                    
+                                });
+
+                            }else{
+
+                                $("#list-scheduled-classes").append(`
+                                    <tr>
+                                        <td class="align-middle text-center" colspan="4">Nenhuma aula cadastrada</td>
+                                    </tr>
+                                `);
+
+                            }
+
+                        } else if (data.status == "error") {
+                            showError(data.message)
+                        }
+                    })
+                    .catch();
+                },
+            },
+        ]);
+    }
+
+    // "DELETAR" AULA
+    $("#list-scheduled-classes").on("click", ".delete-scheduled-classes", function(){
     
+        let id = $(this).data('id');
 
+        Swal.fire({
+            title: 'Atenção!',
+            text: "Deseja realmente deletar?",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Sim',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Não'
+            }).then((result) => {
+                if (result.value) {
+
+                    Swal.queue([
+                        {
+                            title: "Carregando...",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            onOpen: () => {
+                                Swal.showLoading();
+                                $.post(window.location.origin + "/aulas-programadas/deletar", {
+                                    id: id
+                                })
+                                    .then(function (data) {
+                                        if (data.status == "success") {
+                                                        
+                                            showSuccess("Deletada com sucesso!", null, loadAll)
+                                        } else if (data.status == "error") {
+                                            showError(data.message)
+                                        }
+                                    })
+                                    .catch();
+                            },
+                        },
+                    ]);
+
+                }
+            })
+
+
+    });
+
+
+    // CARREGAR DADOS NA TELA
+    function loadAll()
+    {
+        // listar dados do aluno
+        loadStudent();
+        // listar planos no select
+        loadPlans();
+        // listar os contratos do aluno
+        loadContracts();
+        // listar as faturas do aluno
+        loadInvoices();
+        // listar quadras
+        loadCourts();
+        // listar aulas
+        listScheduledClasses();
+    }
 
 });
