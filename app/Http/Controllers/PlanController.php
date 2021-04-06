@@ -21,10 +21,18 @@ class PlanController extends Controller
     
     public function store(Request $request) 
     {
+        $price_formated = str_replace(".", "", trim($request->price));
+        $price_formated = str_replace(",", ".", $price_formated);
+
         $data = [
             'id_company' => 1,
             'name' => trim($request->name),
+            'age_range' => trim($request->age_range),
+            'day_period' => trim($request->day_period),
+            'lessons_per_week' => trim($request->lessons_per_week),
+            'annual_contract' => trim($request->annual_contract),
             'months' => trim($request->months),
+            'price' => $price_formated,
             'status' => "A"
         ];
 
@@ -38,10 +46,18 @@ class PlanController extends Controller
     
     public function update(Request $request) 
     {
+        $price_formated = str_replace(".", "", trim($request->price));
+        $price_formated = str_replace(",", ".", $price_formated);
+        
         $data = [
             'id' => trim($request->id),
             'name' => trim($request->name),
+            'age_range' => trim($request->age_range),
+            'day_period' => trim($request->day_period),
+            'lessons_per_week' => trim($request->lessons_per_week),
+            'annual_contract' => trim($request->annual_contract),
             'months' => trim($request->months),
+            'price' => $price_formated,
         ];
 
         $response = $this->planService->update($data);

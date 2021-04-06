@@ -11,7 +11,7 @@
     <div class="card">
         <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-striped table-valign-middle table-hover">
+                <table class="table table-striped table-valign-middle table-hover table-sm">
                     <thead>
                         <tr>
                             <th>Cliente</th>

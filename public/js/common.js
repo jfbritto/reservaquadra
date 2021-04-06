@@ -1,18 +1,46 @@
+$('.money').mask('#.##0,00', {reverse: true});
+$('.zip_code').mask('00000-000');
+$('.cpf').mask('000.000.000-00');
 
-function weekDayDescription(day_number)
+function weekDayDescription(val)
 {
     const week_day_description = {1:'Segunda',2:'Terça',3:'Quarta',4:'Quinta',5:'Sexta',6:'Sábado',7:'Domingo'};
     
-    if(day_number > 0 && day_number < 8){
-        return `${week_day_description[day_number]}`
+    if(val > 0 && val < 8){
+        return `${week_day_description[val]}`
     }else{
         return `Dia não identificado`
     }
 }
 
-$('.money').mask('#.##0,00', {reverse: true});
-$('.zip_code').mask('00000-000');
-$('.cpf').mask('000.000.000-00');
+function periodContractedDescription(val)
+{
+    const period_cantracted_description = {1:'Mensal',2:'Bimestral',3:'Trimestral',4:'Quadrimestral',6:'Semestral',12:'Anual'};
+    
+    return `${period_cantracted_description[val]}`
+}
+
+function getAgeRange(val)
+{
+    const age_range_description = {1:'Infantil',2:'Juvenil',3:'Adulto'};
+    
+    if(val > 0 && val < 4){
+        return `${age_range_description[val]}`
+    }else{
+        return ``
+    }
+}
+
+function getDayPeriod(val)
+{
+    const day_period_description = {1:'Diurno',2:'Noturno'};
+    
+    if(val > 0 && val < 3){
+        return `${day_period_description[val]}`
+    }else{
+        return ``
+    }
+}
 
 
 var SPMaskBehavior = function (val) {

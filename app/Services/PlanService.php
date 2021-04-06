@@ -41,7 +41,12 @@ class PlanService
             $result = DB::table('plans')
                         ->where('id', $data['id'])
                         ->update(['name' => $data['name'],
-                                'months' => $data['months']]);
+                                  'age_range' => $data['age_range'],
+                                  'day_period' => $data['day_period'],
+                                  'lessons_per_week' => $data['lessons_per_week'],
+                                  'annual_contract' => $data['annual_contract'],
+                                  'months' => $data['months'],
+                                  'price' => $data['price']]);
 
             DB::commit();
 

@@ -134,11 +134,11 @@ $(document).ready(function () {
                     data.data.forEach(item => {
                         
                         $("#id_plan").append(`
-                            <option data-months="${item.months}" value="${item.id}">${item.name}</option>
+                            <option data-months="${item.months}" data-price="${item.price}" value="${item.id}">${getAgeRange(item.age_range)} - ${getDayPeriod(item.day_period)} - ${item.lessons_per_week} aula(s)/semana - contrato ${periodContractedDescription(item.months)} - R$ ${moneyFormat(item.price)}</option>
                         `)
                         
                         $("#id_plan_renew").append(`
-                            <option data-months="${item.months}" value="${item.id}">${item.name}</option>
+                            <option data-months="${item.months}" data-price="${item.price}" value="${item.id}">${getAgeRange(item.age_range)} - ${getDayPeriod(item.day_period)} - ${item.lessons_per_week} aula(s)/semana - contrato ${periodContractedDescription(item.months)} - R$ ${moneyFormat(item.price)}</option>
                         `)
 
                     });
@@ -152,6 +152,12 @@ $(document).ready(function () {
         .catch();
 
     }
+
+    $("#id_plan").on("change", function(){
+        let price = $("#id_plan option:selected").data('price');
+        console.log(price)
+        $("#price_per_month").val(moneyFormat(price))
+    })
 
     // LISTAR CONTRATOS
     function loadContracts()
@@ -173,6 +179,7 @@ $(document).ready(function () {
                         $("#list-contracts").append(`
                             <tr>
                                 <td class="align-middle">${dateFormat(item.start_date)}</td>
+                                <td class="align-middle">${dateFormat(item.end_date)}</td>
                                 <td class="align-middle">${item.plan_name}</td>
                                 <td class="align-middle">${item.status=='A'?`<span class="badge bg-success">Ativo</span>`:`<span class="badge bg-warning">${item.status}</span>`}</td>
                                 <td class="align-middle" style="text-align: right">
@@ -190,7 +197,7 @@ $(document).ready(function () {
 
                     $("#list-contracts").append(`
                         <tr>
-                            <td class="align-middle text-center" colspan="4">Nenhum contrato ativo encontrado</td>
+                            <td class="align-middle text-center" colspan="5">Nenhum contrato ativo encontrado</td>
                         </tr>
                     `);  
 

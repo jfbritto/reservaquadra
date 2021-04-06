@@ -24,7 +24,7 @@
 
     <div class="card">
         <div class="card-header border-0">
-            <h3 class="card-title">  </h3>
+            <h3 class="card-title"> Dados Pessoais </h3>
             <div class="card-tools">
                 <a href="#" class="btn btn-tool btn-sm" id="delete-student" title="Deletar Aluno">
                     <i class="fas fa-trash"></i>
@@ -38,13 +38,13 @@
             <input type="hidden" id="id_usr" value="{{$id}}">
 
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
 
                     <strong><i class="fas fa-user mr-1"></i> Nome</strong>
                     <p class="text-muted" id="name"></p>
 
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 col-6">
 
                     <strong><i class="fas fa-at mr-1"></i> Email</strong>
                     <p class="text-muted" id="email"></p>
@@ -141,10 +141,11 @@
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-striped table-valign-middle table-hover">
+                        <table class="table table-striped table-valign-middle table-hover table-sm">
                             <thead>
                                 <tr>
                                     <th>Data inicio</th>
+                                    <th>Data fim</th>
                                     <th>Plano</th>
                                     <th>Status</th>
                                     <th></th>
@@ -173,7 +174,7 @@
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-striped table-valign-middle table-hover">
+                        <table class="table table-striped table-valign-middle table-hover table-sm">
                             <thead>
                                 <tr>
                                     <th>Status</th>
@@ -205,7 +206,7 @@
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-striped table-valign-middle table-hover">
+                        <table class="table table-striped table-valign-middle table-hover table-sm">
                             <thead>
                                 <tr>
                                     <th>Quadra</th>
@@ -413,27 +414,25 @@
                 <form id="formStoreContract">
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="id_plan">Plano</label>
                                 <select required name="id_plan" id="id_plan" class="form-control"></select>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="start_date_contract">Data inicio</label>
                                 <input type="date" required name="start_date_contract" id="start_date_contract" class="form-control" value="{{date('Y-m-d')}}">
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="expiration_day">Dia vencimento</label>
                                 <input type="number" required name="expiration_day" id="expiration_day" class="form-control" placeholder="Informe o melhor dia para o vencimento" max="30">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="price_per_month">Mensalidade</label>
                                 <input type="text" required name="price_per_month" id="price_per_month" class="form-control money" placeholder="Informe o valor das mensalidades">
@@ -465,13 +464,13 @@
                 <form id="formRenewContract">
                     <input type="hidden" name="id_contract_renew" id="id_contract_renew" value="">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="id_plan_renew">Plano</label>
                                 <select required name="id_plan_renew" id="id_plan_renew" class="form-control"></select>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="start_date_contract_renew">Data inicio</label>
                                 <input type="date" required name="start_date_contract_renew" id="start_date_contract_renew" class="form-control" value="{{date('Y-m-d')}}">
@@ -479,13 +478,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="expiration_day_renew">Dia vencimento</label>
                                 <input type="number" required name="expiration_day_renew" id="expiration_day_renew" class="form-control" placeholder="Informe o melhor dia para o vencimento" max="30">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="price_per_month_renew">Mensalidade</label>
                                 <input type="text" required name="price_per_month_renew" id="price_per_month_renew" class="form-control money" placeholder="Informe o valor das mensalidades">
