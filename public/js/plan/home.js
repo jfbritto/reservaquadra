@@ -46,7 +46,7 @@ $(document).ready(function () {
 
                                     $("#list").append(`
                                         <tr>
-                                            <td class="align-middle text-center" colspan="3">Nenhum plano cadastrado</td>
+                                            <td class="align-middle text-center" colspan="8">Nenhum plano cadastrado</td>
                                         </tr>
                                     `);  
 
