@@ -24,6 +24,10 @@ Route::group(['middleware' => ['auth']], function(){
     //home
     Route::get('/home', 'HomeController@index');
 
+    //calendario
+    Route::get('/calendario', 'CalendarController@index');
+    Route::get('/calendario/carregar', 'CalendarController@load');
+
     //quadra
     Route::get('/quadras', 'CourtController@index');
     Route::post('/quadra/cadastrar', 'CourtController@store');

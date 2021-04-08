@@ -24,13 +24,17 @@ class PlanController extends Controller
         $price_formated = str_replace(".", "", trim($request->price));
         $price_formated = str_replace(",", ".", $price_formated);
 
+        $annual_contract = 0;
+        if($request->months == 12)
+            $annual_contract = 1;
+
         $data = [
-            'id_company' => 1,
+            'id_company' => auth()->user()->id_company,
             'name' => trim($request->name),
             'age_range' => trim($request->age_range),
             'day_period' => trim($request->day_period),
             'lessons_per_week' => trim($request->lessons_per_week),
-            'annual_contract' => trim($request->annual_contract),
+            'annual_contract' => $annual_contract,
             'months' => trim($request->months),
             'price' => $price_formated,
             'status' => "A"
@@ -48,6 +52,10 @@ class PlanController extends Controller
     {
         $price_formated = str_replace(".", "", trim($request->price));
         $price_formated = str_replace(",", ".", $price_formated);
+
+        $annual_contract = 0;
+        if($request->months == 12)
+            $annual_contract = 1;
         
         $data = [
             'id' => trim($request->id),
@@ -55,7 +63,7 @@ class PlanController extends Controller
             'age_range' => trim($request->age_range),
             'day_period' => trim($request->day_period),
             'lessons_per_week' => trim($request->lessons_per_week),
-            'annual_contract' => trim($request->annual_contract),
+            'annual_contract' => $annual_contract,
             'months' => trim($request->months),
             'price' => $price_formated,
         ];

@@ -13,6 +13,17 @@ function weekDayDescription(val)
     }
 }
 
+function monthDescription(val)
+{
+    const month_description = {1:'Janeiro',2:'Fevereiro',3:'Março',4:'Abril',5:'Maio',6:'Junho',7:'Julho'};
+    
+    if(val > 0 && val < 8){
+        return `${month_description[val]}`
+    }else{
+        return `Mês não identificado`
+    }
+}
+
 function periodContractedDescription(val)
 {
     const period_cantracted_description = {1:'Mensal',2:'Bimestral',3:'Trimestral',4:'Quadrimestral',6:'Semestral',12:'Anual'};

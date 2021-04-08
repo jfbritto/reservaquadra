@@ -22,7 +22,7 @@ class CourtController extends Controller
     public function store(Request $request) 
     {
         $data = [
-            'id_company' => 1,
+            'id_company' => auth()->user()->id_company,
             'name' => trim($request->name),
             'city' => trim($request->city),
             'neighborhood' => trim($request->neighborhood),

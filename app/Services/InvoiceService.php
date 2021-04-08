@@ -108,12 +108,42 @@ class InvoiceService
     //     return $response;
     // }
 
+    public function get_by_id($id_invoice)
+    {
+        $response = [];
+
+        try{
+            $return = Invoice::find($id_invoice);
+
+            $response = ['status' => 'success', 'data' => $return];
+        }catch(Exception $e){
+            $response = ['status' => 'error', 'data' => $e->getMessage()];
+        }
+
+        return $response;
+    }
+
     public function list_next_open($id_student)
     {
         $response = [];
 
         try{
             $return = DB::select( DB::raw("select * from invoices where id_user = ".$id_student." and status = 'A' order by due_date limit 1"));
+
+            $response = ['status' => 'success', 'data' => $return];
+        }catch(Exception $e){
+            $response = ['status' => 'error', 'data' => $e->getMessage()];
+        }
+
+        return $response;
+    }
+
+    public function list_far_more_open($id_student)
+    {
+        $response = [];
+
+        try{
+            $return = Invoice::where('id_user', $id_student)->where('status', 'A')->orderByDesc('due_date')->first();
 
             $response = ['status' => 'success', 'data' => $return];
         }catch(Exception $e){

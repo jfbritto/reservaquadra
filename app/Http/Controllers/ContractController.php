@@ -29,8 +29,6 @@ class ContractController extends Controller
             $response = $this->contractService->renew($data);
         }
 
-        $end_date = date("Y-m-d", strtotime("+ ".$request->months." months"));
-
         $price_formated = str_replace(".", "", trim($request->price_per_month));
         $price_formated = str_replace(",", ".", $price_formated);
 
@@ -40,7 +38,6 @@ class ContractController extends Controller
             'id_plan' => trim($request->id_plan),
             'id_user' => trim($request->id_user),
             'start_date' => trim($request->start_date),
-            'end_date' => $end_date,
             'expiration_day' => $expiration_day,
             'status' => "A",
             'price_per_month' => $price_formated
@@ -50,7 +47,7 @@ class ContractController extends Controller
 
         if($response['status'] == 'success'){
             
-            for ($i=0; $i < intval($request->months); $i++) { 
+            for ($i=0; $i < 6; $i++) {
                 
                 $due_date = date('Y-m-'.$expiration_day.'', strtotime("+ ".$i." months"));
                 

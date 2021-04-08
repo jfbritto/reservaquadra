@@ -179,13 +179,11 @@ $(document).ready(function () {
                         $("#list-contracts").append(`
                             <tr>
                                 <td class="align-middle">${dateFormat(item.start_date)}</td>
-                                <td class="align-middle">${dateFormat(item.end_date)}</td>
-                                <td class="align-middle">${item.plan_name}</td>
-                                <td class="align-middle">${item.status=='A'?`<span class="badge bg-success">Ativo</span>`:`<span class="badge bg-warning">${item.status}</span>`}</td>
+                                <td class="align-middle">${getAgeRange(item.age_range)} / ${getDayPeriod(item.day_period)} / ${item.lessons_per_week}X / ${periodContractedDescription(item.months)}</td>
                                 <td class="align-middle" style="text-align: right">
                                     ${item.faturas_abertas==0?`
-                                        <a title="Renovar" data-id="${item.id}" data-id_plan="${item.id_plan}" data-expiration_day="${item.expiration_day}" data-price_per_month="${item.price_per_month}" href="#" class="btn btn-info renew-contract"><i class="fas fa-retweet"></i></a>`:`
-                                        <a title="Cancelar" data-id="${item.id}" href="#" class="btn btn-danger cancel-contract"><i class="fas fa-ban"></i></a>`}
+                                    <a title="Renovar" data-id="${item.id}" data-id_plan="${item.id_plan}" data-expiration_day="${item.expiration_day}" data-price_per_month="${item.price_per_month}" href="#" class="btn btn-info renew-contract"><i class="fas fa-retweet"></i></a>`:`
+                                    <a title="Cancelar" data-id="${item.id}" href="#" class="btn btn-danger cancel-contract"><i class="fas fa-ban"></i></a>`}
                                 </td>
                             </tr>
                         `);       
@@ -197,7 +195,7 @@ $(document).ready(function () {
 
                     $("#list-contracts").append(`
                         <tr>
-                            <td class="align-middle text-center" colspan="5">Nenhum contrato ativo encontrado</td>
+                            <td class="align-middle text-center" colspan="4">Nenhum contrato ativo encontrado</td>
                         </tr>
                     `);  
 

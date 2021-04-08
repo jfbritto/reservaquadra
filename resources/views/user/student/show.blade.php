@@ -145,9 +145,7 @@
                             <thead>
                                 <tr>
                                     <th>Data inicio</th>
-                                    <th>Data fim</th>
                                     <th>Plano</th>
-                                    <th>Status</th>
                                     <th></th>
                                 </tr>
                             </thead>

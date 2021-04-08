@@ -346,6 +346,12 @@ return [
         // ],
         ['header' => 'OUTROS'],
         [
+            'text'       => 'Calendário',
+            'icon'       => 'fas fa-fw fa-calendar' ,
+            'url'        => 'calendario',
+            'can'        => 'admin',
+        ],
+        [
             'text'       => 'Reservas',
             'icon'       => 'fas fa-fw fa-clipboard-list' ,
             'url'        => 'reservas',

@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `contracts` (
   `id_plan` INT NOT NULL,
   `id_user` INT NOT NULL,
   `start_date` DATE NOT NULL,
-  `end_date` DATE NOT NULL,
+  `end_date` DATE DEFAULT NULL,
   `expiration_day` VARCHAR(5) NOT NULL,
   `status` VARCHAR(5) NOT NULL DEFAULT 'A',
   `price_per_month` DECIMAL(10,2) NOT NULL,

@@ -40,7 +40,7 @@ class UserController extends Controller
     public function store_student(Request $request)
     {
         $data = [
-            'id_company' => 1,
+            'id_company' => auth()->user()->id_company,
             'name' => trim($request->name),
             'email' => trim($request->email),
             'birth' => trim($request->birth),
@@ -138,7 +138,7 @@ class UserController extends Controller
     public function store_employee(Request $request)
     {
         $data = [
-            'id_company' => 1,
+            'id_company' => auth()->user()->id_company,
             'name' => trim($request->name),
             'email' => trim($request->email) ,
             'password' => bcrypt(trim(123456)),

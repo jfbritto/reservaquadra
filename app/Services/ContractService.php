@@ -110,7 +110,7 @@ class ContractService
         $response = [];
 
         try{
-            $return = DB::select( DB::raw("select con.*, pla.name as plan_name, (select count(*) from invoices where id_contract=con.id and status = 'A') as faturas_abertas
+            $return = DB::select( DB::raw("select con.*, pla.months, pla.age_range, pla.day_period, pla.lessons_per_week, pla.name as plan_name, (select count(*) from invoices where id_contract=con.id and status = 'A') as faturas_abertas
                                             from contracts con 
                                                 join plans pla on pla.id=con.id_plan 
                                             where con.id_user = ".$id_student." and con.status = 'A'

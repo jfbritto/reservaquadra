@@ -38,7 +38,8 @@ class ReservationService
             $return = DB::select( DB::raw(" select 
                                                 res.*, avd.week_day, avd.price, avd.start_time, avd.end_time 
                                             from reservations res 
-                                                join available_dates avd on avd.id=res.id_available_date 
+                                                join available_dates avd on avd.id=res.id_available_date
+                                                join courts cou on cou.id=avd.id_court and cou.id_company = '".auth()->user()->id_company."'
                                             order by 
                                                 res.status desc, res.reservation_date"));
 

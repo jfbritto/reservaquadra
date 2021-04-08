@@ -89,7 +89,7 @@ class PlanService
         $response = [];
 
         try{
-            $return = DB::select( DB::raw("select * from plans where status = 'A' and id_company = '1' order by months"));
+            $return = Plan::where('id_company', auth()->user()->id_company)->where('status', 'A')->orderByDesc('age_range')->orderByDesc('day_period')->orderBy('lessons_per_week')->orderBy('months')->get();
 
             $response = ['status' => 'success', 'data' => $return];
         }catch(Exception $e){

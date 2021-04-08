@@ -85,6 +85,32 @@ class InvoiceController extends Controller
 
         $response = $this->invoiceService->receive($data);
 
+        if($response['status'] == 'success'){
+
+            $response2 = $this->invoiceService->get_by_id($request->id);
+
+            $response3 = $this->invoiceService->list_far_more_open($response2['data']->id_user);
+
+            if($response3['status'] == 'success'){
+
+                $due_date = date("Y-m-d", strtotime("+1 month", strtotime($response3['data']->due_date)));
+
+                $data2 = [
+                    'id_user' => trim($response3['data']->id_user),
+                    'id_contract' => trim($response3['data']->id_contract),
+                    'due_date' => $due_date,
+                    'price' => trim($response3['data']->price),
+                    'generate_date' => date('Y-m-d H:i:s'),
+                    'id_user_generated' => auth()->user()->id,
+                    'id_type' => 1,
+                    'status' => "A"
+                ];    
+        
+                $response4 = $this->invoiceService->store($data2);
+            }
+
+        }
+
         if($response['status'] == 'success')
             return response()->json(['status'=>'success'], 201);
 

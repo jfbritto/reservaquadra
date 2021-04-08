@@ -22,12 +22,10 @@
                 <table class="table table-striped table-valign-middle table-hover table-sm">
                     <thead>
                         <tr>
-                            <th>Nome</th>
                             <th>Faixa etária</th>
                             <th>Período do dia</th>
                             <th>Aulas por semana</th>
                             <th>Período contrato</th>
-                            <th>Contrato anual</th>
                             <th>Valor mensal</th>
                             <th></th>
                         </tr>
@@ -51,12 +49,13 @@
 
                 <form id="formStorePlan">
                     <div class="row">
-                        <div class="col-md-12">
+                        <!-- <div class="col-md-12">
                             <div class="form-group">
                                 <label for="name">Nome</label>
                                 <input type="text" required name="name" id="name" class="form-control" placeholder="Informe o nome do plano">
                             </div>
-                        </div>
+                        </div> -->
+                        <input type="hidden" required name="name" id="name" class="form-control" placeholder="Informe o nome do plano">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="age_range">Faixa etária</label>
@@ -89,17 +88,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="annual_contract">Contrato anual</label>
-                                <select required name="annual_contract" id="annual_contract" class="form-control">
-                                    <option value="">-- Selecione --</option>
-                                    <option value="1">Sim</option>
-                                    <option selected value="0">Não</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="months">Período contrato</label>
                                 <select required name="months" id="months" class="form-control">
@@ -107,10 +96,11 @@
                                     <option value="1">Mensal</option>
                                     <option value="3">Trimestral</option>
                                     <option value="6">Semestral</option>
+                                    <option value="12">Anual</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="price">Valor mensal</label>
                                 <input type="text" required name="price" id="price" class="form-control money" placeholder="Informe o valor">
@@ -140,13 +130,15 @@
 
                 <form id="formEditPlan">
                     <div class="row">
-                        <div class="col-md-12">
+                        <!-- <div class="col-md-12">
                             <div class="form-group">
                                 <label for="name_edit">Nome</label>
                                 <input type="hidden" required name="id_edit" id="id_edit" class="form-control">
                                 <input type="text" required name="name_edit" id="name_edit" class="form-control" placeholder="Informe o nome do plano">
                             </div>
-                        </div>
+                        </div> -->
+                        <input type="hidden" required name="id_edit" id="id_edit" class="form-control">
+                        <input type="hidden" required name="name_edit" id="name_edit" class="form-control" placeholder="Informe o nome do plano">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="age_range_edit">Faixa etária</label>
@@ -179,17 +171,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="annual_contract_edit">Contrato anual</label>
-                                <select required name="annual_contract_edit" id="annual_contract_edit" class="form-control">
-                                    <option value="">-- Selecione --</option>
-                                    <option value="1">Sim</option>
-                                    <option selected value="0">Não</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="months_edit">Período contrato</label>
                                 <select required name="months_edit" id="months_edit" class="form-control">
@@ -197,10 +179,11 @@
                                     <option value="1">Mensal</option>
                                     <option value="3">Trimestral</option>
                                     <option value="6">Semestral</option>
+                                    <option value="12">Anual</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="price_edit">Valor mensal</label>
                                 <input type="text" required name="price_edit" id="price_edit" class="form-control money" placeholder="Informe o valor">
