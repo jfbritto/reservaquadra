@@ -108,7 +108,7 @@ class InvoiceService
     //     return $response;
     // }
 
-    public function get_by_id($id_invoice)
+    public function getById($id_invoice)
     {
         $response = [];
 
@@ -123,7 +123,7 @@ class InvoiceService
         return $response;
     }
 
-    public function list_next_open($id_student)
+    public function listNextOpen($id_student)
     {
         $response = [];
 
@@ -138,7 +138,7 @@ class InvoiceService
         return $response;
     }
 
-    public function list_far_more_open($id_student)
+    public function listFarMoreOpen($id_student)
     {
         $response = [];
 
@@ -153,7 +153,7 @@ class InvoiceService
         return $response;
     }
 
-    public function list_all_open_by_contract($id_contract)
+    public function listAllOpenByContract($id_contract)
     {
         $response = [];
 

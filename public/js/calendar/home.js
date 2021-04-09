@@ -24,41 +24,50 @@ $(document).ready(function () {
                             console.log(data.data)
 
                             let table = ``;
-                            let kk = 0;
-                            let str = 0;
-                            let date = data.data.data_inicio.split('-');
-                            let day = ``;
+                            let day_obj = ``;
                             let day_week = ``;
+                            let date = data.data.data_inicio.split('-');
+                            let actual_day = new Date();
 
-                            actual_day = new Date();
+                            let class_bloq = ``;
 
-                            for (let i = 0; i < data.data.linhas; i++) {
+                            console.log(data.data.classes)
+
+                            for (let linha = 0; linha < data.data.linhas; linha++) {
                                 table += `<tr>`;
                                 
-                                for (let d = 0; d < 7; d++) {
+                                for (let coluna = 0; coluna < 7; coluna++) {
                                     
-                                    kk = i*7;
-                                    str = d+kk;
+                                    // inicializando o objeto date com a data inicial do calendário
+                                    day_obj = new Date(parseInt(date[0]), parseInt(date[1]), parseInt(date[2]));
+                                    // adicionando a soma de dias à data inicial para montagem das celulas do calendário
+                                    day_obj.setDate(day_obj.getDate() + (coluna+(linha*7)));
                                     
-                                    day = new Date(parseInt(date[0]), parseInt(date[1]), parseInt(date[2]));
-                                    
-                                    day.setDate(day.getDate() + str);
+                                    day_week = parseInt(day_obj.getDate());
 
-                                    day_week = parseInt(day.getDate());
-
-                                    if(day_week <= 9)
-                                        day_week = '0'+day_week
-
-                                    if(actual_day.getDate() > day.getDate()){
-
-                                        table += `<td>${day_week}/${monthDescription(day.getMonth())}<br>Indisponível</td>`;
+                                    if(actual_day.getDate() > day_obj.getDate()){
+                                        class_bloq = `class_bloq`;
                                     }else{
-                                        table += `<td>${day_week}/${monthDescription(day.getMonth())}</td>`;
+                                        class_bloq = ``;
+                                    }
+                                    
+                                    table += `<td>
+                                                <div class="box-cel">
+                                                <div class="title-cel"><span class="badge badge-dark ${class_bloq}">${day_week<=9?`0${day_week}`:`${day_week}`}</span></div>`;
+
+                                    for (let index = 0; index < data.data.classes.length; index++) {
+                                        const element = data.data.classes[index];
+
+                                        if((day_obj.getDay()-2) == element){
+                                            table += `<div><span class="item-cel badge badge-pill badge-success ${class_bloq}" style="width: 100%;">${element}</span></div>`;
+                                        }
+
                                         
                                     }
 
-
-
+                                                
+                                    table += `<div>
+                                              </td>`;
                                 }
 
                                 

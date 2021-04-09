@@ -72,7 +72,7 @@ class AvailableDateService
         return $response;
     }
 
-    public function list_day_times($id, $week_day, $day)
+    public function listDayTimes($id, $week_day, $day)
     {
         $response = [];
 

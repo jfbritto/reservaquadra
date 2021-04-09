@@ -3,9 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Services\ScheduledClassesService;
 class CalendarController extends Controller
 {
+    private $scheduledClassesService;
+
+    public function __construct(ScheduledClassesService $scheduledClassesService)
+    {
+        $this->scheduledClassesService = $scheduledClassesService;
+    }
+
     public function index() 
     {
         return view('calendar.home');
@@ -13,7 +20,11 @@ class CalendarController extends Controller
 
     public function load() 
     {
-        // $response = $this->courtService->list();
+        $classes = $this->scheduledClassesService->listAll();
+
+        foreach ($classes['data'] as $class) {
+            $response['data']['classes'][] = $class->week_day;     
+        }
 
         $response['status'] = true;
 

@@ -51,7 +51,7 @@ class ReservationService
         return $response;
     }
 
-    public function change_status(array $data)
+    public function changeStatus(array $data)
     {
         $response = [];
 

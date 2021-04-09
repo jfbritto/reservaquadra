@@ -29,14 +29,14 @@ class ReservationController extends Controller
         return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
     }
 
-    public function change_status() 
+    public function changeStatus() 
     {
         $data = [
             'id' => $_POST['id'],
             'status' => $_POST['status']
         ];
 
-        $response = $this->reservationService->change_status($data);
+        $response = $this->reservationService->changeStatus($data);
 
         if($response['status'] == 'success')
             return response()->json(['status'=>'success'], 201);

@@ -5,6 +5,8 @@ $(document).ready(function () {
     // LISTAR ALUNOS
     function loadStudents()
     {
+        resetReadOnly();
+
         Swal.queue([
             {
                 title: "Carregando...",
@@ -327,8 +329,6 @@ $(document).ready(function () {
 
     })
 
-
-
     $("#search").on("keyup", function(){
 
         let search = $(this).val();
@@ -377,6 +377,19 @@ $(document).ready(function () {
         .catch();
 
     })
+
+    function resetReadOnly()
+    {
+        $("#uf").prop("readonly", false)
+        $("#city").prop("readonly", false)
+        $("#neighborhood").prop("readonly", false)
+        $("#address").prop("readonly", false)
+
+        $("#uf_edit").prop("readonly", false)
+        $("#city_edit").prop("readonly", false)
+        $("#neighborhood_edit").prop("readonly", false)
+        $("#address_edit").prop("readonly", false)
+    }
 
 
 });

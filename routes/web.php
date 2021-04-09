@@ -11,9 +11,9 @@ Route::post('/register', 'UserController@store');
 
 //reserva
 Route::get('/reservar', 'ExternalController@index');
-Route::post('/listar-quadras', 'ExternalController@list_courts');
-Route::post('/listar-dias-disponiveis/{id}', 'ExternalController@list_week_days');
-Route::post('/listar-horarios-disponiveis/{id}/{week_day}/{day}', 'ExternalController@list_available_day_times');
+Route::post('/listar-quadras', 'ExternalController@listCourts');
+Route::post('/listar-dias-disponiveis/{id}', 'ExternalController@listWeekDays');
+Route::post('/listar-horarios-disponiveis/{id}/{week_day}/{day}', 'ExternalController@listAvailableDayTimes');
 Route::post('/reservar-horario', 'ExternalController@store');
 
 Route::group(['middleware' => ['auth']], function(){
@@ -43,7 +43,7 @@ Route::group(['middleware' => ['auth']], function(){
     //reservas
     Route::get('/reservas', 'ReservationController@index');
     Route::post('/reservas/listar', 'ReservationController@list');
-    Route::post('/reservas/change-status', 'ReservationController@change_status');
+    Route::post('/reservas/change-status', 'ReservationController@changeStatus');
 
     // contratos
     Route::get('/contratos/listar/{id_student}', 'ContractController@list');
@@ -51,7 +51,7 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post('/contratos/cancelar', 'ContractController@destroy');
     
     // faturas
-    Route::get('/faturas/listar/{id_student}', 'InvoiceController@list_next_open');
+    Route::get('/faturas/listar/{id_student}', 'InvoiceController@listNextOpen');
     Route::post('/faturas/receber', 'InvoiceController@receive');
     
     // planos
@@ -68,19 +68,19 @@ Route::group(['middleware' => ['auth']], function(){
     
     //alunos
     Route::get('/alunos', 'UserController@student');
-    Route::get('/alunos/exibir/{id}', 'UserController@show_student');
-    Route::get('/alunos/encontrar', 'UserController@find_student');
-    Route::post('/alunos/listar', 'UserController@list_student');
-    Route::post('/alunos/cadastrar', 'UserController@store_student');
-    Route::post('/alunos/editar', 'UserController@update_student');
+    Route::get('/alunos/exibir/{id}', 'UserController@showStudent');
+    Route::get('/alunos/encontrar', 'UserController@findStudent');
+    Route::post('/alunos/listar', 'UserController@listStudent');
+    Route::post('/alunos/cadastrar', 'UserController@storeStudent');
+    Route::post('/alunos/editar', 'UserController@updateStudent');
     Route::post('/alunos/deletar', 'UserController@destroy');
-    Route::post('/alunos/buscar', 'UserController@search_student');
+    Route::post('/alunos/buscar', 'UserController@searchStudent');
 
     //funcionarios
     Route::get('/funcionarios', 'UserController@employee');
-    Route::post('/funcionarios/listar', 'UserController@list_employee');
-    Route::post('/funcionarios/cadastrar', 'UserController@store_employee');
-    Route::post('/funcionarios/editar', 'UserController@update_employee');
+    Route::post('/funcionarios/listar', 'UserController@listEmployee');
+    Route::post('/funcionarios/cadastrar', 'UserController@storeEmployee');
+    Route::post('/funcionarios/editar', 'UserController@updateEmployee');
     Route::post('/funcionarios/deletar', 'UserController@destroy');
 
 });

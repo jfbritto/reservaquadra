@@ -104,7 +104,7 @@ class ContractController extends Controller
         
         if($response['status'] == 'success'){
 
-            $pendent_invoices = $this->invoiceService->list_all_open_by_contract($request->id);
+            $pendent_invoices = $this->invoiceService->listAllOpenByContract($request->id);
     
             if($pendent_invoices['data']){
                 foreach ($pendent_invoices['data'] as $invoice) {

@@ -44,7 +44,7 @@ class ExternalController extends Controller
         return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
     }
 
-    public function list_courts() 
+    public function listCourts() 
     {
 
         $response = $this->courtService->list();
@@ -55,7 +55,7 @@ class ExternalController extends Controller
         return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
     }
 
-    public function list_week_days($id) 
+    public function listWeekDays($id) 
     {
 
         $response = $this->availableDateService->list($id);
@@ -87,10 +87,10 @@ class ExternalController extends Controller
         return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
     }
 
-    public function list_available_day_times($id, $week_day, $day) 
+    public function listAvailableDayTimes($id, $week_day, $day) 
     {
 
-        $response = $this->availableDateService->list_day_times($id, $week_day, $day);
+        $response = $this->availableDateService->listDayTimes($id, $week_day, $day);
 
         if($response['status'] == 'success')
             return response()->json(['status'=>'success', 'data'=>$response['data']], 201);

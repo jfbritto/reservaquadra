@@ -99,4 +99,26 @@ class ScheduledClassesService
 
         return $response;
     }
+
+    public function listAll()
+    {
+        $response = [];
+
+        try{
+
+            $return = DB::table('scheduled_classes')
+                        ->join('courts', 'courts.id', '=', 'scheduled_classes.id_court')
+                        ->where('courts.id_company', auth()->user()->id_company)
+                        ->where('scheduled_classes.status', 'A')
+                        ->select('scheduled_classes.*', 'courts.name as court_name')
+                        ->orderBy('scheduled_classes.week_day')
+                        ->get();
+
+            $response = ['status' => 'success', 'data' => $return];
+        }catch(Exception $e){
+            $response = ['status' => 'error', 'data' => $e->getMessage()];
+        }
+
+        return $response;
+    }
 }

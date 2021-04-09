@@ -20,12 +20,12 @@ class UserController extends Controller
         return view('user.student.home');
     }
 
-    public function show_student($id)
+    public function showStudent($id)
     {
         return view('user.student.show', ['id' => $id]);
     }
 
-    public function find_student() 
+    public function findStudent() 
     {
         $id = $_GET['id'];
         $response = $this->userService->find($id);
@@ -37,7 +37,7 @@ class UserController extends Controller
     }
 
     //adicionar user
-    public function store_student(Request $request)
+    public function storeStudent(Request $request)
     {
         $data = [
             'id_company' => auth()->user()->id_company,
@@ -70,7 +70,7 @@ class UserController extends Controller
         return response()->json(['status'=>'error', 'message'=>$response['data']], 201);
     }
 
-    public function list_student() 
+    public function listStudent() 
     {
 
         $response = $this->userService->list([4]);
@@ -81,7 +81,7 @@ class UserController extends Controller
         return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
     }
 
-    public function search_student() 
+    public function searchStudent() 
     {
         $search = $_POST['search'];
         $response = $this->userService->search([4], $search);
@@ -92,7 +92,7 @@ class UserController extends Controller
         return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
     }
 
-    public function update_student(Request $request) 
+    public function updateStudent(Request $request) 
     {
 
         $data = [
@@ -135,7 +135,7 @@ class UserController extends Controller
     }
 
     //adicionar user
-    public function store_employee(Request $request)
+    public function storeEmployee(Request $request)
     {
         $data = [
             'id_company' => auth()->user()->id_company,
@@ -153,7 +153,7 @@ class UserController extends Controller
         return response()->json(['status'=>'error', 'message'=>$response['data']], 201);
     }
 
-    public function list_employee() 
+    public function listEmployee() 
     {
 
         $response = $this->userService->list([2,3]);
@@ -164,7 +164,7 @@ class UserController extends Controller
         return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
     }
 
-    public function update_employee(Request $request) 
+    public function updateEmployee(Request $request) 
     {
         $data = [
             'id' => trim($request->id),

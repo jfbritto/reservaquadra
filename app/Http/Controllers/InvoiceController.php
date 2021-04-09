@@ -87,9 +87,9 @@ class InvoiceController extends Controller
 
         if($response['status'] == 'success'){
 
-            $response2 = $this->invoiceService->get_by_id($request->id);
+            $response2 = $this->invoiceService->getById($request->id);
 
-            $response3 = $this->invoiceService->list_far_more_open($response2['data']->id_user);
+            $response3 = $this->invoiceService->listFarMoreOpen($response2['data']->id_user);
 
             if($response3['status'] == 'success'){
 
@@ -132,10 +132,10 @@ class InvoiceController extends Controller
     //     return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
     // }
     
-    public function list_next_open($id_student) 
+    public function listNextOpen($id_student) 
     {
 
-        $response = $this->invoiceService->list_next_open($id_student);
+        $response = $this->invoiceService->listNextOpen($id_student);
 
         if($response['status'] == 'success')
             return response()->json(['status'=>'success', 'data'=>$response['data']], 201);

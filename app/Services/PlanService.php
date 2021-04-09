@@ -89,7 +89,13 @@ class PlanService
         $response = [];
 
         try{
-            $return = Plan::where('id_company', auth()->user()->id_company)->where('status', 'A')->orderByDesc('age_range')->orderByDesc('day_period')->orderBy('lessons_per_week')->orderBy('months')->get();
+            $return = Plan::where('id_company', auth()->user()->id_company)
+                            ->where('status', 'A')
+                            ->orderByDesc('age_range')
+                            ->orderBy('day_period')
+                            ->orderBy('lessons_per_week')
+                            ->orderBy('months')
+                            ->get();
 
             $response = ['status' => 'success', 'data' => $return];
         }catch(Exception $e){
