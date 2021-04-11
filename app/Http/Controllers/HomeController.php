@@ -25,6 +25,10 @@ class HomeController extends Controller
 
     public function index()
     {
+
+        // dd(phpinfo());
+        // dd(date('d/m/Y H:i:s'));
+
         return view('home.home');
     }
 

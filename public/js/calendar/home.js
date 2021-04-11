@@ -31,6 +31,7 @@ $(document).ready(function () {
 
                             let class_bloq = ``;
 
+                            console.log(actual_day.getDay())
                             console.log(data.data.classes)
 
                             for (let linha = 0; linha < data.data.linhas; linha++) {
@@ -58,7 +59,7 @@ $(document).ready(function () {
                                     for (let index = 0; index < data.data.classes.length; index++) {
                                         const element = data.data.classes[index];
 
-                                        if((day_obj.getDay()-2) == element){
+                                        if((day_obj.getDay()==0?7:day_obj.getDay()) == element){
                                             table += `<div><span class="item-cel badge badge-pill badge-success ${class_bloq}" style="width: 100%;">${element}</span></div>`;
                                         }
 
