@@ -15,7 +15,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Alunos</span>
-                    <span class="info-box-number">123</span>
+                    <span class="info-box-number" id="tot-students"><i class="fas fa-spinner fa-pulse"></i></span>
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Aulas hoje</span>
-                    <span class="info-box-number">123</span>
+                    <span class="info-box-number" id="tot-classes"><i class="fas fa-spinner fa-pulse"></i></span>
                 </div>
             </div>
         </div>
@@ -37,7 +37,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Reservas pendentes</span>
-                    <span class="info-box-number">123</span>
+                    <span class="info-box-number" id="tot-reservations"><i class="fas fa-spinner fa-pulse"></i></span>
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Débitos pendentes</span>
-                    <span class="info-box-number">123</span>
+                    <span class="info-box-number" id="tot-debts"><i class="fas fa-spinner fa-pulse"></i></span>
                 </div>
             </div>
         </div>

@@ -23,6 +23,7 @@ Route::group(['middleware' => ['auth']], function(){
 
     //home
     Route::get('/home', 'HomeController@index');
+    Route::get('/home/all', 'HomeController@all');
 
     //calendario
     Route::get('/calendario', 'CalendarController@index');

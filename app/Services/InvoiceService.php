@@ -168,4 +168,19 @@ class InvoiceService
         return $response;
     }
 
+    public function listAllOverdueBills()
+    {
+        $response = [];
+
+        try{
+            $return = DB::select( DB::raw("select * from invoices inv join contracts con on con.id=inv.id_contract where inv.status = 'A' and inv.due_date < now() order by due_date"));
+
+            $response = ['status' => 'success', 'data' => $return];
+        }catch(Exception $e){
+            $response = ['status' => 'error', 'data' => $e->getMessage()];
+        }
+
+        return $response;
+    }
+
 }
