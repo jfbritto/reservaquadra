@@ -143,6 +143,9 @@ $(document).ready(function () {
 
                     });
 
+                    $("#id_plan").select2().css('width', '100%');
+                    $("#id_plan_renew").select2().css('width', '100%');
+
                 }
 
             } else if (data.status == "error") {
