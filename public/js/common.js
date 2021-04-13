@@ -53,6 +53,14 @@ function getDayPeriod(val)
     }
 }
 
+// pega o dia da semana informado em JS e passa para o padrão do PHP
+function week_dayPhpToJs(week_day)
+{
+    const week_day_js = {7:'2', 1:'3', 2:'4', 3:'5', 4:'6', 5:'0', 6:'1'};
+    
+    return `${week_day_js[week_day]}`
+    
+}
 
 var SPMaskBehavior = function (val) {
     return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';

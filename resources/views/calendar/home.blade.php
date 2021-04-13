@@ -65,53 +65,31 @@
                         </tr>
                     </thead>
                     <tbody id="list">
-                    
-                        <tr>
-                            <td>
-                                <div class="title-cel"><span class="badge badge-dark">04</span></div>
-                                <span class="badge badge-success" style="width: 100%;">serwer</span>
 
-
-                            </td>
-                            <td>05</td>
-                            <td>06</td>
-                            <td>07</td>
-                            <td>08</td>
-                            <td>09</td>
-                            <td>10</td>
-                        </tr>
-                        <tr>
-                            <td>11</td>
-                            <td>12</td>
-                            <td>13</td>
-                            <td>14</td>
-                            <td>15</td>
-                            <td>16</td>
-                            <td>17</td>
-                        </tr>
-                        <tr>
-                            <td>18</td>
-                            <td>19</td>
-                            <td>20</td>
-                            <td>21</td>
-                            <td>22</td>
-                            <td>23</td>
-                            <td>24</td>
-                        </tr>
-                        <tr>
-                            <td>25</td>
-                            <td>26</td>
-                            <td>27</td>
-                            <td>28</td>
-                            <td>29</td>
-                            <td>30</td>
-                            <td>31</td>
-                        </tr>
                     
                     </tbody>
                 </table>
             </div>
 
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalInfoCalendar">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detalhes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <p><strong>Aluno: </strong><span id="info-student"></span></p>
+                <p><strong>Quadra: </strong><span id="info-court"></span></p>
+
+            </div>
+            </div>
         </div>
     </div>
 

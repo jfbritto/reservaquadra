@@ -23,7 +23,9 @@ class CalendarController extends Controller
         $classes = $this->scheduledClassesService->listAll();
 
         foreach ($classes['data'] as $class) {
-            $response['data']['classes'][] = $class->week_day;     
+            $response['data']['week_day'][] = $class->week_day;
+            $response['data']['interval'][] = $class->start_time.' às '.$class->end_time;
+            $response['data']['all'][] = $class;
         }
 
         $response['status'] = true;

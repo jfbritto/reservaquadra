@@ -20,8 +20,6 @@ $(document).ready(function () {
 
                             Swal.close();
                             $("#list").html(``);
-                            
-                            console.log(data.data)
 
                             let table = ``;
                             let day_obj = ``;
@@ -30,9 +28,6 @@ $(document).ready(function () {
                             let actual_day = new Date();
 
                             let class_bloq = ``;
-
-                            console.log(actual_day.getDay())
-                            console.log(data.data.classes)
 
                             for (let linha = 0; linha < data.data.linhas; linha++) {
                                 table += `<tr>`;
@@ -56,11 +51,13 @@ $(document).ready(function () {
                                                 <div class="box-cel">
                                                 <div class="title-cel"><span class="badge badge-dark ${class_bloq}">${day_week<=9?`0${day_week}`:`${day_week}`}</span></div>`;
 
-                                    for (let index = 0; index < data.data.classes.length; index++) {
-                                        const element = data.data.classes[index];
+                                    for (let index = 0; index < data.data.week_day.length; index++) {
+                                        const element_week_day = data.data.week_day[index];
+                                        const element_interval = data.data.interval[index];
+                                        const element_all = data.data.all[index];
 
-                                        if((day_obj.getDay()==0?7:day_obj.getDay()) == element){
-                                            table += `<div><span class="item-cel badge badge-pill badge-success ${class_bloq}" style="width: 100%;">${element}</span></div>`;
+                                        if(day_obj.getDay() == week_dayPhpToJs(element_week_day)){
+                                            table += `<div><span data-id_user="${element_all.id_user}" data-user_name="${element_all.user_name}" data-court_name="${element_all.court_name}" class="item-cel badge badge-pill badge-success ${class_bloq} btn-detail" style="width: 100%;">${element_interval}</span></div>`;
                                         }
 
                                         
@@ -87,6 +84,13 @@ $(document).ready(function () {
             },
         ]);
     }
+
+    $("#list").on("click", ".btn-detail", function(){
+        $("#info-student").html($(this).data('user_name'));
+        $("#info-court").html($(this).data('court_name'));
+
+        $("#modalInfoCalendar").modal("show");
+    });
 
 
 });
