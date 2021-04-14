@@ -25,7 +25,7 @@ class PlanController extends Controller
         $price_formated = str_replace(",", ".", $price_formated);
 
         $annual_contract = 0;
-        if($request->months == 12)
+        if($request->months >= 12)
             $annual_contract = 1;
 
         $data = [
@@ -54,7 +54,7 @@ class PlanController extends Controller
         $price_formated = str_replace(",", ".", $price_formated);
 
         $annual_contract = 0;
-        if($request->months == 12)
+        if($request->months >= 12)
             $annual_contract = 1;
         
         $data = [

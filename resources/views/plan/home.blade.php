@@ -97,12 +97,13 @@
                                     <option value="3">Trimestral</option>
                                     <option value="6">Semestral</option>
                                     <option value="12">Anual</option>
+                                    <option value="13">Anual - (Tenis +)</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="price">Valor mensal</label>
+                                <label for="price" id="price_label">Valor mensal</label>
                                 <input type="text" required name="price" id="price" class="form-control money" placeholder="Informe o valor">
                             </div>
                         </div>
@@ -180,12 +181,13 @@
                                     <option value="3">Trimestral</option>
                                     <option value="6">Semestral</option>
                                     <option value="12">Anual</option>
+                                    <option value="13">Anual - (Tenis +)</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="price_edit">Valor mensal</label>
+                                <label for="price_edit" id="price_edit_label">Valor mensal</label>
                                 <input type="text" required name="price_edit" id="price_edit" class="form-control money" placeholder="Informe o valor">
                             </div>
                         </div>

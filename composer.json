@@ -15,7 +15,8 @@
         "jeroennoten/laravel-adminlte": "^3.5",
         "laravel/framework": "^7.29",
         "laravel/tinker": "^2.5",
-        "laravel/ui": "^2.5"
+        "laravel/ui": "^2.5",
+        "orangehill/iseed": "^3.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

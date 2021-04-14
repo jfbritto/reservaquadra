@@ -26,7 +26,7 @@ function monthDescription(val)
 
 function periodContractedDescription(val)
 {
-    const period_cantracted_description = {1:'Mensal',2:'Bimestral',3:'Trimestral',4:'Quadrimestral',6:'Semestral',12:'Anual'};
+    const period_cantracted_description = {1:'Mensal',2:'Bimestral',3:'Trimestral',4:'Quadrimestral',6:'Semestral',12:'Anual',13:'Anual - (Tenis +)'};
     
     return `${period_cantracted_description[val]}`
 }

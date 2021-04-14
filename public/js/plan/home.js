@@ -211,4 +211,22 @@ $(document).ready(function () {
     });
     
 
+    $("#months").on("change", function(){
+        let option = $("#months option:selected").val();
+        
+        if(option == 13)
+            $("#price_label").html("Valor anual");
+        else
+            $("#price_label").html("Valor mensal");
+    });
+
+    $("#months_edit").on("change", function(){
+        let option = $("#months_edit option:selected").val();
+        
+        if(option == 13)
+            $("#price_edit_label").html("Valor anual");
+        else
+            $("#price_edit_label").html("Valor mensal");
+    });
+
 });
