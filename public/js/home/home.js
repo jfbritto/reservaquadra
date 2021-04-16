@@ -25,4 +25,17 @@ $(document).ready(function () {
 
     }
 
+    $(".link-student").on("click", function(){
+        window.location.href = "/alunos";
+    })
+
+    $(".link-calendar").on("click", function(){
+        window.location.href = "/calendario";
+    })
+
+    $(".link-reservations").on("click", function(){
+        window.location.href = "/reservas";
+    })
+
+
 });
