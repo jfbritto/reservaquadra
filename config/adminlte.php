@@ -304,7 +304,7 @@ return [
             'url'        => 'home',
             'can'        => 'admin',
         ],
-        // ['header' => 'USUÁRIOS'],
+        ['header' => 'USUÁRIOS'],
         // [
         //     'text'    => 'Usuários',
         //     'icon'    => 'fas fa-fw fa-users',
@@ -330,7 +330,7 @@ return [
                 ],
         //     ],
         // ],
-        // ['header' => 'CONFIGURAÇÕES'],
+        ['header' => 'CONFIGURAÇÕES'],
         // [
         //     'text'    => 'Configurações',
         //     'icon'    => 'fas fa-fw fa-cog',
@@ -350,7 +350,7 @@ return [
                 ],
         //     ],
         // ],
-        // ['header' => 'OUTROS'],
+        ['header' => 'OUTROS'],
         [
             'text'       => 'Calendário',
             'icon'       => 'fas fa-fw fa-calendar' ,

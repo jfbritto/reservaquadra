@@ -141,7 +141,7 @@
         </div>
     </div>
 
-    <div class="modal fade" tabindex="-1" role="dialog" id="modalAvailableDates">
+    <div class="modal fade" role="dialog" id="modalAvailableDates">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
             <div class="modal-header">
@@ -152,7 +152,10 @@
             </div>
             <div class="modal-body">
                 
-                <p class="font-weight-bold h5" id="title-court"></p>
+                <h5 class="font-weight-bold mb-4">
+                    <span id="title-court"></span>
+                    <span class="pull-right"><button type="button" class="btn btn-success btn-sm float-right" data-toggle="modal" data-target="#modalAddAvailableDate">Adicionar Horário</button></span>
+                </h5>
 
                 <div class="table-responsive">
                     <table class="table table-condensed table-hover table-sm">
@@ -169,7 +172,6 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalAddAvailableDate">Adicionar Horário</button>
                 <input type="hidden" id="id_court_add" value="">
             </div>
             </div>

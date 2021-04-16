@@ -35,3 +35,7 @@
 .display-none{
   display: none !important;
 }
+
+.modal {
+  overflow-y:auto !important;
+}
