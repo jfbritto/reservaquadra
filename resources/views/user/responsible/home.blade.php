@@ -1,18 +1,18 @@
 @extends('adminlte::page')
 
-@section('title', 'Alunos')
+@section('title', 'Responsáveis')
 
 @section('content_header')
-    <h1>Alunos</h1>
+    <h1>Responsáveis</h1>
 @stop
 
 @section('content')
     
     <div class="card">
         <div class="card-header border-0">
-            <h3 class="card-title"> <input type="text" class="form-control" name="search" id="search" placeholder="Buscar pelo nome"> </h3>
+            <h3 class="card-title"> </h3>
             <div class="card-tools">
-                <a href="#" class="btn btn-tool btn-sm" data-toggle="modal" data-target="#modalStoreStudent">
+                <a href="#" class="btn btn-tool btn-sm" data-toggle="modal" data-target="#modalStoreResponsible">
                 <i class="fas fa-plus"></i>
                 </a>
             </div>
@@ -23,7 +23,7 @@
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th class="just-pc">Email</th>
+                            <th>Email</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -33,25 +33,23 @@
         </div>
     </div>
 
-
-
-    <div class="modal fade" tabindex="-1" role="dialog" id="modalStoreStudent">
-        <div class="modal-dialog modal-xl" role="document">
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalStoreResponsible">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Cadastrar Aluno</h5>
+                <h5 class="modal-title">Cadastrar Responsável</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
 
-                <form id="formStoreStudent">
+                <form id="formStoreResponsible">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="name">Nome</label>
-                                <input type="text" required name="name" id="name" class="form-control" placeholder="Informe o nome do aluno">
+                                <input type="text" required name="name" id="name" class="form-control" placeholder="Informe o nome">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -179,31 +177,31 @@
 
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" form="formStoreStudent">Salvar</button>
+                <button type="submit" class="btn btn-primary" form="formStoreResponsible">Salvar</button>
             </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" tabindex="-1" role="dialog" id="modalEditStudent">
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalEditResponsible">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Editar Aluno</h5>
+                <h5 class="modal-title">Editar Responsável</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
 
-                <form id="formEditStudent">
+                <form id="formEditResponsible">
                     <input type="hidden" required name="id_edit" id="id_edit" class="form-control">                
 
                     <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="name_edit">Nome</label>
-                                <input type="text" required name="name_edit" id="name_edit" class="form-control" placeholder="Informe o nome">
+                                <input type="text" required name="name_edit" id="name_edit" class="form-control" placeholder="Informe o nome do aluno">
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -327,12 +325,11 @@
                         </div>
 
                     </div>
-
                 </form>
 
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" form="formEditStudent">Salvar</button>
+                <button type="submit" class="btn btn-primary" form="formEditResponsible">Salvar</button>
             </div>
             </div>
         </div>
@@ -341,5 +338,5 @@
 @stop
 
 @section('js')
-    <script src="/js/user/student/home.js"></script>
+    <script src="/js/user/responsible/home.js"></script>
 @stop

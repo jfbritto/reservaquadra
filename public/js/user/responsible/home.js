@@ -1,9 +1,9 @@
 $(document).ready(function () {
 
-    loadStudents();
+    loadResponsibles();
 
-    // LISTAR ALUNOS
-    function loadStudents()
+    // LISTAR RESPONSAVEIS
+    function loadResponsibles()
     {
         resetReadOnly();
 
@@ -14,8 +14,8 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + "/alunos/listar", {
-
+                    $.post(window.location.origin + "/responsaveis/listar", {
+                        
                     })
                         .then(function (data) {
                             if (data.status == "success") {
@@ -24,7 +24,7 @@ $(document).ready(function () {
                                 $("#list").html(``);
 
                                 if(data.data.length > 0){
-
+                                    
                                     data.data.forEach(item => {
 
                                         $("#list").append(`
@@ -32,9 +32,9 @@ $(document).ready(function () {
                                                 <td class="align-middle">${item.name}</td>
                                                 <td class="align-middle just-pc">${item.email}</td>
                                                 <td class="align-middle" style="text-align: right">
-                                                    <a title="Abrir" href="/alunos/exibir/${item.id}" class="btn btn-info open-student"><i style="color: white" class="fas fa-eye"></i></a>
-                                                    <a title="Editar" data-id="${item.id}" data-name="${item.name}" data-email="${item.email}" data-birth="${item.birth}" data-cpf="${item.cpf}" data-rg="${item.rg}" data-civil_status="${item.civil_status}" data-profession="${item.profession}" data-zip_code="${item.zip_code}" data-uf="${item.uf}" data-city="${item.city}" data-neighborhood="${item.neighborhood}" data-address="${item.address}" data-address_number="${item.address_number}" data-complement="${item.complement}" data-start_date="${item.start_date}" data-health_plan="${item.health_plan}" data-how_met="${item.how_met}" href="#" class="btn btn-warning edit-student display-none"><i style="color: white" class="fas fa-edit"></i></a>
-                                                    <a title="Deletar" data-id="${item.id}" href="#" class="btn btn-danger delete-student display-none"><i class="fas fa-trash-alt"></i></a>
+                                                    <a title="Abrir" href="/alunos/exibir/${item.id}" class="btn btn-info open-responsible display-none"><i style="color: white" class="fas fa-eye"></i></a>
+                                                    <a title="Editar" data-id="${item.id}" data-name="${item.name}" data-email="${item.email}" data-birth="${item.birth}" data-cpf="${item.cpf}" data-rg="${item.rg}" data-civil_status="${item.civil_status}" data-profession="${item.profession}" data-zip_code="${item.zip_code}" data-uf="${item.uf}" data-city="${item.city}" data-neighborhood="${item.neighborhood}" data-address="${item.address}" data-address_number="${item.address_number}" data-complement="${item.complement}" data-start_date="${item.start_date}" data-health_plan="${item.health_plan}" data-how_met="${item.how_met}" href="#" class="btn btn-warning edit-responsible"><i style="color: white" class="fas fa-edit"></i></a>
+                                                    <a title="Deletar" data-id="${item.id}" href="#" class="btn btn-danger delete-responsible"><i class="fas fa-trash-alt"></i></a>
                                                 </td>
                                             </tr>
                                         `);       
@@ -44,7 +44,7 @@ $(document).ready(function () {
 
                                     $("#list").append(`
                                         <tr>
-                                            <td class="align-middle text-center" colspan="4">Nenhum aluno cadastrado</td>
+                                            <td class="align-middle text-center" colspan="4">Nenhum responsável cadastrado</td>
                                         </tr>
                                     `);  
 
@@ -62,8 +62,8 @@ $(document).ready(function () {
     }
 
 
-    // CADASTRAR ALUNO
-    $("#formStoreStudent").submit(function (e) {
+    // CADASTRAR RESPONSAVEL
+    $("#formStoreResponsible").submit(function (e) {
         e.preventDefault();
 
         Swal.queue([
@@ -73,7 +73,7 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + "/alunos/cadastrar", {
+                    $.post(window.location.origin + "/responsaveis/cadastrar", {
                         name: $("#name").val(),
                         email: $("#email").val(),
                         birth: $("#birth").val(),
@@ -95,13 +95,13 @@ $(document).ready(function () {
                         .then(function (data) {
                             if (data.status == "success") {
 
-                                $("#formStoreStudent").each(function () {
+                                $("#formStoreResponsible").each(function () {
                                     this.reset();
                                 });
                                 
-                                $("#modalStoreStudent").modal("hide");
+                                $("#modalStoreResponsible").modal("hide");
 
-                                showSuccess("Cadastro efetuado!", null, loadStudents)
+                                showSuccess("Cadastro efetuado!", null, loadResponsibles)
                             } else if (data.status == "error") {
                                 showError(data.message)
                             }
@@ -113,8 +113,8 @@ $(document).ready(function () {
     });
 
 
-    // ABRIR MODAL PARA EDITAR ALUNO
-    $("#list").on("click", ".edit-student", function(){
+    // ABRIR MODAL PARA EDITAR RESPONSAVEL
+    $("#list").on("click", ".edit-responsible", function(){
 
         let id = $(this).data('id');
 
@@ -138,11 +138,11 @@ $(document).ready(function () {
         $("#health_plan_edit").val($(this).data('health_plan'));
         $("#how_met_edit").val($(this).data('how_met')).change();
 
-        $("#modalEditStudent").modal("show");
+        $("#modalEditResponsible").modal("show");
     });
 
-    // EDITAR ALUNO
-    $("#formEditStudent").submit(function (e) {
+    // EDITAR RESPONSAVEL
+    $("#formEditResponsible").submit(function (e) {
         e.preventDefault();
 
         Swal.queue([
@@ -152,7 +152,7 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + "/alunos/editar", {
+                    $.post(window.location.origin + "/responsaveis/editar", {
                         id: $("#id_edit").val(),
                         name: $("#name_edit").val(),
                         email: $("#email_edit").val(),
@@ -175,13 +175,13 @@ $(document).ready(function () {
                         .then(function (data) {
                             if (data.status == "success") {
 
-                                $("#formEditStudent").each(function () {
+                                $("#formEditResponsible").each(function () {
                                     this.reset();
                                 });
                                 
-                                $("#modalEditStudent").modal("hide");
+                                $("#modalEditResponsible").modal("hide");
 
-                                showSuccess("Edição efetuada!", null, loadStudents)
+                                showSuccess("Edição efetuada!", null, loadResponsibles)
                             } else if (data.status == "error") {
                                 showError(data.message)
                             }
@@ -192,8 +192,8 @@ $(document).ready(function () {
         ]);
     });
 
-    // "DELETAR" ALUNO
-    $("#list").on("click", ".delete-student", function(){
+    // "DELETAR" RESPONSÁVEL
+    $("#list").on("click", ".delete-responsible", function(){
         
         let id = $(this).data('id');
 
@@ -216,13 +216,13 @@ $(document).ready(function () {
                             allowEscapeKey: false,
                             onOpen: () => {
                                 Swal.showLoading();
-                                $.post(window.location.origin + "/alunos/deletar", {
+                                $.post(window.location.origin + "/responsaveis/deletar", {
                                     id: id
                                 })
                                     .then(function (data) {
                                         if (data.status == "success") {
                                                         
-                                            showSuccess("Deletado com sucesso!", null, loadStudents)
+                                            showSuccess("Deletado com sucesso!", null, loadResponsibles)
                                         } else if (data.status == "error") {
                                             showError(data.message)
                                         }
@@ -236,55 +236,7 @@ $(document).ready(function () {
             })
 
     });
+    
 
-    // BUSCAR ALUNO
-    $("#search").on("keyup", function(){
-
-        let search = $(this).val();
-
-        $.post(window.location.origin + "/alunos/buscar", {
-            search
-        })
-        .then(function (data) {
-            if (data.status == "success") {
-
-                Swal.close();
-                $("#list").html(``);
-
-                if(data.data.length > 0){
-
-                    data.data.forEach(item => {
-
-                        $("#list").append(`
-                            <tr>
-                                <td class="align-middle">${item.name}</td>
-                                <td class="align-middle just-pc">${item.email}</td>
-                                <td class="align-middle" style="text-align: right">
-                                    <a title="Abrir" href="/alunos/exibir/${item.id}" class="btn btn-info open-student"><i style="color: white" class="fas fa-eye"></i></a>
-                                    <a title="Editar" data-id="${item.id}" data-name="${item.name}" data-email="${item.email}" data-birth="${item.birth}" data-cpf="${item.cpf}" data-rg="${item.rg}" data-civil_status="${item.civil_status}" data-profession="${item.profession}" data-zip_code="${item.zip_code}" data-uf="${item.uf}" data-city="${item.city}" data-neighborhood="${item.neighborhood}" data-address="${item.address}" data-address_number="${item.address_number}" data-complement="${item.complement}" data-start_date="${item.start_date}" data-health_plan="${item.health_plan}" data-how_met="${item.how_met}" href="#" class="btn btn-warning edit-student"><i style="color: white" class="fas fa-edit"></i></a>
-                                    <a title="Deletar" data-id="${item.id}" href="#" class="btn btn-danger delete-student"><i class="fas fa-trash-alt"></i></a>
-                                </td>
-                            </tr>
-                        `);       
-                    });
-
-                }else{
-
-                    $("#list").append(`
-                        <tr>
-                            <td class="align-middle text-center" colspan="4">Nenhum aluno cadastrado</td>
-                        </tr>
-                    `);  
-
-                }
-
-
-            } else if (data.status == "error") {
-                showError(data.message)
-            }
-        })
-        .catch();
-
-    })
 
 });

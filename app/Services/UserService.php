@@ -57,6 +57,7 @@ class UserService
                                   'start_date' => $data['start_date'],
                                   'health_plan' => $data['health_plan'],
                                   'how_met' => $data['how_met'],
+                                  'group' => $data['group'],
                                 ]);
 
             DB::commit();

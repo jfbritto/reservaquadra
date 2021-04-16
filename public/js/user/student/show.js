@@ -158,8 +158,16 @@ $(document).ready(function () {
 
     $("#id_plan").on("change", function(){
         let price = $("#id_plan option:selected").data('price');
-        console.log(price)
+        let months = $("#id_plan option:selected").data('months');
+        
         $("#price_per_month").val(moneyFormat(price))
+
+        if(months == 13){
+            $("#expiration_day").val("1");
+            $("#expiration_day").attr("disabled", true);
+        }else{
+            $("#expiration_day").attr("disabled", false);
+        }
     })
 
     // LISTAR CONTRATOS

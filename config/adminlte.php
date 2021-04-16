@@ -317,6 +317,12 @@ return [
                     'can'        => 'admin',
                 ],
                 [
+                    'text'       => 'Responsáveis',
+                    'icon'       => 'fas fa-fw fa-user-tie' ,
+                    'url'        => 'responsaveis',
+                    'can'        => 'admin',
+                ],
+                [
                     'text'       => 'Funcionários',
                     'icon'       => 'fas fa-fw fa-user-friends' ,
                     'url'        => 'funcionarios',

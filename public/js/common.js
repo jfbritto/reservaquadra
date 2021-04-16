@@ -143,3 +143,102 @@ function showSuccess(title = null, text = null, functions = null, param = null)
     }
 
 }
+
+
+// BUSCA DE ENDEREÇO
+$("#zip_code, #zip_code_edit").on("keyup", function(){
+
+    if($(this).val().length == 9){
+
+        let type = $(this).data('type');
+        let zip_code = $(this).val();
+
+        zip_code = zip_code.replace("-","");
+
+        Swal.queue([
+            {
+                title: "Carregando...",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                    $.get(`http://viacep.com.br/ws/${zip_code}/json`, { })
+                        .then(function (data) {
+
+                            if(data.erro){
+                                showError("Cep não encontrado!")
+                                return false;
+                            }
+
+                            if(type == 'add'){
+                                
+                                $("#uf").prop("readonly", true)
+                                $("#city").prop("readonly", true)
+                                $("#neighborhood").prop("readonly", true)
+                                $("#address").prop("readonly", true)
+                                
+                                $("#uf").val(data.uf);
+                                $("#city").val(data.localidade);
+                                $("#neighborhood").val(data.bairro);
+                                $("#address").val(data.logradouro);
+
+                                if(data.uf == "")
+                                    $("#uf").prop("readonly", false)
+
+                                if(data.localidade == "")
+                                    $("#city").prop("readonly", false)
+
+                                if(data.bairro == "")
+                                    $("#neighborhood").prop("readonly", false)
+
+                                if(data.logradouro == "")
+                                    $("#address").prop("readonly", false)
+                                    
+                            }else{
+
+                                $("#uf_edit").prop("readonly", true)
+                                $("#city_edit").prop("readonly", true)
+                                $("#neighborhood_edit").prop("readonly", true)
+                                $("#address_edit").prop("readonly", true)
+                                
+                                $("#uf_edit").val(data.uf);
+                                $("#city_edit").val(data.localidade);
+                                $("#neighborhood_edit").val(data.bairro);
+                                $("#address_edit").val(data.logradouro);
+
+                                if(data.uf == "")
+                                    $("#uf_edit").prop("readonly", false)
+
+                                if(data.localidade == "")
+                                    $("#city_edit").prop("readonly", false)
+
+                                if(data.bairro == "")
+                                    $("#neighborhood_edit").prop("readonly", false)
+
+                                if(data.logradouro == "")
+                                    $("#address_edit").prop("readonly", false)
+                                
+                            }
+
+                            Swal.close();
+
+                        })
+                        .catch();
+                },
+            },
+        ]);
+    }
+})
+
+function resetReadOnly()
+{
+    $("#uf").prop("readonly", false)
+    $("#city").prop("readonly", false)
+    $("#neighborhood").prop("readonly", false)
+    $("#address").prop("readonly", false)
+
+    $("#uf_edit").prop("readonly", false)
+    $("#city_edit").prop("readonly", false)
+    $("#neighborhood_edit").prop("readonly", false)
+    $("#address_edit").prop("readonly", false)
+}

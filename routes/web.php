@@ -74,13 +74,20 @@ Route::group(['middleware' => ['auth']], function(){
     Route::post('/alunos/listar', 'UserController@listStudent');
     Route::post('/alunos/cadastrar', 'UserController@storeStudent');
     Route::post('/alunos/editar', 'UserController@updateStudent');
-    Route::post('/alunos/deletar', 'UserController@destroy');
     Route::post('/alunos/buscar', 'UserController@searchStudent');
+    Route::post('/alunos/deletar', 'UserController@destroy');
+
+    //responsáveis
+    Route::get('/responsaveis', 'UserController@responsible');
+    Route::post('/responsaveis/cadastrar', 'UserController@storeResponsible');
+    Route::post('/responsaveis/listar', 'UserController@listResponsible');
+    Route::post('/responsaveis/editar', 'UserController@updateResponsible');
+    Route::post('/responsaveis/deletar', 'UserController@destroy');
 
     //funcionarios
     Route::get('/funcionarios', 'UserController@employee');
-    Route::post('/funcionarios/listar', 'UserController@listEmployee');
     Route::post('/funcionarios/cadastrar', 'UserController@storeEmployee');
+    Route::post('/funcionarios/listar', 'UserController@listEmployee');
     Route::post('/funcionarios/editar', 'UserController@updateEmployee');
     Route::post('/funcionarios/deletar', 'UserController@destroy');
 
