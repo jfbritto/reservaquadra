@@ -3,7 +3,7 @@
 @section('title', 'Alunos')
 
 @section('content_header')
-    <h1>Alunos</h1>
+    <h1><i class="fas fa-user-graduate"></i> &nbsp; Alunos</h1>
 @stop
 
 @section('content')

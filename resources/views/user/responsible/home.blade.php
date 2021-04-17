@@ -3,7 +3,7 @@
 @section('title', 'Responsáveis')
 
 @section('content_header')
-    <h1>Responsáveis</h1>
+    <h1><i class="fas fa-user-tie"></i> &nbsp;Responsáveis</h1>
 @stop
 
 @section('content')

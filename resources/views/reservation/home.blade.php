@@ -3,7 +3,7 @@
 @section('title', 'Reservas')
 
 @section('content_header')
-    <h1>Reservas</h1>
+    <h1><i class="fas fa-clipboard-list"></i> &nbsp;Reservas</h1>
 @stop
 
 @section('content')

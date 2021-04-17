@@ -3,7 +3,7 @@
 @section('title', 'Calendário')
 
 @section('content_header')
-    <h1>Calendário</h1>
+    <h1><i class="fas fa-calendar"></i> &nbsp;Calendário</h1>
 @stop
 
 @section('css')

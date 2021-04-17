@@ -3,7 +3,7 @@
 @section('title', 'Quadras')
 
 @section('content_header')
-    <h1>Quadras</h1>
+    <h1><i class="fas fa-th-large"></i> &nbsp;Quadras</h1>
 @stop
 
 @section('content')
