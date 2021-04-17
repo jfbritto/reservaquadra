@@ -16,7 +16,7 @@ Route::post('/listar-dias-disponiveis/{id}', 'ExternalController@listWeekDays');
 Route::post('/listar-horarios-disponiveis/{id}/{week_day}/{day}', 'ExternalController@listAvailableDayTimes');
 Route::post('/reservar-horario', 'ExternalController@store');
 
-Route::group(['middleware' => ['auth']], function(){
+Route::group(['middleware' => ['admin']], function(){
 
     //logout
     Route::post('/logout', 'AuthenticateController@logout');
