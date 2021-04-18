@@ -57,7 +57,7 @@ $(document).ready(function () {
                                         const element_all = data.data.all[index];
 
                                         if(day_obj.getDay() == week_dayPhpToJs(element_week_day)){
-                                            table += `<div><span data-id_user="${element_all.id_user}" data-user_name="${element_all.user_name}" data-court_name="${element_all.court_name}" class="item-cel badge badge-pill badge-success ${class_bloq} btn-detail" style="width: 100%;">${element_interval}</span></div>`;
+                                            table += `<div><span data-id_user="${element_all.id_user}" data-user_name="${element_all.user_name}" data-court_name="${element_all.court_name}" data-start_time="${element_all.start_time}" data-end_time="${element_all.end_time}" class="item-cel badge badge-pill badge-success ${class_bloq} btn-detail" style="width: 100%;">${element_interval}</span></div>`;
                                         }
 
                                         
@@ -88,6 +88,8 @@ $(document).ready(function () {
     $("#list").on("click", ".btn-detail", function(){
         $("#info-student").html($(this).data('user_name'));
         $("#info-court").html($(this).data('court_name'));
+        $("#info-start_time").html($(this).data('start_time'));
+        $("#info-end_time").html($(this).data('end_time'));
 
         $("#modalInfoCalendar").modal("show");
     });
