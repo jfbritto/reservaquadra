@@ -87,8 +87,7 @@
 
                 <p><strong>Aluno: </strong><span id="info-student"></span></p>
                 <p><strong>Quadra: </strong><span id="info-court"></span></p>
-                <p><strong>Inicio: </strong><span id="info-start_time"></span></p>
-                <p><strong>Fim: </strong><span id="info-end_time"></span></p>
+                <p><strong>Período: </strong><span id="info-period"></span></p>
 
             </div>
             </div>

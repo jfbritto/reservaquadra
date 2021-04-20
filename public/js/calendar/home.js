@@ -88,8 +88,7 @@ $(document).ready(function () {
     $("#list").on("click", ".btn-detail", function(){
         $("#info-student").html($(this).data('user_name'));
         $("#info-court").html($(this).data('court_name'));
-        $("#info-start_time").html($(this).data('start_time'));
-        $("#info-end_time").html($(this).data('end_time'));
+        $("#info-period").html(`${$(this).data('start_time')} às ${$(this).data('end_time')}`);
 
         $("#modalInfoCalendar").modal("show");
     });
