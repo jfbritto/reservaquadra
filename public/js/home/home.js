@@ -30,7 +30,7 @@ $(document).ready(function () {
     })
 
     $(".link-calendar").on("click", function(){
-        window.location.href = "/calendario";
+        window.location.href = "/aulas-programadas";
     })
 
     $(".link-reservations").on("click", function(){

@@ -133,8 +133,32 @@ class ScheduledClassesService
                         ->join('courts', 'courts.id', '=', 'scheduled_classes.id_court')
                         ->where('courts.id_company', auth()->user()->id_company)
                         ->where('scheduled_classes.status', 'A')
-                        ->where('scheduled_classes.week_day', (date('N')-1))
+                        ->where('scheduled_classes.week_day', date('N'))
                         ->select('scheduled_classes.*', 'courts.name as court_name')
+                        ->orderBy('scheduled_classes.week_day')
+                        ->get();
+
+            $response = ['status' => 'success', 'data' => $return];
+        }catch(Exception $e){
+            $response = ['status' => 'error', 'data' => $e->getMessage()];
+        }
+
+        return $response;
+    }
+
+    public function listAllByDate($date)
+    {
+        $response = [];
+
+        try{
+
+            $return = DB::table('scheduled_classes')
+                        ->join('courts', 'courts.id', '=', 'scheduled_classes.id_court')
+                        ->join('users', 'users.id', '=', 'scheduled_classes.id_user')
+                        ->where('courts.id_company', auth()->user()->id_company)
+                        ->where('scheduled_classes.status', 'A')
+                        ->where('scheduled_classes.week_day', date('N', strtotime($date)))
+                        ->select('scheduled_classes.*', 'courts.name as court_name', 'users.name as user_name')
                         ->orderBy('scheduled_classes.week_day')
                         ->get();
 

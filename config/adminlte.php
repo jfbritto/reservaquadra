@@ -352,6 +352,12 @@ return [
         // ],
         ['header' => 'OUTROS'],
         [
+            'text'       => 'Aulas',
+            'icon'       => 'fas fa-fw fa-chalkboard-teacher' ,
+            'url'        => 'aulas-programadas',
+            'can'        => 'admin',
+        ],
+        [
             'text'       => 'Calendário',
             'icon'       => 'fas fa-fw fa-calendar' ,
             'url'        => 'calendario',

@@ -155,6 +155,19 @@ CREATE TABLE IF NOT EXISTS `scheduled_classes` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `scheduled_classes_result` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_scheduled_classes` INT NOT NULL,
+  `status` VARCHAR(5) NOT NULL,
+  `date` DATE NOT NULL,
+  `date_remarked` DATE DEFAULT NULL,
+  `id_scheduled_classes_result_remarked` INT DEFAULT NULL,
+  `observation` TEXT DEFAULT NULL,
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
 
 
 -- seeder

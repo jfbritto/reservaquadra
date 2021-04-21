@@ -18,6 +18,18 @@ class ScheduledClassesController extends Controller
     {
         return view('scheduled_classes.home');
     }
+
+    public function search() 
+    {
+        $date = $_GET['date'];
+
+        $response = $this->scheduledClassesService->listAllByDate($date);
+
+        if($response['status'] == 'success')
+            return response()->json(['status'=>'success', 'data'=>$response['data']], 201);
+
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+    }
     
     public function store(Request $request) 
     {
