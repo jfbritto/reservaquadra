@@ -34,9 +34,9 @@ class UserController extends Controller
         $response = $this->userService->find($id);
 
         if($response['status'] == 'success')
-            return response()->json(['status'=>'success', 'data'=>$response['data']], 201);
+            return response()->json(['status'=>'success', 'data'=>$response['data']], 200);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
 
     public function storeStudent(Request $request)
@@ -69,7 +69,7 @@ class UserController extends Controller
         if($response['status'] == 'success')
             return response()->json(['status'=>'success'], 201);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);
     }
 
     public function listStudent() 
@@ -78,9 +78,9 @@ class UserController extends Controller
         $response = $this->userService->list([4]);
 
         if($response['status'] == 'success')
-            return response()->json(['status'=>'success', 'data'=>$response['data']], 201);
+            return response()->json(['status'=>'success', 'data'=>$response['data']], 200);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
 
     public function searchStudent() 
@@ -89,9 +89,9 @@ class UserController extends Controller
         $response = $this->userService->search([4], $search);
 
         if($response['status'] == 'success')
-            return response()->json(['status'=>'success', 'data'=>$response['data']], 201);
+            return response()->json(['status'=>'success', 'data'=>$response['data']], 200);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
 
     public function updateStudent(Request $request) 
@@ -122,9 +122,9 @@ class UserController extends Controller
         $response = $this->userService->update($data);
 
         if($response['status'] == 'success')
-            return response()->json(['status'=>'success'], 201);
+            return response()->json(['status'=>'success'], 200);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
 
     // ****************************************
@@ -166,7 +166,7 @@ class UserController extends Controller
         if($response['status'] == 'success')
             return response()->json(['status'=>'success'], 201);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);
     }
 
     public function listResponsible() 
@@ -175,9 +175,9 @@ class UserController extends Controller
         $response = $this->userService->list([5]);
 
         if($response['status'] == 'success')
-            return response()->json(['status'=>'success', 'data'=>$response['data']], 201);
+            return response()->json(['status'=>'success', 'data'=>$response['data']], 200);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
 
     public function updateResponsible(Request $request) 
@@ -206,9 +206,9 @@ class UserController extends Controller
         $response = $this->userService->update($data);
 
         if($response['status'] == 'success')
-            return response()->json(['status'=>'success'], 201);
+            return response()->json(['status'=>'success'], 200);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
 
     // ****************************************
@@ -250,7 +250,7 @@ class UserController extends Controller
         if($response['status'] == 'success')
             return response()->json(['status'=>'success'], 201);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);
     }
 
     public function listEmployee() 
@@ -259,9 +259,9 @@ class UserController extends Controller
         $response = $this->userService->list([2,3]);
 
         if($response['status'] == 'success')
-            return response()->json(['status'=>'success', 'data'=>$response['data']], 201);
+            return response()->json(['status'=>'success', 'data'=>$response['data']], 200);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
 
     public function updateEmployee(Request $request) 
@@ -291,9 +291,9 @@ class UserController extends Controller
         $response = $this->userService->update($data);
 
         if($response['status'] == 'success')
-            return response()->json(['status'=>'success'], 201);
+            return response()->json(['status'=>'success'], 200);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
 
     // ****************************************
@@ -310,9 +310,9 @@ class UserController extends Controller
         $response = $this->userService->destroy($data);
 
         if($response['status'] == 'success')
-            return response()->json(['status'=>'success'], 201);
+            return response()->json(['status'=>'success'], 200);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
 
     // ****************************************
@@ -334,6 +334,6 @@ class UserController extends Controller
         if($response['status'] == 'success')
             return response()->json(['status'=>'success'], 201);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);
     }
 }

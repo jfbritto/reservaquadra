@@ -69,7 +69,7 @@ class ContractController extends Controller
         if($response['status'] == 'success')
             return response()->json(['status'=>'success'], 201);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
     
     // public function update(Request $request) 
@@ -123,9 +123,9 @@ class ContractController extends Controller
         }
 
         if($response['status'] == 'success')
-            return response()->json(['status'=>'success'], 201);
+            return response()->json(['status'=>'success'], 200);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
     
     public function list($id_student) 
@@ -134,8 +134,8 @@ class ContractController extends Controller
         $response = $this->contractService->list($id_student);
 
         if($response['status'] == 'success')
-            return response()->json(['status'=>'success', 'data'=>$response['data']], 201);
+            return response()->json(['status'=>'success', 'data'=>$response['data']], 200);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
 }

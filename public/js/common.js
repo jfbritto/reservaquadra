@@ -1,7 +1,27 @@
+// mascara de dinheiro
 $('.money').mask('#.##0,00', {reverse: true});
+// mascara de cep
 $('.zip_code').mask('00000-000');
+// mascara de cpf
 $('.cpf').mask('000.000.000-00');
 
+// retorna o nome do status pelo sua sigla referente enviada
+function scheduledClassResultStatus(val)
+{
+    const class_result = {'P':'Presente','F':'Falta','FJ':'Falta Justificada','CH':'Chuva','FP':'Falta do Professor'};
+    
+    return `${class_result[val]}`
+}
+
+// retorna a class do status pelo sua sigla referente enviada
+function scheduledClassResultStatusClass(val)
+{
+    const class_result = {'P':'success','F':'danger','FJ':'warning','CH':'info','FP':'warning'};
+    
+    return `${class_result[val]}`
+}
+
+// retorna o nome do dia da semana pelo seu numero referente enviado
 function weekDayDescription(val)
 {
     const week_day_description = {1:'Segunda',2:'Terça',3:'Quarta',4:'Quinta',5:'Sexta',6:'Sábado',7:'Domingo'};
@@ -13,6 +33,7 @@ function weekDayDescription(val)
     }
 }
 
+// retorna o nome do mes pelo seu numero referente enviado
 function monthDescription(val)
 {
     const month_description = {1:'Janeiro',2:'Fevereiro',3:'Março',4:'Abril',5:'Maio',6:'Junho',7:'Julho'};
@@ -24,6 +45,7 @@ function monthDescription(val)
     }
 }
 
+// retorna a periodicidade do plano pelo seu numero referente enviado
 function periodContractedDescription(val)
 {
     const period_cantracted_description = {1:'Mensal',2:'Bimestral',3:'Trimestral',4:'Quadrimestral',6:'Semestral',12:'Anual',13:'Anual - (Tenis +)'};
@@ -31,6 +53,7 @@ function periodContractedDescription(val)
     return `${period_cantracted_description[val]}`
 }
 
+// retorna a faixa etária do aluno pelo seu numero referente enviado
 function getAgeRange(val)
 {
     const age_range_description = {1:'Infantil',2:'Juvenil',3:'Adulto'};
@@ -42,6 +65,7 @@ function getAgeRange(val)
     }
 }
 
+// retorna o perio do dia pelo seu numero referente enviado
 function getDayPeriod(val)
 {
     const day_period_description = {1:'Diurno',2:'Noturno'};
@@ -62,6 +86,7 @@ function week_dayPhpToJs(week_day)
     
 }
 
+// mascara de telefone
 var SPMaskBehavior = function (val) {
     return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
 },
@@ -70,10 +95,9 @@ onKeyPress: function(val, e, field, options) {
     field.mask(SPMaskBehavior.apply({}, arguments), options);
     }
 };
-
 $('.phone').mask(SPMaskBehavior, spOptions);
 
-
+// mascara de dinheiro em reais
 function moneyFormat(money)
 {   
     let cash = parseFloat(money).toFixed(2).toString().replace('.', ',')
@@ -87,6 +111,7 @@ function moneyFormat(money)
     }
 }
 
+// formata a data com hora e minuto
 function dateFormatFull(date)
 {
     if(date == null || date == undefined || date == ''){
@@ -105,6 +130,7 @@ function dateFormatFull(date)
     }
 }
 
+// formata a data em dia, mes e ano
 function dateFormat(date)
 {
     if(date == null || date == undefined || date == ''){
@@ -121,8 +147,7 @@ function dateFormat(date)
     }
 }
 
-
-
+// automatização de funções do sweet alert 2
 function showError(text = "Ocorreu um erro!")
 {
     Swal.fire({ type: 'error', text: text, showConfirmButton: true })
@@ -143,7 +168,6 @@ function showSuccess(title = null, text = null, functions = null, param = null)
     }
 
 }
-
 
 // BUSCA DE ENDEREÇO
 $("#zip_code, #zip_code_edit").on("keyup", function(){

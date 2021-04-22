@@ -114,7 +114,7 @@ class InvoiceController extends Controller
         if($response['status'] == 'success')
             return response()->json(['status'=>'success'], 201);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
     
     // public function destroy(Request $request) 
@@ -138,8 +138,8 @@ class InvoiceController extends Controller
         $response = $this->invoiceService->listNextOpen($id_student);
 
         if($response['status'] == 'success')
-            return response()->json(['status'=>'success', 'data'=>$response['data']], 201);
+            return response()->json(['status'=>'success', 'data'=>$response['data']], 200);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
 }

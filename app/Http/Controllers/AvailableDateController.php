@@ -71,7 +71,7 @@ class AvailableDateController extends Controller
         if($response['status'] == 'success')
             return response()->json(['status'=>'success'], 201);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
 
     public function destroy(Request $request) 
@@ -84,9 +84,9 @@ class AvailableDateController extends Controller
         $response = $this->availableDateService->destroy($data);
 
         if($response['status'] == 'success')
-            return response()->json(['status'=>'success'], 201);
+            return response()->json(['status'=>'success'], 200);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
     
     public function list($id) 
@@ -95,8 +95,8 @@ class AvailableDateController extends Controller
         $response = $this->availableDateService->list($id);
 
         if($response['status'] == 'success')
-            return response()->json(['status'=>'success', 'data'=>$response['data']], 201);
+            return response()->json(['status'=>'success', 'data'=>$response['data']], 200);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
 }

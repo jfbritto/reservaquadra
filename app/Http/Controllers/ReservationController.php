@@ -24,9 +24,9 @@ class ReservationController extends Controller
         $response = $this->reservationService->list();
 
         if($response['status'] == 'success')
-            return response()->json(['status'=>'success', 'data'=>$response['data']], 201);
+            return response()->json(['status'=>'success', 'data'=>$response['data']], 200);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
 
     public function changeStatus() 
@@ -39,8 +39,8 @@ class ReservationController extends Controller
         $response = $this->reservationService->changeStatus($data);
 
         if($response['status'] == 'success')
-            return response()->json(['status'=>'success'], 201);
+            return response()->json(['status'=>'success'], 200);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
 }

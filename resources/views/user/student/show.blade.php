@@ -222,19 +222,32 @@
         </div>
         <div class="col-md-6">
 
-            <!-- <div class="card">
+            <div class="card">
                 <div class="card-header border-0">
-                    <h3 class="card-title">  </h3>
+                    <h3 class="card-title"> Últimas Aulas Realizadas / Reagendadas / Canceladas </h3>
                     <div class="card-tools">
-                        <a href="#" class="btn btn-tool btn-sm" data-toggle="modal" data-target="#modalStoreStudent">
-                            <i class="fas fa-plus"></i>
+                        <a href="#" class="btn btn-tool btn-sm" id="" title="Listar aulas realizadas">
+                            <i class="fas fa-list"></i>
                         </a>
                     </div>
                 </div>
-                <div class="card-body">
-                    
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-valign-middle table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Quadra</th>
+                                    <th>Dia</th>
+                                    <th>Data</th>
+                                    <th>Período</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="list-scheduled-classes-results"></tbody>
+                        </table>
+                    </div>
                 </div>
-            </div> -->
+            </div>
 
         </div>
     </div>

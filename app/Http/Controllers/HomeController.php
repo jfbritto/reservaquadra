@@ -46,8 +46,8 @@ class HomeController extends Controller
                 'debts' => count($response_debts['data'])];
 
         if($data)
-            return response()->json(['status'=>'success', 'data'=>$data, 201]);
+            return response()->json(['status'=>'success', 'data'=>$data, 200]);
 
-        return response()->json(['status'=>'error', 'message'=>$data, 201]);    
+        return response()->json(['status'=>'error', 'message'=>$data, 400]);    
     }
 }

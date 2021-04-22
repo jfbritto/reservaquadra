@@ -69,6 +69,10 @@ Route::group(['middleware' => ['admin']], function(){
     Route::post('/aulas-programadas/listar/{id}', 'ScheduledClassesController@list');
     Route::post('/aulas-programadas/deletar', 'ScheduledClassesController@destroy');
     
+    // aulas programadas resultado
+    Route::post('/aulas-programadas-resultado/cadastrar', 'ScheduledClassesResultController@store');
+    Route::post('/aulas-programadas-resultado/listar/{id}', 'ScheduledClassesResultController@list');
+
     //alunos
     Route::get('/alunos', 'UserController@student');
     Route::get('/alunos/exibir/{id}', 'UserController@showStudent');

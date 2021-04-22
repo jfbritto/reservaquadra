@@ -587,65 +587,6 @@ $(document).ready(function () {
         window.location.replace("/alunos");
     }
 
-    // BUSCA DE ENDEREÇO
-    $("#zip_code_edit").on("keyup", function(){
-
-        if($(this).val().length == 9){
-
-            let type = $(this).data('type');
-            let zip_code = $(this).val();
-
-            zip_code = zip_code.replace("-","");
-
-            Swal.queue([
-                {
-                    title: "Carregando...",
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                    onOpen: () => {
-                        Swal.showLoading();
-                        $.get(`http://viacep.com.br/ws/${zip_code}/json`, { })
-                            .then(function (data) {
-
-                                if(data.erro){
-                                    showError("Cep não encontrado!")
-                                    return false;
-                                }
-
-                                $("#uf_edit").prop("readonly", true)
-                                $("#city_edit").prop("readonly", true)
-                                $("#neighborhood_edit").prop("readonly", true)
-                                $("#address_edit").prop("readonly", true)
-                                
-                                $("#uf_edit").val(data.uf);
-                                $("#city_edit").val(data.localidade);
-                                $("#neighborhood_edit").val(data.bairro);
-                                $("#address_edit").val(data.logradouro);
-
-                                if(data.uf == "")
-                                    $("#uf_edit").prop("readonly", false)
-
-                                if(data.localidade == "")
-                                    $("#city_edit").prop("readonly", false)
-
-                                if(data.bairro == "")
-                                    $("#neighborhood_edit").prop("readonly", false)
-
-                                if(data.logradouro == "")
-                                    $("#address_edit").prop("readonly", false)
-                                
-                                Swal.close();
-
-                            })
-                            .catch();
-                    },
-                },
-            ]);
-
-        }
-    })
-
-
     // CADASTRAR AULA
     $("#formStoreScheduledClasses").submit(function (e) {
         e.preventDefault();
@@ -685,7 +626,7 @@ $(document).ready(function () {
         ]);
     });
 
-    // LISTAR AULAS
+    // LISTAR AULAS AGENDADAS
     function listScheduledClasses()
     {
         let id = $("#id_usr").val();
@@ -788,9 +729,69 @@ $(document).ready(function () {
 
                 }
             })
-
-
     });
+
+    // LISTAR AULAS REALIZADAS/CANCELADAS/REAGENDADAS
+    function listScheduledClassesResults()
+    {
+        let id = $("#id_usr").val();
+
+        Swal.queue([
+            {
+                title: "Carregando...",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                    $.post(window.location.origin + `/aulas-programadas-resultado/listar/${id}`, {
+                        
+                    })
+                    .then(function (data) {
+                        if (data.status == "success") {
+
+                            Swal.close();
+                            
+                            $("#list-scheduled-classes-results").html(``);
+
+                            let wd = ""
+
+                            if(data.data.length > 0){
+
+                                data.data.forEach(item => {
+
+                                    $("#list-scheduled-classes-results").append(`
+                                        <tr>
+                                            <td class="align-middle">${item.court_name}</td>
+                                            <td class="align-middle">${weekDayDescription(item.week_day)}</td>
+                                            <td class="align-middle">${dateFormat(item.date)}</td>
+                                            <td class="align-middle">${item.start_time} às ${item.end_time}</td>
+                                            <td class="align-middle" style="text-align: right">
+                                                <span class="badge badge-${scheduledClassResultStatusClass(item.status)}">${scheduledClassResultStatus(item.status)}</span>
+                                            </td>
+                                        </tr>
+                                    `);
+                                    
+                                });
+
+                            }else{
+
+                                $("#list-scheduled-classes-results").append(`
+                                    <tr>
+                                        <td class="align-middle text-center" colspan="4">Nenhuma aula realizada</td>
+                                    </tr>
+                                `);
+
+                            }
+
+                        } else if (data.status == "error") {
+                            showError(data.message)
+                        }
+                    })
+                    .catch();
+                },
+            },
+        ]);
+    }
 
 
     // CARREGAR DADOS NA TELA
@@ -806,8 +807,10 @@ $(document).ready(function () {
         loadInvoices();
         // listar quadras
         loadCourts();
-        // listar aulas
+        // listar aulas programadas
         listScheduledClasses();
+        // listar aulas aplicadas/canceladas/reagendadas
+        listScheduledClassesResults();
     }
 
 });

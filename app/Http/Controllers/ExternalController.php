@@ -41,7 +41,7 @@ class ExternalController extends Controller
         if($response['status'] == 'success')
             return response()->json(['status'=>'success'], 201);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
 
     public function listCourts() 
@@ -50,9 +50,9 @@ class ExternalController extends Controller
         $response = $this->courtService->list();
 
         if($response['status'] == 'success')
-            return response()->json(['status'=>'success', 'data'=>$response['data']], 201);
+            return response()->json(['status'=>'success', 'data'=>$response['data']], 200);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
 
     public function listWeekDays($id) 
@@ -82,9 +82,9 @@ class ExternalController extends Controller
         }
 
         if($response['status'] == 'success')
-            return response()->json(['status'=>'success', 'data'=>$days_available], 201);
+            return response()->json(['status'=>'success', 'data'=>$days_available], 200);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
 
     public function listAvailableDayTimes($id, $week_day, $day) 
@@ -93,8 +93,8 @@ class ExternalController extends Controller
         $response = $this->availableDateService->listDayTimes($id, $week_day, $day);
 
         if($response['status'] == 'success')
-            return response()->json(['status'=>'success', 'data'=>$response['data']], 201);
+            return response()->json(['status'=>'success', 'data'=>$response['data']], 200);
 
-        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
 }

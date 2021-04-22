@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `scheduled_classes` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `scheduled_classes_result` (
+CREATE TABLE IF NOT EXISTS `scheduled_classes_results` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_scheduled_classes` INT NOT NULL,
   `status` VARCHAR(5) NOT NULL,

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateScheduledClassesResultTable extends Migration
+class CreateScheduledClassesResultsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateScheduledClassesResultTable extends Migration
      */
     public function up()
     {
-        Schema::create('scheduled_classes_result', function (Blueprint $table) {
+        Schema::create('scheduled_classes_results', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_scheduled_classes');
             $table->string('status', 5);
@@ -32,6 +32,6 @@ class CreateScheduledClassesResultTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('scheduled_classes_result');
+        Schema::dropIfExists('scheduled_classes_results');
     }
 }
