@@ -777,7 +777,7 @@ $(document).ready(function () {
 
                                 $("#list-scheduled-classes-results").append(`
                                     <tr>
-                                        <td class="align-middle text-center" colspan="4">Nenhuma aula realizada</td>
+                                        <td class="align-middle text-center" colspan="5">Nenhuma aula realizada</td>
                                     </tr>
                                 `);
 
