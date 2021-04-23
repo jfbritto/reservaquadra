@@ -169,6 +169,73 @@ CREATE TABLE IF NOT EXISTS `scheduled_classes_results` (
 ENGINE = InnoDB;
 
 
+-- não implementado
+CREATE TABLE IF NOT EXISTS `payment_method` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(30) NOT NULL,
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+-- não implementado
+CREATE TABLE IF NOT EXISTS `payment_method_subtype` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_company` INT NOT NULL,
+  `id_payment_method` INT NOT NULL,
+  `name` VARCHAR(30) NOT NULL,
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+-- não implementado
+CREATE TABLE IF NOT EXISTS `invoice_type` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(30) NOT NULL,
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `cost_center` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_company` INT NOT NULL,
+  `name` VARCHAR(30) NOT NULL,
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `cost_center_subtype` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_cost_center` INT NOT NULL,
+  `name` VARCHAR(30) NOT NULL,
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `expenses` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_company` INT NOT NULL,
+  `generate_date` DATETIME NOT NULL,
+  `id_user_generated` INT NOT NULL,
+  `due_date` DATE NOT NULL,
+  `status` VARCHAR(5) NOT NULL DEFAULT 'A',
+  `price` DECIMAL(10,2) NOT NULL,
+  `paid_date` DATETIME DEFAULT NULL,
+  `id_user_paid` INT DEFAULT NULL,
+  `id_cost_center` INT NOT NULL,
+  `id_cost_center_subtype` INT NOT NULL,
+  `observation` TEXT DEFAULT NULL,
+  `nfe` VARCHAR(50) DEFAULT NULL,
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+
+
 
 -- seeder
 

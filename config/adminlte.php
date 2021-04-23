@@ -350,6 +350,22 @@ return [
                 ],
         //     ],
         // ],
+        ['header' => 'FINANCEIRO'],
+        [
+            'text'       => 'Entradas',
+            'icon'       => 'fas fa-fw fa-comment-dollar' ,
+            // 'icon_color' => 'green',
+            'url'        => 'entradas',
+            'can'        => 'admin',
+        ],
+        [
+            'text'       => 'Despesas',
+            'icon'       => 'fas fa-fw fa-comment-dollar' ,
+            // 'icon_color' => 'red',
+            'url'        => 'despesas',
+            'can'        => 'admin',
+        ],
+
         ['header' => 'OUTROS'],
         [
             'text'       => 'Aulas',

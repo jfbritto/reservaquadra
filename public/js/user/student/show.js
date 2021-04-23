@@ -648,8 +648,6 @@ $(document).ready(function () {
                             
                             $("#list-scheduled-classes").html(``);
 
-                            let wd = ""
-
                             if(data.data.length > 0){
 
                                 data.data.forEach(item => {
@@ -752,8 +750,6 @@ $(document).ready(function () {
                             Swal.close();
                             
                             $("#list-scheduled-classes-results").html(``);
-
-                            let wd = ""
 
                             if(data.data.length > 0){
 

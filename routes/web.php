@@ -97,4 +97,7 @@ Route::group(['middleware' => ['admin']], function(){
     Route::post('/funcionarios/editar', 'UserController@updateEmployee');
     Route::post('/funcionarios/deletar', 'UserController@destroy');
 
+    // despesas
+    Route::get('/despesas', 'ExpenseController@index');
+
 });
