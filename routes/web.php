@@ -99,5 +99,7 @@ Route::group(['middleware' => ['admin']], function(){
 
     // despesas
     Route::get('/despesas', 'ExpenseController@index');
-
+    Route::post('/despesas/cadastrar', 'ExpenseController@store');
+    Route::get('/despesas/listar', 'ExpenseController@list');
+    Route::post('/despesas/deletar', 'ExpenseController@destroy');
 });

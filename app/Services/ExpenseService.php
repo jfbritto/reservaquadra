@@ -93,6 +93,7 @@ class expenseService
 
         try{
             $return = Expense::where('id_company', auth()->user()->id_company)
+                            ->where('status', '!=', 'D')
                             ->orderByDesc('due_date')
                             ->get();
 

@@ -12,7 +12,7 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.get(window.location.origin + "/planos/listar", {
+                    $.get(window.location.origin + "/despesas/listar", {
                         
                     })
                         .then(function (data) {
@@ -25,11 +25,15 @@ $(document).ready(function () {
                                     
                                     data.data.forEach(item => {
 
+                                        // <a title="Editar" data-id="${item.id}" href="#" class="btn btn-warning edit-court"><i style="color: white" class="fas fa-edit"></i></a>
+
                                         $("#list").append(`
                                             <tr>
-                                                <td class="align-middle">${item.id}</td>
+                                                <td class="align-middle">${dateFormat(item.due_date)}</td>
+                                                <td class="align-middle">${item.id_cost_center}</td>
+                                                <td class="align-middle">${item.id_cost_center_subtype}</td>
+                                                <td class="align-middle">${moneyFormat(item.price)}</td>
                                                 <td class="align-middle" style="text-align: right">
-                                                    <a title="Editar" data-id="${item.id}" href="#" class="btn btn-warning edit-court"><i style="color: white" class="fas fa-edit"></i></a>
                                                     <a title="Deletar" data-id="${item.id}" href="#" class="btn btn-danger delete-court"><i class="fas fa-trash-alt"></i></a>
                                                 </td>
                                             </tr>
@@ -58,8 +62,8 @@ $(document).ready(function () {
     }
 
 
-    // CADASTRAR PLANO
-    $("#formStorePlan").submit(function (e) {
+    // CADASTRAR DESPESA
+    $("#formStoreExpense").submit(function (e) {
         e.preventDefault();
 
         Swal.queue([
@@ -69,22 +73,21 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + "/planos/cadastrar", {
-                        name: $("#name").val(),
-                        age_range: $("#age_range option:selected").val(),
-                        day_period: $("#day_period option:selected").val(),
-                        lessons_per_week: $("#lessons_per_week option:selected").val(),
-                        months: $("#months option:selected").val(),
+                    $.post(window.location.origin + "/despesas/cadastrar", {
+                        due_date: $("#due_date").val(),
                         price: $("#price").val(),
+                        id_cost_center: $("#id_cost_center option:selected").val(),
+                        id_cost_center_subtype: $("#id_cost_center_subtype option:selected").val(),
+                        observation: $("#observation").val(),
                     })
                         .then(function (data) {
                             if (data.status == "success") {
 
-                                $("#formStorePlan").each(function () {
+                                $("#formStoreExpense").each(function () {
                                     this.reset();
                                 });
                                 
-                                $("#modalStorePlan").modal("hide");
+                                $("#modalStoreExpense").modal("hide");
 
                                 showSuccess("Cadastro efetuado!", null, loadPlans)
                             } else if (data.status == "error") {
@@ -98,7 +101,7 @@ $(document).ready(function () {
     });
 
 
-    // EDITAR PLANO
+    // EDITAR DESPESA
     $("#list").on("click", ".edit-court", function(){
 
         let id = $(this).data('id');
@@ -161,7 +164,7 @@ $(document).ready(function () {
     });
 
 
-    // "DELETAR" PLANO
+    // "DELETAR" DESPESA
     $("#list").on("click", ".delete-court", function(){
         
         let id = $(this).data('id');
@@ -185,13 +188,13 @@ $(document).ready(function () {
                             allowEscapeKey: false,
                             onOpen: () => {
                                 Swal.showLoading();
-                                $.post(window.location.origin + "/planos/deletar", {
+                                $.post(window.location.origin + "/despesas/deletar", {
                                     id: id
                                 })
                                     .then(function (data) {
                                         if (data.status == "success") {
                                                         
-                                            showSuccess("Deletado com sucesso!", null, loadPlans)
+                                            showSuccess("Deletada com sucesso!", null, loadPlans)
                                         } else if (data.status == "error") {
                                             showError(data.message)
                                         }
