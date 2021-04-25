@@ -102,4 +102,11 @@ Route::group(['middleware' => ['admin']], function(){
     Route::post('/despesas/cadastrar', 'ExpenseController@store');
     Route::get('/despesas/listar', 'ExpenseController@list');
     Route::post('/despesas/deletar', 'ExpenseController@destroy');
+
+    //centro de custo
+    Route::get('/centro-de-custo', 'CostCenterController@index');
+    Route::post('/centro-de-custo/cadastrar', 'CostCenterController@store');
+    Route::get('/centro-de-custo/listar', 'CostCenterController@list');
+    Route::post('/centro-de-custo/editar', 'CostCenterController@update');
+    Route::post('/centro-de-custo/deletar', 'CostCenterController@destroy');
 });

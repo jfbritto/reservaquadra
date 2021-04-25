@@ -365,6 +365,13 @@ return [
             'url'        => 'despesas',
             'can'        => 'admin',
         ],
+        [
+            'text'       => 'Centro de custo',
+            'icon'       => 'fas fa-fw fa-file-signature' ,
+            // 'icon_color' => 'green',
+            'url'        => 'centro-de-custo',
+            'can'        => 'admin',
+        ],
 
         ['header' => 'OUTROS'],
         [

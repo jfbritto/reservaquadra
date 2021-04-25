@@ -6,7 +6,7 @@ use App\Models\Expense;
 use DB;
 use Exception;
 
-class expenseService
+class ExpenseService
 {
     public function store(array $data)
     {
@@ -92,10 +92,16 @@ class expenseService
         $response = [];
 
         try{
-            $return = Expense::where('id_company', auth()->user()->id_company)
-                            ->where('status', '!=', 'D')
-                            ->orderByDesc('due_date')
-                            ->get();
+
+            $return = DB::select( DB::raw(" select 
+                                                exp.*, coc.name as name_cost_center
+                                            from expenses exp 
+                                                join cost_centers coc on coc.id=exp.id_cost_center
+                                            where 
+                                                exp.id_company = '".auth()->user()->id_company."' and
+                                                exp.status != 'D'
+                                            order by 
+                                                exp.id_cost_center, exp.status desc"));
 
             $response = ['status' => 'success', 'data' => $return];
         }catch(Exception $e){

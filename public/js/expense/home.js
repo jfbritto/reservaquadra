@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
     loadPlans();
+    loadCostCenter();
 
     // LISTAR PLANOS
     function loadPlans()
@@ -30,7 +31,7 @@ $(document).ready(function () {
                                         $("#list").append(`
                                             <tr>
                                                 <td class="align-middle">${dateFormat(item.due_date)}</td>
-                                                <td class="align-middle">${item.id_cost_center}</td>
+                                                <td class="align-middle">${item.name_cost_center}</td>
                                                 <td class="align-middle">${item.id_cost_center_subtype}</td>
                                                 <td class="align-middle">${moneyFormat(item.price)}</td>
                                                 <td class="align-middle" style="text-align: right">
@@ -44,12 +45,53 @@ $(document).ready(function () {
 
                                     $("#list").append(`
                                         <tr>
-                                            <td class="align-middle text-center" colspan="8">Nenhum plano cadastrado</td>
+                                            <td class="align-middle text-center" colspan="8">Nenhuma despesa cadastrada</td>
                                         </tr>
                                     `);  
 
                                 }
 
+
+                            } else if (data.status == "error") {
+                                showError(data.message)
+                            }
+                        })
+                        .catch();
+                },
+            },
+        ]);
+    }
+
+    // LISTAR CENTROS DE CUSTO
+    function loadCostCenter()
+    {
+        Swal.queue([
+            {
+                title: "Carregando...",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                    $.get(window.location.origin + "/centro-de-custo/listar", {
+                        
+                    })
+                        .then(function (data) {
+                            if (data.status == "success") {
+
+                                Swal.close();
+
+                                $("#id_cost_center").html(``);
+                                $("#id_cost_center").html(`<option value="">-- Selecione --</option>`);
+
+                                if(data.data.length > 0){
+
+                                    data.data.forEach(item => { 
+                                        $("#id_cost_center").append(`
+                                            <option value="${item.id}">${item.name}</option>
+                                        `)
+                                    });
+
+                                }
 
                             } else if (data.status == "error") {
                                 showError(data.message)
@@ -101,67 +143,67 @@ $(document).ready(function () {
     });
 
 
-    // EDITAR DESPESA
-    $("#list").on("click", ".edit-court", function(){
+    // // EDITAR DESPESA
+    // $("#list").on("click", ".edit-court", function(){
 
-        let id = $(this).data('id');
-        let name = $(this).data('name');
-        let months = $(this).data('months');
-        let age_range = $(this).data('age_range');
-        let day_period = $(this).data('day_period');
-        let lessons_per_week = $(this).data('lessons_per_week');
-        let price = $(this).data('price');
+    //     let id = $(this).data('id');
+    //     let name = $(this).data('name');
+    //     let months = $(this).data('months');
+    //     let age_range = $(this).data('age_range');
+    //     let day_period = $(this).data('day_period');
+    //     let lessons_per_week = $(this).data('lessons_per_week');
+    //     let price = $(this).data('price');
 
-        $("#id_edit").val(id);
-        $("#name_edit").val(name);
-        $("#months_edit").val(months).change();
-        $("#age_range_edit").val(age_range).change();
-        $("#day_period_edit").val(day_period).change();
-        $("#lessons_per_week_edit").val(lessons_per_week).change();
-        $("#price_edit").val(moneyFormat(price));
+    //     $("#id_edit").val(id);
+    //     $("#name_edit").val(name);
+    //     $("#months_edit").val(months).change();
+    //     $("#age_range_edit").val(age_range).change();
+    //     $("#day_period_edit").val(day_period).change();
+    //     $("#lessons_per_week_edit").val(lessons_per_week).change();
+    //     $("#price_edit").val(moneyFormat(price));
 
-        $("#modalEditPlan").modal("show");
-    });
+    //     $("#modalEditPlan").modal("show");
+    // });
 
-    $("#formEditPlan").submit(function (e) {
-        e.preventDefault();
+    // $("#formEditPlan").submit(function (e) {
+    //     e.preventDefault();
 
-        Swal.queue([
-            {
-                title: "Carregando...",
-                allowOutsideClick: false,
-                allowEscapeKey: false,
-                onOpen: () => {
-                    Swal.showLoading();
-                    $.post(window.location.origin + "/planos/editar", {
-                        id: $("#id_edit").val(),
-                        name: $("#name_edit").val(),
-                        age_range: $("#age_range_edit option:selected").val(),
-                        day_period: $("#day_period_edit option:selected").val(),
-                        lessons_per_week: $("#lessons_per_week_edit option:selected").val(),
-                        annual_contract: $("#annual_contract_edit option:selected").val(),
-                        months: $("#months_edit option:selected").val(),
-                        price: $("#price_edit").val(),
-                    })
-                        .then(function (data) {
-                            if (data.status == "success") {
+    //     Swal.queue([
+    //         {
+    //             title: "Carregando...",
+    //             allowOutsideClick: false,
+    //             allowEscapeKey: false,
+    //             onOpen: () => {
+    //                 Swal.showLoading();
+    //                 $.post(window.location.origin + "/planos/editar", {
+    //                     id: $("#id_edit").val(),
+    //                     name: $("#name_edit").val(),
+    //                     age_range: $("#age_range_edit option:selected").val(),
+    //                     day_period: $("#day_period_edit option:selected").val(),
+    //                     lessons_per_week: $("#lessons_per_week_edit option:selected").val(),
+    //                     annual_contract: $("#annual_contract_edit option:selected").val(),
+    //                     months: $("#months_edit option:selected").val(),
+    //                     price: $("#price_edit").val(),
+    //                 })
+    //                     .then(function (data) {
+    //                         if (data.status == "success") {
 
-                                $("#formEditPlan").each(function () {
-                                    this.reset();
-                                });
+    //                             $("#formEditPlan").each(function () {
+    //                                 this.reset();
+    //                             });
                                 
-                                $("#modalEditPlan").modal("hide");
+    //                             $("#modalEditPlan").modal("hide");
 
-                                showSuccess("Edição efetuada!", null, loadPlans)
-                            } else if (data.status == "error") {
-                                showError(data.message)
-                            }
-                        })
-                        .catch();
-                },
-            },
-        ]);
-    });
+    //                             showSuccess("Edição efetuada!", null, loadPlans)
+    //                         } else if (data.status == "error") {
+    //                             showError(data.message)
+    //                         }
+    //                     })
+    //                     .catch();
+    //             },
+    //         },
+    //     ]);
+    // });
 
 
     // "DELETAR" DESPESA
@@ -208,24 +250,6 @@ $(document).ready(function () {
             })
 
     });
-    
 
-    $("#months").on("change", function(){
-        let option = $("#months option:selected").val();
-        
-        if(option == 13)
-            $("#price_label").html("Valor anual");
-        else
-            $("#price_label").html("Valor mensal");
-    });
-
-    $("#months_edit").on("change", function(){
-        let option = $("#months_edit option:selected").val();
-        
-        if(option == 13)
-            $("#price_edit_label").html("Valor anual");
-        else
-            $("#price_edit_label").html("Valor mensal");
-    });
 
 });

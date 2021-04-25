@@ -27,8 +27,10 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('admin', function ($user) {
 
-            if(auth()->user()->group == 1)
-                return true;
+            if(auth()->user()){
+                if(auth()->user()->group == 1)
+                    return true;
+            }
             
             return false;
  

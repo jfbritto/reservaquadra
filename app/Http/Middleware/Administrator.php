@@ -15,8 +15,10 @@ class Administrator
      */
     public function handle($request, Closure $next)
     {
-        if(auth()->user()->group == 1)
-            return $next($request);
+        if(auth()->user()){
+            if(auth()->user()->group == 1)
+                return $next($request);
+        }
 
         return redirect('/');
     }

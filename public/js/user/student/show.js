@@ -88,7 +88,6 @@ $(document).ready(function () {
                             if (data.status == "success") {
 
                                 Swal.close();
-                                $("#list").html(``);
 
                                 $("#id_court").html(``);
                                 $("#id_court").html(`<option value="">-- Selecione --</option>`);

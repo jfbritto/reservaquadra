@@ -108,13 +108,6 @@
 
                 <form id="formEditPlan">
                     <div class="row">
-                        <!-- <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="name_edit">Nome</label>
-                                <input type="hidden" required name="id_edit" id="id_edit" class="form-control">
-                                <input type="text" required name="name_edit" id="name_edit" class="form-control" placeholder="Informe o nome do plano">
-                            </div>
-                        </div> -->
                         <input type="hidden" required name="id_edit" id="id_edit" class="form-control">
                         <input type="hidden" required name="name_edit" id="name_edit" class="form-control" placeholder="Informe o nome do plano">
                         <div class="col-md-4">
