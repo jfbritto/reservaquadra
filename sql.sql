@@ -208,10 +208,11 @@ CREATE TABLE IF NOT EXISTS `cost_centers` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `cost_center_subtype` (
+CREATE TABLE IF NOT EXISTS `cost_center_subtypes` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_cost_center` INT NOT NULL,
   `name` VARCHAR(30) NOT NULL,
+  `status` VARCHAR(5) NOT NULL DEFAULT 'A',
   `created_at` DATETIME NULL,
   `updated_at` DATETIME NULL,
   PRIMARY KEY (`id`))
