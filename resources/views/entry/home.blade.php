@@ -24,7 +24,6 @@
                         <tr>
                             <th>Data</th>
                             <th>Valor</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody id="list"></tbody>

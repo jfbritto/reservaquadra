@@ -192,7 +192,7 @@ class InvoiceService
             $date_ini = date('Y-m-01 00:00:00', strtotime($date));
             $date_fim = date('Y-m-t 23:59:59', strtotime($date));
 
-            $return = DB::select( DB::raw("select * from invoices inv where inv.status = 'R' and inv.paid_date between '".$date_ini."' and '".$date_fim."' order by inv.due_date"));
+            $return = DB::select( DB::raw("select * from invoices inv join users usr on usr.id=inv.id_user where usr.id_company = ".auth()->user()->id_company." and inv.status = 'R' and inv.paid_date between '".$date_ini."' and '".$date_fim."' order by inv.due_date"));
 
             $response = ['status' => 'success', 'data' => $return];
         }catch(Exception $e){

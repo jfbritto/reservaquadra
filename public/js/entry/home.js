@@ -29,9 +29,6 @@ $(document).ready(function () {
                                             <tr>
                                                 <td class="align-middle">${dateFormat(item.due_date)}</td>
                                                 <td class="align-middle">${moneyFormat(item.price)}</td>
-                                                <td class="align-middle" style="text-align: right">
-                                                    <a title="Deletar" data-id="${item.id}" href="#" class="btn btn-danger delete-court"><i class="fas fa-trash-alt"></i></a>
-                                                </td>
                                             </tr>
                                         `);       
                                     });
