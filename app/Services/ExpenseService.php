@@ -94,9 +94,10 @@ class ExpenseService
         try{
 
             $return = DB::select( DB::raw(" select 
-                                                exp.*, coc.name as name_cost_center
+                                                exp.*, coc.name as name_cost_center, ccs.name as name_cost_center_subtype
                                             from expenses exp 
                                                 join cost_centers coc on coc.id=exp.id_cost_center
+                                                join cost_center_subtypes ccs on ccs.id=exp.id_cost_center_subtype
                                             where 
                                                 exp.id_company = '".auth()->user()->id_company."' and
                                                 exp.status != 'D'

@@ -12,7 +12,7 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.get(window.location.origin + "/centro-de-custo/listar", {
+                    $.get(window.location.origin + "/centros-de-custo/listar", {
                         
                     })
                         .then(function (data) {
@@ -25,12 +25,11 @@ $(document).ready(function () {
                                     
                                     data.data.forEach(item => {
 
-                                        // <a title="Horários" href="#" data-id="${item.id}" data-name="${item.name}" class="btn btn-primary list-dates"><i style="color: white" class="fas fa-clock"></i></a>
-
                                         $("#list").append(`
                                             <tr>
                                                 <td class="align-middle">${item.name}</td>
                                                 <td class="align-middle" style="text-align: right">
+                                                    <a title="Subtipos de centro de custo" href="#" data-id="${item.id}" data-name="${item.name}" class="btn btn-primary list-subtypes"><i style="color: white" class="fas fa-list"></i></a>
                                                     <a title="Editar" data-id="${item.id}" data-name="${item.name}" href="#" class="btn btn-warning edit-cost-center"><i style="color: white" class="fas fa-edit"></i></a>
                                                     <a title="Deletar" data-id="${item.id}" href="#" class="btn btn-danger delete-court"><i class="fas fa-trash-alt"></i></a>
                                                 </td>
@@ -70,7 +69,7 @@ $(document).ready(function () {
                 onOpen: () => {
                     Swal.showLoading();
 
-                    $.post(window.location.origin + "/centro-de-custo/cadastrar", {
+                    $.post(window.location.origin + "/centros-de-custo/cadastrar", {
                         name: $("#name").val(),
                         city: $("#city").val(),
                         neighborhood: $("#neighborhood").val(),
@@ -123,7 +122,7 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + "/centro-de-custo/editar", {
+                    $.post(window.location.origin + "/centros-de-custo/editar", {
                         id: $("#id_edit").val(),
                         name: $("#name_edit").val(),
                     })
@@ -172,7 +171,7 @@ $(document).ready(function () {
                             allowEscapeKey: false,
                             onOpen: () => {
                                 Swal.showLoading();
-                                $.post(window.location.origin + "/centro-de-custo/deletar", {
+                                $.post(window.location.origin + "/centros-de-custo/deletar", {
                                     id: id
                                 })
                                     .then(function (data) {
@@ -194,8 +193,8 @@ $(document).ready(function () {
     });
     
 
-    // CADASTRAR DATA DISPONÍVEL
-    $("#formAddAvailableDate").submit(function (e) {
+    // CADASTRAR SUBTIPOS
+    $("#formAddCostCenterSubtypes").submit(function (e) {
         e.preventDefault();
 
         Swal.queue([
@@ -205,23 +204,20 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + "/datas-disponiveis/cadastrar", {
-                        id_court: $("#id_court_add").val(),
-                        week_day: $("#week_day").val(),
-                        start_time: $("#start_time").val(),
-                        end_time: $("#end_time").val(),
-                        price: $("#price").val(),
+                    $.post(window.location.origin + "/subtipos-de-centros-de-custo/cadastrar", {
+                        id_cost_center: $("#id_cost_center_add").val(),
+                        name: $("#name_subtype").val(),
                     })
                         .then(function (data) {
                             if (data.status == "success") {
 
-                                $("#formAddAvailableDate").each(function () {
+                                $("#formAddCostCenterSubtypes").each(function () {
                                     this.reset();
                                 });
 
-                                $("#modalAddAvailableDate").modal("hide");
+                                $("#modalAddCostCenterSubtypes").modal("hide");
 
-                                showSuccess("Cadastro efetuado!", null, listAvailableDates, $("#id_court_add").val())
+                                showSuccess("Cadastro efetuado!", null, listSubtypes, $("#id_cost_center_add").val())
                             } else if (data.status == "error") {
                                 showError(data.message)
                             }
@@ -233,19 +229,19 @@ $(document).ready(function () {
     });
 
 
-    // LISTAR DATAS DISPONÍVEIS
-    $("#list").on("click", ".list-dates", function(){
+    // LISTAR SUBTIPOS
+    $("#list").on("click", ".list-subtypes", function(){
 
         let id = $(this).data('id');
         let name = $(this).data('name');
 
-        $("#title-court").html(name);
-        $("#id_court_add").val(id);
+        $("#title-subtype").html(name);
+        $("#id_cost_center_add").val(id);
 
-        listAvailableDates(id);
+        listSubtypes(id);
     });
 
-    function listAvailableDates(id)
+    function listSubtypes(id)
     {
         Swal.queue([
             {
@@ -254,38 +250,24 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + `/datas-disponiveis/listar/${id}`, {
-                        
+                    $.get(window.location.origin + `/subtipos-de-centros-de-custo/listar`, {
+                        id_cost_center:id
                     })
                         .then(function (data) {
                             if (data.status == "success") {
 
                                 Swal.close();
-                                
-                                $("#list-dates").html(``);
-
-                                let wd = ""
+                                $("#list-subtypes").html(``);
 
                                 if(data.data.length > 0){
 
                                     data.data.forEach(item => {
-                                        
-                                        if(wd != item.week_day)
-                                        $("#list-dates").append(`
-                                            <tr class="table-active">
-                                                <td colspan="4" class="align-middle font-weight-bold">${weekDayDescription(item.week_day)}</td>
-                                            </tr>
-                                        `);
 
-                                        wd = item.week_day;
-
-                                        $("#list-dates").append(`
+                                        $("#list-subtypes").append(`
                                             <tr>
-                                                <td class="align-middle">${item.start_time}</td>
-                                                <td class="align-middle">${item.end_time}</td>
-                                                <td class="align-middle">R$ ${moneyFormat(item.price)}</td>
+                                                <td class="align-middle">${item.name}</td>
                                                 <td class="align-middle" style="text-align: right">
-                                                    <a title="Deletar" data-id="${item.id}" data-id_court="${item.id_court}" href="#" class="btn btn-danger delete-available-date"><i class="fas fa-trash-alt"></i></a>
+                                                    <a title="Deletar" data-id="${item.id}" data-id_cost_center="${item.id_cost_center}" href="#" class="btn btn-danger delete-subtype"><i class="fas fa-trash-alt"></i></a>
                                                 </td>
                                             </tr>
                                         `);
@@ -294,15 +276,15 @@ $(document).ready(function () {
 
                                 }else{
 
-                                    $("#list-dates").append(`
+                                    $("#list-subtypes").append(`
                                         <tr>
-                                            <td class="align-middle text-center" colspan="5">Nenhuma hora disponível cadastrada</td>
+                                            <td class="align-middle text-center" colspan="2">Nenhum subtipo cadastrado</td>
                                         </tr>
                                     `);
 
                                 }
 
-                                $("#modalAvailableDates").modal("show");
+                                $("#modalCostCenterSubtypes").modal("show");
 
                             } else if (data.status == "error") {
                                 showError(data.message)
@@ -315,11 +297,11 @@ $(document).ready(function () {
     }
 
 
-    // "DELETAR" QUADRA
-    $("#list-dates").on("click", ".delete-available-date", function(){
+    // "DELETAR" SUBTIPOS
+    $("#list-subtypes").on("click", ".delete-subtype", function(){
         
         let id = $(this).data('id');
-        let id_court = $(this).data('id_court');
+        let id_cost_center = $(this).data('id_cost_center');
 
         Swal.fire({
             title: 'Atenção!',
@@ -340,13 +322,13 @@ $(document).ready(function () {
                             allowEscapeKey: false,
                             onOpen: () => {
                                 Swal.showLoading();
-                                $.post(window.location.origin + "/datas-disponiveis/deletar", {
+                                $.post(window.location.origin + "/subtipos-de-centros-de-custo/deletar", {
                                     id: id
                                 })
                                     .then(function (data) {
                                         if (data.status == "success") {
                                                         
-                                            showSuccess("Deletada com sucesso!", null, listAvailableDates, id_court)
+                                            showSuccess("Deletada com sucesso!", null, listSubtypes, id_cost_center)
                                         } else if (data.status == "error") {
                                             showError(data.message)
                                         }

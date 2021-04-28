@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\CostCenterSubtypeService;
 
-class CostCenterController extends Controller
+class CostCenterSubtypeController extends Controller
 {
     private $costCenterSubtypeService;
 
@@ -22,7 +22,7 @@ class CostCenterController extends Controller
     public function store(Request $request) 
     {
         $data = [
-            'id_cost_center' => auth()->user()->id_cost_center,
+            'id_cost_center' => trim($request->id_cost_center),
             'name' => trim($request->name),
             'status' => "A",
         ];
@@ -67,8 +67,9 @@ class CostCenterController extends Controller
     
     public function list() 
     {
+        $id_cost_center = $_GET['id_cost_center'];
 
-        $response = $this->costCenterSubtypeService->list();
+        $response = $this->costCenterSubtypeService->list($id_cost_center);
 
         if($response['status'] == 'success')
             return response()->json(['status'=>'success', 'data'=>$response['data']], 200);

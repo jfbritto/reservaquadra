@@ -32,7 +32,7 @@ $(document).ready(function () {
                                             <tr>
                                                 <td class="align-middle">${dateFormat(item.due_date)}</td>
                                                 <td class="align-middle">${item.name_cost_center}</td>
-                                                <td class="align-middle">${item.id_cost_center_subtype}</td>
+                                                <td class="align-middle">${item.name_cost_center_subtype}</td>
                                                 <td class="align-middle">${moneyFormat(item.price)}</td>
                                                 <td class="align-middle" style="text-align: right">
                                                     <a title="Deletar" data-id="${item.id}" href="#" class="btn btn-danger delete-court"><i class="fas fa-trash-alt"></i></a>
@@ -72,7 +72,7 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.get(window.location.origin + "/centro-de-custo/listar", {
+                    $.get(window.location.origin + "/centros-de-custo/listar", {
                         
                     })
                         .then(function (data) {
@@ -103,6 +103,49 @@ $(document).ready(function () {
         ]);
     }
 
+    // LISTAR SUBTIPOS DE CENTRO DE CUSTO
+    $("#id_cost_center").on("change", function(){
+        
+        let id_cost_center = $("#id_cost_center option:selected").val();
+
+        Swal.queue([
+            {
+                title: "Carregando...",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                    $.get(window.location.origin + "/subtipos-de-centros-de-custo/listar", {
+                        id_cost_center:id_cost_center
+                    })
+                        .then(function (data) {
+                            if (data.status == "success") {
+
+                                Swal.close();
+
+                                $("#id_cost_center_subtype").html(``);
+                                $("#id_cost_center_subtype").html(`<option value="">-- Selecione --</option>`);
+
+                                if(data.data.length > 0){
+
+                                    data.data.forEach(item => { 
+                                        $("#id_cost_center_subtype").append(`
+                                            <option value="${item.id}">${item.name}</option>
+                                        `)
+                                    });
+
+                                }
+
+                            } else if (data.status == "error") {
+                                showError(data.message)
+                            }
+                        })
+                        .catch();
+                },
+            },
+        ]);
+
+    });
 
     // CADASTRAR DESPESA
     $("#formStoreExpense").submit(function (e) {

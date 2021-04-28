@@ -79,15 +79,15 @@ class CostCenterSubtypeService
         return $response;
     }
 
-    public function list()
+    public function list($id)
     {
         $response = [];
 
         try{
-            $return = CostCenterSubtype::where('id_company', auth()->user()->id_company)
-                            ->where('status', '!=', 'D')
-                            ->orderByDesc('name')
-                            ->get();
+            $return = CostCenterSubtype::where('id_cost_center', $id)
+                                        ->where('status', '!=', 'D')
+                                        ->orderByDesc('name')
+                                        ->get();
 
             $response = ['status' => 'success', 'data' => $return];
         }catch(Exception $e){

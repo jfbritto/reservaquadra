@@ -104,9 +104,14 @@ Route::group(['middleware' => ['admin']], function(){
     Route::post('/despesas/deletar', 'ExpenseController@destroy');
 
     //centro de custo
-    Route::get('/centro-de-custo', 'CostCenterController@index');
-    Route::post('/centro-de-custo/cadastrar', 'CostCenterController@store');
-    Route::get('/centro-de-custo/listar', 'CostCenterController@list');
-    Route::post('/centro-de-custo/editar', 'CostCenterController@update');
-    Route::post('/centro-de-custo/deletar', 'CostCenterController@destroy');
+    Route::get('/centros-de-custo', 'CostCenterController@index');
+    Route::post('/centros-de-custo/cadastrar', 'CostCenterController@store');
+    Route::get('/centros-de-custo/listar', 'CostCenterController@list');
+    Route::post('/centros-de-custo/editar', 'CostCenterController@update');
+    Route::post('/centros-de-custo/deletar', 'CostCenterController@destroy');
+
+    //subtipos de centro de custo
+    Route::get('/subtipos-de-centros-de-custo/listar', 'CostCenterSubtypeController@list');
+    Route::post('/subtipos-de-centros-de-custo/cadastrar', 'CostCenterSubtypeController@store');
+    Route::post('/subtipos-de-centros-de-custo/deletar', 'CostCenterSubtypeController@destroy');
 });

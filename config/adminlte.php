@@ -369,7 +369,7 @@ return [
             'text'       => 'Centro de custo',
             'icon'       => 'fas fa-fw fa-file-signature' ,
             // 'icon_color' => 'green',
-            'url'        => 'centro-de-custo',
+            'url'        => 'centros-de-custo',
             'can'        => 'admin',
         ],
 

@@ -24,7 +24,7 @@
                         <tr>
                             <th>Data</th>
                             <th>Centro de custo</th>
-                            <th>Descrição</th>
+                            <th>Subtipo</th>
                             <th>Valor</th>
                             <th></th>
                         </tr>
@@ -71,10 +71,9 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="id_cost_center_subtype">Descrição</label>
+                                <label for="id_cost_center_subtype">Subtipo</label>
                                 <select required name="id_cost_center_subtype" id="id_cost_center_subtype" class="form-control">
                                     <option value="">-- Selecione --</option>
-                                    <option value="1">teste</option>
                                 </select>
                             </div>
                         </div>

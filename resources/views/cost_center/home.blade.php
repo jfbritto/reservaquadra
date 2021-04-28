@@ -33,7 +33,7 @@
     </div>
 
     <div class="modal fade" tabindex="-1" role="dialog" id="modalStoreCostCenter">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Cadastrar Centro de Custo</h5>
@@ -45,7 +45,7 @@
 
                 <form id="formStoreCostCenter">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="name">Nome</label>
                                 <input type="text" required name="name" id="name" class="form-control" placeholder="Informe o nome">
@@ -63,10 +63,10 @@
     </div>
 
     <div class="modal fade" tabindex="-1" role="dialog" id="modalEditCostCenter">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Editar Quadra</h5>
+                <h5 class="modal-title">Editar Centro de Custo</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -75,7 +75,7 @@
 
                 <form id="formEditCostCenter">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="name_edit">Nome</label>
                                 <input type="hidden" required name="id_edit" id="id_edit">
@@ -93,11 +93,11 @@
         </div>
     </div>
 
-    <div class="modal fade" role="dialog" id="modalAvailableDates">
+    <div class="modal fade" role="dialog" id="modalCostCenterSubtypes">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Horários disponiveis</h5>
+                <h5 class="modal-title">Subtipos de centro de custo</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -105,77 +105,46 @@
             <div class="modal-body">
                 
                 <h5 class="font-weight-bold mb-4">
-                    <span id="title-court"></span>
-                    <span class="pull-right"><button type="button" class="btn btn-success btn-sm float-right" data-toggle="modal" data-target="#modalAddAvailableDate">Adicionar Horário</button></span>
+                    <span id="title-subtype"></span>
+                    <span class="pull-right"><button type="button" class="btn btn-success btn-sm float-right" data-toggle="modal" data-target="#modalAddCostCenterSubtypes">Adicionar Subtipo</button></span>
                 </h5>
 
                 <div class="table-responsive">
                     <table class="table table-condensed table-hover table-sm">
                         <thead>
                             <tr>
-                                <th>Início</th>
-                                <th>Fim</th>
-                                <th>Valor</th>
+                                <th>Nome</th>
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody id="list-dates"></tbody>
+                        <tbody id="list-subtypes"></tbody>
                     </table>
                 </div>
             </div>
             <div class="modal-footer">
-                <input type="hidden" id="id_court_add" value="">
+                <input type="hidden" id="id_cost_center_add" value="">
             </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" tabindex="-1" role="dialog" id="modalAddAvailableDate">
-        <div class="modal-dialog modal-lg" role="document">
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalAddCostCenterSubtypes">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Adicionar horários disponíveis</h5>
+                <h5 class="modal-title">Adicionar Subtipo</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
 
-                <form id="formAddAvailableDate">
+                <form id="formAddCostCenterSubtypes">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
-                                <label for="week_day">Dia da semana</label>
-                                <select required name="week_day" id="week_day" class="form-control">
-                                    <option value="">Selecione</option>
-                                    <option value="1">Segunda</option>
-                                    <option value="2">Terça</option>
-                                    <option value="3">Quarta</option>
-                                    <option value="4">Quinta</option>
-                                    <option value="5">Sexta</option>
-                                    <option value="6">Sábado</option>
-                                    <option value="7">Domingo</option>
-                                    <option value="9">Dias de semana</option>
-                                    <option value="8">Todos os dias</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="price">Valor</label>
-                                <input type="text" required name="price" id="price" class="form-control money" placeholder="Informe o valor">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="start_time">Hora inicial</label>
-                                <input type="time" required name="start_time" id="start_time" class="form-control" placeholder="Informe a hora inicial">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="end_time">Hora final</label>
-                                <input type="time" required name="end_time" id="end_time" class="form-control" placeholder="Informe a hora inicial">
+                                <label for="name_subtype">Nome</label>
+                                <input type="text" required name="name_subtype" id="name_subtype" class="form-control" placeholder="Informe o nome">
                             </div>
                         </div>
                     </div>
@@ -183,7 +152,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" form="formAddAvailableDate">Salvar</button>
+                <button type="submit" class="btn btn-primary" form="formAddCostCenterSubtypes">Salvar</button>
             </div>
             </div>
         </div>
