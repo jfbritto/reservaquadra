@@ -142,4 +142,16 @@ class InvoiceController extends Controller
 
         return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
+    
+    public function listReceivedByMonth() 
+    {
+        $date = date('Y-m-d');
+
+        $response = $this->invoiceService->listReceivedByMonth($date);
+
+        if($response['status'] == 'success')
+            return response()->json(['status'=>'success', 'data'=>$response['data']], 200);
+
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
+    }
 }
