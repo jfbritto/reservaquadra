@@ -122,9 +122,13 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + "/centros-de-custo/editar", {
-                        id: $("#id_edit").val(),
-                        name: $("#name_edit").val(),
+                    $.ajax({
+                        url: window.location.origin + "/centros-de-custo/editar",
+                        type: 'PUT',
+                        data: {
+                            id: $("#id_edit").val(),
+                            name: $("#name_edit").val(),
+                        }
                     })
                         .then(function (data) {
                             if (data.status == "success") {
@@ -171,8 +175,10 @@ $(document).ready(function () {
                             allowEscapeKey: false,
                             onOpen: () => {
                                 Swal.showLoading();
-                                $.post(window.location.origin + "/centros-de-custo/deletar", {
-                                    id: id
+                                $.ajax({
+                                    url: window.location.origin + "/centros-de-custo/deletar",
+                                    type: 'DELETE',
+                                    data: {id}
                                 })
                                     .then(function (data) {
                                         if (data.status == "success") {
@@ -322,8 +328,10 @@ $(document).ready(function () {
                             allowEscapeKey: false,
                             onOpen: () => {
                                 Swal.showLoading();
-                                $.post(window.location.origin + "/subtipos-de-centros-de-custo/deletar", {
-                                    id: id
+                                $.ajax({
+                                    url: window.location.origin + "/subtipos-de-centros-de-custo/deletar",
+                                    type: 'DELETE',
+                                    data: {id}
                                 })
                                     .then(function (data) {
                                         if (data.status == "success") {

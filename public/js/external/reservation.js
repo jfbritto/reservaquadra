@@ -9,7 +9,7 @@ $(document).ready(function () {
     }
 
     function loadCourts() {
-        $.post(window.location.origin + "/listar-quadras", {})
+        $.get(window.location.origin + "/listar-quadras", {})
             .then(function (data) {
                 if (data.status == "success") {
                     
@@ -71,7 +71,7 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + `/listar-dias-disponiveis/${id_court}`, {
+                    $.get(window.location.origin + `/listar-dias-disponiveis/${id_court}`, {
                         
                     })
                     .then(function (data) {
@@ -157,7 +157,7 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + `/listar-horarios-disponiveis/${id_court}/${week_day}/${day}`, {
+                    $.get(window.location.origin + `/listar-horarios-disponiveis/${id_court}/${week_day}/${day}`, {
                         
                     })
                     .then(function (data) {

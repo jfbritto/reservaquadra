@@ -383,8 +383,10 @@ $(document).ready(function () {
                             allowEscapeKey: false,
                             onOpen: () => {
                                 Swal.showLoading();
-                                $.post(window.location.origin + "/contratos/cancelar", {
-                                    id: id
+                                $.ajax({
+                                    url: window.location.origin + "/contratos/cancelar",
+                                    type: 'DELETE',
+                                    data: {id}
                                 })
                                     .then(function (data) {
                                         if (data.status == "success") {
@@ -457,10 +459,14 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + "/faturas/receber", {
-                        id: $("#id_invoice").val(),
-                        discount: $("#discount").val(),
-                        paid_price: $("#paid_price").val(),
+                    $.ajax({
+                        url: window.location.origin + "/faturas/receber",
+                        type: 'PUT',
+                        data: {
+                            id: $("#id_invoice").val(),
+                            discount: $("#discount").val(),
+                            paid_price: $("#paid_price").val()
+                        }
                     })
                         .then(function (data) {
                             if (data.status == "success") {
@@ -494,25 +500,29 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + "/alunos/editar", {
-                        id: $("#id_usr").val(),
-                        name: $("#name_edit").val(),
-                        email: $("#email_edit").val(),
-                        birth: $("#birth_edit").val(),
-                        cpf: $("#cpf_edit").val(),
-                        rg: $("#rg_edit").val(),
-                        civil_status: $("#civil_status_edit option:selected").val(),
-                        profession: $("#profession_edit").val(),
-                        zip_code: $("#zip_code_edit").val(),
-                        uf: $("#uf_edit").val(),
-                        city: $("#city_edit").val(),
-                        neighborhood: $("#neighborhood_edit").val(),
-                        address: $("#address_edit").val(),
-                        address_number: $("#address_number_edit").val(),
-                        complement: $("#complement_edit").val(),
-                        start_date: $("#start_date_edit").val(),
-                        health_plan: $("#health_plan_edit").val(),
-                        how_met: $("#how_met_edit option:selected").val(),
+                    $.ajax({
+                        url: window.location.origin + "/alunos/editar",
+                        type: 'PUT',
+                        data: {
+                            id: $("#id_usr").val(),
+                            name: $("#name_edit").val(),
+                            email: $("#email_edit").val(),
+                            birth: $("#birth_edit").val(),
+                            cpf: $("#cpf_edit").val(),
+                            rg: $("#rg_edit").val(),
+                            civil_status: $("#civil_status_edit option:selected").val(),
+                            profession: $("#profession_edit").val(),
+                            zip_code: $("#zip_code_edit").val(),
+                            uf: $("#uf_edit").val(),
+                            city: $("#city_edit").val(),
+                            neighborhood: $("#neighborhood_edit").val(),
+                            address: $("#address_edit").val(),
+                            address_number: $("#address_number_edit").val(),
+                            complement: $("#complement_edit").val(),
+                            start_date: $("#start_date_edit").val(),
+                            health_plan: $("#health_plan_edit").val(),
+                            how_met: $("#how_met_edit option:selected").val(),
+                        }
                     })
                         .then(function (data) {
                             if (data.status == "success") {
@@ -559,8 +569,10 @@ $(document).ready(function () {
                             allowEscapeKey: false,
                             onOpen: () => {
                                 Swal.showLoading();
-                                $.post(window.location.origin + "/alunos/deletar", {
-                                    id: id
+                                $.ajax({
+                                    url: window.location.origin + "/alunos/deletar",
+                                    type: 'DELETE',
+                                    data: {id}
                                 })
                                     .then(function (data) {
                                         if (data.status == "success") {
@@ -708,8 +720,10 @@ $(document).ready(function () {
                             allowEscapeKey: false,
                             onOpen: () => {
                                 Swal.showLoading();
-                                $.post(window.location.origin + "/aulas-programadas/deletar", {
-                                    id: id
+                                $.ajax({
+                                    url: window.location.origin + "/aulas-programadas/deletar",
+                                    type: 'DELETE',
+                                    data: {id}
                                 })
                                     .then(function (data) {
                                         if (data.status == "success") {

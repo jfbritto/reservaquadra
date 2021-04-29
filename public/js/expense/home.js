@@ -286,8 +286,10 @@ $(document).ready(function () {
                             allowEscapeKey: false,
                             onOpen: () => {
                                 Swal.showLoading();
-                                $.post(window.location.origin + "/despesas/deletar", {
-                                    id: id
+                                $.ajax({
+                                    url: window.location.origin + "/despesas/deletar",
+                                    type: 'DELETE',
+                                    data: {id}
                                 })
                                     .then(function (data) {
                                         if (data.status == "success") {

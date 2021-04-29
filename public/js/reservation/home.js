@@ -90,8 +90,10 @@ $(document).ready(function () {
                             allowEscapeKey: false,
                             onOpen: () => {
                                 Swal.showLoading();
-                                $.post(window.location.origin + "/reservas/change-status", {
-                                    id, status
+                                $.ajax({
+                                    url: window.location.origin + "/reservas/change-status",
+                                    type: 'PUT',
+                                    data: {id, status}
                                 })
                                     .then(function (data) {
                                         if (data.status == "success") {

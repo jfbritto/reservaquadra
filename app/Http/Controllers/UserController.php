@@ -201,6 +201,7 @@ class UserController extends Controller
             'start_date' => trim($request->start_date),
             'health_plan' => trim($request->health_plan),
             'how_met' => trim($request->how_met),
+            'group' => 5,
         ];
 
         $response = $this->userService->update($data);

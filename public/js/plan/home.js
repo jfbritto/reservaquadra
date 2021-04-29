@@ -134,15 +134,19 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + "/planos/editar", {
-                        id: $("#id_edit").val(),
-                        name: $("#name_edit").val(),
-                        age_range: $("#age_range_edit option:selected").val(),
-                        day_period: $("#day_period_edit option:selected").val(),
-                        lessons_per_week: $("#lessons_per_week_edit option:selected").val(),
-                        annual_contract: $("#annual_contract_edit option:selected").val(),
-                        months: $("#months_edit option:selected").val(),
-                        price: $("#price_edit").val(),
+                    $.ajax({
+                        url: window.location.origin + "/planos/editar",
+                        type: 'PUT',
+                        data: {
+                            id: $("#id_edit").val(),
+                            name: $("#name_edit").val(),
+                            age_range: $("#age_range_edit option:selected").val(),
+                            day_period: $("#day_period_edit option:selected").val(),
+                            lessons_per_week: $("#lessons_per_week_edit option:selected").val(),
+                            annual_contract: $("#annual_contract_edit option:selected").val(),
+                            months: $("#months_edit option:selected").val(),
+                            price: $("#price_edit").val(),
+                        }
                     })
                         .then(function (data) {
                             if (data.status == "success") {
@@ -189,8 +193,10 @@ $(document).ready(function () {
                             allowEscapeKey: false,
                             onOpen: () => {
                                 Swal.showLoading();
-                                $.post(window.location.origin + "/planos/deletar", {
-                                    id: id
+                                $.ajax({
+                                    url: window.location.origin + "/planos/deletar",
+                                    type: 'DELETE',
+                                    data: {id}
                                 })
                                     .then(function (data) {
                                         if (data.status == "success") {

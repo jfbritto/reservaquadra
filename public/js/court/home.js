@@ -130,13 +130,17 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + "/quadra/editar", {
-                        id: $("#id_edit").val(),
-                        name: $("#name_edit").val(),
-                        city: $("#city_edit").val(),
-                        neighborhood: $("#neighborhood_edit").val(),
-                        reference: $("#reference_edit").val(),
-                        description: $("#description_edit").val(),
+                    $.ajax({
+                        url: window.location.origin + "/quadra/editar", 
+                        type: 'PUT',
+                        data:{
+                            id: $("#id_edit").val(),
+                            name: $("#name_edit").val(),
+                            city: $("#city_edit").val(),
+                            neighborhood: $("#neighborhood_edit").val(),
+                            reference: $("#reference_edit").val(),
+                            description: $("#description_edit").val(),
+                        }
                     })
                         .then(function (data) {
                             if (data.status == "success") {
@@ -183,8 +187,10 @@ $(document).ready(function () {
                             allowEscapeKey: false,
                             onOpen: () => {
                                 Swal.showLoading();
-                                $.post(window.location.origin + "/quadra/deletar", {
-                                    id: id
+                                $.ajax({
+                                    url: window.location.origin + "/quadra/deletar",
+                                    type: 'DELETE',
+                                    data: {id}
                                 })
                                     .then(function (data) {
                                         if (data.status == "success") {
@@ -351,8 +357,10 @@ $(document).ready(function () {
                             allowEscapeKey: false,
                             onOpen: () => {
                                 Swal.showLoading();
-                                $.post(window.location.origin + "/datas-disponiveis/deletar", {
-                                    id: id
+                                $.ajax({
+                                    url: window.location.origin + "/datas-disponiveis/deletar",
+                                    type: 'DELETE',
+                                    data: {id}
                                 })
                                     .then(function (data) {
                                         if (data.status == "success") {
