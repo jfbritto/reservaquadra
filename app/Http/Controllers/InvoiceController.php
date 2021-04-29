@@ -145,7 +145,7 @@ class InvoiceController extends Controller
     
     public function listReceivedByMonth() 
     {
-        $date = date('Y-m-d');
+        $date = $_GET['date'];
 
         $response = $this->invoiceService->listReceivedByMonth($date);
 

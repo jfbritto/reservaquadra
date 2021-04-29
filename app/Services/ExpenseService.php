@@ -87,11 +87,14 @@ class ExpenseService
         return $response;
     }
 
-    public function list()
+    public function list($date)
     {
         $response = [];
 
         try{
+
+            $date_ini = date('Y-m-01 00:00:00', strtotime($date));
+            $date_fim = date('Y-m-t 23:59:59', strtotime($date));
 
             $return = DB::select( DB::raw(" select 
                                                 exp.*, coc.name as name_cost_center, ccs.name as name_cost_center_subtype
@@ -100,7 +103,8 @@ class ExpenseService
                                                 join cost_center_subtypes ccs on ccs.id=exp.id_cost_center_subtype
                                             where 
                                                 exp.id_company = '".auth()->user()->id_company."' and
-                                                exp.status != 'D'
+                                                exp.status != 'D' and
+                                                exp.due_date between '".$date_ini."' and '".$date_fim."' 
                                             order by 
                                                 exp.id_cost_center, exp.status desc"));
 

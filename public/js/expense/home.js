@@ -1,11 +1,12 @@
 $(document).ready(function () {
 
-    loadPlans();
+    loadExpenses();
     loadCostCenter();
 
-    // LISTAR PLANOS
-    function loadPlans()
+    // LISTAR DESPESAS
+    function loadExpenses()
     {
+        let date = $("#date").val();
         Swal.queue([
             {
                 title: "Carregando...",
@@ -14,7 +15,7 @@ $(document).ready(function () {
                 onOpen: () => {
                     Swal.showLoading();
                     $.get(window.location.origin + "/despesas/listar", {
-                        
+                        date
                     })
                         .then(function (data) {
                             if (data.status == "success") {
@@ -174,7 +175,7 @@ $(document).ready(function () {
                                 
                                 $("#modalStoreExpense").modal("hide");
 
-                                showSuccess("Cadastro efetuado!", null, loadPlans)
+                                showSuccess("Cadastro efetuado!", null, loadExpenses)
                             } else if (data.status == "error") {
                                 showError(data.message)
                             }
@@ -237,7 +238,7 @@ $(document).ready(function () {
                                 
     //                             $("#modalEditPlan").modal("hide");
 
-    //                             showSuccess("Edição efetuada!", null, loadPlans)
+    //                             showSuccess("Edição efetuada!", null, loadExpenses)
     //                         } else if (data.status == "error") {
     //                             showError(data.message)
     //                         }
@@ -279,7 +280,7 @@ $(document).ready(function () {
                                     .then(function (data) {
                                         if (data.status == "success") {
                                                         
-                                            showSuccess("Deletada com sucesso!", null, loadPlans)
+                                            showSuccess("Deletada com sucesso!", null, loadExpenses)
                                         } else if (data.status == "error") {
                                             showError(data.message)
                                         }
@@ -292,6 +293,10 @@ $(document).ready(function () {
                 }
             })
 
+    });
+
+    $("#date").on("change", function(){
+        loadExpenses();
     });
 
 

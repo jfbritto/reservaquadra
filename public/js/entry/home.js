@@ -5,6 +5,7 @@ $(document).ready(function () {
     // LISTAR PLANOS
     function loadEntries()
     {
+        let date = $("#date").val();
         Swal.queue([
             {
                 title: "Carregando...",
@@ -13,7 +14,7 @@ $(document).ready(function () {
                 onOpen: () => {
                     Swal.showLoading();
                     $.get(window.location.origin + "/faturas/listar-entradas-por-mes", {
-                        
+                        date
                     })
                         .then(function (data) {
                             if (data.status == "success") {
@@ -53,6 +54,10 @@ $(document).ready(function () {
             },
         ]);
     }
+
+    $("#date").on("change", function(){
+        loadEntries();
+    });
 
 
 
