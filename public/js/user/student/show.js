@@ -81,7 +81,7 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + "/quadra/listar", {
+                    $.get(window.location.origin + "/quadra/listar", {
                         
                     })
                         .then(function (data) {
@@ -637,7 +637,7 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + `/aulas-programadas/listar/${id}`, {
+                    $.get(window.location.origin + `/aulas-programadas/listar/${id}`, {
                         
                     })
                     .then(function (data) {
@@ -740,7 +740,7 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + `/aulas-programadas-resultado/listar/${id}`, {
+                    $.get(window.location.origin + `/aulas-programadas-resultado/listar/${id}`, {
                         
                     })
                     .then(function (data) {

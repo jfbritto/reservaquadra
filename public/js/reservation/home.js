@@ -12,7 +12,7 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + "/reservas/listar", {
+                    $.get(window.location.origin + "/reservas/listar", {
                         
                     })
                         .then(function (data) {

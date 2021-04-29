@@ -85,7 +85,7 @@ class UserController extends Controller
 
     public function searchStudent() 
     {
-        $search = $_POST['search'];
+        $search = $_GET['search'];
         $response = $this->userService->search([4], $search);
 
         if($response['status'] == 'success')

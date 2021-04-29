@@ -12,7 +12,7 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + "/quadra/listar", {
+                    $.get(window.location.origin + "/quadra/listar", {
                         
                     })
                         .then(function (data) {
@@ -265,7 +265,7 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + `/datas-disponiveis/listar/${id}`, {
+                    $.get(window.location.origin + `/datas-disponiveis/listar/${id}`, {
                         
                     })
                         .then(function (data) {

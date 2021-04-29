@@ -23,6 +23,9 @@ $(document).ready(function () {
                                 Swal.close();
                                 $("#list").html(``);
 
+                                let tot_expenses_paid = 0;
+                                let tot_expenses_pendent = 0;
+
                                 if(data.data.length > 0){
                                     
                                     data.data.forEach(item => {
@@ -34,23 +37,32 @@ $(document).ready(function () {
                                                 <td class="align-middle">${dateFormat(item.due_date)}</td>
                                                 <td class="align-middle">${item.name_cost_center}</td>
                                                 <td class="align-middle">${item.name_cost_center_subtype}</td>
-                                                <td class="align-middle">${moneyFormat(item.price)}</td>
+                                                <td class="align-middle">R$ ${moneyFormat(item.price)}</td>
+                                                <td class="align-middle">${item.status=='P'?'<span class="badge badge-warning">Pendente</span>':'<span class="badge badge-success">Paga</span>'}</td>
                                                 <td class="align-middle" style="text-align: right">
                                                     <a title="Deletar" data-id="${item.id}" href="#" class="btn btn-danger delete-court"><i class="fas fa-trash-alt"></i></a>
                                                 </td>
                                             </tr>
                                         `);       
+
+                                        if(item.status == 'R')
+                                            tot_expenses_paid += parseFloat(item.price);
+
+                                        if(item.status == 'P')
+                                            tot_expenses_pendent += parseFloat(item.price);
                                     });
 
                                 }else{
 
                                     $("#list").append(`
                                         <tr>
-                                            <td class="align-middle text-center" colspan="8">Nenhuma despesa cadastrada</td>
+                                            <td class="align-middle text-center" colspan="8">Nenhuma despesa encontrada</td>
                                         </tr>
                                     `);  
-
                                 }
+
+                                $("#tot-expenses-paid").html("R$ "+moneyFormat(tot_expenses_paid));
+                                $("#tot-expenses-pendent").html("R$ "+moneyFormat(tot_expenses_pendent));
 
 
                             } else if (data.status == "error") {

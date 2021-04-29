@@ -1,5 +1,9 @@
 @extends('adminlte::page')
 
+@section('meta_tags')
+    <link rel="icon" href="/img/tennis-ball.png" type="image/png">
+@stop
+
 @section('title', 'Centro de custo')
 
 @section('content_header')

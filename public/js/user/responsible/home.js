@@ -14,7 +14,7 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + "/responsaveis/listar", {
+                    $.get(window.location.origin + "/responsaveis/listar", {
                         
                     })
                         .then(function (data) {

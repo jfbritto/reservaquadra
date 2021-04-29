@@ -14,7 +14,7 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + "/alunos/listar", {
+                    $.get(window.location.origin + "/alunos/listar", {
 
                     })
                         .then(function (data) {
@@ -23,32 +23,7 @@ $(document).ready(function () {
                                 Swal.close();
                                 $("#list").html(``);
 
-                                if(data.data.length > 0){
-
-                                    data.data.forEach(item => {
-
-                                        $("#list").append(`
-                                            <tr>
-                                                <td class="align-middle">${item.name}</td>
-                                                <td class="align-middle just-pc">${item.email}</td>
-                                                <td class="align-middle" style="text-align: right">
-                                                    <a title="Abrir" href="/alunos/exibir/${item.id}" class="btn btn-info open-student"><i style="color: white" class="fas fa-eye"></i></a>
-                                                    <a title="Editar" data-id="${item.id}" data-name="${item.name}" data-email="${item.email}" data-birth="${item.birth}" data-cpf="${item.cpf}" data-rg="${item.rg}" data-civil_status="${item.civil_status}" data-profession="${item.profession}" data-zip_code="${item.zip_code}" data-uf="${item.uf}" data-city="${item.city}" data-neighborhood="${item.neighborhood}" data-address="${item.address}" data-address_number="${item.address_number}" data-complement="${item.complement}" data-start_date="${item.start_date}" data-health_plan="${item.health_plan}" data-how_met="${item.how_met}" href="#" class="btn btn-warning edit-student display-none"><i style="color: white" class="fas fa-edit"></i></a>
-                                                    <a title="Deletar" data-id="${item.id}" href="#" class="btn btn-danger delete-student display-none"><i class="fas fa-trash-alt"></i></a>
-                                                </td>
-                                            </tr>
-                                        `);       
-                                    });
-
-                                }else{
-
-                                    $("#list").append(`
-                                        <tr>
-                                            <td class="align-middle text-center" colspan="4">Nenhum aluno cadastrado</td>
-                                        </tr>
-                                    `);  
-
-                                }
+                                mountTable(data);
 
 
                             } else if (data.status == "error") {
@@ -59,6 +34,37 @@ $(document).ready(function () {
                 },
             },
         ]);
+    }
+
+    function mountTable(data){
+        
+        if(data.data.length > 0){
+
+            data.data.forEach(item => {
+
+                $("#list").append(`
+                    <tr>
+                        <td class="align-middle">${item.name}</td>
+                        <td class="align-middle just-pc">${item.email}</td>
+                        <td class="align-middle" style="text-align: right">
+                            <a title="Abrir" href="/alunos/exibir/${item.id}" class="btn btn-info open-student"><i style="color: white" class="fas fa-eye"></i></a>
+                            <a title="Editar" data-id="${item.id}" data-name="${item.name}" data-email="${item.email}" data-birth="${item.birth}" data-cpf="${item.cpf}" data-rg="${item.rg}" data-civil_status="${item.civil_status}" data-profession="${item.profession}" data-zip_code="${item.zip_code}" data-uf="${item.uf}" data-city="${item.city}" data-neighborhood="${item.neighborhood}" data-address="${item.address}" data-address_number="${item.address_number}" data-complement="${item.complement}" data-start_date="${item.start_date}" data-health_plan="${item.health_plan}" data-how_met="${item.how_met}" href="#" class="btn btn-warning edit-student display-none"><i style="color: white" class="fas fa-edit"></i></a>
+                            <a title="Deletar" data-id="${item.id}" href="#" class="btn btn-danger delete-student display-none"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                `);       
+            });
+
+        }else{
+
+            $("#list").append(`
+                <tr>
+                    <td class="align-middle text-center" colspan="4">Nenhum aluno cadastrado</td>
+                </tr>
+            `);  
+
+        }
+
     }
 
 
@@ -242,7 +248,7 @@ $(document).ready(function () {
 
         let search = $(this).val();
 
-        $.post(window.location.origin + "/alunos/buscar", {
+        $.get(window.location.origin + "/alunos/buscar", {
             search
         })
         .then(function (data) {
@@ -251,33 +257,7 @@ $(document).ready(function () {
                 Swal.close();
                 $("#list").html(``);
 
-                if(data.data.length > 0){
-
-                    data.data.forEach(item => {
-
-                        $("#list").append(`
-                            <tr>
-                                <td class="align-middle">${item.name}</td>
-                                <td class="align-middle just-pc">${item.email}</td>
-                                <td class="align-middle" style="text-align: right">
-                                    <a title="Abrir" href="/alunos/exibir/${item.id}" class="btn btn-info open-student"><i style="color: white" class="fas fa-eye"></i></a>
-                                    <a title="Editar" data-id="${item.id}" data-name="${item.name}" data-email="${item.email}" data-birth="${item.birth}" data-cpf="${item.cpf}" data-rg="${item.rg}" data-civil_status="${item.civil_status}" data-profession="${item.profession}" data-zip_code="${item.zip_code}" data-uf="${item.uf}" data-city="${item.city}" data-neighborhood="${item.neighborhood}" data-address="${item.address}" data-address_number="${item.address_number}" data-complement="${item.complement}" data-start_date="${item.start_date}" data-health_plan="${item.health_plan}" data-how_met="${item.how_met}" href="#" class="btn btn-warning edit-student"><i style="color: white" class="fas fa-edit"></i></a>
-                                    <a title="Deletar" data-id="${item.id}" href="#" class="btn btn-danger delete-student"><i class="fas fa-trash-alt"></i></a>
-                                </td>
-                            </tr>
-                        `);       
-                    });
-
-                }else{
-
-                    $("#list").append(`
-                        <tr>
-                            <td class="align-middle text-center" colspan="4">Nenhum aluno cadastrado</td>
-                        </tr>
-                    `);  
-
-                }
-
+                mountTable(data);
 
             } else if (data.status == "error") {
                 showError(data.message)

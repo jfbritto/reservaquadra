@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'ViniTennis',
+    'title' => '',
     'title_prefix' => '',
     'title_postfix' => '',
 

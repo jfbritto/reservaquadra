@@ -12,7 +12,7 @@ $(document).ready(function () {
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.post(window.location.origin + "/funcionarios/listar", {
+                    $.get(window.location.origin + "/funcionarios/listar", {
                         
                     })
                         .then(function (data) {

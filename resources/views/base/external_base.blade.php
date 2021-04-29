@@ -1,5 +1,9 @@
 @extends('adminlte::master')
 
+@section('meta_tags')
+    <link rel="icon" href="/img/tennis-ball.png" type="image/png">
+@stop
+
 @section('adminlte_css')
     @stack('css')
     @yield('css')
