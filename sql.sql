@@ -235,7 +235,17 @@ CREATE TABLE IF NOT EXISTS `expenses` (
   `created_at` DATETIME NULL,
   `updated_at` DATETIME NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `phones` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_user` INT NOT NULL,
+  `number` VARCHAR(20) NOT NULL,
+  `status` VARCHAR(5) NOT NULL DEFAULT 'A',
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
 
 
 

@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\UserService;
+use App\Services\PhoneService;
 
 class UserController extends Controller
 {
     private $userService;
+    private $phoneService;
 
-    public function __construct(UserService $userService)
+    public function __construct(UserService $userService, PhoneService $phoneService)
     {
         $this->userService = $userService;
+        $this->phoneService = $phoneService;
     }
 
     // ****************************************
@@ -65,6 +68,23 @@ class UserController extends Controller
         ];
 
         $response = $this->userService->store($data);
+
+        if($response['status'] == 'success'){
+            if($request->phones){
+                if(count($request->phones) > 0){
+
+                    foreach ($request->phones as $number) {
+                        $data = [
+                            'id_user' => $response['data']->id,
+                            'number' => $number 
+                        ];
+    
+                        $this->phoneService->store($data);
+                    }
+        
+                }
+            }
+        }
 
         if($response['status'] == 'success')
             return response()->json(['status'=>'success'], 201);

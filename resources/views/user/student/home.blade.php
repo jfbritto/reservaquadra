@@ -179,12 +179,47 @@
                         </div>
 
                     </div>
+
+                    <hr>
+
+                    <div class="row" id="box-phones">
+                    
+                    </div>
                 </form>
 
             </div>
             <div class="modal-footer">
+                <a title="Adicionar telefone" href="#" class="btn btn-success" data-toggle="modal" data-target="#modalAddPhone"><i class="fas fa-plus"></i>&nbsp;&nbsp;<i class="fas fa-phone"></i></a>
                 <button type="submit" class="btn btn-primary" form="formStoreStudent">Salvar</button>
             </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalAddPhone">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Adicionar Telefone</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">    
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="phone_number">Número</label>
+                                <input type="text" name="phone_number" id="phone_number" class="form-control phone" placeholder="Informe o telefone">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-success" id="btn-add-phone">Adicionar</a>
+                </div>
             </div>
         </div>
     </div>
