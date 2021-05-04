@@ -119,4 +119,7 @@ Route::group(['middleware' => ['admin']], function(){
     Route::get('/subtipos-de-centros-de-custo/listar', 'CostCenterSubtypeController@list');
     Route::post('/subtipos-de-centros-de-custo/cadastrar', 'CostCenterSubtypeController@store');
     Route::delete('/subtipos-de-centros-de-custo/deletar', 'CostCenterSubtypeController@destroy');
+
+    //telefones
+    Route::get('/telefones/listar', 'PhoneController@list');
 });

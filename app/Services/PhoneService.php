@@ -82,12 +82,12 @@ class PhoneService
         return $response;
     }
 
-    public function list()
+    public function list($id_user)
     {
         $response = [];
 
         try{
-            $return = DB::select( DB::raw("select * from phones where status = 'A' order by name"));
+            $return = DB::select( DB::raw("select * from phones where status = 'A' and id_user = '".$id_user."' order by id desc"));
 
             $response = ['status' => 'success', 'data' => $return];
         }catch(Exception $e){

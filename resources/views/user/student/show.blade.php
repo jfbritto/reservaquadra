@@ -94,6 +94,12 @@
 
             <hr>
 
+            <div class="row" id="box-phones">
+            
+            </div>
+
+            <hr>
+
             <div class="row">
                 <div class="col-md-10 col-8">
                     <strong><i class="fas fa-map-marker-alt mr-1"></i> Endereço</strong>
@@ -103,7 +109,6 @@
                     <strong><i class="fas fa-map-marker-alt mr-1"></i> CEP</strong>
                     <p class="text-muted" id="zip_code"></p>
                 </div>
-                
             </div>
 
             <hr>

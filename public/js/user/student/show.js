@@ -71,6 +71,53 @@ $(document).ready(function () {
         ]);
     }
 
+    // LISTAR TELEFONES
+    function loadPhones()
+    {
+        Swal.queue([
+            {
+                title: "Carregando...",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                    $.get(window.location.origin + "/telefones/listar", {
+                        id_user:$("#id_usr").val()
+                    })
+                        .then(function (data) {
+                            if (data.status == "success") {
+
+                                Swal.close();
+
+                                $("#box-phones").html(``);
+
+                                if(data.data.length > 0){
+
+                                    data.data.forEach(item => { 
+                                        $("#box-phones").append(`
+                                            <div class="col-sm-3">
+                                                <div class="alert alert-light">
+                                                    <span class="phone_add" data-type="phone">${item.number}</span>
+                                                    <button type="button" class="close close-alert">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        `);
+                                    });
+
+                                }
+
+                            } else if (data.status == "error") {
+                                showError(data.message)
+                            }
+                        })
+                        .catch();
+                },
+            },
+        ]);
+    }
+
     // LISTAR QUADRAS
     function loadCourts()
     {
@@ -820,6 +867,8 @@ $(document).ready(function () {
         listScheduledClasses();
         // listar aulas aplicadas/canceladas/reagendadas
         listScheduledClassesResults();
+        // listar telefones
+        loadPhones();
     }
 
 });
