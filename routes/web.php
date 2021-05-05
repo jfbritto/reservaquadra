@@ -120,6 +120,18 @@ Route::group(['middleware' => ['admin']], function(){
     Route::post('/subtipos-de-centros-de-custo/cadastrar', 'CostCenterSubtypeController@store');
     Route::delete('/subtipos-de-centros-de-custo/deletar', 'CostCenterSubtypeController@destroy');
 
+    //métodos de pagamento
+    Route::get('/metodos-de-pagamento', 'PaymentMethodController@index');
+    Route::get('/metodos-de-pagamento/listar', 'PaymentMethodController@list');
+    Route::post('/metodos-de-pagamento/cadastrar', 'PaymentMethodController@store');
+    Route::put('/metodos-de-pagamento/editar', 'PaymentMethodController@update');
+    Route::delete('/metodos-de-pagamento/deletar', 'PaymentMethodController@destroy');
+
+    //subtipos de métodos de pagamento
+    Route::get('/subtipos-de-metodos-de-pagamento/listar', 'PaymentMethodSubtypeController@list');
+    Route::post('/subtipos-de-metodos-de-pagamento/cadastrar', 'PaymentMethodSubtypeController@store');
+    Route::delete('/subtipos-de-metodos-de-pagamento/deletar', 'PaymentMethodSubtypeController@destroy');
+
     //telefones
     Route::get('/telefones/listar', 'PhoneController@list');
 });

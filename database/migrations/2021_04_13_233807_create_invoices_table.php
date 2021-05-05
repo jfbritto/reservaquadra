@@ -29,6 +29,8 @@ class CreateInvoicesTable extends Migration
             $table->dateTime('cancel_date')->nullable();
             $table->integer('id_user_canceled')->nullable();
             $table->integer('id_type');
+            $table->integer('id_payment_method')->nullable();
+            $table->integer('id_payment_method_subtype')->nullable();
             $table->timestamps();
         });
     }

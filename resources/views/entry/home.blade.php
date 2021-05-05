@@ -11,6 +11,19 @@
 @stop
 
 @section('content')
+
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-3 link-student">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-comment-dollar"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Total recebido</span>
+                    <span class="info-box-number" id="tot-entry"><i class="fas fa-spinner fa-pulse"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <div class="card">
         <div class="card-header border-0">
@@ -23,6 +36,9 @@
                         <tr>
                             <th>Data</th>
                             <th>Valor</th>
+                            <th>Método</th>
+                            <th>Subtipo/Bandeira</th>
+                            <th>Cliente</th>
                         </tr>
                     </thead>
                     <tbody id="list"></tbody>

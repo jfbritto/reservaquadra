@@ -81,6 +81,8 @@ class InvoiceController extends Controller
             'paid_date' => date('Y-m-d H:i:s'),
             'id_user_received' => auth()->user()->id,
             'status' => "R",
+            'id_payment_method' => trim($request->id_payment_method),
+            'id_payment_method_subtype' => trim($request->id_payment_method_subtype),
         ];
 
         $response = $this->invoiceService->receive($data);

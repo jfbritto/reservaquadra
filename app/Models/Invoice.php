@@ -21,6 +21,8 @@ class Invoice extends Model
         'id_user_received',
         'id_user_canceled',
         'id_type',
+        'id_payment_method',
+        'id_payment_method_subtype',
         'status',
         'created_at',
         'updated_at',

@@ -45,7 +45,7 @@ class UsersTableSeeder extends Seeder
             array (
                 'id' => 2,
                 'id_company' => 1,
-                'name' => 'CIntia Closs',
+                'name' => 'Cintia Closs',
                 'email' => 'cintia_closs@gmail.com',
                 'password' => '$2y$10$eyotOnegT5/r9Ld1o0bYQe74RMyCeLxQv96jRicXJEba629jaOMp2',
                 'group' => 4,

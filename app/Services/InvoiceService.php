@@ -44,6 +44,8 @@ class InvoiceService
                                 'paid_price' => $data['paid_price'],
                                 'paid_date' => $data['paid_date'],
                                 'id_user_received' => $data['id_user_received'],
+                                'id_payment_method' => $data['id_payment_method'],
+                                'id_payment_method_subtype' => $data['id_payment_method_subtype'],
                                 'status' => $data['status']]);
 
             DB::commit();
@@ -193,10 +195,12 @@ class InvoiceService
             $date_fim = date('Y-m-t 23:59:59', strtotime($date));
 
             $return = DB::select( DB::raw("select 
-                                                * 
-                                            from 
+                                                inv.*, usr.name as cliente, pmt.name as payment_method, pms.name as payment_method_subtype
+                                            from
                                                 invoices inv 
-                                                join users usr on usr.id=inv.id_user 
+                                                join users usr on usr.id=inv.id_user
+                                                join payment_methods pmt on inv.id_payment_method=pmt.id
+                                                join payment_method_subtypes pms on inv.id_payment_method_subtype=pms.id
                                             where 
                                                 usr.id_company = ".auth()->user()->id_company." and 
                                                 inv.status = 'R' and 

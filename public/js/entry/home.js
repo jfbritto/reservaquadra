@@ -22,6 +22,8 @@ $(document).ready(function () {
                                 Swal.close();
                                 $("#list").html(``);
 
+                                let tot_entry = 0;
+
                                 if(data.data.length > 0){
                                     
                                     data.data.forEach(item => {
@@ -29,10 +31,18 @@ $(document).ready(function () {
                                         $("#list").append(`
                                             <tr>
                                                 <td class="align-middle">${dateFormat(item.due_date)}</td>
-                                                <td class="align-middle">${moneyFormat(item.price)}</td>
+                                                <td class="align-middle">R$ ${moneyFormat(item.paid_price)}</td>
+                                                <td class="align-middle">${item.payment_method}</td>
+                                                <td class="align-middle">${item.payment_method_subtype}</td>
+                                                <td class="align-middle">${item.cliente}</td>
                                             </tr>
                                         `);       
+
+                                        if(item.status == 'R')
+                                            tot_entry += parseFloat(item.paid_price);
+
                                     });
+
 
                                 }else{
 
@@ -43,6 +53,8 @@ $(document).ready(function () {
                                     `);  
 
                                 }
+
+                                $("#tot-entry").html("R$ "+moneyFormat(tot_entry));
 
 
                             } else if (data.status == "error") {

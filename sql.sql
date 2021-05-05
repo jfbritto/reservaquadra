@@ -169,8 +169,7 @@ CREATE TABLE IF NOT EXISTS `scheduled_classes_results` (
 ENGINE = InnoDB;
 
 
--- não implementado
-CREATE TABLE IF NOT EXISTS `payment_method` (
+CREATE TABLE IF NOT EXISTS `payment_methods` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(30) NOT NULL,
   `created_at` DATETIME NULL,
@@ -178,10 +177,8 @@ CREATE TABLE IF NOT EXISTS `payment_method` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
--- não implementado
-CREATE TABLE IF NOT EXISTS `payment_method_subtype` (
+CREATE TABLE IF NOT EXISTS `payment_method_subtypes` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_company` INT NOT NULL,
   `id_payment_method` INT NOT NULL,
   `name` VARCHAR(30) NOT NULL,
   `created_at` DATETIME NULL,
@@ -190,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `payment_method_subtype` (
 ENGINE = InnoDB;
 
 -- não implementado
-CREATE TABLE IF NOT EXISTS `invoice_type` (
+CREATE TABLE IF NOT EXISTS `invoice_types` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(30) NOT NULL,
   `created_at` DATETIME NULL,

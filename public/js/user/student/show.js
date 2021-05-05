@@ -311,6 +311,91 @@ $(document).ready(function () {
 
     }
 
+    // LISTAR MÉTODOS DE PAGAMENTO
+    function loadPaymentMethods()
+    {
+        Swal.queue([
+            {
+                title: "Carregando...",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                    $.get(window.location.origin + "/metodos-de-pagamento/listar", {
+                        
+                    })
+                        .then(function (data) {
+                            if (data.status == "success") {
+
+                                Swal.close();
+
+                                $("#id_payment_method").html(``);
+                                $("#id_payment_method").html(`<option value="">-- Selecione --</option>`);
+
+                                if(data.data.length > 0){
+
+                                    data.data.forEach(item => { 
+                                        $("#id_payment_method").append(`
+                                            <option value="${item.id}">${item.name}</option>
+                                        `)
+                                    });
+
+                                }
+
+                            } else if (data.status == "error") {
+                                showError(data.message)
+                            }
+                        })
+                        .catch();
+                },
+            },
+        ]);
+    }
+
+    // LISTAR MÉTODOS DE PAGAMENTO
+    $("#id_payment_method").on("change", function(){
+        
+        let id_payment_method = $("#id_payment_method option:selected").val();
+
+        Swal.queue([
+            {
+                title: "Carregando...",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                    $.get(window.location.origin + "/subtipos-de-metodos-de-pagamento/listar", {
+                        id_payment_method:id_payment_method
+                    })
+                        .then(function (data) {
+                            if (data.status == "success") {
+
+                                Swal.close();
+
+                                $("#id_payment_method_subtype").html(``);
+                                $("#id_payment_method_subtype").html(`<option value="">-- Selecione --</option>`);
+
+                                if(data.data.length > 0){
+
+                                    data.data.forEach(item => { 
+                                        $("#id_payment_method_subtype").append(`
+                                            <option value="${item.id}">${item.name}</option>
+                                        `)
+                                    });
+
+                                }
+
+                            } else if (data.status == "error") {
+                                showError(data.message)
+                            }
+                        })
+                        .catch();
+                },
+            },
+        ]);
+
+    });
+
 
     // CADASTRAR CONTRATO
     $("#formStoreContract").submit(function (e) {
@@ -512,7 +597,9 @@ $(document).ready(function () {
                         data: {
                             id: $("#id_invoice").val(),
                             discount: $("#discount").val(),
-                            paid_price: $("#paid_price").val()
+                            paid_price: $("#paid_price").val(),
+                            id_payment_method: $("#id_payment_method option:selected").val(),
+                            id_payment_method_subtype: $("#id_payment_method_subtype option:selected").val(),
                         }
                     })
                         .then(function (data) {
@@ -524,7 +611,7 @@ $(document).ready(function () {
                                 
                                 $("#modalReceiveInvoice").modal("hide");
 
-                                showSuccess("Cadastro efetuado!", null, loadAll)
+                                showSuccess("Recebimento efetuado!", null, loadAll)
                             } else if (data.status == "error") {
                                 showError(data.message)
                             }
@@ -869,6 +956,8 @@ $(document).ready(function () {
         listScheduledClassesResults();
         // listar telefones
         loadPhones();
+        //listar métodos de pagamento
+        loadPaymentMethods();
     }
 
 });
