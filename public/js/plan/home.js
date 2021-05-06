@@ -5,6 +5,9 @@ $(document).ready(function () {
     // LISTAR PLANOS
     function loadPlans()
     {
+        $(".year-plan").hide();
+        $("#price_label").html("Valor mensal");
+        
         Swal.queue([
             {
                 title: "Carregando...",
@@ -33,7 +36,7 @@ $(document).ready(function () {
                                                 <td class="align-middle">${periodContractedDescription(item.months)}</td>
                                                 <td class="align-middle">${moneyFormat(item.price)}</td>
                                                 <td class="align-middle" style="text-align: right">
-                                                    <a title="Editar" data-id="${item.id}" data-name="${item.name}" data-months="${item.months}" data-age_range="${item.age_range}" data-day_period="${item.day_period}" data-lessons_per_week="${item.lessons_per_week}" data-annual_contract="${item.annual_contract}" data-price="${item.price}" href="#" class="btn btn-warning edit-court"><i style="color: white" class="fas fa-edit"></i></a>
+                                                    <a title="Editar" data-id="${item.id}" data-name="${item.name}" data-months="${item.months}" data-age_range="${item.age_range}" data-day_period="${item.day_period}" data-lessons_per_week="${item.lessons_per_week}" data-annual_contract="${item.annual_contract}" data-price="${item.price}" data-price_march="${item.price_march}" data-price_april="${item.price_april}" data-price_may="${item.price_may}" data-price_june="${item.price_june}" data-price_july="${item.price_july}" data-price_august="${item.price_august}" data-price_september="${item.price_september}" data-price_october="${item.price_october}" data-price_november="${item.price_november}" data-price_december="${item.price_december}"  href="#" class="btn btn-warning edit-court"><i style="color: white" class="fas fa-edit"></i></a>
                                                     <a title="Deletar" data-id="${item.id}" href="#" class="btn btn-danger delete-court"><i class="fas fa-trash-alt"></i></a>
                                                 </td>
                                             </tr>
@@ -80,6 +83,16 @@ $(document).ready(function () {
                         lessons_per_week: $("#lessons_per_week option:selected").val(),
                         months: $("#months option:selected").val(),
                         price: $("#price").val(),
+                        price_march: $("#price_march").val(),
+                        price_april: $("#price_april").val(),
+                        price_may: $("#price_may").val(),
+                        price_june: $("#price_june").val(),
+                        price_july: $("#price_july").val(),
+                        price_august: $("#price_august").val(),
+                        price_september: $("#price_september").val(),
+                        price_october: $("#price_october").val(),
+                        price_november: $("#price_november").val(),
+                        price_december: $("#price_december").val(),
                     })
                         .then(function (data) {
                             if (data.status == "success") {
@@ -105,21 +118,28 @@ $(document).ready(function () {
     // EDITAR PLANO
     $("#list").on("click", ".edit-court", function(){
 
-        let id = $(this).data('id');
-        let name = $(this).data('name');
-        let months = $(this).data('months');
-        let age_range = $(this).data('age_range');
-        let day_period = $(this).data('day_period');
-        let lessons_per_week = $(this).data('lessons_per_week');
-        let price = $(this).data('price');
+        $("#id_edit").val($(this).data('id'));
+        $("#name_edit").val($(this).data('name'));
+        $("#months_edit").val($(this).data('months')).change();
+        $("#age_range_edit").val($(this).data('age_range')).change();
+        $("#day_period_edit").val($(this).data('day_period')).change();
+        $("#lessons_per_week_edit").val($(this).data('lessons_per_week')).change();
+        $("#price_edit").val(moneyFormat($(this).data('price')));
+        $("#price_march_edit").val(moneyFormat($(this).data('price_march')));
+        $("#price_april_edit").val(moneyFormat($(this).data('price_april')));
+        $("#price_may_edit").val(moneyFormat($(this).data('price_may')));
+        $("#price_june_edit").val(moneyFormat($(this).data('price_june')));
+        $("#price_july_edit").val(moneyFormat($(this).data('price_july')));
+        $("#price_august_edit").val(moneyFormat($(this).data('price_august')));
+        $("#price_september_edit").val(moneyFormat($(this).data('price_september')));
+        $("#price_october_edit").val(moneyFormat($(this).data('price_october')));
+        $("#price_november_edit").val(moneyFormat($(this).data('price_november')));
+        $("#price_december_edit").val(moneyFormat($(this).data('price_december')));
 
-        $("#id_edit").val(id);
-        $("#name_edit").val(name);
-        $("#months_edit").val(months).change();
-        $("#age_range_edit").val(age_range).change();
-        $("#day_period_edit").val(day_period).change();
-        $("#lessons_per_week_edit").val(lessons_per_week).change();
-        $("#price_edit").val(moneyFormat(price));
+        if($(this).data('months') > 12)
+            $(".year-plan-edit").show();
+        else
+            $(".year-plan-edit").hide();
 
         $("#modalEditPlan").modal("show");
     });
@@ -146,6 +166,16 @@ $(document).ready(function () {
                             annual_contract: $("#annual_contract_edit option:selected").val(),
                             months: $("#months_edit option:selected").val(),
                             price: $("#price_edit").val(),
+                            price_march: $("#price_march_edit").val(),
+                            price_april: $("#price_april_edit").val(),
+                            price_may: $("#price_may_edit").val(),
+                            price_june: $("#price_june_edit").val(),
+                            price_july: $("#price_july_edit").val(),
+                            price_august: $("#price_august_edit").val(),
+                            price_september: $("#price_september_edit").val(),
+                            price_october: $("#price_october_edit").val(),
+                            price_november: $("#price_november_edit").val(),
+                            price_december: $("#price_december_edit").val(),
                         }
                     })
                         .then(function (data) {
@@ -220,19 +250,25 @@ $(document).ready(function () {
     $("#months").on("change", function(){
         let option = $("#months option:selected").val();
         
-        if(option == 13)
-            $("#price_label").html("Valor anual");
-        else
+        if(option == 13){
+            $("#price_label").html("Valor anual padrão (entrando em fevereiro)");
+            $(".year-plan").show();
+        }else{
             $("#price_label").html("Valor mensal");
+            $(".year-plan").hide();
+        }
     });
 
     $("#months_edit").on("change", function(){
         let option = $("#months_edit option:selected").val();
         
-        if(option == 13)
-            $("#price_edit_label").html("Valor anual");
-        else
+        if(option == 13){
+            $("#price_edit_label").html("Valor anual padrão (entrando em fevereiro)");
+            $(".year-plan-edit").show();
+        }else{
             $("#price_edit_label").html("Valor mensal");
+            $(".year-plan-edit").hide();
+        }
     });
 
 });

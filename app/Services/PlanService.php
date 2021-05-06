@@ -46,7 +46,18 @@ class PlanService
                                   'lessons_per_week' => $data['lessons_per_week'],
                                   'annual_contract' => $data['annual_contract'],
                                   'months' => $data['months'],
-                                  'price' => $data['price']]);
+                                  'price' => $data['price'],
+                                  'price_march' => $data['price_march'],
+                                  'price_april' => $data['price_april'],
+                                  'price_may' => $data['price_may'],
+                                  'price_june' => $data['price_june'],
+                                  'price_july' => $data['price_july'],
+                                  'price_august' => $data['price_august'],
+                                  'price_september' => $data['price_september'],
+                                  'price_october' => $data['price_october'],
+                                  'price_november' => $data['price_november'],
+                                  'price_december' => $data['price_december'],
+                                  ]);
 
             DB::commit();
 

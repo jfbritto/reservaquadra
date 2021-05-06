@@ -23,6 +23,16 @@ class CreatePlansTable extends Migration
             $table->integer('lessons_per_week');
             $table->integer('annual_contract');
             $table->decimal('price', 10);
+            $table->decimal('price_march', 10)->nullable()->default(0);
+            $table->decimal('price_april', 10)->nullable()->default(0);
+            $table->decimal('price_may', 10)->nullable()->default(0);
+            $table->decimal('price_june', 10)->nullable()->default(0);
+            $table->decimal('price_july', 10)->nullable()->default(0);
+            $table->decimal('price_august', 10)->nullable()->default(0);
+            $table->decimal('price_september', 10)->nullable()->default(0);
+            $table->decimal('price_october', 10)->nullable()->default(0);
+            $table->decimal('price_november', 10)->nullable()->default(0);
+            $table->decimal('price_december', 10)->nullable()->default(0);
             $table->string('status', 5)->default('A');
             $table->timestamps();
         });
