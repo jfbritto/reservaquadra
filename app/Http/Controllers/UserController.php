@@ -141,6 +141,26 @@ class UserController extends Controller
 
         $response = $this->userService->update($data);
 
+        if($response['status'] == 'success'){
+            
+            $this->phoneService->removeByCliente($request->id);
+
+            if($request->phones){
+                if(count($request->phones) > 0){
+
+                    foreach ($request->phones as $number) {
+                        $data = [
+                            'id_user' => $request->id,
+                            'number' => $number 
+                        ];
+    
+                        $this->phoneService->store($data);
+                    }
+        
+                }
+            }
+        }
+
         if($response['status'] == 'success')
             return response()->json(['status'=>'success'], 200);
 

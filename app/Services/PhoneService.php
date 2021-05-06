@@ -82,6 +82,28 @@ class PhoneService
         return $response;
     }
 
+    public function removeByCliente($id_user)
+    {
+        $response = [];
+
+        try{
+
+            DB::beginTransaction();
+
+            $phones = DB::table('phones')->where('id_user', $id_user)->delete();
+
+            DB::commit();
+
+            $response = ['status' => 'success', 'data' => $phones];
+
+        }catch(Exception $e){
+            DB::rollBack();
+            $response = ['status' => 'error', 'data' => $e->getMessage()];
+        }
+
+        return $response;
+    }
+
     public function list($id_user)
     {
         $response = [];

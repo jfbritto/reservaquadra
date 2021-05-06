@@ -89,22 +89,34 @@ $(document).ready(function () {
 
                                 Swal.close();
 
-                                $("#box-phones").html(``);
+                                $("#box-phones-registered").html(``);
 
                                 if(data.data.length > 0){
 
                                     data.data.forEach(item => { 
-                                        $("#box-phones").append(`
+                                        $("#box-phones-registered").append(`
                                             <div class="col-sm-3">
                                                 <div class="alert alert-light">
+                                                    <span data-type="phone">${item.number}</span>
+                                                </div>
+                                            </div>
+                                        `);
+
+                                        let random = Math.floor(Math.random() * 100000);
+    
+                                        $("#box-phones").append(`
+                                            <div class="col-sm-3 random${random}">
+                                                <div class="alert alert-light">
                                                     <span class="phone_add" data-type="phone">${item.number}</span>
-                                                    <button type="button" class="close close-alert">
+                                                    <button type="button" class="close close-alert" data-class_alert="random${random}" >
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
                                             </div>
                                         `);
+
                                     });
+
 
                                 }
 
@@ -627,6 +639,16 @@ $(document).ready(function () {
     $("#formEditStudent").submit(function (e) {
         e.preventDefault();
 
+        let phones = $(".phone_add");
+        let phone_array = [];
+        for (const key in phones) {
+            if (Object.hasOwnProperty.call(phones, key)) {
+                const element = $(phones[key]).data("type");
+                if(element == "phone")
+                    phone_array.push($(phones[key]).html())
+            }
+        }
+
         Swal.queue([
             {
                 title: "Carregando...",
@@ -656,6 +678,7 @@ $(document).ready(function () {
                             start_date: $("#start_date_edit").val(),
                             health_plan: $("#health_plan_edit").val(),
                             how_met: $("#how_met_edit option:selected").val(),
+                            phones:phone_array
                         }
                     })
                         .then(function (data) {
@@ -935,6 +958,32 @@ $(document).ready(function () {
             },
         ]);
     }
+
+    $("#btn-add-phone").on("click", function(){
+
+        let number = $("#phone_number").val();
+        let random = Math.floor(Math.random() * 100000);
+
+        $("#box-phones").append(`
+            <div class="col-sm-3 random${random}">
+                <div class="alert alert-light">
+                    <span class="phone_add" data-type="phone">${number}</span>
+                    <button type="button" class="close close-alert" data-class_alert="random${random}" >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        `);
+
+        $("#modalAddPhone").modal("hide");
+        $("#phone_number").val("");
+
+    });
+
+    $("#box-phones").on("click", ".close-alert", function(){
+        let class_alert = $(this).data("class_alert");
+        $(`.${class_alert}`).remove()
+    });
 
 
     // CARREGAR DADOS NA TELA
