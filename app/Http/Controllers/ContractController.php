@@ -25,12 +25,21 @@ class ContractController extends Controller
                 'id' => trim($request->id_contract_renew),
                 'status' => "R",
             ];
-
             $response = $this->contractService->renew($data);
         }
 
-        $price_formated = str_replace(".", "", trim($request->price_per_month));
-        $price_formated = str_replace(",", ".", $price_formated);
+        $parcel = null;
+        if($request->months >= 12){
+            $price_formated = str_replace(".", "", trim($request->price_per_month));
+            $price_formated = str_replace(",", ".", $price_formated);
+
+            $price_formated = number_format(($price_formated/$request->parcel),2,".","");
+
+            $parcel = $request->parcel;
+        }else{
+            $price_formated = str_replace(".", "", trim($request->price_per_month));
+            $price_formated = str_replace(",", ".", $price_formated);
+        }
 
         $expiration_day = str_pad(trim($request->expiration_day) , 2 , '0' , STR_PAD_LEFT);
 
@@ -40,29 +49,54 @@ class ContractController extends Controller
             'start_date' => trim($request->start_date),
             'expiration_day' => $expiration_day,
             'status' => "A",
-            'price_per_month' => $price_formated
+            'price_per_month' => $price_formated,
+            'parcel' => $parcel,
         ];        
 
         $response = $this->contractService->store($data);
 
         if($response['status'] == 'success'){
             
-            for ($i=0; $i < 6; $i++) {
-                
-                $due_date = date('Y-m-'.$expiration_day.'', strtotime("+ ".$i." months"));
-                
-                $data = [
-                    'id_user' => trim($request->id_user),
-                    'id_contract' => trim($response['data']->id),
-                    'due_date' => $due_date,
-                    'price' => trim($price_formated),
-                    'generate_date' => date('Y-m-d H:i:s'),
-                    'id_user_generated' => auth()->user()->id,
-                    'id_type' => 1,
-                    'status' => "A"
-                ];    
+            if($request->months >= 12){
 
-                $response2 = $this->invoiceService->store($data);
+                for ($i=0; $i < $request->parcel; $i++) {
+                    
+                    $due_date = date('Y-m-'.$expiration_day.'', strtotime("+ ".$i." months"));
+                    
+                    $data = [
+                        'id_user' => trim($request->id_user),
+                        'id_contract' => trim($response['data']->id),
+                        'due_date' => $due_date,
+                        'price' => trim($price_formated),
+                        'generate_date' => date('Y-m-d H:i:s'),
+                        'id_user_generated' => auth()->user()->id,
+                        'id_type' => 1,
+                        'status' => "A"
+                    ];    
+    
+                    $response2 = $this->invoiceService->store($data);
+                }
+
+            }else{
+
+                for ($i=0; $i < 6; $i++) {
+                    
+                    $due_date = date('Y-m-'.$expiration_day.'', strtotime("+ ".$i." months"));
+                    
+                    $data = [
+                        'id_user' => trim($request->id_user),
+                        'id_contract' => trim($response['data']->id),
+                        'due_date' => $due_date,
+                        'price' => trim($price_formated),
+                        'generate_date' => date('Y-m-d H:i:s'),
+                        'id_user_generated' => auth()->user()->id,
+                        'id_type' => 1,
+                        'status' => "A"
+                    ];    
+    
+                    $response2 = $this->invoiceService->store($data);
+                }
+
             }
         }
 

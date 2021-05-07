@@ -475,22 +475,30 @@
                                 <select required name="id_plan" id="id_plan" class="form-control"></select>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="start_date_contract">Data inicio</label>
                                 <input type="date" required name="start_date_contract" id="start_date_contract" class="form-control" value="{{date('Y-m-d')}}">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="expiration_day">Dia vencimento</label>
                                 <input type="number" required name="expiration_day" id="expiration_day" class="form-control" placeholder="Informe o melhor dia para o vencimento" max="30">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-12 price_per_month_box">
                             <div class="form-group">
-                                <label for="price_per_month">Mensalidade</label>
-                                <input type="text" required name="price_per_month" id="price_per_month" class="form-control money" placeholder="Informe o valor das mensalidades">
+                                <label for="price_per_month" id="price_per_month_label">Mensalidade</label>
+                                <input type="text" required readonly name="price_per_month" id="price_per_month" class="form-control money" placeholder="Informe o valor das mensalidades">
+                            </div>
+                        </div>
+                        <div class="col-md-6 parcels" style="display: none;">
+                            <div class="form-group">
+                                <label for="parcel">Parcelas</label>
+                                <select name="parcel" id="parcel" class="form-control">
+                                    <option selected value=""></option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -525,24 +533,30 @@
                                 <select required name="id_plan_renew" id="id_plan_renew" class="form-control"></select>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="start_date_contract_renew">Data inicio</label>
                                 <input type="date" required name="start_date_contract_renew" id="start_date_contract_renew" class="form-control" value="{{date('Y-m-d')}}">
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="expiration_day_renew">Dia vencimento</label>
                                 <input type="number" required name="expiration_day_renew" id="expiration_day_renew" class="form-control" placeholder="Informe o melhor dia para o vencimento" max="30">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-12 price_per_month_box_renew">
                             <div class="form-group">
-                                <label for="price_per_month_renew">Mensalidade</label>
-                                <input type="text" required name="price_per_month_renew" id="price_per_month_renew" class="form-control money" placeholder="Informe o valor das mensalidades">
+                                <label for="price_per_month_renew" id="price_per_month_label_renew">Mensalidade</label>
+                                <input type="text" required readonly name="price_per_month_renew" id="price_per_month_renew" class="form-control money" placeholder="Informe o valor das mensalidades">
+                            </div>
+                        </div>
+                        <div class="col-md-6 parcels_renew" style="display: none;">
+                            <div class="form-group">
+                                <label for="parcel_renew">Parcelas</label>
+                                <select name="parcel_renew" id="parcel_renew" class="form-control">
+                                    <option selected value=""></option>
+                                </select>
                             </div>
                         </div>
                     </div>

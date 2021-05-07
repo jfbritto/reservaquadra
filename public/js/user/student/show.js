@@ -90,6 +90,7 @@ $(document).ready(function () {
                                 Swal.close();
 
                                 $("#box-phones-registered").html(``);
+                                $("#box-phones").html(``);
 
                                 if(data.data.length > 0){
 
@@ -192,11 +193,11 @@ $(document).ready(function () {
                     data.data.forEach(item => {
                         
                         $("#id_plan").append(`
-                            <option data-months="${item.months}" data-price="${item.price}" value="${item.id}">${getAgeRange(item.age_range)} - ${getDayPeriod(item.day_period)} - ${item.lessons_per_week} aula(s)/semana - contrato ${periodContractedDescription(item.months)} - R$ ${moneyFormat(item.price)}</option>
+                            <option data-months="${item.months}" data-price="${item.price}" data-price_march="${item.price_march}" data-price_april="${item.price_april}" data-price_may="${item.price_may}" data-price_june="${item.price_june}" data-price_july="${item.price_july}" data-price_august="${item.price_august}" data-price_september="${item.price_september}" data-price_october="${item.price_october}" data-price_november="${item.price_november}" data-price_december="${item.price_december}" value="${item.id}">${getAgeRange(item.age_range)} - ${getDayPeriod(item.day_period)} - ${item.lessons_per_week} aula(s)/semana - contrato ${periodContractedDescription(item.months)} - R$ ${moneyFormat(item.price)}</option>
                         `)
                         
                         $("#id_plan_renew").append(`
-                            <option data-months="${item.months}" data-price="${item.price}" value="${item.id}">${getAgeRange(item.age_range)} - ${getDayPeriod(item.day_period)} - ${item.lessons_per_week} aula(s)/semana - contrato ${periodContractedDescription(item.months)} - R$ ${moneyFormat(item.price)}</option>
+                            <option data-months="${item.months}" data-price="${item.price}" data-price_march="${item.price_march}" data-price_april="${item.price_april}" data-price_may="${item.price_may}" data-price_june="${item.price_june}" data-price_july="${item.price_july}" data-price_august="${item.price_august}" data-price_september="${item.price_september}" data-price_october="${item.price_october}" data-price_november="${item.price_november}" data-price_december="${item.price_december}" value="${item.id}">${getAgeRange(item.age_range)} - ${getDayPeriod(item.day_period)} - ${item.lessons_per_week} aula(s)/semana - contrato ${periodContractedDescription(item.months)} - R$ ${moneyFormat(item.price)}</option>
                         `)
 
                     });
@@ -215,16 +216,85 @@ $(document).ready(function () {
     }
 
     $("#id_plan").on("change", function(){
-        let price = $("#id_plan option:selected").data('price');
-        let months = $("#id_plan option:selected").data('months');
-        
-        $("#price_per_month").val(moneyFormat(price))
 
-        if(months == 13){
+        let empty = $("#id_plan option:selected").val();
+        if(empty == ""){
+            $(".price_per_month_box").removeClass("col-md-6").addClass("col-md-12");
+            $("#price_per_month").val("");
+            $("#price_per_month_label").html("Mensalidade");
+            $("#expiration_day").val("");
+            $("#expiration_day").attr("disabled", false);
+            $(".parcels").hide();
+            return false;
+        }
+
+        let actual_day = new Date();
+
+        $("#price_per_month").val(moneyFormat($("#id_plan option:selected").data('price')))
+        
+        if($("#id_plan option:selected").data('months') == 13){
             $("#expiration_day").val("1");
             $("#expiration_day").attr("disabled", true);
+
+            let price = 0;
+            let select = 0;
+            
+            if(actual_day.getMonth() == 0){
+                price = $("#id_plan option:selected").data('price');
+                select = 12;
+            }else if(actual_day.getMonth() == 1){
+                price = $("#id_plan option:selected").data('price');
+                select = 12;
+            }else if(actual_day.getMonth() == 2){
+                price = $("#id_plan option:selected").data('price_march');
+                select = 11;
+            }else if(actual_day.getMonth() == 3){
+                price = $("#id_plan option:selected").data('price_april');
+                select = 10;
+            }else if(actual_day.getMonth() == 4){
+                price = $("#id_plan option:selected").data('price_may');
+                select = 9;
+            }else if(actual_day.getMonth() == 5){
+                price = $("#id_plan option:selected").data('price_june');
+                select = 8;
+            }else if(actual_day.getMonth() == 6){
+                price = $("#id_plan option:selected").data('price_july');
+                select = 7;
+            }else if(actual_day.getMonth() == 7){
+                price = $("#id_plan option:selected").data('price_august');
+                select = 6;
+            }else if(actual_day.getMonth() == 8){
+                price = $("#id_plan option:selected").data('price_september');
+                select = 5;
+            }else if(actual_day.getMonth() == 9){
+                price = $("#id_plan option:selected").data('price_october');
+                select = 4;
+            }else if(actual_day.getMonth() == 10){
+                price = $("#id_plan option:selected").data('price_november');
+                select = 3;
+            }else if(actual_day.getMonth() == 11){
+                price = $("#id_plan option:selected").data('price_december');
+                select = 2;
+            }
+
+            $("#price_per_month").val(moneyFormat(price));
+
+            let parcels = (price/select).toFixed(2);
+
+            $("#parcel").html(``)
+            $("#parcel").append(`<option value="1">1 x de ${moneyFormat(price)}</option>`)
+            $("#parcel").append(`<option value="${select}">${select} x de ${moneyFormat(parcels)}</option>`)
+
+            $("#price_per_month_label").html("Anuidade");
+
+            $(".price_per_month_box").removeClass("col-md-12").addClass("col-md-6");
+            $(".parcels").show();
         }else{
+            $(".price_per_month_box").removeClass("col-md-6").addClass("col-md-12");
+            $("#price_per_month_label").html("Mensalidade");
+            $("#expiration_day").val("");
             $("#expiration_day").attr("disabled", false);
+            $(".parcels").hide();
         }
     })
 
@@ -426,6 +496,7 @@ $(document).ready(function () {
                         start_date: $("#start_date_contract").val(),
                         expiration_day: $("#expiration_day").val(),
                         months: $("#id_plan option:selected").data('months'),
+                        parcel: $("#parcel option:selected").val(),
                         price_per_month: $("#price_per_month").val(),
                     })
                         .then(function (data) {
@@ -480,6 +551,7 @@ $(document).ready(function () {
                         start_date: $("#start_date_contract_renew").val(),
                         expiration_day: $("#expiration_day_renew").val(),
                         months: $("#id_plan_renew option:selected").data('months'),
+                        parcel: $("#parcel_renew option:selected").val(),
                         price_per_month: $("#price_per_month_renew").val(),
                     })
                         .then(function (data) {
@@ -501,6 +573,89 @@ $(document).ready(function () {
             },
         ]);
     });
+
+    $("#id_plan_renew").on("change", function(){
+
+        let empty = $("#id_plan_renew option:selected").val();
+        if(empty == ""){
+            $(".price_per_month_box_renew").removeClass("col-md-6").addClass("col-md-12");
+            $("#price_per_month_renew").val("");
+            $("#price_per_month_label_renew").html("Mensalidade");
+            $("#expiration_day_renew").val("");
+            $("#expiration_day_renew").attr("disabled", false);
+            $(".parcels_renew").hide();
+            return false;
+        }
+
+        let actual_day = new Date();
+
+        $("#price_per_month_renew").val(moneyFormat($("#id_plan_renew option:selected").data('price')))
+        
+        if($("#id_plan_renew option:selected").data('months') == 13){
+            $("#expiration_day_renew").val("1");
+            $("#expiration_day_renew").attr("disabled", true);
+
+            let price = 0;
+            let select = 0;
+            
+            if(actual_day.getMonth() == 0){
+                price = $("#id_plan_renew option:selected").data('price');
+                select = 12;
+            }else if(actual_day.getMonth() == 1){
+                price = $("#id_plan_renew option:selected").data('price');
+                select = 12;
+            }else if(actual_day.getMonth() == 2){
+                price = $("#id_plan_renew option:selected").data('price_march');
+                select = 11;
+            }else if(actual_day.getMonth() == 3){
+                price = $("#id_plan_renew option:selected").data('price_april');
+                select = 10;
+            }else if(actual_day.getMonth() == 4){
+                price = $("#id_plan_renew option:selected").data('price_may');
+                select = 9;
+            }else if(actual_day.getMonth() == 5){
+                price = $("#id_plan_renew option:selected").data('price_june');
+                select = 8;
+            }else if(actual_day.getMonth() == 6){
+                price = $("#id_plan_renew option:selected").data('price_july');
+                select = 7;
+            }else if(actual_day.getMonth() == 7){
+                price = $("#id_plan_renew option:selected").data('price_august');
+                select = 6;
+            }else if(actual_day.getMonth() == 8){
+                price = $("#id_plan_renew option:selected").data('price_september');
+                select = 5;
+            }else if(actual_day.getMonth() == 9){
+                price = $("#id_plan_renew option:selected").data('price_october');
+                select = 4;
+            }else if(actual_day.getMonth() == 10){
+                price = $("#id_plan_renew option:selected").data('price_november');
+                select = 3;
+            }else if(actual_day.getMonth() == 11){
+                price = $("#id_plan_renew option:selected").data('price_december');
+                select = 2;
+            }
+
+            $("#price_per_month_renew").val(moneyFormat(price));
+
+            let parcels = (price/select).toFixed(2);
+
+            $("#parcel_renew").html(``)
+            $("#parcel_renew").append(`<option value="1">1 x de ${moneyFormat(price)}</option>`)
+            $("#parcel_renew").append(`<option value="${select}">${select} x de ${moneyFormat(parcels)}</option>`)
+
+            $("#price_per_month_label_renew").html("Anuidade");
+
+            $(".price_per_month_box_renew").removeClass("col-md-12").addClass("col-md-6");
+            $(".parcels_renew").show();
+        }else{
+            $(".price_per_month_box_renew").removeClass("col-md-6").addClass("col-md-12");
+            $("#price_per_month_label_renew").html("Mensalidade");
+            $("#expiration_day_renew").val("");
+            $("#expiration_day_renew").attr("disabled", false);
+            $(".parcels_renew").hide();
+        }
+    })
 
 
     // CANCELAR CONTRATO

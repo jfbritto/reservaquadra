@@ -22,6 +22,7 @@ class CreateContractsTable extends Migration
             $table->string('expiration_day', 5);
             $table->string('status', 5)->default('A');
             $table->decimal('price_per_month', 10);
+            $table->integer('parcel')->nullable();
             $table->dateTime('cancel_date')->nullable();
             $table->integer('id_user_canceled')->nullable();
             $table->timestamps();
