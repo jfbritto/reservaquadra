@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\InvoiceService;
+use App\Services\ContractService;
 
 class InvoiceController extends Controller
 {
     private $invoiceService;
+    private $contractService;
 
-    public function __construct(InvoiceService $invoiceService)
+    public function __construct(InvoiceService $invoiceService, ContractService $contractService)
     {
         $this->invoiceService = $invoiceService;
+        $this->contractService = $contractService;
     }
     
     // public function store(Request $request) 
@@ -60,6 +63,7 @@ class InvoiceController extends Controller
     
     public function receive(Request $request) 
     {
+        // formata o desconto
         if($request->discount){
             $discount_formated = str_replace(".", "", trim($request->discount));
             $discount_formated = str_replace(",", ".", $discount_formated);
@@ -67,6 +71,7 @@ class InvoiceController extends Controller
             $discount_formated = 0;
         }
 
+        // formata o valor recebido
         if($request->paid_price){
             $paid_price_formated = str_replace(".", "", trim($request->paid_price));
             $paid_price_formated = str_replace(",", ".", $paid_price_formated);
@@ -85,31 +90,53 @@ class InvoiceController extends Controller
             'id_payment_method_subtype' => trim($request->id_payment_method_subtype),
         ];
 
+        // efetua o recebimento retornando o boleto recebido
         $response = $this->invoiceService->receive($data);
 
+        // verifica se deu tudo certo
         if($response['status'] == 'success'){
 
-            $response2 = $this->invoiceService->getById($request->id);
+            // busca a fatura pelo id
+            $invoice_obj = $this->invoiceService->getById($request->id);
 
-            $response3 = $this->invoiceService->listFarMoreOpen($response2['data']->id_user);
+            // verifica se a fatura é de um contrato que precisa de nova geração de fatura
+            $generate_invoice = false;
+            if($invoice_obj['data']->id_contract){
+                $contract_obj = $this->contractService->find($invoice_obj['data']->id_contract);
 
-            if($response3['status'] == 'success'){
-
-                $due_date = date("Y-m-d", strtotime("+1 month", strtotime($response3['data']->due_date)));
-
-                $data2 = [
-                    'id_user' => trim($response3['data']->id_user),
-                    'id_contract' => trim($response3['data']->id_contract),
-                    'due_date' => $due_date,
-                    'price' => trim($response3['data']->price),
-                    'generate_date' => date('Y-m-d H:i:s'),
-                    'id_user_generated' => auth()->user()->id,
-                    'id_type' => 1,
-                    'status' => "A"
-                ];    
-        
-                $response4 = $this->invoiceService->store($data2);
+                if($contract_obj['data'][0]->parcel == null)
+                    $generate_invoice = true;
             }
+
+            // caso seja...
+            if($generate_invoice){
+
+                // busca a fatura aberta mais distante
+                $invoice_far_obj = $this->invoiceService->listFarMoreOpen($invoice_obj['data']->id_user);
+                
+                // verifica se ela existe
+                if($invoice_far_obj['status'] == 'success'){
+                    
+                    // adiciona a data de vencimento após a ultima data encontrada
+                    $due_date = date("Y-m-d", strtotime("+1 month", strtotime($invoice_far_obj['data']->due_date)));
+    
+                    $data2 = [
+                        'id_user' => trim($invoice_far_obj['data']->id_user),
+                        'id_contract' => trim($invoice_far_obj['data']->id_contract),
+                        'due_date' => $due_date,
+                        'price' => trim($invoice_far_obj['data']->price),
+                        'generate_date' => date('Y-m-d H:i:s'),
+                        'id_user_generated' => auth()->user()->id,
+                        'id_type' => 1,
+                        'status' => "A"
+                    ];    
+                    
+                    // e gera a fatura
+                    $this->invoiceService->store($data2);
+                }
+
+            }
+
 
         }
 
