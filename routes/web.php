@@ -56,6 +56,13 @@ Route::group(['middleware' => ['admin']], function(){
     Route::get('/faturas/listar-entradas-por-mes', 'InvoiceController@listReceivedByMonth');
     Route::put('/faturas/receber', 'InvoiceController@receive');
     
+    // tipos faturas
+    Route::get('/tipos-faturas', 'InvoiceTypeController@index');
+    Route::get('/tipos-faturas/listar', 'InvoiceTypeController@list');
+    Route::post('/tipos-faturas/cadastrar', 'InvoiceTypeController@store');
+    Route::put('/tipos-faturas/editar', 'InvoiceTypeController@update');
+    Route::delete('/tipos-faturas/deletar', 'InvoiceTypeController@destroy');
+
     // planos
     Route::get('/planos', 'PlanController@index');
     Route::get('/planos/listar', 'PlanController@list');

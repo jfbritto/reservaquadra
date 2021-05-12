@@ -185,6 +185,7 @@
                             <thead>
                                 <tr>
                                     <th>Status</th>
+                                    <th>Tipo</th>
                                     <th>Vencimento</th>
                                     <th>Valor</th>
                                     <th></th>

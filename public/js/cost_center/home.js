@@ -31,7 +31,7 @@ $(document).ready(function () {
                                                 <td class="align-middle" style="text-align: right">
                                                     <a title="Subtipos de centro de custo" href="#" data-id="${item.id}" data-name="${item.name}" class="btn btn-primary list-subtypes"><i style="color: white" class="fas fa-list"></i></a>
                                                     <a title="Editar" data-id="${item.id}" data-name="${item.name}" href="#" class="btn btn-warning edit-cost-center"><i style="color: white" class="fas fa-edit"></i></a>
-                                                    <a title="Deletar" data-id="${item.id}" href="#" class="btn btn-danger delete-court"><i class="fas fa-trash-alt"></i></a>
+                                                    <a title="Deletar" data-id="${item.id}" href="#" class="btn btn-danger delete-cost-center"><i class="fas fa-trash-alt"></i></a>
                                                 </td>
                                             </tr>
                                         `);       
@@ -152,7 +152,7 @@ $(document).ready(function () {
 
 
     // "DELETAR" CENTRO DE CUSTO
-    $("#list").on("click", ".delete-court", function(){
+    $("#list").on("click", ".delete-cost-center", function(){
         
         let id = $(this).data('id');
 

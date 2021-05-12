@@ -198,10 +198,10 @@ CREATE TABLE IF NOT EXISTS `payment_method_subtypes` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
--- não implementado
 CREATE TABLE IF NOT EXISTS `invoice_types` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(30) NOT NULL,
+  `status` VARCHAR(5) NOT NULL,
   `created_at` DATETIME NULL,
   `updated_at` DATETIME NULL,
   PRIMARY KEY (`id`))

@@ -130,7 +130,7 @@ class InvoiceService
         $response = [];
 
         try{
-            $return = DB::select( DB::raw("select * from invoices where id_user = ".$id_student." and status = 'A' order by due_date limit 1"));
+            $return = DB::select( DB::raw("select inv.*, ity.name as invoice_type from invoices inv join invoice_types ity on ity.id=inv.id_type where inv.id_user = ".$id_student." and inv.status = 'A' order by inv.due_date limit 1"));
 
             $response = ['status' => 'success', 'data' => $return];
         }catch(Exception $e){

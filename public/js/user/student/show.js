@@ -366,6 +366,7 @@ $(document).ready(function () {
                         $("#list-invoices").append(`
                             <tr>
                                 <td class="align-middle">${item.status=='A'?`<span class="badge bg-success">Aberta</span>`:`<span class="badge bg-warning">${item.status}</span>`}</td>
+                                <td class="align-middle">${item.invoice_type}</td>
                                 <td class="align-middle">${dateFormat(item.due_date)}</td>
                                 <td class="align-middle">R$ ${moneyFormat(item.price)}</td>
                                 <td class="align-middle" style="text-align: right">
