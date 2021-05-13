@@ -75,6 +75,21 @@ class ExpenseController extends Controller
     //     return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     // }
     
+    public function pay(Request $request) 
+    {
+        $data = [
+            'id' => trim($request->id),
+            'status' => 'R'
+        ];
+
+        $response = $this->expenseService->pay($data);
+
+        if($response['status'] == 'success')
+            return response()->json(['status'=>'success'], 200);
+
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
+    }
+    
     public function destroy(Request $request) 
     {
         $data = [

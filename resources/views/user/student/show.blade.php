@@ -174,7 +174,7 @@
                         <a href="#" class="btn btn-tool btn-sm" id="" title="Listar faturas">
                             <i class="fas fa-list"></i>
                         </a>
-                        <a href="#" class="btn btn-tool btn-sm" id="" title="Cadastrar fatura avulsa">
+                        <a href="#" class="btn btn-tool btn-sm" data-toggle="modal" data-target="#modalAddSingleInvoice" title="Cadastrar fatura avulsa">
                             <i class="fas fa-plus"></i>
                         </a>
                     </div>
@@ -699,6 +699,56 @@
         </div>
     </div>
     
+
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalAddSingleInvoice">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cadastrar Fatura Avulsa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form id="formStoreSingleInvoice">
+
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="price_invoice">Valor</label>
+                                <input type="text" required name="price_invoice" id="price_invoice" class="form-control money" placeholder="Informe o valor">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="due_date_invoice">Vencimento</label>
+                                <input type="date" required name="due_date_invoice" id="due_date_invoice" class="form-control" value="{{date('Y-m-d')}}">
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="id_type_invoice">Tipo</label>
+                                <select required name="id_type_invoice" id="id_type_invoice" class="form-control"></select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" form="formStoreSingleInvoice">Salvar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
 @stop
 
 @section('js')

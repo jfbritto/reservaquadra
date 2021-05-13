@@ -172,6 +172,84 @@ $(document).ready(function () {
         ]);
     }
 
+    // LISTAR TIPOS DE FATURAS
+    function loadInvoiceTypes()
+    {
+        Swal.queue([
+            {
+                title: "Carregando...",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                    $.get(window.location.origin + "/tipos-faturas/listar", {
+                        
+                    })
+                        .then(function (data) {
+                            if (data.status == "success") {
+
+                                Swal.close();
+
+                                $("#id_type_invoice").html(``);
+                                $("#id_type_invoice").html(`<option value="">-- Selecione --</option>`);
+
+                                if(data.data.length > 0){
+
+                                    data.data.forEach(item => { 
+                                        $("#id_type_invoice").append(`
+                                            <option value="${item.id}">${item.name}</option>
+                                        `)
+                                    });
+
+                                }
+
+                            } else if (data.status == "error") {
+                                showError(data.message)
+                            }
+                        })
+                        .catch();
+                },
+            },
+        ]);
+    }
+
+    // CADASTRAR FATURA AVULSA
+    $("#formStoreSingleInvoice").submit(function (e) {
+        e.preventDefault();
+
+        Swal.queue([
+            {
+                title: "Carregando...",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                    $.post(window.location.origin + "/faturas/cadastrar", {
+                        id_user: $("#id_usr").val(),
+                        price: $("#price_invoice").val(),
+                        due_date: $("#due_date_invoice").val(),
+                        id_type: $("#id_type_invoice option:selected").val(),
+                    })
+                        .then(function (data) {
+                            if (data.status == "success") {
+
+                                $("#formStoreSingleInvoice").each(function () {
+                                    this.reset();
+                                });
+
+                                $("#modalAddSingleInvoice").modal("hide");
+
+                                showSuccess("Fatura criada!", null, loadAll)
+                            } else if (data.status == "error") {
+                                showError(data.message)
+                            }
+                        })
+                        .catch();
+                },
+            },
+        ]);
+    });
+
     // LISTAR PLANOS NO SELECT
     function loadPlans()
     {
@@ -1163,6 +1241,8 @@ $(document).ready(function () {
         loadPhones();
         //listar métodos de pagamento
         loadPaymentMethods();
+        //listar tipos de faturas
+        loadInvoiceTypes();
     }
 
 });

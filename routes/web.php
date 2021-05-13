@@ -55,6 +55,7 @@ Route::group(['middleware' => ['admin']], function(){
     Route::get('/faturas/listar/{id_student}', 'InvoiceController@listNextOpen');
     Route::get('/faturas/listar-entradas-por-mes', 'InvoiceController@listReceivedByMonth');
     Route::put('/faturas/receber', 'InvoiceController@receive');
+    Route::post('/faturas/cadastrar', 'InvoiceController@store');
     
     // tipos faturas
     Route::get('/tipos-faturas', 'InvoiceTypeController@index');
@@ -113,6 +114,7 @@ Route::group(['middleware' => ['admin']], function(){
     Route::get('/despesas', 'ExpenseController@index');
     Route::get('/despesas/listar', 'ExpenseController@list');
     Route::post('/despesas/cadastrar', 'ExpenseController@store');
+    Route::put('/despesas/pagar', 'ExpenseController@pay');
     Route::delete('/despesas/deletar', 'ExpenseController@destroy');
 
     //centro de custo

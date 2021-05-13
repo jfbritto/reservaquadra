@@ -17,30 +17,28 @@ class InvoiceController extends Controller
         $this->contractService = $contractService;
     }
     
-    // public function store(Request $request) 
-    // {
-    //     $end_date = date("Y-m-d", strtotime("+ ".$request->months." months"));
+    public function store(Request $request) 
+    {
+        $price_formated = str_replace(".", "", trim($request->price));
+        $price_formated = str_replace(",", ".", $price_formated);
 
-    //     $price_formated = str_replace(".", "", trim($request->price_per_month));
-    //     $price_formated = str_replace(",", ".", $price_formated);
+        $data = [
+            'id_user' => trim($request->id_user),
+            'price' => $price_formated,
+            'generate_date' => date('Y-m-d'),
+            'id_user_generated' => auth()->user()->id,
+            'due_date' => trim($request->due_date),
+            'id_type' => trim($request->id_type),
+            'status' => "A",
+        ];        
 
-    //     $data = [
-    //         'id_plan' => trim($request->id_plan),
-    //         'id_user' => trim($request->id_user),
-    //         'start_date' => trim($request->start_date),
-    //         'end_date' => $end_date,
-    //         'expiration_day' => trim($request->expiration_day),
-    //         'status' => "A",
-    //         'price_per_month' => $price_formated
-    //     ];        
+        $response = $this->invoiceService->store($data);
 
-    //     $response = $this->invoiceService->store($data);
+        if($response['status'] == 'success')
+            return response()->json(['status'=>'success'], 201);
 
-    //     if($response['status'] == 'success')
-    //         return response()->json(['status'=>'success'], 201);
-
-    //     return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
-    // }
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+    }
     
     // public function update(Request $request) 
     // {

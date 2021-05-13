@@ -53,7 +53,7 @@
                             <th>Centro de custo</th>
                             <th>Subtipo</th>
                             <th>Valor</th>
-                            <th>Status</th>
+                            <th>Pagamento</th>
                             <th></th>
                         </tr>
                     </thead>

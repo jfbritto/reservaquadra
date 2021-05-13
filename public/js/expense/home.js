@@ -40,6 +40,7 @@ $(document).ready(function () {
                                                 <td class="align-middle">R$ ${moneyFormat(item.price)}</td>
                                                 <td class="align-middle">${item.status=='P'?'<span class="badge badge-warning">Pendente</span>':'<span class="badge badge-success">Paga</span>'}</td>
                                                 <td class="align-middle" style="text-align: right">
+                                                    ${item.status=='P'?`<a title="Informar pagamento" data-id="${item.id}" href="#" class="btn btn-success pay-expense"><i class="fas fa-comment-dollar"></i></a>`:''}
                                                     <a title="Deletar" data-id="${item.id}" href="#" class="btn btn-danger delete-court"><i class="fas fa-trash-alt"></i></a>
                                                 </td>
                                             </tr>
@@ -295,6 +296,53 @@ $(document).ready(function () {
                                         if (data.status == "success") {
                                                         
                                             showSuccess("Deletada com sucesso!", null, loadExpenses)
+                                        } else if (data.status == "error") {
+                                            showError(data.message)
+                                        }
+                                    })
+                                    .catch();
+                            },
+                        },
+                    ]);
+
+                }
+            })
+
+    });
+
+    // PAGAR DESPESA
+    $("#list").on("click", ".pay-expense", function(){
+        
+        let id = $(this).data('id');
+
+        Swal.fire({
+            title: 'Atenção!',
+            text: "Confirma que o valor foi pago?",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Sim',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Não'
+            }).then((result) => {
+                if (result.value) {
+
+                    Swal.queue([
+                        {
+                            title: "Carregando...",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            onOpen: () => {
+                                Swal.showLoading();
+                                $.ajax({
+                                    url: window.location.origin + "/despesas/pagar",
+                                    type: 'PUT',
+                                    data: {id}
+                                })
+                                    .then(function (data) {
+                                        if (data.status == "success") {
+                                                        
+                                            showSuccess("Pagamento efetuado com sucesso!", null, loadExpenses)
                                         } else if (data.status == "error") {
                                             showError(data.message)
                                         }
