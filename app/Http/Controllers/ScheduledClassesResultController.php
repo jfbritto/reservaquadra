@@ -17,10 +17,12 @@ class ScheduledClassesResultController extends Controller
     public function store(Request $request) 
     {
 
+        $teacher = trim($request->id_teacher)==""?null:trim($request->id_teacher);
+
         $data = [
             'id_scheduled_classes' => trim($request->id_scheduled_classes),
             'status' => trim($request->status),
-            'id_teacher' => trim($request->id_teacher),
+            'id_teacher' => $teacher,
             'observation' => trim($request->observation),
             'date' => trim($request->date),
         ];

@@ -458,7 +458,7 @@ $(document).ready(function () {
 
                     $("#list-invoices").append(`
                         <tr>
-                            <td class="align-middle text-center" colspan="4">Nenhuma fatura aberta encontrada</td>
+                            <td class="align-middle text-center" colspan="5">Nenhuma fatura aberta encontrada</td>
                         </tr>
                     `);  
 

@@ -125,7 +125,7 @@ $(document).ready(function () {
                 onOpen: () => {
                     Swal.showLoading();
                     $.post(window.location.origin + "/aulas-programadas-resultado/cadastrar", {
-                        status: $("#status").val(),
+                        status: $("#status option:selected").val(),
                         id_teacher: $("#id_teacher option:selected").val(),
                         observation: $("#observation").val(),
                         date: $("#date").val(),
@@ -153,7 +153,13 @@ $(document).ready(function () {
 
     $("#status").on("change", function(){
 
-        
+        if($("#status option:selected").val() == "P"){
+            $("#id_teacher").prop("required", true)
+            $("#observation").prop("required", true)
+        }else{
+            $("#id_teacher").prop("required", false)
+            $("#observation").prop("required", false)
+        }
 
     });
 
