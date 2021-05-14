@@ -93,7 +93,6 @@
                                 <label for="id_cost_center">Centro de custo</label>
                                 <select required name="id_cost_center" id="id_cost_center" class="form-control">
                                     <option value="">-- Selecione --</option>
-                                    <option value="1">teste</option>
                                 </select>
                             </div>
                         </div>

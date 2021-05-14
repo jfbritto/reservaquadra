@@ -34,6 +34,58 @@
         </div>
     </div>
 
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalStoreScheduledClassesResult">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Resultado da aula</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form id="formStoreScheduledClassesResult">
+                    <input type="hidden" id="id_scheduled_classes" value="">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="status">Resultado</label>
+                                <select required name="status" id="status" class="form-control">
+                                    <option value="">-- Selecione --</option>
+                                    <option value="P">Presente</option>
+                                    <option value="F">Falta</option>
+                                    <option value="FJ">Falta Justificada</option>
+                                    <option value="CH">Chuva</option>
+                                    <option value="FP">Falta do Professor</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="id_teacher">Professor</label>
+                                <select required name="id_teacher" id="id_teacher" class="form-control">
+                                    <option value="">-- Selecione --</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="observation">Observação</label>
+                                <textarea name="observation" id="observation" cols="30" rows="3" class="form-control" placeholder="Descreva brevemente como foi a aula!"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" form="formStoreScheduledClassesResult">Salvar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
 @stop
 
 @section('js')

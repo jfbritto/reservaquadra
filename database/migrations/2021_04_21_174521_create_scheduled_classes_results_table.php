@@ -16,6 +16,7 @@ class CreateScheduledClassesResultsTable extends Migration
         Schema::create('scheduled_classes_results', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_scheduled_classes');
+            $table->integer('id_teacher');
             $table->string('status', 5);
             $table->date('date');
             $table->date('date_remarked')->nullable();

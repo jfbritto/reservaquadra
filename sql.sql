@@ -170,6 +170,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `scheduled_classes_results` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_scheduled_classes` INT NOT NULL,
+  `id_teacher` INT NOT NULL,
   `status` VARCHAR(5) NOT NULL,
   `date` DATE NOT NULL,
   `date_remarked` DATE DEFAULT NULL,

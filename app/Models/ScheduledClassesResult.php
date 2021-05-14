@@ -9,6 +9,7 @@ class ScheduledClassesResult extends Model
     protected $fillable = [
         'id',
         'id_scheduled_classes',
+        'id_teacher',
         'status',
         'date',
         'date_remarked',
