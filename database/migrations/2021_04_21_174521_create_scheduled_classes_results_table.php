@@ -18,6 +18,7 @@ class CreateScheduledClassesResultsTable extends Migration
             $table->integer('id_scheduled_classes');
             $table->integer('id_teacher')->nullable();
             $table->string('status', 5);
+            $table->string('result', 5);
             $table->date('date');
             $table->date('date_remarked')->nullable();
             $table->integer('id_scheduled_classes_result_remarked')->nullable();

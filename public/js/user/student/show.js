@@ -1166,7 +1166,7 @@ $(document).ready(function () {
                                             <td class="align-middle">${dateFormat(item.date)}</td>
                                             <td class="align-middle">${item.start_time} às ${item.end_time}</td>
                                             <td class="align-middle" style="text-align: right">
-                                                <span class="badge badge-${scheduledClassResultStatusClass(item.status)}">${scheduledClassResultStatus(item.status)}</span>
+                                                <span class="badge badge-${scheduledClassResultStatusClass(item.result)}">${scheduledClassResultStatus(item.result)}</span>
                                             </td>
                                         </tr>
                                     `);

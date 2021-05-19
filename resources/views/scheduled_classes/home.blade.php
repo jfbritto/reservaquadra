@@ -50,10 +50,9 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="status">Resultado</label>
-                                <select required name="status" id="status" class="form-control">
-                                    <option value="">-- Selecione --</option>
-                                    <option value="P">Presente</option>
+                                <label for="result">Resultado</label>
+                                <select required name="result" id="result" class="form-control">
+                                    <option selected="selected" value="P">Presente</option>
                                     <option value="F">Falta</option>
                                     <option value="FJ">Falta Justificada</option>
                                     <option value="CH">Chuva</option>
@@ -69,10 +68,25 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-md-6" style="display: none;" id="box-remark">
+                            <div class="form-group">
+                                <label for="remark">A aula será remarcada?</label>
+                                <select name="remark" id="remark" class="form-control">
+                                    <option value="N">Não</option>
+                                    <option value="S">Sim</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6" style="display: none;" id="box-date-remarked">
+                            <div class="form-group">
+                                <label for="date_remarked">Data da reposição</label>
+                                <input type="date" name="date_remarked" id="date_remarked" min="{{date('Y-m-d')}}" class="form-control">
+                            </div>
+                        </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="observation">Observação</label>
-                                <textarea name="observation" id="observation" cols="30" rows="3" class="form-control" placeholder="Descreva brevemente como foi a aula!"></textarea>
+                                <textarea name="observation" id="observation" cols="30" rows="3" class="form-control" placeholder="Descreva brevemente como foi a aula, ou o motivo de não ter sido realizada!"></textarea>
                             </div>
                         </div>
                     </div>

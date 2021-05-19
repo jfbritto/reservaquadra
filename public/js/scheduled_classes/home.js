@@ -34,9 +34,9 @@ $(document).ready(function () {
                                                 <td class="align-middle">${item.user_name}</td>
                                                 <td class="align-middle">${item.court_name}</td>
                                                 <td class="align-middle">${item.start_time} às ${item.end_time}</td>
-                                                <td class="align-middle">${item.status==null?`<span class="badge badge-warning">Pendente</span>`:`<span class="badge badge-${scheduledClassResultStatusClass(item.status)}">${scheduledClassResultStatus(item.status)}</span>`}</td>
+                                                <td class="align-middle">${item.result==null?`<span class="badge badge-warning">Pendente</span>`:`<span class="badge badge-${scheduledClassResultStatusClass(item.result)}">${scheduledClassResultStatus(item.result)}</span>`}</td>
                                                 <td class="align-middle" style="text-align: right">
-                                                    ${item.status==null?`
+                                                    ${item.result==null?`
                                                         <a title="Realizada" data-id="${item.id}" href="#" class="btn btn-success mark-presence"><i class="fas fa-check"></i></a>
                                                     `:``}
                                                 </td>
@@ -125,11 +125,12 @@ $(document).ready(function () {
                 onOpen: () => {
                     Swal.showLoading();
                     $.post(window.location.origin + "/aulas-programadas-resultado/cadastrar", {
-                        status: $("#status option:selected").val(),
+                        result: $("#result option:selected").val(),
                         id_teacher: $("#id_teacher option:selected").val(),
                         observation: $("#observation").val(),
                         date: $("#date").val(),
                         id_scheduled_classes: $("#id_scheduled_classes").val(),
+                        date_remarked: $("#date_remarked").val(),
                     })
                         .then(function (data) {
                             if (data.status == "success") {
@@ -151,15 +152,39 @@ $(document).ready(function () {
         ]);
     });
 
-    $("#status").on("change", function(){
+    $("#result").on("change", function(){
 
-        if($("#status option:selected").val() == "P"){
+        $("#remark").val("N").change();
+        $("#date_remarked").val("");
+        $("#box-date-remarked").hide();
+        $("#date_remarked").prop("required", false)
+
+        if($("#result option:selected").val() == "P"){
             $("#id_teacher").prop("required", true)
             $("#observation").prop("required", true)
+
+            $("#box-remark").hide();
         }else{
             $("#id_teacher").prop("required", false)
             $("#observation").prop("required", false)
+
+            $("#box-remark").show();
         }
+
+    });
+
+    $("#remark").on("change", function(){
+        let selected = $("#remark option:selected").val();
+
+        if(selected == "S"){
+            $("#box-date-remarked").show();
+            $("#date_remarked").prop("required", true)
+        }else{
+            $("#box-date-remarked").hide();
+            $("#date_remarked").prop("required", false)
+        }
+        
+        $("#date_remarked").val("");
 
     });
 

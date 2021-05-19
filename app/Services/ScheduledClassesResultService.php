@@ -60,7 +60,7 @@ class ScheduledClassesResultService
 
         try{
             $return = DB::select( DB::raw("select 
-                                                scc.*, crt.name as court_name, usr.name as user_name, scr.status as status, scr.date
+                                                scc.*, crt.name as court_name, usr.name as user_name, scr.result as result, scr.date
                                             from 
                                                 scheduled_classes_results scr
                                                 join scheduled_classes scc on scr.id_scheduled_classes= scc.id

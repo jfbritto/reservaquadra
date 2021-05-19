@@ -11,6 +11,7 @@ class ScheduledClassesResult extends Model
         'id_scheduled_classes',
         'id_teacher',
         'status',
+        'result',
         'date',
         'date_remarked',
         'id_scheduled_classes_result_remarked',
