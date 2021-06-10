@@ -31,6 +31,28 @@
                     <tbody id="list"></tbody>
                 </table>
             </div>
+
+
+            <div class="table-responsive mt-5">
+                <table class="table table-striped table-valign-middle table-hover table-sm">
+                    <thead class="text-center">
+                        <tr>
+                            <th colspan="6" style="font-size: 20px;">Aulas Remarcadas</th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th>Aluno</th>
+                            <th>Quadra</th>
+                            <th>Período</th>
+                            <th>Resultado Anterior</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="list-rm"></tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -47,6 +69,7 @@
 
                 <form id="formStoreScheduledClassesResult">
                     <input type="hidden" id="id_scheduled_classes" value="">
+                    <input type="hidden" id="id_scheduled_classes_result_remarked" value="">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">

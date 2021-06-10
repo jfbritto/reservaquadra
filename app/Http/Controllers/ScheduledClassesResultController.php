@@ -19,6 +19,7 @@ class ScheduledClassesResultController extends Controller
 
         $teacher = trim($request->id_teacher)==""?null:trim($request->id_teacher);
         $date_remarked = trim($request->date_remarked)==""?null:trim($request->date_remarked);
+        $id_scheduled_classes_result_remarked = trim($request->id_scheduled_classes_result_remarked)==""?null:trim($request->id_scheduled_classes_result_remarked);
 
         $data = [
             'id_scheduled_classes' => trim($request->id_scheduled_classes),
@@ -28,6 +29,7 @@ class ScheduledClassesResultController extends Controller
             'observation' => trim($request->observation),
             'date' => trim($request->date),
             'date_remarked' => $date_remarked,
+            'id_scheduled_classes_result_remarked' => $id_scheduled_classes_result_remarked,
         ];
 
         $response = $this->scheduledClassesResultService->store($data);

@@ -24,9 +24,19 @@ class ScheduledClassesController extends Controller
         $date = $_GET['date'];
 
         $response = $this->scheduledClassesService->listAllByDate($date);
+        $response_rm = $this->scheduledClassesService->listRemarkedAllByDate($date);
+
+        $resp['response'] = null;
+        $resp['response_rm'] = null;
 
         if($response['status'] == 'success')
-            return response()->json(['status'=>'success', 'data'=>$response['data']], 200);
+            $resp['response'] = $response['data'];
+        
+        if($response_rm['status'] == 'success')
+            $resp['response_rm'] = $response_rm['data'];
+            
+
+            return response()->json(['status'=>'success', 'data'=>$resp], 200);
 
         return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }

@@ -20,14 +20,13 @@ $(document).ready(function () {
                         .then(function (data) {
                             if (data.status == "success") {
 
-                                console.log(data.data)
-
                                 Swal.close();
                                 $("#list").html(``);
+                                $("#list-rm").html(``);
 
-                                if(data.data.length > 0){
+                                if(data.data.response.length > 0){
                                     
-                                    data.data.forEach(item => {
+                                    data.data.response.forEach(item => {
 
                                         $("#list").append(`
                                             <tr>
@@ -37,7 +36,7 @@ $(document).ready(function () {
                                                 <td class="align-middle">${item.result==null?`<span class="badge badge-warning">Pendente</span>`:`<span class="badge badge-${scheduledClassResultStatusClass(item.result)}">${scheduledClassResultStatus(item.result)}</span>`}</td>
                                                 <td class="align-middle" style="text-align: right">
                                                     ${item.result==null?`
-                                                        <a title="Realizada" data-id="${item.id}" href="#" class="btn btn-success mark-presence"><i class="fas fa-check"></i></a>
+                                                        <a title="Realizada" data-id="${item.id}" data-id_origin="" href="#" class="btn btn-success mark-presence"><i class="fas fa-check"></i></a>
                                                     `:``}
                                                 </td>
                                             </tr>
@@ -49,6 +48,38 @@ $(document).ready(function () {
                                     $("#list").append(`
                                         <tr>
                                             <td class="align-middle text-center" colspan="5">Nenhuma aula encontrada</td>
+                                        </tr>
+                                    `);  
+
+                                }
+
+                                // tabela de aulas remarcadas
+
+                                if(data.data.response_rm.length > 0){
+                                    
+                                    data.data.response_rm.forEach(item => {
+
+                                        $("#list-rm").append(`
+                                            <tr>
+                                                <td class="align-middle">${item.user_name}</td>
+                                                <td class="align-middle">${item.court_name}</td>
+                                                <td class="align-middle">${item.start_time} às ${item.end_time}</td>
+                                                <td class="align-middle">${item.result==null?`<span class="badge badge-warning">Pendente</span>`:`<span class="badge badge-${scheduledClassResultStatusClass(item.result)}">${scheduledClassResultStatus(item.result)}</span>`}</td>
+                                                <td class="align-middle">${item.result_rm==null?`<span class="badge badge-warning">Pendente</span>`:`<span class="badge badge-${scheduledClassResultStatusClass(item.result_rm)}">${scheduledClassResultStatus(item.result_rm)}</span>`}</td>
+                                                <td class="align-middle" style="text-align: right">
+                                                    ${item.result_rm==null?`
+                                                        <a title="Realizada" data-id="${item.id}" data-id_origin="${item.id_origin}" href="#" class="btn btn-success mark-presence"><i class="fas fa-check"></i></a>
+                                                    `:``}
+                                                </td>
+                                            </tr>
+                                        `);       
+                                    });
+
+                                }else{
+
+                                    $("#list-rm").append(`
+                                        <tr>
+                                            <td class="align-middle text-center" colspan="6">Nenhuma aula remarcada encontrada</td>
                                         </tr>
                                     `);  
 
@@ -108,8 +139,9 @@ $(document).ready(function () {
 
 
     // ABRIR MODAL PARA CADASTRAR RESULTADO DA AULA
-    $("#list").on("click",".mark-presence", function(){
+    $("#list, #list-rm").on("click",".mark-presence", function(){
         $("#id_scheduled_classes").val($(this).data('id'));
+        $("#id_scheduled_classes_result_remarked").val($(this).data('id_origin'));
         $("#modalStoreScheduledClassesResult").modal("show");
     });
 
@@ -131,6 +163,7 @@ $(document).ready(function () {
                         date: $("#date").val(),
                         id_scheduled_classes: $("#id_scheduled_classes").val(),
                         date_remarked: $("#date_remarked").val(),
+                        id_scheduled_classes_result_remarked: $("#id_scheduled_classes_result_remarked").val(),
                     })
                         .then(function (data) {
                             if (data.status == "success") {

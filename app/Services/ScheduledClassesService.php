@@ -172,4 +172,34 @@ class ScheduledClassesService
 
         return $response;
     }
+
+    public function listRemarkedAllByDate($date)
+    {
+        $response = [];
+
+        try{
+
+            $return = DB::select( DB::raw("SELECT 
+                                                scc.*, crt.name as court_name, usr.name as user_name, scr.id as id_origin, scr.result as result, scr_res.result as result_rm
+                                            FROM 
+                                                scheduled_classes_results scr
+                                                JOIN scheduled_classes scc ON scr.id_scheduled_classes=scc.id
+                                                JOIN courts crt ON crt.id=scc.id_court 
+                                                JOIN users usr ON usr.id= scc.id_user
+                                                LEFT JOIN scheduled_classes_results scr_res on scr_res.id_scheduled_classes_result_remarked=scr.id
+                                            WHERE
+                                                crt.id_company =  ".auth()->user()->id_company." AND
+                                                scc.status = 'A' and 
+                                                scr.date_remarked = '".$date."'
+                                            ORDER BY 
+                                                scc.week_day, scc.start_time;
+                                            "));
+
+            $response = ['status' => 'success', 'data' => $return];
+        }catch(Exception $e){
+            $response = ['status' => 'error', 'data' => $e->getMessage()];
+        }
+
+        return $response;
+    }
 }
