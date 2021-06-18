@@ -19,6 +19,8 @@ class ScheduledClassesResultController extends Controller
 
         $teacher = trim($request->id_teacher)==""?null:trim($request->id_teacher);
         $date_remarked = trim($request->date_remarked)==""?null:trim($request->date_remarked);
+        $start_time_remarked = trim($request->start_time_remarked)==""?null:trim($request->start_time_remarked);
+        $end_time_remarked = trim($request->end_time_remarked)==""?null:trim($request->end_time_remarked);
         $id_scheduled_classes_result_remarked = trim($request->id_scheduled_classes_result_remarked)==""?null:trim($request->id_scheduled_classes_result_remarked);
 
         $data = [
@@ -29,6 +31,8 @@ class ScheduledClassesResultController extends Controller
             'observation' => trim($request->observation),
             'date' => trim($request->date),
             'date_remarked' => $date_remarked,
+            'start_time_remarked' => $start_time_remarked,
+            'end_time_remarked' => $end_time_remarked,
             'id_scheduled_classes_result_remarked' => $id_scheduled_classes_result_remarked,
         ];
 

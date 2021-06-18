@@ -14,6 +14,8 @@ class ScheduledClassesResult extends Model
         'result',
         'date',
         'date_remarked',
+        'start_time_remarked',
+        'end_time_remarked',
         'id_scheduled_classes_result_remarked',
         'observation',
         'created_at',

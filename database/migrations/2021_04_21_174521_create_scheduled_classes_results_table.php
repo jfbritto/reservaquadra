@@ -21,6 +21,8 @@ class CreateScheduledClassesResultsTable extends Migration
             $table->string('result', 5);
             $table->date('date');
             $table->date('date_remarked')->nullable();
+            $table->date('start_time_remarked')->nullable();
+            $table->date('end_time_remarked')->nullable();
             $table->integer('id_scheduled_classes_result_remarked')->nullable();
             $table->text('observation')->nullable();
             $table->timestamps();

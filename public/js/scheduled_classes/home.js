@@ -56,6 +56,8 @@ $(document).ready(function () {
                                 // tabela de aulas remarcadas
 
                                 if(data.data.response_rm.length > 0){
+
+                                    $("#box-remarkeds").show()
                                     
                                     data.data.response_rm.forEach(item => {
 
@@ -63,7 +65,7 @@ $(document).ready(function () {
                                             <tr>
                                                 <td class="align-middle">${item.user_name}</td>
                                                 <td class="align-middle">${item.court_name}</td>
-                                                <td class="align-middle">${item.start_time} às ${item.end_time}</td>
+                                                <td class="align-middle">${item.start_time_remarked} às ${item.end_time_remarked}</td>
                                                 <td class="align-middle">${item.result==null?`<span class="badge badge-warning">Pendente</span>`:`<span class="badge badge-${scheduledClassResultStatusClass(item.result)}">${scheduledClassResultStatus(item.result)}</span>`}</td>
                                                 <td class="align-middle">${item.result_rm==null?`<span class="badge badge-warning">Pendente</span>`:`<span class="badge badge-${scheduledClassResultStatusClass(item.result_rm)}">${scheduledClassResultStatus(item.result_rm)}</span>`}</td>
                                                 <td class="align-middle" style="text-align: right">
@@ -76,6 +78,8 @@ $(document).ready(function () {
                                     });
 
                                 }else{
+
+                                    $("#box-remarkeds").hide()
 
                                     $("#list-rm").append(`
                                         <tr>
@@ -163,6 +167,8 @@ $(document).ready(function () {
                         date: $("#date").val(),
                         id_scheduled_classes: $("#id_scheduled_classes").val(),
                         date_remarked: $("#date_remarked").val(),
+                        start_time_remarked: $("#start_time_remarked").val(),
+                        end_time_remarked: $("#end_time_remarked").val(),
                         id_scheduled_classes_result_remarked: $("#id_scheduled_classes_result_remarked").val(),
                     })
                         .then(function (data) {
@@ -189,8 +195,12 @@ $(document).ready(function () {
 
         $("#remark").val("N").change();
         $("#date_remarked").val("");
-        $("#box-date-remarked").hide();
+        $("#start_time_remarked").val("");
+        $("#end_time_remarked").val("");
+        $(".box-date-remarked").hide();
         $("#date_remarked").prop("required", false)
+        $("#start_time_remarked").prop("required", false)
+        $("#end_time_remarked").prop("required", false)
 
         if($("#result option:selected").val() == "P"){
             $("#id_teacher").prop("required", true)
@@ -210,14 +220,20 @@ $(document).ready(function () {
         let selected = $("#remark option:selected").val();
 
         if(selected == "S"){
-            $("#box-date-remarked").show();
+            $(".box-date-remarked").show();
             $("#date_remarked").prop("required", true)
+            $("#start_time_remarked").prop("required", true)
+            $("#end_time_remarked").prop("required", true)
         }else{
-            $("#box-date-remarked").hide();
+            $(".box-date-remarked").hide();
             $("#date_remarked").prop("required", false)
+            $("#start_time_remarked").prop("required", false)
+            $("#end_time_remarked").prop("required", false)
         }
         
         $("#date_remarked").val("");
+        $("#start_time_remarked").val("");
+        $("#end_time_remarked").val("");
 
     });
 

@@ -33,7 +33,7 @@
             </div>
 
 
-            <div class="table-responsive mt-5">
+            <div class="table-responsive mt-5" id="box-remarkeds" style="display: none;">
                 <table class="table table-striped table-valign-middle table-hover table-sm">
                     <thead class="text-center">
                         <tr>
@@ -100,10 +100,22 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-6" style="display: none;" id="box-date-remarked">
+                        <div class="col-md-6 box-date-remarked" style="display: none;">
                             <div class="form-group">
                                 <label for="date_remarked">Data da reposição</label>
                                 <input type="date" name="date_remarked" id="date_remarked" min="{{date('Y-m-d')}}" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6 box-date-remarked" style="display: none;">
+                            <div class="form-group">
+                                <label for="start_time_remarked">Hora início</label>
+                                <input type="time" name="start_time_remarked" id="start_time_remarked" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-6 box-date-remarked" style="display: none;">
+                            <div class="form-group">
+                                <label for="end_time_remarked">Hora fim</label>
+                                <input type="time" name="end_time_remarked" id="end_time_remarked" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-12">
