@@ -258,6 +258,18 @@ CREATE TABLE IF NOT EXISTS `phones` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `holidays` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_company` INT NOT NULL,
+  `name` VARCHAR(30) NOT NULL,
+  `day` INT NULL,
+  `month` INT NULL,
+  `year` INT NULL,
+  `status` VARCHAR(5) NOT NULL DEFAULT 'A',
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
 
 
 -- seeder

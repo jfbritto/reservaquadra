@@ -387,6 +387,12 @@ return [
             'can'        => 'admin',
         ],
         [
+            'text'       => 'Feriados',
+            'icon'       => 'fas fa-fw fa-hand-peace' ,
+            'url'        => 'feriados',
+            'can'        => 'admin',
+        ],
+        [
             'text'       => 'Reservas',
             'icon'       => 'fas fa-fw fa-clipboard-list' ,
             'url'        => 'reservas',

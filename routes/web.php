@@ -143,4 +143,11 @@ Route::group(['middleware' => ['admin']], function(){
 
     //telefones
     Route::get('/telefones/listar', 'PhoneController@list');
+
+    //feriados
+    Route::get('/feriados', 'HolidayController@index');
+    Route::get('/feriados/listar', 'HolidayController@list');
+    Route::post('/feriados/cadastrar', 'HolidayController@store');
+    Route::put('/feriados/editar', 'HolidayController@update');
+    Route::delete('/feriados/deletar', 'HolidayController@destroy');
 });

@@ -36,9 +36,9 @@ function weekDayDescription(val)
 // retorna o nome do mes pelo seu numero referente enviado
 function monthDescription(val)
 {
-    const month_description = {1:'Janeiro',2:'Fevereiro',3:'Março',4:'Abril',5:'Maio',6:'Junho',7:'Julho'};
+    const month_description = {1:'Janeiro',2:'Fevereiro',3:'Março',4:'Abril',5:'Maio',6:'Junho',7:'Julho',8:'Agosto',9:'Setembro',10:'Outubro',11:'Novembro',12:'Dezembro'};
     
-    if(val > 0 && val < 8){
+    if(val > 0 && val <= 12){
         return `${month_description[val]}`
     }else{
         return `Mês não identificado`
