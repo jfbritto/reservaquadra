@@ -96,12 +96,36 @@ class UserService
         return $response;
     }
 
+    public function changeStatus(array $data)
+    {
+        $response = [];
+
+        try{
+
+            DB::beginTransaction();
+
+            $result = DB::table('users')
+                        ->where('id', $data['id'])
+                        ->update(['status' => $data['status']]);
+
+            DB::commit();
+
+            $response = ['status' => 'success', 'data' => $result];
+
+        }catch(Exception $e){
+            DB::rollBack();
+            $response = ['status' => 'error', 'data' => $e->getMessage()];
+        }
+
+        return $response;
+    }
+
     public function list($group)
     {
         $response = [];
 
         try{
-            $return = DB::select( DB::raw("select usr.* from users usr where usr.status = 'A' and usr.group in (".implode(',',$group).") order by usr.name"));
+            $return = DB::select( DB::raw("select usr.*, TIMESTAMPDIFF(YEAR, birth, CURDATE()) AS age from users usr where usr.status IN ('A','I') and usr.group in (".implode(',',$group).") order by usr.status, usr.name"));
 
             $response = ['status' => 'success', 'data' => $return];
         }catch(Exception $e){
@@ -131,7 +155,7 @@ class UserService
         $response = [];
 
         try{
-            $return = DB::select( DB::raw("select usr.* from users usr where usr.status = 'A' and usr.group in (".implode(',',$group).") and name like '%".$search."%' order by usr.name"));
+            $return = DB::select( DB::raw("select usr.*, TIMESTAMPDIFF(YEAR, birth, CURDATE()) AS age from users usr where usr.status in ('A','I') and usr.group in (".implode(',',$group).") and name like '%".$search."%' order by usr.status, usr.name"));
 
             $response = ['status' => 'success', 'data' => $return];
         }catch(Exception $e){

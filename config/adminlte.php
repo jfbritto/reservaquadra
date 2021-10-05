@@ -316,18 +316,18 @@ return [
                     'url'        => 'alunos',
                     'can'        => 'admin',
                 ],
-                [
-                    'text'       => 'Responsáveis',
-                    'icon'       => 'fas fa-fw fa-user-tie' ,
-                    'url'        => 'responsaveis',
-                    'can'        => 'admin',
-                ],
-                [
-                    'text'       => 'Funcionários',
-                    'icon'       => 'fas fa-fw fa-user-friends' ,
-                    'url'        => 'funcionarios',
-                    'can'        => 'admin',
-                ],
+                // [
+                //     'text'       => 'Responsáveis',
+                //     'icon'       => 'fas fa-fw fa-user-tie' ,
+                //     'url'        => 'responsaveis',
+                //     'can'        => 'admin',
+                // ],
+                // [
+                //     'text'       => 'Funcionários',
+                //     'icon'       => 'fas fa-fw fa-user-friends' ,
+                //     'url'        => 'funcionarios',
+                //     'can'        => 'admin',
+                // ],
         //     ],
         // ],
         ['header' => 'CONFIGURAÇÕES'],
@@ -380,24 +380,24 @@ return [
             'url'        => 'aulas-programadas',
             'can'        => 'admin',
         ],
-        [
-            'text'       => 'Calendário',
-            'icon'       => 'fas fa-fw fa-calendar' ,
-            'url'        => 'calendario',
-            'can'        => 'admin',
-        ],
-        [
-            'text'       => 'Feriados',
-            'icon'       => 'fas fa-fw fa-hand-peace' ,
-            'url'        => 'feriados',
-            'can'        => 'admin',
-        ],
-        [
-            'text'       => 'Reservas',
-            'icon'       => 'fas fa-fw fa-clipboard-list' ,
-            'url'        => 'reservas',
-            'can'        => 'admin',
-        ],
+        // [
+        //     'text'       => 'Calendário',
+        //     'icon'       => 'fas fa-fw fa-calendar' ,
+        //     'url'        => 'calendario',
+        //     'can'        => 'admin',
+        // ],
+        // [
+        //     'text'       => 'Feriados',
+        //     'icon'       => 'fas fa-fw fa-hand-peace' ,
+        //     'url'        => 'feriados',
+        //     'can'        => 'admin',
+        // ],
+        // [
+        //     'text'       => 'Reservas',
+        //     'icon'       => 'fas fa-fw fa-clipboard-list' ,
+        //     'url'        => 'reservas',
+        //     'can'        => 'admin',
+        // ],
     ],
 
     /*

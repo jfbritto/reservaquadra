@@ -538,9 +538,14 @@ $(document).ready(function () {
 
                                 if(data.data.length > 0){
 
+                                    let selected = ``;
+                                    if(data.data.length == 1)
+                                        selected = `selected="selected"`;
+
+
                                     data.data.forEach(item => { 
                                         $("#id_payment_method_subtype").append(`
-                                            <option value="${item.id}">${item.name}</option>
+                                            <option ${selected} value="${item.id}">${item.name}</option>
                                         `)
                                     });
 

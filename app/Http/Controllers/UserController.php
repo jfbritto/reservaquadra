@@ -356,6 +356,23 @@ class UserController extends Controller
         return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
 
+    public function changeStatus(Request $request) 
+    {
+        $status = $request->status;
+
+        $data = [
+            'id' => trim($request->id),
+            'status' => $status
+        ];
+
+        $response = $this->userService->changeStatus($data);
+
+        if($response['status'] == 'success')
+            return response()->json(['status'=>'success'], 200);
+
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
+    }
+
     // ****************************************
     //               MODULO ROOT
     // ****************************************

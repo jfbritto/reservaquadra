@@ -90,6 +90,7 @@ Route::group(['middleware' => ['admin']], function(){
     Route::get('/alunos/buscar', 'UserController@searchStudent');
     Route::post('/alunos/cadastrar', 'UserController@storeStudent');
     Route::put('/alunos/editar', 'UserController@updateStudent');
+    Route::put('/alunos/mudar-status', 'UserController@changeStatus');
     Route::delete('/alunos/deletar', 'UserController@destroy');
 
     //responsáveis

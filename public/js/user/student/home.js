@@ -3,8 +3,9 @@ $(document).ready(function () {
     const tabela = $('#table').DataTable({
         "paging":   true,
         "ordering": true,
+        "order": [],
         "info":     true,
-        "searching":true,
+        "searching":false,
         language: {
             url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json'
         }
@@ -54,12 +55,21 @@ $(document).ready(function () {
 
             data.data.forEach(item => {
 
+                let status = item.status=='A'?`danger`:`success`;
+                let txt_status = item.status=='A'?`Inativar aluno`:`Ativar aluno`;
+
                 tabela.row.add( [
                     item.name,
+                    item.age, 
                     item.email, 
-                    `<a title="Abrir" href="/alunos/exibir/${item.id}" class="btn btn-info open-student"><i style="color: white" class="fas fa-eye"></i></a>`,
+                    `<a title="${txt_status}" href="#" class="btn btn-${status} edit-status-student" data-id="${item.id}" data-status="${item.status}"><i style="color: white" class="fas fa-power-off"></i></a>
+                     <a title="Abrir" href="/alunos/exibir/${item.id}" class="btn btn-info open-student"><i style="color: white" class="fas fa-eye"></i></a>`,
                 ]).draw();
 
+            });
+
+            $("#table tbody tr").each(function() {
+                $(this).find('td:eq(3)').css('text-align','right');
             });
 
         }else{
@@ -183,6 +193,59 @@ $(document).ready(function () {
     $("#box-phones").on("click", ".close-alert", function(){
         let class_alert = $(this).data("class_alert");
         $(`.${class_alert}`).remove()
+    });
+
+
+    $("#list").on("click", ".edit-status-student", function(){
+
+        let id = $(this).data("id");
+        let status = $(this).data("status");
+
+        if(status == "A")
+            status = "I";
+        else if(status == "I")
+            status = "A";
+        
+        Swal.fire({
+            title: 'Atenção!',
+            text: "Deseja realmente inativar o aluno?",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Sim',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Não'
+            }).then((result) => {
+                if (result.value) {
+
+                    Swal.queue([
+                        {
+                            title: "Carregando...",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            onOpen: () => {
+                                Swal.showLoading();
+                                $.ajax({
+                                    url: window.location.origin + "/alunos/mudar-status",
+                                    type: 'PUT',
+                                    data: {id,status}
+                                })
+                                    .then(function (data) {
+                                        if (data.status == "success") {
+                                                        
+                                            showSuccess("Deletado com sucesso!", null, loadStudents)
+                                        } else if (data.status == "error") {
+                                            showError(data.message)
+                                        }
+                                    })
+                                    .catch();
+                            },
+                        },
+                    ]);
+
+                }
+            })
+
     });
 
 });
