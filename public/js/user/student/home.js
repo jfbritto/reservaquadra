@@ -200,15 +200,19 @@ $(document).ready(function () {
 
         let id = $(this).data("id");
         let status = $(this).data("status");
+        
+        let txt_status = status=='A'?`inativar`:`ativar`;
+        let txt_status_resposta = status=='A'?`Inativado`:`Ativado`;
 
         if(status == "A")
             status = "I";
         else if(status == "I")
             status = "A";
         
+
         Swal.fire({
             title: 'Atenção!',
-            text: "Deseja realmente inativar o aluno?",
+            text: `Deseja realmente ${txt_status} o aluno?`,
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -233,7 +237,7 @@ $(document).ready(function () {
                                     .then(function (data) {
                                         if (data.status == "success") {
                                                         
-                                            showSuccess("Deletado com sucesso!", null, loadStudents)
+                                            showSuccess(`${txt_status_resposta} com sucesso!`, null, loadStudents)
                                         } else if (data.status == "error") {
                                             showError(data.message)
                                         }
