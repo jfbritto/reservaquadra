@@ -149,10 +149,24 @@ CREATE TABLE IF NOT EXISTS `invoices` (
   `id_type` INT NOT NULL,
   `id_payment_method` INT NOT NULL,
   `id_payment_method_subtype` INT NOT NULL,
+  `id_payment_method_subtype_condition` INT NOT NULL,
   `created_at` DATETIME NULL,
   `updated_at` DATETIME NULL,
   PRIMARY KEY (`id`))
-ENGINE = InnoDB
+ENGINE = InnoDB;
+
+alter table invoices add column `id_payment_method_subtype_condition` INT NULL after id_payment_method_subtype;
+
+CREATE TABLE IF NOT EXISTS `invoice_receipts` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_invoice` INT DEFAULT NULL,
+  `billing_date` DATETIME NOT NULL,
+  `status` VARCHAR(5) NOT NULL DEFAULT 'R',
+  `price` DECIMAL(10,2) NOT NULL,
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
 
 CREATE TABLE IF NOT EXISTS `scheduled_classes` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -195,6 +209,19 @@ CREATE TABLE IF NOT EXISTS `payment_method_subtypes` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_payment_method` INT NOT NULL,
   `name` VARCHAR(30) NOT NULL,
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `payment_method_subtype_conditions` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_payment_method_subtype` INT NOT NULL,
+  `parcel` INT NOT NULL,
+  `is_flat` INT NOT NULL DEFAULT 0,
+  `percentage_rate` FLOAT NOT NULL,
+  `flat_rate` FLOAT NOT NULL,
+  `days_for_payment` INT NOT NULL,
   `created_at` DATETIME NULL,
   `updated_at` DATETIME NULL,
   PRIMARY KEY (`id`))

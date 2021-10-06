@@ -5,16 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Services\InvoiceService;
 use App\Services\ContractService;
+use App\Services\InvoiceReceiptService;
+use App\Services\PaymentMethodSubtypeConditionService;
 
 class InvoiceController extends Controller
 {
     private $invoiceService;
     private $contractService;
+    private $invoiceReceiptService;
 
-    public function __construct(InvoiceService $invoiceService, ContractService $contractService)
+    public function __construct(InvoiceService $invoiceService, ContractService $contractService, InvoiceReceiptService $invoiceReceiptService, PaymentMethodSubtypeConditionService $paymentMethodSubtypeConditionService)
     {
         $this->invoiceService = $invoiceService;
         $this->contractService = $contractService;
+        $this->invoiceReceiptService = $invoiceReceiptService;
+        $this->paymentMethodSubtypeConditionService = $paymentMethodSubtypeConditionService;
     }
     
     public function store(Request $request) 
@@ -86,6 +91,7 @@ class InvoiceController extends Controller
             'status' => "R",
             'id_payment_method' => trim($request->id_payment_method),
             'id_payment_method_subtype' => trim($request->id_payment_method_subtype),
+            'id_payment_method_subtype_condition' => trim($request->id_payment_method_subtype_condition),
         ];
 
         // efetua o recebimento retornando o boleto recebido
@@ -96,6 +102,52 @@ class InvoiceController extends Controller
 
             // busca a fatura pelo id
             $invoice_obj = $this->invoiceService->getById($request->id);
+
+
+            $next_date = date('Y-m-d H:i:s');
+            // busca o parcelamento pelo id
+            $pmsc_obj = $this->paymentMethodSubtypeConditionService->getById($request->id_payment_method_subtype_condition);
+
+            if($pmsc_obj['data']->is_flat == 0){
+
+                $final_value = ($invoice_obj['data']->paid_price) - (($pmsc_obj['data']->percentage_rate/100)*$invoice_obj['data']->paid_price);
+
+                $val_parcel = $final_value/$pmsc_obj['data']->parcel;
+                
+                // cria o registro da data esperada para o faturamento dessa fatura paga
+                for ($i=0; $i < $pmsc_obj['data']->parcel; $i++) {
+                    
+                    $next_date = date('Y-m-d H:i:s', strtotime($next_date." + ".$pmsc_obj['data']->days_for_payment." days"));
+
+                    $data_invoice_receipt = [
+                        'id_invoice' => $invoice_obj['data']->id,
+                        'billing_date' => $next_date,
+                        'status' => "R",
+                        'price' => $val_parcel
+                    ];
+        
+                    $this->invoiceReceiptService->store($data_invoice_receipt);
+                }
+
+            }else{
+
+                $final_value = ($invoice_obj['data']->paid_price) - ($pmsc_obj['data']->flat_rate);
+
+                $val_parcel = $final_value/$pmsc_obj['data']->parcel;
+
+                $next_date = date('Y-m-d H:i:s', strtotime($next_date." + ".$pmsc_obj['data']->days_for_payment." days"));
+
+                $data_invoice_receipt = [
+                    'id_invoice' => $invoice_obj['data']->id,
+                    'billing_date' => $next_date,
+                    'status' => "R",
+                    'price' => $val_parcel
+                ];
+    
+                $this->invoiceReceiptService->store($data_invoice_receipt);
+
+            }
+
 
             // verifica se a fatura é de um contrato que precisa de nova geração de fatura
             $generate_invoice = false;

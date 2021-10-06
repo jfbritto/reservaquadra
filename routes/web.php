@@ -142,6 +142,9 @@ Route::group(['middleware' => ['admin']], function(){
     Route::post('/subtipos-de-metodos-de-pagamento/cadastrar', 'PaymentMethodSubtypeController@store');
     Route::delete('/subtipos-de-metodos-de-pagamento/deletar', 'PaymentMethodSubtypeController@destroy');
 
+    //subtipos de métodos de pagamento
+    Route::get('/condicoes-de-subtipos-de-metodos-de-pagamento/listar', 'PaymentMethodSubtypeConditionController@list');
+
     //telefones
     Route::get('/telefones/listar', 'PhoneController@list');
 

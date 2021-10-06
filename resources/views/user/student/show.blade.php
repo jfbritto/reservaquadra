@@ -614,16 +614,22 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="id_payment_method">Método de Pagamento</label>
                                 <select required name="id_payment_method" id="id_payment_method" class="form-control"></select>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="id_payment_method_subtype">Subtipo/Bandeira</label>
                                 <select required name="id_payment_method_subtype" id="id_payment_method_subtype" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="id_payment_method_subtype_condition">Parcelas</label>
+                                <select required name="id_payment_method_subtype_condition" id="id_payment_method_subtype_condition" class="form-control"></select>
                             </div>
                         </div>
                     </div>

@@ -513,7 +513,7 @@ $(document).ready(function () {
         ]);
     }
 
-    // LISTAR MÉTODOS DE PAGAMENTO
+    // LISTAR SUBTIPOS DE MÉTODOS DE PAGAMENTO
     $("#id_payment_method").on("change", function(){
         
         let id_payment_method = $("#id_payment_method option:selected").val();
@@ -546,6 +546,58 @@ $(document).ready(function () {
                                     data.data.forEach(item => { 
                                         $("#id_payment_method_subtype").append(`
                                             <option ${selected} value="${item.id}">${item.name}</option>
+                                        `)
+                                    });
+
+                                    if(data.data.length == 1)
+                                        $("#id_payment_method_subtype").change();
+
+                                }
+
+                            } else if (data.status == "error") {
+                                showError(data.message)
+                            }
+                        })
+                        .catch();
+                },
+            },
+        ]);
+
+    });
+
+    // LISTAR PARCELAS DE SUBTIPOS DE MÉTODOS DE PAGAMENTO
+    $("#id_payment_method_subtype").on("change", function(){
+        
+        let id_payment_method_subtype = $("#id_payment_method_subtype option:selected").val();
+
+        Swal.queue([
+            {
+                title: "Carregando...",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                    $.get(window.location.origin + "/condicoes-de-subtipos-de-metodos-de-pagamento/listar", {
+                        id_payment_method_subtype:id_payment_method_subtype
+                    })
+                        .then(function (data) {
+                            if (data.status == "success") {
+
+                                Swal.close();
+
+                                $("#id_payment_method_subtype_condition").html(``);
+                                $("#id_payment_method_subtype_condition").html(`<option value="">-- Selecione --</option>`);
+
+                                if(data.data.length > 0){
+
+                                    let selected = ``;
+                                    if(data.data.length == 1)
+                                        selected = `selected="selected"`;
+
+
+                                    data.data.forEach(item => { 
+                                        $("#id_payment_method_subtype_condition").append(`
+                                            <option ${selected} value="${item.id}">${item.parcel}</option>
                                         `)
                                     });
 
@@ -801,6 +853,9 @@ $(document).ready(function () {
         $("#price").val(moneyFormat(price));
         $("#paid_price").val(moneyFormat(price));
 
+        $("#id_payment_method_subtype").html("");
+        $("#id_payment_method_subtype_condition").html("");
+
         $("#modalReceiveInvoice").modal('show');
     });
 
@@ -851,6 +906,7 @@ $(document).ready(function () {
                             paid_price: $("#paid_price").val(),
                             id_payment_method: $("#id_payment_method option:selected").val(),
                             id_payment_method_subtype: $("#id_payment_method_subtype option:selected").val(),
+                            id_payment_method_subtype_condition: $("#id_payment_method_subtype_condition option:selected").val(),
                         }
                     })
                         .then(function (data) {
