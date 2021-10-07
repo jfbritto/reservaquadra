@@ -62,6 +62,7 @@ $(document).ready(function () {
                     item.name,
                     item.age, 
                     item.email, 
+                    `${item.status=='A'?`<span class="badge badge-success">Ativo</span>`:`<span class="badge badge-danger">Inativo</span>`}`, 
                     `<a title="${txt_status}" href="#" class="btn btn-${status} edit-status-student" data-id="${item.id}" data-status="${item.status}"><i style="color: white" class="fas fa-power-off"></i></a>
                      <a title="Abrir" href="/alunos/exibir/${item.id}" class="btn btn-info open-student"><i style="color: white" class="fas fa-eye"></i></a>`,
                 ]).draw();
@@ -69,7 +70,7 @@ $(document).ready(function () {
             });
 
             $("#table tbody tr").each(function() {
-                $(this).find('td:eq(3)').css('text-align','right');
+                $(this).find('td:eq(4)').css('text-align','right');
             });
 
         }else{

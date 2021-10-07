@@ -163,6 +163,7 @@ CREATE TABLE IF NOT EXISTS `invoice_receipts` (
   `billing_date` DATETIME NOT NULL,
   `status` VARCHAR(5) NOT NULL DEFAULT 'R',
   `price` DECIMAL(10,2) NOT NULL,
+  `tax` DECIMAL(10,2) NOT NULL,
   `created_at` DATETIME NULL,
   `updated_at` DATETIME NULL,
   PRIMARY KEY (`id`))
@@ -219,8 +220,8 @@ CREATE TABLE IF NOT EXISTS `payment_method_subtype_conditions` (
   `id_payment_method_subtype` INT NOT NULL,
   `parcel` INT NOT NULL,
   `is_flat` INT NOT NULL DEFAULT 0,
-  `percentage_rate` FLOAT NOT NULL,
-  `flat_rate` FLOAT NOT NULL,
+  `percentage_tax` FLOAT NOT NULL,
+  `flat_tax` FLOAT NOT NULL,
   `days_for_payment` INT NOT NULL,
   `created_at` DATETIME NULL,
   `updated_at` DATETIME NULL,

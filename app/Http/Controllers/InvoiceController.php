@@ -109,21 +109,24 @@ class InvoiceController extends Controller
             $pmsc_obj = $this->paymentMethodSubtypeConditionService->getById($request->id_payment_method_subtype_condition);
 
             if($pmsc_obj['data']->is_flat == 0){
-
-                $final_value = ($invoice_obj['data']->paid_price) - (($pmsc_obj['data']->percentage_rate/100)*$invoice_obj['data']->paid_price);
-
-                $val_parcel = $final_value/$pmsc_obj['data']->parcel;
                 
                 // cria o registro da data esperada para o faturamento dessa fatura paga
                 for ($i=0; $i < $pmsc_obj['data']->parcel; $i++) {
                     
+                    $val_parcel = $invoice_obj['data']->paid_price/$pmsc_obj['data']->parcel;
+                    
+                    $tax = ($pmsc_obj['data']->percentage_tax/100)*$val_parcel;
+
+                    $final_value = $val_parcel - $tax;
+
                     $next_date = date('Y-m-d H:i:s', strtotime($next_date." + ".$pmsc_obj['data']->days_for_payment." days"));
 
                     $data_invoice_receipt = [
                         'id_invoice' => $invoice_obj['data']->id,
                         'billing_date' => $next_date,
                         'status' => "R",
-                        'price' => $val_parcel
+                        'price' => $final_value,
+                        'tax' => $tax
                     ];
         
                     $this->invoiceReceiptService->store($data_invoice_receipt);
@@ -131,9 +134,9 @@ class InvoiceController extends Controller
 
             }else{
 
-                $final_value = ($invoice_obj['data']->paid_price) - ($pmsc_obj['data']->flat_rate);
+                $final_value = ($invoice_obj['data']->paid_price) - ($pmsc_obj['data']->flat_tax);
 
-                $val_parcel = $final_value/$pmsc_obj['data']->parcel;
+                $final_value = $final_value/$pmsc_obj['data']->parcel;
 
                 $next_date = date('Y-m-d H:i:s', strtotime($next_date." + ".$pmsc_obj['data']->days_for_payment." days"));
 
@@ -141,7 +144,8 @@ class InvoiceController extends Controller
                     'id_invoice' => $invoice_obj['data']->id,
                     'billing_date' => $next_date,
                     'status' => "R",
-                    'price' => $val_parcel
+                    'price' => $final_value,
+                    'price' => $pmsc_obj['data']->flat_tax
                 ];
     
                 $this->invoiceReceiptService->store($data_invoice_receipt);

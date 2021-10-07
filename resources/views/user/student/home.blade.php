@@ -29,6 +29,7 @@
                             <th>Nome</th>
                             <th>Idade</th>
                             <th>Email</th>
+                            <th>Status</th>
                             <th></th>
                         </tr>
                     </thead>

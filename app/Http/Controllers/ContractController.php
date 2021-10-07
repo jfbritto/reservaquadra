@@ -81,7 +81,11 @@ class ContractController extends Controller
 
                 for ($i=0; $i < 6; $i++) {
                     
-                    $due_date = date('Y-m-'.$expiration_day.'', strtotime("+ ".$i." months"));
+                    if(intval(date('d')) > intval($expiration_day)){
+                        $due_date = date('Y-m-'.$expiration_day.'', strtotime("+ ".($i+1)." months"));
+                    }else{
+                        $due_date = date('Y-m-'.$expiration_day.'', strtotime("+ ".$i." months"));
+                    }
                     
                     $data = [
                         'id_user' => trim($request->id_user),

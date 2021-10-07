@@ -12,6 +12,7 @@ class InvoiceReceipt extends Model
         'billing_date',
         'status',
         'price',
+        'tax',
         'created_at',
         'updated_at',
     ];

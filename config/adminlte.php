@@ -336,12 +336,12 @@ return [
         //     'icon'    => 'fas fa-fw fa-cog',
         //     'can'     => 'admin',
         //     'submenu' => [
-                [
-                    'text'       => 'Quadras',
-                    'icon'       => 'fas fa-fw fa-th-large' ,
-                    'url'        => 'quadras',
-                    'can'        => 'admin',
-                ],
+                // [
+                //     'text'       => 'Quadras',
+                //     'icon'       => 'fas fa-fw fa-th-large' ,
+                //     'url'        => 'quadras',
+                //     'can'        => 'admin',
+                // ],
                 [
                     'text'       => 'Planos',
                     'icon'       => 'fas fa-fw fa-puzzle-piece' ,
@@ -373,13 +373,13 @@ return [
             'can'        => 'admin',
         ],
 
-        ['header' => 'OUTROS'],
-        [
-            'text'       => 'Aulas',
-            'icon'       => 'fas fa-fw fa-chalkboard-teacher' ,
-            'url'        => 'aulas-programadas',
-            'can'        => 'admin',
-        ],
+        // ['header' => 'OUTROS'],
+        // [
+        //     'text'       => 'Aulas',
+        //     'icon'       => 'fas fa-fw fa-chalkboard-teacher' ,
+        //     'url'        => 'aulas-programadas',
+        //     'can'        => 'admin',
+        // ],
         // [
         //     'text'       => 'Calendário',
         //     'icon'       => 'fas fa-fw fa-calendar' ,
