@@ -135,6 +135,21 @@ class UserService
         return $response;
     }
 
+    public function listTotal($group)
+    {
+        $response = [];
+
+        try{
+            $return = DB::select( DB::raw("select sum(status = 'A') as ativos, sum(status = 'I') as inativos from users usr where usr.status IN ('A','I') and usr.group in (".implode(',',$group).")"));
+
+            $response = ['status' => 'success', 'data' => $return];
+        }catch(Exception $e){
+            $response = ['status' => 'error', 'data' => $e->getMessage()];
+        }
+
+        return $response;
+    }
+
     public function find($id)
     {
         $response = [];

@@ -53,6 +53,7 @@ Route::group(['middleware' => ['admin']], function(){
     
     // faturas
     Route::get('/faturas/listar/{id_student}', 'InvoiceController@listNextOpen');
+    Route::get('/faturas/listar-recebidas/{id_student}', 'InvoiceController@listReceivedsByStudent');
     Route::get('/faturas/listar-entradas-por-mes', 'InvoiceController@listReceivedByMonth');
     Route::put('/faturas/receber', 'InvoiceController@receive');
     Route::post('/faturas/cadastrar', 'InvoiceController@store');
@@ -87,6 +88,7 @@ Route::group(['middleware' => ['admin']], function(){
     Route::get('/alunos/exibir/{id}', 'UserController@showStudent');
     Route::get('/alunos/encontrar', 'UserController@findStudent');
     Route::get('/alunos/listar', 'UserController@listStudent');
+    Route::get('/alunos/listar-totais', 'UserController@listStudentTotal');
     Route::get('/alunos/buscar', 'UserController@searchStudent');
     Route::post('/alunos/cadastrar', 'UserController@storeStudent');
     Route::put('/alunos/editar', 'UserController@updateStudent');

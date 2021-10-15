@@ -11,7 +11,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1><i class="fas fa-user-graduate"></i> &nbsp;Aluno</h1>
+                <h1><i class="fas fa-user-graduate"></i> &nbsp;Aluno <span id="status-student"></span></h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -36,6 +36,7 @@
                 <a href="#" class="btn btn-tool btn-sm" data-toggle="modal" data-target="#modalEditStudent" title="Editar Aluno">
                     <i class="fas fa-pen"></i>
                 </a>
+                <span id="edit-status-student"></span>
             </div>
         </div>
         <div class="card-body">
@@ -171,7 +172,7 @@
                 <div class="card-header border-0">
                     <h3 class="card-title"> Próxima Fatura </h3>
                     <div class="card-tools">
-                        <a href="#" class="btn btn-tool btn-sm" id="" title="Listar faturas">
+                        <a href="#" class="btn btn-tool btn-sm" id="list-all-invoices" title="Listar faturas">
                             <i class="fas fa-list"></i>
                         </a>
                         <a href="#" class="btn btn-tool btn-sm" data-toggle="modal" data-target="#modalAddSingleInvoice" title="Cadastrar fatura avulsa">
@@ -750,6 +751,38 @@
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" form="formStoreSingleInvoice">Salvar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalListInvoices">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Faturas Recebidas</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="table-responsive">
+                    <table class="table table-striped table-valign-middle table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Tipo</th>
+                                <th>Vencimento</th>
+                                <th>Valor</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="list-all-invoices-modal"></tbody>
+                    </table>
+                </div>
+
             </div>
             </div>
         </div>

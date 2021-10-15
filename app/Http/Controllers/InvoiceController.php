@@ -226,6 +226,17 @@ class InvoiceController extends Controller
         return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
     
+    public function listReceivedsByStudent($id_student) 
+    {
+
+        $response = $this->invoiceService->listReceivedsByStudent($id_student);
+
+        if($response['status'] == 'success')
+            return response()->json(['status'=>'success', 'data'=>$response['data']], 200);
+
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
+    }
+    
     public function listReceivedByMonth() 
     {
         $date = $_GET['date'];

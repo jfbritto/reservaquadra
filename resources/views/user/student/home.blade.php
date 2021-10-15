@@ -11,12 +11,35 @@
 @stop
 
 @section('content')
-    
+
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-3 link-student">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-success elevation-1"><i class="fas fa-user-graduate"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Ativos</span>
+                    <span class="info-box-number" id="tot-students-active"><i class="fas fa-spinner fa-pulse"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-3 link-student">
+            <div class="info-box mb-3">
+                <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-user-graduate"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Inativos</span>
+                    <span class="info-box-number" id="tot-students-inactive"><i class="fas fa-spinner fa-pulse"></i></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="card">
         <div class="card-header border-0">
             <h3 class="card-title"> <input type="text" class="form-control" name="search" id="search" placeholder="Buscar pelo nome"> </h3>
             <div class="card-tools">
-                <a href="#" class="btn btn-tool btn-sm" data-toggle="modal" data-target="#modalStoreStudent">
+                <a href="#" class="btn btn-tool btn-sm" title="Cadastrar aluno" data-toggle="modal" data-target="#modalStoreStudent">
                 <i class="fas fa-plus"></i>
                 </a>
             </div>

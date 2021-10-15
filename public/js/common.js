@@ -45,6 +45,22 @@ function monthDescription(val)
     }
 }
 
+// retorna a class do status da fatura
+function InvoicesStatusClass(val)
+{
+    const class_result = {'A':'primary','C':'danger','R':'success'};
+    
+    return `${class_result[val]}`
+}
+
+// retorna a class do status da fatura
+function InvoicesStatusName(val)
+{
+    const class_result = {'A':'Aberta','C':'Cancelada','R':'Recebida'};
+    
+    return `${class_result[val]}`
+}
+
 // retorna a periodicidade do plano pelo seu numero referente enviado
 function periodContractedDescription(val)
 {

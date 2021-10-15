@@ -26,6 +26,11 @@ $(document).ready(function () {
                                     let item = data.data[0];
                                     $(".name_user").html(item.name);
 
+                                    let txt_status = item.status=='A'?`Inativar aluno`:`Ativar aluno`;
+                                    $("#edit-status-student").html(`<a href="#" title="${txt_status}" class="btn btn-tool btn-sm edit-status-student" data-id="${item.id}" data-status="${item.status}" id="edit-status-student"><i class="fas fa-power-off"></i></a>`);
+
+                                    $("#status-student").html(item.status=='A'?``:`<span class="badge badge-danger">Inativo</span>`);
+
                                     // CARREGAR INFORMAÇÕES NA TELA
                                     $("#name").html(item.name);
                                     $("#email").html(item.email);
@@ -70,6 +75,63 @@ $(document).ready(function () {
             },
         ]);
     }
+
+    // ATIVAR OU INATIVAR ALUNO
+    $("#edit-status-student").on("click", ".edit-status-student", function(){
+
+        let id = $(this).data("id");
+        let status = $(this).data("status");
+        
+        let txt_status = status=='A'?`inativar`:`ativar`;
+        let txt_status_resposta = status=='A'?`Inativado`:`Ativado`;
+
+        if(status == "A")
+            status = "I";
+        else if(status == "I")
+            status = "A";
+        
+
+        Swal.fire({
+            title: 'Atenção!',
+            text: `Deseja realmente ${txt_status} o aluno?`,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Sim',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Não'
+            }).then((result) => {
+                if (result.value) {
+
+                    Swal.queue([
+                        {
+                            title: "Carregando...",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            onOpen: () => {
+                                Swal.showLoading();
+                                $.ajax({
+                                    url: window.location.origin + "/alunos/mudar-status",
+                                    type: 'PUT',
+                                    data: {id,status}
+                                })
+                                    .then(function (data) {
+                                        if (data.status == "success") {
+                                                        
+                                            showSuccess(`${txt_status_resposta} com sucesso!`, null, loadAll)
+                                        } else if (data.status == "error") {
+                                            showError(data.message)
+                                        }
+                                    })
+                                    .catch();
+                            },
+                        },
+                    ]);
+
+                }
+            })
+
+    });
 
     // LISTAR TELEFONES
     function loadPhones()
@@ -426,7 +488,7 @@ $(document).ready(function () {
 
     }
 
-    // LISTAR FATURAS
+    // LISTAR PRÓXIMA FATURA
     function loadInvoices()
     {
         $.get(window.location.origin + `/faturas/listar/${$("#id_usr").val()}`, {
@@ -443,7 +505,7 @@ $(document).ready(function () {
 
                         $("#list-invoices").append(`
                             <tr>
-                                <td class="align-middle">${item.status=='A'?`<span class="badge bg-success">Aberta</span>`:`<span class="badge bg-warning">${item.status}</span>`}</td>
+                                <td class="align-middle"><span class="badge bg-${InvoicesStatusClass(item.status)}">${InvoicesStatusName(item.status)}</span></td>
                                 <td class="align-middle">${item.invoice_type}</td>
                                 <td class="align-middle">${dateFormat(item.due_date)}</td>
                                 <td class="align-middle">R$ ${moneyFormat(item.price)}</td>
@@ -471,6 +533,54 @@ $(document).ready(function () {
         .catch();
 
     }
+
+    //LISTAR FATURAS
+    $("#list-all-invoices").on("click", function(){
+
+        $.get(window.location.origin + `/faturas/listar-recebidas/${$("#id_usr").val()}`, {
+
+        })
+        .then(function (data) {
+            if (data.status == "success") {
+
+                $("#list-all-invoices-modal").html(``);
+
+                if(data.data.length > 0){
+
+                    data.data.forEach(item => {
+
+                        $("#list-all-invoices-modal").append(`
+                            <tr>
+                                <td class="align-middle"><span class="badge bg-${InvoicesStatusClass(item.status)}">${InvoicesStatusName(item.status)}</span></td>
+                                <td class="align-middle">${item.invoice_type}</td>
+                                <td class="align-middle">${dateFormat(item.due_date)}</td>
+                                <td class="align-middle">R$ ${moneyFormat(item.price)}</td>
+                                <td class="align-middle" style="text-align: right">
+                                    
+                                </td>
+                            </tr>
+                        `);       
+                    });
+
+                }else{
+
+                    $("#list-all-invoices-modal").append(`
+                        <tr>
+                            <td class="align-middle text-center" colspan="5">Nenhuma fatura aberta encontrada</td>
+                        </tr>
+                    `);  
+
+                }
+
+                $("#modalListInvoices").modal("show");
+
+            } else if (data.status == "error") {
+                showError(data.message)
+            }
+        })
+        .catch();
+
+    });
 
     // LISTAR MÉTODOS DE PAGAMENTO
     function loadPaymentMethods()

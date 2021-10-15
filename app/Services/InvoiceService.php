@@ -141,6 +141,21 @@ class InvoiceService
         return $response;
     }
 
+    public function listReceivedsByStudent($id_student)
+    {
+        $response = [];
+
+        try{
+            $return = DB::select( DB::raw("select inv.*, ity.name as invoice_type from invoices inv join invoice_types ity on ity.id=inv.id_type where inv.id_user = ".$id_student." and inv.status = 'R' order by inv.due_date"));
+
+            $response = ['status' => 'success', 'data' => $return];
+        }catch(Exception $e){
+            $response = ['status' => 'error', 'data' => $e->getMessage()];
+        }
+
+        return $response;
+    }
+
     public function listFarMoreOpen($id_student)
     {
         $response = [];
@@ -196,7 +211,7 @@ class InvoiceService
             $date_fim = date('Y-m-t 23:59:59', strtotime($date));
 
             $return = DB::select( DB::raw("select 
-                                                inv.*, usr.name as cliente, pmt.name as payment_method, pms.name as payment_method_subtype
+                                                inv.*, usr.name as cliente, pmt.name as payment_method, pms.name as payment_method_subtype, pmsc.parcel as parcelas
                                             from
                                                 invoices inv 
                                                 join users usr on usr.id=inv.id_user

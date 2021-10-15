@@ -28,7 +28,7 @@
                 <span class="info-box-icon bg-success elevation-1"><i class="fas fa-comment-dollar"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">Total Faturado</span>
+                    <span class="info-box-text">Total Esperado</span>
                     <span class="info-box-number" id="tot-billed"><i class="fas fa-spinner fa-pulse"></i></span>
                 </div>
             </div>
@@ -45,6 +45,9 @@
         <div class="col-md-6">
             
             <div class="card">
+                <div class="card-header border-0">
+                    Clientes que pagaram
+                </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
                         <table class="table table-striped table-valign-middle table-hover table-sm">
@@ -54,6 +57,7 @@
                                     <th>Valor</th>
                                     <th>Método</th>
                                     <th>Subtipo/Bandeira</th>
+                                    <th>Parcelas</th>
                                     <th>Cliente</th>
                                 </tr>
                             </thead>
@@ -67,6 +71,9 @@
         <div class="col-md-6">
 
             <div class="card">
+                <div class="card-header border-0">
+                    Recebimentos esperados
+                </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
                         <table class="table table-striped table-valign-middle table-hover table-sm">
@@ -76,6 +83,7 @@
                                     <th>Valor</th>
                                     <th>Método</th>
                                     <th>Subtipo/Bandeira</th>
+                                    <th>Parcelas</th>
                                     <th>Cliente</th>
                                 </tr>
                             </thead>

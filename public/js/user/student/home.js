@@ -12,6 +12,7 @@ $(document).ready(function () {
     } );
 
     loadStudents();
+    loadTotalStudents();
 
     // LISTAR ALUNOS
     function loadStudents()
@@ -47,6 +48,28 @@ $(document).ready(function () {
         ]);
     }
 
+    // TOTAIS ALUNOS
+    function loadTotalStudents()
+    {
+
+        $.get(window.location.origin + "/alunos/listar-totais", {
+
+        })
+        .then(function (data) {
+            if (data.status == "success") {
+
+                Swal.close();
+                $("#tot-students-active").html(data.data[0].ativos);
+                $("#tot-students-inactive").html(data.data[0].inativos);
+
+            } else if (data.status == "error") {
+                showError(data.message)
+            }
+        })
+        .catch();
+           
+    }
+
     function mountTable(data){
 
         tabela.clear().draw();
@@ -63,8 +86,7 @@ $(document).ready(function () {
                     item.age, 
                     item.email, 
                     `${item.status=='A'?`<span class="badge badge-success">Ativo</span>`:`<span class="badge badge-danger">Inativo</span>`}`, 
-                    `<a title="${txt_status}" href="#" class="btn btn-${status} edit-status-student" data-id="${item.id}" data-status="${item.status}"><i style="color: white" class="fas fa-power-off"></i></a>
-                     <a title="Abrir" href="/alunos/exibir/${item.id}" class="btn btn-info open-student"><i style="color: white" class="fas fa-eye"></i></a>`,
+                    `<a title="Abrir" href="/alunos/exibir/${item.id}" class="btn btn-primary open-student"><i style="color: white" class="fas fa-arrow-right"></i></a>`,
                 ]).draw();
 
             });
