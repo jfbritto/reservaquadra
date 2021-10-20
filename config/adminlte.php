@@ -348,6 +348,12 @@ return [
                     'url'        => 'planos',
                     'can'        => 'admin',
                 ],
+                [
+                    'text'       => 'Métodos de Pagamento',
+                    'icon'       => 'fas fa-fw fa-comment-dollar' ,
+                    'url'        => 'metodos-de-pagamento',
+                    'can'        => 'admin',
+                ],
         //     ],
         // ],
         ['header' => 'FINANCEIRO'],

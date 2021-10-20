@@ -146,6 +146,7 @@ Route::group(['middleware' => ['admin']], function(){
 
     //subtipos de métodos de pagamento
     Route::get('/condicoes-de-subtipos-de-metodos-de-pagamento/listar', 'PaymentMethodSubtypeConditionController@list');
+    Route::post('/condicoes-de-subtipos-de-metodos-de-pagamento/cadastrar', 'PaymentMethodSubtypeConditionController@store');
 
     //telefones
     Route::get('/telefones/listar', 'PhoneController@list');
