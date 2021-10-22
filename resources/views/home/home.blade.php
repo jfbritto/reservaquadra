@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-sm-6 col-md-3 link-calendar">
+        <div class="col-12 col-sm-6 col-md-3 link-calendar" style="display: none;">
             <div class="info-box mb-3">
                 <span class="info-box-icon bg-success elevation-1"><i class="fas fa-calendar-alt"></i></span>
 
@@ -35,7 +35,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-sm-6 col-md-3 link-reservations">
+        <div class="col-12 col-sm-6 col-md-3 link-reservations" style="display: none;">
             <div class="info-box mb-3">
                 <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-clipboard-list"></i></span>
 
@@ -46,7 +46,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-sm-6 col-md-3">
+        <div class="col-12 col-sm-6 col-md-3" style="display: none;">
             <div class="info-box mb-3">
                 <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-file-invoice-dollar"></i></span>
 

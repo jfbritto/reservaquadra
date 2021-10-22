@@ -141,7 +141,7 @@
                 <div class="card-header border-0">
                     <h3 class="card-title"> Contrato Vigente </h3>
                     <div class="card-tools">
-                        <a href="#" class="btn btn-tool btn-sm" id="" title="Listar contratos">
+                        <a href="#" class="btn btn-tool btn-sm" id="" title="Listar contratos" style="display: none;">
                             <i class="fas fa-list"></i>
                         </a>
                         <a href="#" class="btn btn-tool btn-sm" data-toggle="modal" data-target="#modalStoreContract" id="btn-new-contract" style="display: none;" title="Cadastrar contrato">
