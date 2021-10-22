@@ -49,11 +49,13 @@
                 <table class="table table-striped table-valign-middle table-hover table-sm">
                     <thead>
                         <tr>
-                            <th>Data</th>
+                            <th>Vencimento</th>
+                            <th>Pagamento</th>
                             <th>Centro de custo</th>
                             <th>Subtipo</th>
                             <th>Valor</th>
-                            <th>Pagamento</th>
+                            <th>Observação</th>
+                            <th>Status</th>
                             <th></th>
                         </tr>
                     </thead>

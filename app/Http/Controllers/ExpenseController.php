@@ -79,6 +79,8 @@ class ExpenseController extends Controller
     {
         $data = [
             'id' => trim($request->id),
+            'paid_date' => date('Y-m-d H:i:s'),
+            'id_user_paid' => auth()->user()->id,
             'status' => 'R'
         ];
 

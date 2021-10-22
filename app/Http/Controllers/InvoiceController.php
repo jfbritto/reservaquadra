@@ -128,7 +128,7 @@ class InvoiceController extends Controller
                         'price' => $final_value,
                         'tax' => $tax
                     ];
-        
+
                     $this->invoiceReceiptService->store($data_invoice_receipt);
                 }
 
@@ -145,11 +145,10 @@ class InvoiceController extends Controller
                     'billing_date' => $next_date,
                     'status' => "R",
                     'price' => $final_value,
-                    'price' => $pmsc_obj['data']->flat_tax
+                    'tax' => $pmsc_obj['data']->flat_tax
                 ];
     
                 $this->invoiceReceiptService->store($data_invoice_receipt);
-
             }
 
 

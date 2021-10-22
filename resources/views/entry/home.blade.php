@@ -53,7 +53,8 @@
                         <table class="table table-striped table-valign-middle table-hover table-sm">
                             <thead>
                                 <tr>
-                                    <th>Data</th>
+                                    <th>Pagamento</th>
+                                    <th>Vencimento</th>
                                     <th>Valor</th>
                                     <th>Método</th>
                                     <th>Subtipo/Bandeira</th>
@@ -79,8 +80,9 @@
                         <table class="table table-striped table-valign-middle table-hover table-sm">
                             <thead>
                                 <tr>
-                                    <th>Data</th>
+                                    <th>Compensação</th>
                                     <th>Valor</th>
+                                    <th>Taxa</th>
                                     <th>Método</th>
                                     <th>Subtipo/Bandeira</th>
                                     <th>Parcelas</th>

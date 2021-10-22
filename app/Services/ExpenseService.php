@@ -73,7 +73,9 @@ class ExpenseService
 
             $result = DB::table('expenses')
                         ->where('id', $data['id'])
-                        ->update(['status' => $data['status']]);
+                        ->update(['status' => $data['status'],
+                                 'paid_date' => $data['paid_date'],
+                                 'id_user_paid' => $data['id_user_paid']]);
 
             DB::commit();
 

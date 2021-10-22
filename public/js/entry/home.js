@@ -33,6 +33,7 @@ $(document).ready(function () {
 
                                         $("#list").append(`
                                             <tr>
+                                                <td class="align-middle">${dateFormat(item.paid_date)}</td>
                                                 <td class="align-middle">${dateFormat(item.due_date)}</td>
                                                 <td class="align-middle">R$ ${moneyFormat(item.paid_price)}</td>
                                                 <td class="align-middle">${item.payment_method}</td>
@@ -71,6 +72,7 @@ $(document).ready(function () {
                                             <tr>
                                                 <td class="align-middle">${dateFormat(item.billing_date)}</td>
                                                 <td class="align-middle">R$ ${moneyFormat(item.price)}</td>
+                                                <td class="align-middle">R$ ${moneyFormat(item.tax)}</td>
                                                 <td class="align-middle">${item.payment_method}</td>
                                                 <td class="align-middle">${item.payment_method_subtype}</td>
                                                 <td class="align-middle">${item.parcela_paga}/${item.total_parcelas}</td>

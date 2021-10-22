@@ -35,9 +35,11 @@ $(document).ready(function () {
                                         $("#list").append(`
                                             <tr>
                                                 <td class="align-middle">${dateFormat(item.due_date)}</td>
+                                                <td class="align-middle">${dateFormat(item.paid_date)}</td>
                                                 <td class="align-middle">${item.name_cost_center}</td>
                                                 <td class="align-middle">${item.name_cost_center_subtype}</td>
                                                 <td class="align-middle">R$ ${moneyFormat(item.price)}</td>
+                                                <td class="align-middle">${item.observation}</td>
                                                 <td class="align-middle">${item.status=='P'?'<span class="badge badge-warning">Pendente</span>':'<span class="badge badge-success">Paga</span>'}</td>
                                                 <td class="align-middle" style="text-align: right">
                                                     ${item.status=='P'?`<a title="Informar pagamento" data-id="${item.id}" href="#" class="btn btn-success pay-expense"><i class="fas fa-comment-dollar"></i></a>`:''}
