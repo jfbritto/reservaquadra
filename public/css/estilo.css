@@ -5,7 +5,7 @@
     display: flex;
     -ms-flex-direction: column;
     flex-direction: column;
-    height: 50vh;
+    height: 40vh;
     -ms-flex-pack: center;
     justify-content: center;
 }
