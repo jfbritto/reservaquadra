@@ -24,9 +24,9 @@
                     <a class="nav-link" style="color: black" href="/home">Entrar</a>
                 </li>
             @else
-                <li class="nav-item active">
+                <!-- <li class="nav-item active">
                     <a class="nav-link" style="color: black" href="/">Logar</a>
-                </li>
+                </li> -->
             @endif
             
             <!-- <li class="nav-item">
