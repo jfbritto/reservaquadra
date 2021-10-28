@@ -61,6 +61,14 @@ function InvoicesStatusName(val)
     return `${class_result[val]}`
 }
 
+// retorna o nome do objetivo do aluno
+function objectiveName(val)
+{
+    const result = {'evolucao':'Evolução','prazer':'Prazer','suor':'Suor'};
+    
+    return `${result[val]}`
+}
+
 // retorna a periodicidade do plano pelo seu numero referente enviado
 function periodContractedDescription(val)
 {
@@ -69,12 +77,17 @@ function periodContractedDescription(val)
     return `${period_cantracted_description[val]}`
 }
 
-// retorna a faixa etária do aluno pelo seu numero referente enviado
+// retorna o plano do aluno pelo seu numero referente enviado
 function getAgeRange(val)
 {
-    const age_range_description = {1:'Infantil',2:'Juvenil',3:'Adulto'};
+    const age_range_description = {1:'Infantil',
+                                   2:'Juvenil',
+                                   3:'Adulto',
+                                   4:'Pré Equipe',
+                                   5:'Pacote de Aulas',
+                                   6:'GynPass'};
     
-    if(val > 0 && val < 4){
+    if(val > 0 && val <= 6){
         return `${age_range_description[val]}`
     }else{
         return ``
@@ -186,7 +199,7 @@ function showSuccess(title = null, text = null, functions = null, param = null)
 }
 
 // BUSCA DE ENDEREÇO
-$("#zip_code, #zip_code_edit").on("keyup", function(){
+$("#zip_code, #zip_code_edit, #responsible_zip_code, #responsible_zip_code_edit").on("keyup", function(){
 
     if($(this).val().length == 9){
 
@@ -210,53 +223,122 @@ $("#zip_code, #zip_code_edit").on("keyup", function(){
                                 return false;
                             }
 
+                            switch (type) {
+                                case 'add':
+
+                                    $("#uf").prop("readonly", true)
+                                    $("#city").prop("readonly", true)
+                                    $("#neighborhood").prop("readonly", true)
+                                    $("#address").prop("readonly", true)
+                                    
+                                    $("#uf").val(data.uf);
+                                    $("#city").val(data.localidade);
+                                    $("#neighborhood").val(data.bairro);
+                                    $("#address").val(data.logradouro);
+    
+                                    if(data.uf == "")
+                                        $("#uf").prop("readonly", false)
+    
+                                    if(data.localidade == "")
+                                        $("#city").prop("readonly", false)
+    
+                                    if(data.bairro == "")
+                                        $("#neighborhood").prop("readonly", false)
+    
+                                    if(data.logradouro == "")
+                                        $("#address").prop("readonly", false)
+                                    
+                                    break;
+                                
+                                case 'edit':
+
+                                    $("#uf_edit").prop("readonly", true)
+                                    $("#city_edit").prop("readonly", true)
+                                    $("#neighborhood_edit").prop("readonly", true)
+                                    $("#address_edit").prop("readonly", true)
+                                    
+                                    $("#uf_edit").val(data.uf);
+                                    $("#city_edit").val(data.localidade);
+                                    $("#neighborhood_edit").val(data.bairro);
+                                    $("#address_edit").val(data.logradouro);
+    
+                                    if(data.uf == "")
+                                        $("#uf_edit").prop("readonly", false)
+    
+                                    if(data.localidade == "")
+                                        $("#city_edit").prop("readonly", false)
+    
+                                    if(data.bairro == "")
+                                        $("#neighborhood_edit").prop("readonly", false)
+    
+                                    if(data.logradouro == "")
+                                        $("#address_edit").prop("readonly", false)
+                                    
+                                    break;
+                                
+                                case 'add-responsible':
+
+                                    $("#responsible_uf").prop("readonly", true)
+                                    $("#responsible_city").prop("readonly", true)
+                                    $("#responsible_neighborhood").prop("readonly", true)
+                                    $("#responsible_address").prop("readonly", true)
+                                    
+                                    $("#responsible_uf").val(data.uf);
+                                    $("#responsible_city").val(data.localidade);
+                                    $("#responsible_neighborhood").val(data.bairro);
+                                    $("#responsible_address").val(data.logradouro);
+    
+                                    if(data.uf == "")
+                                        $("#responsible_uf").prop("readonly", false)
+    
+                                    if(data.localidade == "")
+                                        $("#responsible_city").prop("readonly", false)
+    
+                                    if(data.bairro == "")
+                                        $("#responsible_neighborhood").prop("readonly", false)
+    
+                                    if(data.logradouro == "")
+                                        $("#responsible_address").prop("readonly", false)
+                                    
+                                    break;
+                                
+                                case 'edit-responsible':
+
+                                    $("#responsible_uf_edit").prop("readonly", true)
+                                    $("#responsible_city_edit").prop("readonly", true)
+                                    $("#responsible_neighborhood_edit").prop("readonly", true)
+                                    $("#responsible_address_edit").prop("readonly", true)
+                                    
+                                    $("#responsible_uf_edit").val(data.uf);
+                                    $("#responsible_city_edit").val(data.localidade);
+                                    $("#responsible_neighborhood_edit").val(data.bairro);
+                                    $("#responsible_address_edit").val(data.logradouro);
+    
+                                    if(data.uf == "")
+                                        $("#responsible_uf_edit").prop("readonly", false)
+    
+                                    if(data.localidade == "")
+                                        $("#responsible_city_edit").prop("readonly", false)
+    
+                                    if(data.bairro == "")
+                                        $("#responsible_neighborhood_edit").prop("readonly", false)
+    
+                                    if(data.logradouro == "")
+                                        $("#responsible_address_edit").prop("readonly", false)
+                                    
+                                    break;
+                            
+                                default:
+                                    break;
+                            }
+
                             if(type == 'add'){
                                 
-                                $("#uf").prop("readonly", true)
-                                $("#city").prop("readonly", true)
-                                $("#neighborhood").prop("readonly", true)
-                                $("#address").prop("readonly", true)
                                 
-                                $("#uf").val(data.uf);
-                                $("#city").val(data.localidade);
-                                $("#neighborhood").val(data.bairro);
-                                $("#address").val(data.logradouro);
-
-                                if(data.uf == "")
-                                    $("#uf").prop("readonly", false)
-
-                                if(data.localidade == "")
-                                    $("#city").prop("readonly", false)
-
-                                if(data.bairro == "")
-                                    $("#neighborhood").prop("readonly", false)
-
-                                if(data.logradouro == "")
-                                    $("#address").prop("readonly", false)
                                     
                             }else{
 
-                                $("#uf_edit").prop("readonly", true)
-                                $("#city_edit").prop("readonly", true)
-                                $("#neighborhood_edit").prop("readonly", true)
-                                $("#address_edit").prop("readonly", true)
                                 
-                                $("#uf_edit").val(data.uf);
-                                $("#city_edit").val(data.localidade);
-                                $("#neighborhood_edit").val(data.bairro);
-                                $("#address_edit").val(data.logradouro);
-
-                                if(data.uf == "")
-                                    $("#uf_edit").prop("readonly", false)
-
-                                if(data.localidade == "")
-                                    $("#city_edit").prop("readonly", false)
-
-                                if(data.bairro == "")
-                                    $("#neighborhood_edit").prop("readonly", false)
-
-                                if(data.logradouro == "")
-                                    $("#address_edit").prop("readonly", false)
                                 
                             }
 
@@ -281,4 +363,14 @@ function resetReadOnly()
     $("#city_edit").prop("readonly", false)
     $("#neighborhood_edit").prop("readonly", false)
     $("#address_edit").prop("readonly", false)
+
+    $("#responsible_uf").prop("readonly", false)
+    $("#responsible_city").prop("readonly", false)
+    $("#responsible_neighborhood").prop("readonly", false)
+    $("#responsible_address").prop("readonly", false)
+
+    $("#responsible_uf_edit").prop("readonly", false)
+    $("#responsible_city_edit").prop("readonly", false)
+    $("#responsible_neighborhood_edit").prop("readonly", false)
+    $("#responsible_address_edit").prop("readonly", false)
 }

@@ -32,6 +32,13 @@ $(document).ready(function () {
                                     $("#status-student").html(item.status=='A'?``:`<span class="badge badge-danger">Inativo</span>`);
 
                                     // CARREGAR INFORMAÇÕES NA TELA
+                                    $("#responsible_name").html(item.responsible_name);
+                                    $("#responsible_rg").html(item.responsible_rg);
+                                    $("#responsible_cpf").html(item.responsible_cpf);
+                                    $("#responsible_civil_status").html(item.responsible_civil_status);
+                                    $("#responsible_profession").html(item.responsible_profession);
+                                    $("#responsible_address").html(`${item.responsible_address} ${item.responsible_address_number}, ${item.responsible_complement}. ${item.responsible_neighborhood}, ${item.responsible_city} - ${item.responsible_uf} | ${item.responsible_zip_code}`);
+                                    
                                     $("#name").html(item.name);
                                     $("#email").html(item.email);
                                     $("#birth").html(dateFormat(item.birth));
@@ -39,11 +46,12 @@ $(document).ready(function () {
                                     $("#rg").html(item.rg);
                                     $("#civil_status").html(item.civil_status);
                                     $("#profession").html(item.profession);
-                                    $("#zip_code").html(item.zip_code);
-                                    $("#address").html(`${item.address} ${item.address_number}, ${item.complement}. ${item.neighborhood}, ${item.city} - ${item.uf}`);
+                                    $("#address").html(`${item.address} ${item.address_number}, ${item.complement}. ${item.neighborhood}, ${item.city} - ${item.uf} | ${item.zip_code}`);
                                     $("#start_date").html(dateFormat(item.start_date));
                                     $("#health_plan").html(item.health_plan);
                                     $("#how_met").html(item.how_met);
+                                    $("#special_care").html(item.special_care);
+                                    $("#objective").html(objectiveName(item.objective));
 
                                     // CARREGAR INFORMAÇÕES NO MODAL
                                     $("#name_edit").val(item.name);
@@ -63,6 +71,26 @@ $(document).ready(function () {
                                     $("#start_date_edit").val(item.start_date);
                                     $("#health_plan_edit").val(item.health_plan);
                                     $("#how_met_edit").val(item.how_met).change();
+
+                                    $("#registration_type_edit").val(item.registration_type).change();
+
+                                    $("#gender_edit").val(item.gender).change();
+                                    $("#special_care_edit").val(item.special_care);
+                                    $("#objective_edit").val(item.objective).change();
+
+                                    $("#responsible_name_edit").val(item.responsible_name);
+                                    $("#responsible_cpf_edit").val(item.responsible_cpf);
+                                    $("#responsible_rg_edit").val(item.responsible_rg);
+                                    $("#responsible_civil_status_edit").val(item.responsible_civil_status).change();
+                                    $("#responsible_profession_edit").val(item.responsible_profession);
+
+                                    $("#responsible_zip_code_edit").val(item.responsible_zip_code);
+                                    $("#responsible_uf_edit").val(item.responsible_uf);
+                                    $("#responsible_city_edit").val(item.responsible_city);
+                                    $("#responsible_neighborhood_edit").val(item.responsible_neighborhood);
+                                    $("#responsible_address_edit").val(item.responsible_address);
+                                    $("#responsible_address_number_edit").val(item.responsible_address_number);
+                                    $("#responsible_complement_edit").val(item.responsible_complement);
 
                                 }
 
@@ -152,25 +180,41 @@ $(document).ready(function () {
                                 Swal.close();
 
                                 $("#box-phones-registered").html(``);
+                                $("#box-phones-registered-responsible").html(``);
                                 $("#box-phones").html(``);
 
                                 if(data.data.length > 0){
 
                                     data.data.forEach(item => { 
-                                        $("#box-phones-registered").append(`
-                                            <div class="col-sm-3">
-                                                <div class="alert alert-light">
-                                                    <span data-type="phone">${item.number}</span>
+
+                                        let class_alert = item.is_emergency==0?`light`:`warning`;
+
+                                        if(item.is_responsible_number == 0){
+                                            $("#box-phones-registered").append(`
+                                                <div class="col-sm-3">
+                                                    <div class="alert alert-${class_alert}">
+                                                        <span data-type="phone" data-is_responsible_number="${item.is_responsible_number}" data-is_emergency="${item.is_emergency}">${item.number}</span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        `);
+                                            `);
+                                        }else{
+                                            $("#box-phones-registered-responsible").append(`
+                                                <div class="col-sm-3">
+                                                    <div class="alert alert-${class_alert}">
+                                                        <span data-type="phone" data-is_responsible_number="${item.is_responsible_number}" data-is_emergency="${item.is_emergency}">${item.number}</span>
+                                                    </div>
+                                                </div>
+                                            `);
+                                        }
+
+                                        
 
                                         let random = Math.floor(Math.random() * 100000);
     
                                         $("#box-phones").append(`
                                             <div class="col-sm-3 random${random}">
-                                                <div class="alert alert-light">
-                                                    <span class="phone_add" data-type="phone">${item.number}</span>
+                                                <div class="alert alert-${class_alert}">
+                                                    <span class="phone_add" data-type="phone" data-is_responsible_number="${item.is_responsible_number}" data-is_emergency="${item.is_emergency}">${item.number}</span>
                                                     <button type="button" class="close close-alert" data-class_alert="random${random}" >
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -510,6 +554,7 @@ $(document).ready(function () {
                                 <td class="align-middle">${dateFormat(item.due_date)}</td>
                                 <td class="align-middle">R$ ${moneyFormat(item.price)}</td>
                                 <td class="align-middle" style="text-align: right">
+                                    <a title="Cancelar fatura" data-id="${item.id}" href="#" class="btn btn-danger cancel-invoice"><i class="fas fa-trash"></i></a>
                                     <a title="Receber" data-id="${item.id}" data-due_date="${item.due_date}" data-price="${item.price}" href="#" class="btn btn-success pay-invoice"><i class="fas fa-comment-dollar"></i></a>
                                 </td>
                             </tr>
@@ -537,6 +582,12 @@ $(document).ready(function () {
     //LISTAR FATURAS
     $("#list-all-invoices").on("click", function(){
 
+        listAllInvoicesReceived();
+
+    });
+
+    function listAllInvoicesReceived()
+    {
         $.get(window.location.origin + `/faturas/listar-recebidas/${$("#id_usr").val()}`, {
 
         })
@@ -555,8 +606,9 @@ $(document).ready(function () {
                                 <td class="align-middle">${item.invoice_type}</td>
                                 <td class="align-middle">${dateFormat(item.due_date)}</td>
                                 <td class="align-middle">R$ ${moneyFormat(item.price)}</td>
+                                <td class="align-middle">${item.fiscal_note==null?`-`:item.fiscal_note}</td>
                                 <td class="align-middle" style="text-align: right">
-                                    
+                                    <a title="Editar" data-id="${item.id}" href="#" class="btn btn-warning btn-sm edit-invoice"><i class="fas fa-pen"></i></a>
                                 </td>
                             </tr>
                         `);       
@@ -579,7 +631,54 @@ $(document).ready(function () {
             }
         })
         .catch();
+    }
 
+    // MODAL PARA EDITAR FATURA
+    $("#list-all-invoices-modal").on("click", ".edit-invoice", function(){
+
+        let id_invoice = $(this).data("id");
+        $("#id_invoice_edit").val(id_invoice);
+
+        $("#modalEditInvoice").modal("show");
+    });
+
+    // EDITAR FATURA
+    $("#formEditInvoice").submit(function (e) {
+        e.preventDefault();
+
+        Swal.queue([
+            {
+                title: "Carregando...",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                    $.ajax({
+                        url: window.location.origin + "/faturas/editar",
+                        type: 'PUT',
+                        data: {
+                            fiscal_note: $("#fiscal_note").val(),
+                            id_invoice: $("#id_invoice_edit").val(),
+                        }
+                    })
+                        .then(function (data) {
+                            if (data.status == "success") {
+
+                                $("#formEditInvoice").each(function () {
+                                    this.reset();
+                                });
+                                
+                                $("#modalEditInvoice").modal("hide");
+
+                                showSuccess("Editada com sucesso!", null, listAllInvoicesReceived)
+                            } else if (data.status == "error") {
+                                showError(data.message)
+                            }
+                        })
+                        .catch();
+                },
+            },
+        ]);
     });
 
     // LISTAR MÉTODOS DE PAGAMENTO
@@ -627,6 +726,8 @@ $(document).ready(function () {
     $("#id_payment_method").on("change", function(){
         
         let id_payment_method = $("#id_payment_method option:selected").val();
+        $("#id_payment_method_subtype_condition").html(``);
+        $("#id_payment_method_subtype").html(``);
 
         Swal.queue([
             {
@@ -952,6 +1053,90 @@ $(document).ready(function () {
     });
 
 
+    // CANCELAR FATURA
+    $("#list-invoices").on("click", ".cancel-invoice", function(){
+        let id = $(this).data('id');
+
+        Swal.fire({
+            title: 'Para cancelar, informe a senha de administrador',
+            input: 'password',
+            inputAttributes: {
+              autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Confirmar',
+            showLoaderOnConfirm: false,
+            preConfirm: (pass) => {
+
+                if(pass == "admin123"){
+                    return '1';
+                }else{
+                    return '0';
+                }
+
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+          }).then((result) => {
+            if (result.value == '1') {
+
+                Swal.fire({
+                    title: 'Atenção!',
+                    text: "Deseja realmente cancelar a fatura?",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Sim',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Não'
+                    }).then((result) => {
+                        if (result.value) {
+        
+                            Swal.queue([
+                                {
+                                    title: "Carregando...",
+                                    allowOutsideClick: false,
+                                    allowEscapeKey: false,
+                                    onOpen: () => {
+                                        Swal.showLoading();
+                                        $.ajax({
+                                            url: window.location.origin + "/faturas/cancelar",
+                                            type: 'DELETE',
+                                            data: {id}
+                                        })
+                                            .then(function (data) {
+                                                if (data.status == "success") {
+                                                                
+                                                    showSuccess("Fatura cancelada com sucesso!", null, loadAll)
+                                                } else if (data.status == "error") {
+                                                    showError(data.message)
+                                                }
+                                            })
+                                            .catch();
+                                    },
+                                },
+                            ]);
+        
+                        }
+                    })
+                
+            }else{
+                
+                showError("Senha incorreta!")
+
+            }
+          })
+
+        // $("#id_invoice").val(id_invoice);
+        // $("#due_date").val(due_date);
+        // $("#price").val(moneyFormat(price));
+        // $("#paid_price").val(moneyFormat(price));
+
+        // $("#id_payment_method_subtype").html("");
+        // $("#id_payment_method_subtype_condition").html("");
+
+        // $("#modalReceiveInvoice").modal('show');
+    });
+
     // ABRIR MODAL DE RECEBIMENTO
     $("#list-invoices").on("click", ".pay-invoice", function(){
         let id_invoice = $(this).data('id');
@@ -1046,11 +1231,17 @@ $(document).ready(function () {
 
         let phones = $(".phone_add");
         let phone_array = [];
+        let phone_is_responsible_number_array = [];
+        let phone_is_emergency_array = [];
         for (const key in phones) {
             if (Object.hasOwnProperty.call(phones, key)) {
                 const element = $(phones[key]).data("type");
+                let is_responsible_number = $(phones[key]).data("is_responsible_number");
+                let is_emergency = $(phones[key]).data("is_emergency");
                 if(element == "phone")
                     phone_array.push($(phones[key]).html())
+                    phone_is_responsible_number_array.push(is_responsible_number)
+                    phone_is_emergency_array.push(is_emergency)
             }
         }
 
@@ -1083,7 +1274,30 @@ $(document).ready(function () {
                             start_date: $("#start_date_edit").val(),
                             health_plan: $("#health_plan_edit").val(),
                             how_met: $("#how_met_edit option:selected").val(),
-                            phones:phone_array
+                            
+                            registration_type: $("#registration_type_edit option:selected").val(),
+
+                            gender: $("#gender_edit").val(),
+                            special_care: $("#special_care_edit").val(),
+                            objective: $("#objective_edit option:selected").val(),
+                            
+                            responsible_name: $("#responsible_name_edit").val(),
+                            responsible_cpf: $("#responsible_cpf_edit").val(),
+                            responsible_rg: $("#responsible_rg_edit").val(),
+                            responsible_civil_status: $("#responsible_civil_status_edit option:selected").val(),
+                            responsible_profession: $("#responsible_profession_edit").val(),
+
+                            responsible_zip_code: $("#responsible_zip_code_edit").val(),
+                            responsible_uf: $("#responsible_uf_edit").val(),
+                            responsible_city: $("#responsible_city_edit").val(),
+                            responsible_neighborhood: $("#responsible_neighborhood_edit").val(),
+                            responsible_address: $("#responsible_address_edit").val(),
+                            responsible_address_number: $("#responsible_address_number_edit").val(),
+                            responsible_complement: $("#responsible_complement_edit").val(),
+                            
+                            phones:phone_array,
+                            phone_is_responsible_number:phone_is_responsible_number_array,
+                            phone_is_emergency:phone_is_emergency_array
                         }
                     })
                         .then(function (data) {
@@ -1367,12 +1581,16 @@ $(document).ready(function () {
     $("#btn-add-phone").on("click", function(){
 
         let number = $("#phone_number").val();
+        let is_responsible_number = $("#is_responsible_number option:selected").val();
+        let is_emergency = $("#is_emergency option:selected").val();
         let random = Math.floor(Math.random() * 100000);
 
+        let class_alert = is_emergency==0?`light`:`warning`;
+
         $("#box-phones").append(`
-            <div class="col-sm-3 random${random}">
-                <div class="alert alert-light">
-                    <span class="phone_add" data-type="phone">${number}</span>
+            <div class="col-sm-2 random${random}">
+                <div class="alert alert-${class_alert}">
+                    <span class="phone_add" data-type="phone" data-is_responsible_number="${is_responsible_number}" data-is_emergency="${is_emergency}" >${number}</span>
                     <button type="button" class="close close-alert" data-class_alert="random${random}" >
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -1382,6 +1600,8 @@ $(document).ready(function () {
 
         $("#modalAddPhone").modal("hide");
         $("#phone_number").val("");
+        $("#is_responsible_number").val("0").change();
+        $("#is_emergency").val("0").change();
 
     });
 
@@ -1390,6 +1610,33 @@ $(document).ready(function () {
         $(`.${class_alert}`).remove()
     });
 
+    $("#registration_type_edit").on("change", function(){
+
+        let type = $("#registration_type_edit option:selected").val();
+
+        if(type == 'A'){
+            $(".adulto").show()
+            $(".infantil").hide()
+
+            $(".change-class").removeClass("col-md-6").addClass("col-md-3")
+            $(".change-class").removeClass("col-md-6").addClass("col-md-3")
+            $(".change-class").removeClass("col-md-6").addClass("col-md-3")
+            $(".change-class").removeClass("col-md-6").addClass("col-md-3")
+
+            $(".phone-class").removeClass("col-md-4").addClass("col-md-6")
+        }else{
+            $(".infantil").show()
+            $(".adulto").hide()
+            
+            $(".change-class").removeClass("col-md-3").addClass("col-md-6")
+            $(".change-class").removeClass("col-md-3").addClass("col-md-6")
+            $(".change-class").removeClass("col-md-3").addClass("col-md-6")
+            $(".change-class").removeClass("col-md-3").addClass("col-md-6")
+
+            $(".phone-class").removeClass("col-md-6").addClass("col-md-4")
+        }
+
+    });
 
     // CARREGAR DADOS NA TELA
     function loadAll()

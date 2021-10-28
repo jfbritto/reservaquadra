@@ -58,9 +58,17 @@ $(document).ready(function () {
         .then(function (data) {
             if (data.status == "success") {
 
+                let ativos = 0;
+                if(data.data[0].ativos > 0)
+                    ativos = data.data[0].ativos;
+
+                let inativos = 0;
+                if(data.data[0].inativos > 0)
+                    inativos = data.data[0].inativos;
+
                 Swal.close();
-                $("#tot-students-active").html(data.data[0].ativos);
-                $("#tot-students-inactive").html(data.data[0].inativos);
+                $("#tot-students-active").html(ativos);
+                $("#tot-students-inactive").html(inativos);
 
             } else if (data.status == "error") {
                 showError(data.message)
@@ -84,7 +92,7 @@ $(document).ready(function () {
                 tabela.row.add( [
                     item.name,
                     item.age, 
-                    item.email, 
+                    `${item.active_contracts>0?`<span class="badge badge-success">Sim</span>`:`<span class="badge badge-danger">Não</span>`}`, 
                     `${item.status=='A'?`<span class="badge badge-success">Ativo</span>`:`<span class="badge badge-danger">Inativo</span>`}`, 
                     `<a title="Abrir" href="/alunos/exibir/${item.id}" class="btn btn-primary open-student"><i style="color: white" class="fas fa-arrow-right"></i></a>`,
                 ]).draw();
@@ -94,14 +102,6 @@ $(document).ready(function () {
             $("#table tbody tr").each(function() {
                 $(this).find('td:eq(4)').css('text-align','right');
             });
-
-        }else{
-
-            $("#list").append(`
-                <tr>
-                    <td class="align-middle text-center" colspan="4">Nenhum aluno cadastrado</td>
-                </tr>
-            `);  
 
         }
 
@@ -114,11 +114,17 @@ $(document).ready(function () {
 
         let phones = $(".phone_add");
         let phone_array = [];
+        let phone_is_responsible_number_array = [];
+        let phone_is_emergency_array = [];
         for (const key in phones) {
             if (Object.hasOwnProperty.call(phones, key)) {
                 const element = $(phones[key]).data("type");
+                let is_responsible_number = $(phones[key]).data("is_responsible_number");
+                let is_emergency = $(phones[key]).data("is_emergency");
                 if(element == "phone")
                     phone_array.push($(phones[key]).html())
+                    phone_is_responsible_number_array.push(is_responsible_number)
+                    phone_is_emergency_array.push(is_emergency)
             }
         }
 
@@ -147,7 +153,30 @@ $(document).ready(function () {
                         start_date: $("#start_date").val(),
                         health_plan: $("#health_plan").val(),
                         how_met: $("#how_met option:selected").val(),
-                        phones:phone_array
+                        
+                        registration_type: $("#registration_type option:selected").val(),
+                        
+                        gender: $("#gender").val(),
+                        special_care: $("#special_care").val(),
+                        objective: $("#objective option:selected").val(),
+                        
+                        responsible_name: $("#responsible_name").val(),
+                        responsible_cpf: $("#responsible_cpf").val(),
+                        responsible_rg: $("#responsible_rg").val(),
+                        responsible_civil_status: $("#responsible_civil_status option:selected").val(),
+                        responsible_profession: $("#responsible_profession").val(),
+
+                        responsible_zip_code: $("#responsible_zip_code").val(),
+                        responsible_uf: $("#responsible_uf").val(),
+                        responsible_city: $("#responsible_city").val(),
+                        responsible_neighborhood: $("#responsible_neighborhood").val(),
+                        responsible_address: $("#responsible_address").val(),
+                        responsible_address_number: $("#responsible_address_number").val(),
+                        responsible_complement: $("#responsible_complement").val(),
+
+                        phones:phone_array,
+                        phone_is_responsible_number:phone_is_responsible_number_array,
+                        phone_is_emergency:phone_is_emergency_array
                     })
                         .then(function (data) {
                             if (data.status == "success") {
@@ -157,6 +186,8 @@ $(document).ready(function () {
                                 });
                                 
                                 $("#modalStoreStudent").modal("hide");
+
+                                $("#box-phones").html("");
 
                                 showSuccess("Cadastro efetuado!", null, loadStudents)
                             } else if (data.status == "error") {
@@ -195,12 +226,16 @@ $(document).ready(function () {
     $("#btn-add-phone").on("click", function(){
 
         let number = $("#phone_number").val();
+        let is_responsible_number = $("#is_responsible_number option:selected").val();
+        let is_emergency = $("#is_emergency option:selected").val();
         let random = Math.floor(Math.random() * 100000);
+
+        let class_alert = is_emergency==0?`light`:`warning`;
 
         $("#box-phones").append(`
             <div class="col-sm-2 random${random}">
-                <div class="alert alert-light">
-                    <span class="phone_add" data-type="phone">${number}</span>
+                <div class="alert alert-${class_alert}">
+                    <span class="phone_add" data-type="phone" data-is_responsible_number="${is_responsible_number}" data-is_emergency="${is_emergency}" >${number}</span>
                     <button type="button" class="close close-alert" data-class_alert="random${random}" >
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -210,6 +245,8 @@ $(document).ready(function () {
 
         $("#modalAddPhone").modal("hide");
         $("#phone_number").val("");
+        $("#is_responsible_number").val("0").change();
+        $("#is_emergency").val("0").change();
 
     });
 
@@ -272,6 +309,24 @@ $(document).ready(function () {
 
                 }
             })
+
+    });
+
+    $("#registration_type").on("change", function(){
+
+        let type = $("#registration_type option:selected").val();
+
+        if(type == 'A'){
+            $(".adulto").show()
+            $(".infantil").hide()
+
+            $(".phone-class").removeClass("col-md-4").addClass("col-md-6")
+        }else{
+            $(".infantil").show()
+            $(".adulto").hide()
+
+            $(".phone-class").removeClass("col-md-6").addClass("col-md-4")
+        }
 
     });
 

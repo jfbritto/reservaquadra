@@ -61,6 +61,30 @@ class InvoiceService
         return $response;
     }
 
+    public function update(array $data)
+    {
+        $response = [];
+
+        try{
+
+            DB::beginTransaction();
+
+            $result = DB::table('invoices')
+                        ->where('id', $data['id'])
+                        ->update(['fiscal_note' => $data['fiscal_note']]);
+
+            DB::commit();
+
+            $response = ['status' => 'success', 'data' => $result];
+
+        }catch(Exception $e){
+            DB::rollBack();
+            $response = ['status' => 'error', 'data' => $e->getMessage()];
+        }
+
+        return $response;
+    }
+
     public function cancel(array $data)
     {
         $response = [];

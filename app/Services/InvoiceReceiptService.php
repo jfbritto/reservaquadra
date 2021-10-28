@@ -41,7 +41,7 @@ class InvoiceReceiptService
 
             $return = DB::select( DB::raw("select 
                                                 invr.*, usr.name as cliente, pmt.name as payment_method, pms.name as payment_method_subtype, (select count(*) from invoice_receipts where id_invoice=invr.id_invoice) as total_parcelas,
-                                                (select count(*) from invoice_receipts where id_invoice=invr.id_invoice and EXTRACT(YEAR_MONTH FROM billing_date) <= EXTRACT(YEAR_MONTH FROM invr.billing_date)) as parcela_paga
+                                                (select count(*) from invoice_receipts where id_invoice=invr.id_invoice and EXTRACT(YEAR_MONTH FROM billing_date) <= EXTRACT(YEAR_MONTH FROM invr.billing_date)) as parcela_paga, inv.fiscal_note
                                             from 
                                                 invoice_receipts invr
                                                 join invoices inv on inv.id=invr.id_invoice

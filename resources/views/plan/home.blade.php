@@ -26,7 +26,7 @@
                 <table class="table table-striped table-valign-middle table-hover table-sm">
                     <thead>
                         <tr>
-                            <th>Faixa etária</th>
+                            <th>Plano</th>
                             <th>Período do dia</th>
                             <th>Aulas por semana</th>
                             <th>Período contrato</th>
@@ -62,12 +62,15 @@
                         <input type="hidden" required name="name" id="name" class="form-control" placeholder="Informe o nome do plano">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="age_range">Faixa etária</label>
+                                <label for="age_range">Plano</label>
                                 <select required name="age_range" id="age_range" class="form-control">
                                     <option value="">-- Selecione --</option>
                                     <option value="1">Infantil</option>
                                     <option value="2">Juvenil</option>
                                     <option value="3">Adulto</option>
+                                    <option value="4">Pré Equipe</option>
+                                    <option value="5">Pacote de aulas</option>
+                                    <option value="6">GynPass</option>
                                 </select>
                             </div>
                         </div>
@@ -89,6 +92,8 @@
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
                                 </select>
                             </div>
                         </div>
@@ -208,12 +213,15 @@
                         <input type="hidden" required name="name_edit" id="name_edit" class="form-control" placeholder="Informe o nome do plano">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="age_range_edit">Faixa etária</label>
+                                <label for="age_range_edit">Plano</label>
                                 <select required name="age_range_edit" id="age_range_edit" class="form-control">
                                     <option value="">-- Selecione --</option>
                                     <option value="1">Infantil</option>
                                     <option value="2">Juvenil</option>
                                     <option value="3">Adulto</option>
+                                    <option value="4">Pré Equipe</option>
+                                    <option value="5">Pacote de Aulas</option>
+                                    <option value="6">GynPass</option>
                                 </select>
                             </div>
                         </div>
@@ -235,6 +243,8 @@
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
                                 </select>
                             </div>
                         </div>

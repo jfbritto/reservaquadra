@@ -59,6 +59,7 @@
                                     <th>Método</th>
                                     <th>Subtipo/Bandeira</th>
                                     <th>Parcelas</th>
+                                    <th>NF</th>
                                     <th>Cliente</th>
                                 </tr>
                             </thead>
@@ -86,6 +87,7 @@
                                     <th>Método</th>
                                     <th>Subtipo/Bandeira</th>
                                     <th>Parcelas</th>
+                                    <th>NF</th>
                                     <th>Cliente</th>
                                 </tr>
                             </thead>

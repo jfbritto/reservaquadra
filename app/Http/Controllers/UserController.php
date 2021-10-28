@@ -65,6 +65,22 @@ class UserController extends Controller
             'how_met' => trim($request->how_met),
             'password' => bcrypt(trim(123456)),
             'group' => 4,
+            'registration_type' => trim($request->registration_type),
+            'gender' => trim($request->gender),
+            'special_care' => trim($request->special_care),
+            'objective' => trim($request->objective),
+            'responsible_name' => trim($request->responsible_name),
+            'responsible_cpf' => trim($request->responsible_cpf),
+            'responsible_rg' => trim($request->responsible_rg),
+            'responsible_civil_status' => trim($request->responsible_civil_status),
+            'responsible_profession' => trim($request->responsible_profession),
+            'responsible_zip_code' => trim($request->responsible_zip_code),
+            'responsible_uf' => trim($request->responsible_uf),
+            'responsible_city' => trim($request->responsible_city),
+            'responsible_neighborhood' => trim($request->responsible_neighborhood),
+            'responsible_address' => trim($request->responsible_address),
+            'responsible_address_number' => trim($request->responsible_address_number),
+            'responsible_complement' => trim($request->responsible_complement),
         ];
 
         $response = $this->userService->store($data);
@@ -73,10 +89,13 @@ class UserController extends Controller
             if($request->phones){
                 if(count($request->phones) > 0){
 
-                    foreach ($request->phones as $number) {
+                    foreach ($request->phones as $key => $number) {
+
                         $data = [
                             'id_user' => $response['data']->id,
-                            'number' => $number 
+                            'number' => $number,
+                            'is_responsible_number' => $request->phone_is_responsible_number[$key], 
+                            'is_emergency' => $request->phone_is_emergency[$key], 
                         ];
     
                         $this->phoneService->store($data);
@@ -148,6 +167,22 @@ class UserController extends Controller
             'health_plan' => trim($request->health_plan),
             'how_met' => trim($request->how_met),
             'group' => 4,
+            'registration_type' => trim($request->registration_type),
+            'gender' => trim($request->gender),
+            'special_care' => trim($request->special_care),
+            'objective' => trim($request->objective),
+            'responsible_name' => trim($request->responsible_name),
+            'responsible_cpf' => trim($request->responsible_cpf),
+            'responsible_rg' => trim($request->responsible_rg),
+            'responsible_civil_status' => trim($request->responsible_civil_status),
+            'responsible_profession' => trim($request->responsible_profession),
+            'responsible_zip_code' => trim($request->responsible_zip_code),
+            'responsible_uf' => trim($request->responsible_uf),
+            'responsible_city' => trim($request->responsible_city),
+            'responsible_neighborhood' => trim($request->responsible_neighborhood),
+            'responsible_address' => trim($request->responsible_address),
+            'responsible_address_number' => trim($request->responsible_address_number),
+            'responsible_complement' => trim($request->responsible_complement),
         ];
 
         $response = $this->userService->update($data);
@@ -159,10 +194,12 @@ class UserController extends Controller
             if($request->phones){
                 if(count($request->phones) > 0){
 
-                    foreach ($request->phones as $number) {
+                    foreach ($request->phones as $key => $number) {
                         $data = [
                             'id_user' => $request->id,
-                            'number' => $number 
+                            'number' => $number,
+                            'is_responsible_number' => $request->phone_is_responsible_number[$key], 
+                            'is_emergency' => $request->phone_is_emergency[$key], 
                         ];
     
                         $this->phoneService->store($data);

@@ -11,6 +11,8 @@ class Phone extends Model
         'id_user',
         'number',
         'status',
+        'is_emergency',
+        'is_responsible_number',
         'created_at',
         'updated_at',
     ];

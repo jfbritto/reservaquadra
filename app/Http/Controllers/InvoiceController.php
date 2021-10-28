@@ -45,24 +45,20 @@ class InvoiceController extends Controller
         return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
     }
     
-    // public function update(Request $request) 
-    // {
-    //     $data = [
-    //         'id' => trim($request->id),
-    //         'name' => trim($request->name),
-    //         'city' => trim($request->city),
-    //         'neighborhood' => trim($request->neighborhood),
-    //         'reference' => trim($request->reference),
-    //         'description' => trim($request->description)
-    //     ];
+    public function update(Request $request) 
+    {
+        $data = [
+            'id' => trim($request->id_invoice),
+            'fiscal_note' => trim($request->fiscal_note)
+        ];
 
-    //     $response = $this->invoiceService->update($data);
+        $response = $this->invoiceService->update($data);
 
-    //     if($response['status'] == 'success')
-    //         return response()->json(['status'=>'success'], 201);
+        if($response['status'] == 'success')
+            return response()->json(['status'=>'success'], 201);
 
-    //     return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
-    // }
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+    }
     
     public function receive(Request $request) 
     {
@@ -199,20 +195,22 @@ class InvoiceController extends Controller
         return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
     
-    // public function destroy(Request $request) 
-    // {
-    //     $data = [
-    //         'id' => trim($request->id),
-    //         'status' => 'D'
-    //     ];
+    public function destroy(Request $request) 
+    {
+        $data = [
+            'id' => trim($request->id),
+            'cancel_date' => date('Y-m-d H:i:s'),
+            'id_user_canceled' => auth()->user()->id,
+            'status' => "C"
+        ];
 
-    //     $response = $this->invoiceService->destroy($data);
+        $response = $this->invoiceService->cancel($data);
 
-    //     if($response['status'] == 'success')
-    //         return response()->json(['status'=>'success'], 201);
+        if($response['status'] == 'success')
+            return response()->json(['status'=>'success'], 201);
 
-    //     return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
-    // }
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 201);    
+    }
     
     public function listNextOpen($id_student) 
     {

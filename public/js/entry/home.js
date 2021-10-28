@@ -39,6 +39,7 @@ $(document).ready(function () {
                                                 <td class="align-middle">${item.payment_method}</td>
                                                 <td class="align-middle">${item.payment_method_subtype}</td>
                                                 <td class="align-middle">${item.parcelas}</td>
+                                                <td class="align-middle">${item.fiscal_note}</td>
                                                 <td class="align-middle">${item.cliente}</td>
                                             </tr>
                                         `);       
@@ -76,6 +77,7 @@ $(document).ready(function () {
                                                 <td class="align-middle">${item.payment_method}</td>
                                                 <td class="align-middle">${item.payment_method_subtype}</td>
                                                 <td class="align-middle">${item.parcela_paga}/${item.total_parcelas}</td>
+                                                <td class="align-middle">${item.fiscal_note}</td>
                                                 <td class="align-middle">${item.cliente}</td>
                                             </tr>
                                         `);       

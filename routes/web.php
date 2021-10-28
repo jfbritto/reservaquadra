@@ -57,6 +57,8 @@ Route::group(['middleware' => ['admin']], function(){
     Route::get('/faturas/listar-entradas-por-mes', 'InvoiceController@listReceivedByMonth');
     Route::put('/faturas/receber', 'InvoiceController@receive');
     Route::post('/faturas/cadastrar', 'InvoiceController@store');
+    Route::put('/faturas/editar', 'InvoiceController@update');
+    Route::delete('/faturas/cancelar', 'InvoiceController@destroy');
     
     // tipos faturas
     Route::get('/tipos-faturas', 'InvoiceTypeController@index');

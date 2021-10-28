@@ -28,7 +28,7 @@
 
     <div class="card">
         <div class="card-header border-0">
-            <h3 class="card-title"> Dados Pessoais </h3>
+            <h3 class="card-title"> Dados do Aluno </h3>
             <div class="card-tools">
                 <a href="#" class="btn btn-tool btn-sm" id="delete-student" title="Deletar Aluno">
                     <i class="fas fa-trash"></i>
@@ -43,98 +43,167 @@
             <input type="hidden" id="id_usr" value="{{$id}}">
 
             <div class="row">
-                <div class="col-md-3 col-6">
+                <div class="col-md-8">
 
-                    <strong><i class="fas fa-user mr-1"></i> Nome</strong>
-                    <p class="text-muted" id="name"></p>
+                    <div class="row">
+                        <div class="col-md-3 change-class">
+
+                            <strong><i class="fas fa-user mr-1"></i> Nome</strong>
+                            <p class="text-muted" id="name"></p>
+
+                        </div>
+                        <div class="col-md-3 change-class">
+
+                            <strong><i class="fas fa-at mr-1"></i> Email</strong>
+                            <p class="text-muted" id="email"></p>
+
+                        </div>
+                        <div class="col-md-3 change-class">
+
+                            <strong><i class="fas fa-birthday-cake mr-1"></i> Nascimento</strong>
+                            <p class="text-muted" id="birth"></p>
+
+                        </div>
+                        <div class="col-md-3 adulto">
+
+                            <strong><i class="fas fa-user mr-1"></i> CPF</strong>
+                            <p class="text-muted" id="cpf"></p>
+
+                        </div>
+                        <div class="col-md-3 adulto">
+
+                            <strong><i class="fas fa-user mr-1"></i> RG</strong>
+                            <p class="text-muted" id="rg"></p>
+                        
+                        </div>
+                        <div class="col-md-3 adulto">
+
+                            <strong><i class="fas fa-ring mr-1"></i> Estado civil</strong>
+                            <p class="text-muted" id="civil_status"></p>
+
+                        </div>
+                        <div class="col-md-3 adulto">
+
+                            <strong><i class="fas fa-user-tie mr-1"></i> Profissão</strong>
+                            <p class="text-muted" id="profession"></p>
+
+                        </div>
+                        <div class="col-md-3 change-class">
+
+                            <strong><i class="fas fa-calendar-alt mr-1"></i> Data início</strong>
+                            <p class="text-muted" id="start_date"></p>
+
+                        </div>
+                    </div>
 
                 </div>
-                <div class="col-md-3 col-6">
+                <div class="col-md-4">
 
-                    <strong><i class="fas fa-at mr-1"></i> Email</strong>
-                    <p class="text-muted" id="email"></p>
+                    <div class="row">    
+                        <div class="col-md-6 col-6">
 
-                </div>
-                <div class="col-md-3 col-6">
+                            <strong><i class="fas fa-first-aid mr-1"></i> Plano de saúde</strong>
+                            <p class="text-muted" id="health_plan"></p>
 
-                    <strong><i class="fas fa-birthday-cake mr-1"></i> Nascimento</strong>
-                    <p class="text-muted" id="birth"></p>
+                        </div>
+                        <div class="col-md-6 col-6">
 
-                </div>
-                <div class="col-md-3 col-6">
+                            <strong><i class="fas fa-first-aid mr-1"></i> Cuidado Especial</strong>
+                            <p class="text-muted" id="special_care"></p>
 
-                    <strong><i class="fas fa-user mr-1"></i> CPF</strong>
-                    <p class="text-muted" id="cpf"></p>
+                        </div>
+                        <div class="col-md-6 col-6">
 
-                </div>
-                <div class="col-md-3 col-6">
+                            <strong><i class="fas fa-handshake mr-1"></i> Como conheceu?</strong>
+                            <p class="text-muted" id="how_met"></p>
 
-                    <strong><i class="fas fa-user mr-1"></i> RG</strong>
-                    <p class="text-muted" id="rg"></p>
-                
-                </div>
-                <div class="col-md-3 col-6">
+                        </div>
+                        <div class="col-md-6 col-6">
 
-                    <strong><i class="fas fa-ring mr-1"></i> Estado civil</strong>
-                    <p class="text-muted" id="civil_status"></p>
+                            <strong><i class="fas fa-handshake mr-1"></i> Objetivo</strong>
+                            <p class="text-muted" id="objective"></p>
 
-                </div>
-                <div class="col-md-3 col-6">
+                        </div>
 
-                    <strong><i class="fas fa-user-tie mr-1"></i> Profissão</strong>
-                    <p class="text-muted" id="profession"></p>
+                    </div>
 
                 </div>
-                <div class="col-md-3 col-6">
-
-                    <strong><i class="fas fa-calendar-alt mr-1"></i> Data início</strong>
-                    <p class="text-muted" id="start_date"></p>
-
-                </div>
-            </div>
-
-            <hr>
-
-            <div class="row" id="box-phones-registered">
-            
             </div>
 
             <hr>
 
             <div class="row">
-                <div class="col-md-10 col-8">
+                <div class="col-md-12 col-12">
                     <strong><i class="fas fa-map-marker-alt mr-1"></i> Endereço</strong>
                     <p class="text-muted" id="address"></p>
-                </div>
-                <div class="col-md-2 col-4">
-                    <strong><i class="fas fa-map-marker-alt mr-1"></i> CEP</strong>
-                    <p class="text-muted" id="zip_code"></p>
                 </div>
             </div>
 
             <hr>
 
-            <div class="row">    
-                <div class="col-md-6 col-6">
-
-                    <strong><i class="fas fa-first-aid mr-1"></i> Plano de saúde</strong>
-                    <p class="text-muted" id="health_plan"></p>
-
-                </div>
-                <div class="col-md-6 col-6">
-
-                    <strong><i class="fas fa-handshake mr-1"></i> Como conheceu?</strong>
-                    <p class="text-muted" id="how_met"></p>
-
-                </div>
-
-            </div>
+            <div class="row" id="box-phones-registered"></div>
 
         </div>
     </div>
 
 
-    <div class="row">
+    <div class="card infantil">
+        <div class="card-header border-0">
+            <h3 class="card-title"> Dados do Responsável </h3>
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-md-3">
+
+                    <strong><i class="fas fa-user mr-1"></i> Nome</strong>
+                    <p class="text-muted" id="responsible_name"></p>
+
+                </div>
+                <div class="col-md-2">
+
+                    <strong><i class="fas fa-user mr-1"></i> CPF</strong>
+                    <p class="text-muted" id="responsible_rg"></p>
+
+                </div>
+                <div class="col-md-2">
+
+                    <strong><i class="fas fa-user mr-1"></i> RG</strong>
+                    <p class="text-muted" id="responsible_cpf"></p>
+                
+                </div>
+                <div class="col-md-2">
+
+                    <strong><i class="fas fa-ring mr-1"></i> Estado civil</strong>
+                    <p class="text-muted" id="responsible_civil_status"></p>
+
+                </div>
+                <div class="col-md-3">
+
+                    <strong><i class="fas fa-user-tie mr-1"></i> Profissão</strong>
+                    <p class="text-muted" id="responsible_profession"></p>
+
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+                <div class="col-md-12 col-12">
+                    <strong><i class="fas fa-map-marker-alt mr-1"></i> Endereço</strong>
+                    <p class="text-muted" id="responsible_address"></p>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row" id="box-phones-registered-responsible"></div>
+
+        </div>
+    </div>
+
+
+    <div class="row" style="padding-bottom: 200px;">
         <div class="col-md-6">
         
             <div class="card">
@@ -272,7 +341,7 @@
     ********************************* -->
 
     <div class="modal fade" tabindex="-1" role="dialog" id="modalEditStudent">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Editar Aluno</h5>
@@ -282,39 +351,62 @@
             </div>
             <div class="modal-body">
 
-                <form id="formEditStudent">          
+                <form id="formEditStudent">        
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="registration_type_edit">Tipo Cadastro</label>
+                                <select name="registration_type_edit" id="registration_type_edit" class="form-control">
+                                    <option value="A">Adulto</option>
+                                    <option value="I">Infantil</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="name_edit">Nome</label>
                                 <input type="text" required name="name_edit" id="name_edit" class="form-control" placeholder="Informe o nome do aluno">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="email_edit">Email</label>
                                 <input type="email" name="email_edit" id="email_edit" class="form-control" placeholder="Informe o email">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="birth_edit">Data de nascimento</label>
                                 <input type="date" required name="birth_edit" id="birth_edit" class="form-control" placeholder="">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 adulto">
                             <div class="form-group">
                                 <label for="cpf_edit">CPF</label>
                                 <input type="text" name="cpf_edit" id="cpf_edit" class="form-control cpf" placeholder="Informe o CPF">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 adulto">
                             <div class="form-group">
                                 <label for="rg_edit">RG</label>
                                 <input type="text" name="rg_edit" id="rg_edit" class="form-control" placeholder="Informe o RG">
                             </div>
                         </div>
                         <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="gender_edit">Gênero</label>
+                                <select name="gender_edit" id="gender_edit" class="form-control">
+                                    <option value="">-- Selecione --</option>
+                                    <option value="F">Feminino</option>
+                                    <option value="M">Masculino</option>
+                                    <option value="O">Outro</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 adulto">
                             <div class="form-group">
                                 <label for="civil_status_edit">Estado civil</label>
                                 <select name="civil_status_edit" id="civil_status_edit" class="form-control">
@@ -326,7 +418,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 adulto">
                             <div class="form-group">
                                 <label for="profession_edit">Profissão</label>
                                 <input type="text" name="profession_edit" id="profession_edit" class="form-control" placeholder="Informe a profissão">
@@ -384,19 +476,36 @@
                     <hr>
 
                     <div class="row">    
-                        <div class="col-md-4">
+                        <div class="col-md-3" style="display: none;">
                             <div class="form-group">
                                 <label for="start_date_edit">Data início</label>
                                 <input type="date" name="start_date_edit" id="start_date_edit" class="form-control" placeholder="">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="health_plan_edit">Plano de saúde</label>
                                 <input type="text" name="health_plan_edit" id="health_plan_edit" class="form-control" placeholder="Informe o plano de saúde">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="special_care_edit">Cuidado especial?</label>
+                                <input type="text" name="special_care_edit" id="special_care_edit" class="form-control" placeholder="Informe qual">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="objective_edit">Objetivo</label>
+                                <select name="objective_edit" id="objective_edit" class="form-control">
+                                    <option value="">-- Selecione --</option>
+                                    <option value="evolucao">Evolução</option>
+                                    <option value="prazer">Prazer</option>
+                                    <option value="suor">Suor</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="how_met_edit">Como conheceu?</label>
                                 <select name="how_met_edit" id="how_met_edit" class="form-control">
@@ -410,6 +519,94 @@
                             </div>
                         </div>
 
+                    </div>
+
+                    <hr class="infantil" style="display: none;">
+
+                    <div class="row infantil" style="display: none;">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="responsible_name_edit">Nome</label>
+                                <input type="text" name="responsible_name_edit" id="responsible_name_edit" class="form-control" placeholder="Informe o nome do responsável">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="responsible_cpf_edit">CPF</label>
+                                <input type="text" name="responsible_cpf_edit" id="responsible_cpf_edit" class="form-control cpf" placeholder="Informe o CPF do responsável">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="responsible_rg_edit">RG</label>
+                                <input type="text" name="responsible_rg_edit" id="responsible_rg_edit" class="form-control" placeholder="Informe o RG do responsável">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="responsible_civil_status_edit">Estado civil</label>
+                                <select name="responsible_civil_status_edit" id="responsible_civil_status_edit" class="form-control">
+                                    <option value="">-- Selecione --</option>
+                                    <option value="Solteiro">Solteiro(a)</option>
+                                    <option value="Casado">Casado(a)</option>
+                                    <option value="Divorciado">Divorciado(a)</option>
+                                    <option value="Viuvo">Viuvo(a)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="responsible_profession_edit">Profissão</label>
+                                <input type="text" name="responsible_profession_edit" id="responsible_profession_edit" class="form-control" placeholder="Informe a profissão do responsável">
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="infantil" style="display: none;">
+                    
+                    <div class="row infantil" style="display: none;">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="responsible_zip_code_edit">CEP</label>
+                                <input type="text" name="responsible_zip_code_edit" id="responsible_zip_code_edit" data-type="edit-responsible" class="form-control zip_code" placeholder="Informe o CEP" maxlength="9">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="responsible_uf_edit">UF</label>
+                                <input type="text" name="responsible_uf_edit" id="responsible_uf_edit" class="form-control" placeholder="Informe o UF">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="responsible_city_edit">Cidade</label>
+                                <input type="text" name="responsible_city_edit" id="responsible_city_edit" class="form-control" placeholder="Informe a cidade">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="responsible_neighborhood_edit">Bairro</label>
+                                <input type="text" name="responsible_neighborhood_edit" id="responsible_neighborhood_edit" class="form-control" placeholder="Informe o bairro">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="responsible_address_edit">Endereço</label>
+                                <input type="text" name="responsible_address_edit" id="responsible_address_edit" class="form-control" placeholder="Informe o endereço">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="responsible_address_number_edit">Número</label>
+                                <input type="text" name="responsible_address_number_edit" id="responsible_address_number_edit" class="form-control" placeholder="Informe o número">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="responsible_complement_edit">Complemento</label>
+                                <input type="text" name="responsible_complement_edit" id="responsible_complement_edit" class="form-control" placeholder="Ex: Casa, Ap. 101">
+                            </div>
+                        </div>
                     </div>
 
                     <hr>
@@ -441,10 +638,28 @@
                 <div class="modal-body">
 
                     <div class="row">    
-                        <div class="col-md-12">
+                        <div class="col-md-4 phone-class">
                             <div class="form-group">
                                 <label for="phone_number">Número</label>
                                 <input type="text" name="phone_number" id="phone_number" class="form-control phone" placeholder="Informe o telefone">
+                            </div>
+                        </div>
+                        <div class="col-md-4 infantil">
+                            <div class="form-group">
+                                <label for="is_responsible_number">Pertence ao</label>
+                                <select name="is_responsible_number" id="is_responsible_number" class="form-control">
+                                    <option value="0">Aluno</option>
+                                    <option value="1">Responsável</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 phone-class">
+                            <div class="form-group">
+                                <label for="is_emergency">É de emergência?</label>
+                                <select name="is_emergency" id="is_emergency" class="form-control">
+                                    <option value="0">Não</option>
+                                    <option value="1">Sim</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -756,7 +971,6 @@
         </div>
     </div>
 
-
     <div class="modal fade" tabindex="-1" role="dialog" id="modalListInvoices">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -776,6 +990,7 @@
                                 <th>Tipo</th>
                                 <th>Vencimento</th>
                                 <th>Valor</th>
+                                <th>NF</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -783,6 +998,31 @@
                     </table>
                 </div>
 
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalEditInvoice">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Fatura</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formEditInvoice">
+                    <div class="form-group">
+                        <label for="fiscal_note">Nº Nota Fiscal</label>
+                        <input type="text" name="fiscal_note" id="fiscal_note" class="form-control" placeholder="Informe o nº da nota">
+                        <input type="hidden" id="id_invoice_edit">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" form="formEditInvoice">Salvar</button>
             </div>
             </div>
         </div>

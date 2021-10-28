@@ -25,6 +25,7 @@ class Invoice extends Model
         'id_payment_method_subtype',
         'id_payment_method_subtype_condition',
         'status',
+        'fiscal_note',
         'created_at',
         'updated_at',
     ];
