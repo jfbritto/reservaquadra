@@ -93,6 +93,7 @@ $(document).ready(function () {
                     item.name,
                     item.age, 
                     `${item.active_contracts>0?`<span class="badge badge-success">Sim</span>`:`<span class="badge badge-danger">Não</span>`}`, 
+                    `<span class="badge badge-${item.overdue_invoices>0?`danger`:`success`}">${item.overdue_invoices}</span>`, 
                     `${item.status=='A'?`<span class="badge badge-success">Ativo</span>`:`<span class="badge badge-danger">Inativo</span>`}`, 
                     `<a title="Abrir" href="/alunos/exibir/${item.id}" class="btn btn-primary open-student"><i style="color: white" class="fas fa-arrow-right"></i></a>`,
                 ]).draw();
@@ -100,7 +101,7 @@ $(document).ready(function () {
             });
 
             $("#table tbody tr").each(function() {
-                $(this).find('td:eq(4)').css('text-align','right');
+                $(this).find('td:eq(5)').css('text-align','right');
             });
 
         }

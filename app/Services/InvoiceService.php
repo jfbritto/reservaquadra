@@ -225,14 +225,14 @@ class InvoiceService
         return $response;
     }
 
-    public function listReceivedByMonth($date)
+    public function listReceivedByMonth($date_ini, $date_end)
     {
         $response = [];
 
         try{
 
-            $date_ini = date('Y-m-01 00:00:00', strtotime($date));
-            $date_fim = date('Y-m-t 23:59:59', strtotime($date));
+            $date_ini = date('Y-m-d 00:00:00', strtotime($date_ini));
+            $date_fim = date('Y-m-d 23:59:59', strtotime($date_end));
 
             $return = DB::select( DB::raw("select 
                                                 inv.*, usr.name as cliente, pmt.name as payment_method, pms.name as payment_method_subtype, pmsc.parcel as parcelas

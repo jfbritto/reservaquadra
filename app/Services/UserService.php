@@ -141,7 +141,15 @@ class UserService
         $response = [];
 
         try{
-            $return = DB::select( DB::raw("select usr.*, TIMESTAMPDIFF(YEAR, birth, CURDATE()) AS age, (select count(*) from contracts where status = 'A' and id_user = usr.id) as active_contracts from users usr where usr.status IN ('A','I') and usr.group in (".implode(',',$group).") order by usr.status, usr.name"));
+            $return = DB::select( DB::raw(" select 
+                                                usr.*, TIMESTAMPDIFF(YEAR, birth, CURDATE()) AS age, (select count(*) from contracts where status = 'A' and id_user = usr.id) as active_contracts ,
+                                                (select count(*) from invoices where status = 'A' and due_date < curdate() and id_user = usr.id) as overdue_invoices
+                                            from 
+                                                users usr 
+                                            where 
+                                                usr.status IN ('A','I') and usr.group in (".implode(',',$group).") 
+                                            order by 
+                                                usr.status, usr.name"));
 
             $response = ['status' => 'success', 'data' => $return];
         }catch(Exception $e){
@@ -186,7 +194,15 @@ class UserService
         $response = [];
 
         try{
-            $return = DB::select( DB::raw("select usr.*, TIMESTAMPDIFF(YEAR, birth, CURDATE()) AS age, (select count(*) from contracts where status = 'A' and id_user = usr.id) as active_contracts from users usr where usr.status in ('A','I') and usr.group in (".implode(',',$group).") and name like '%".$search."%' order by usr.status, usr.name"));
+            $return = DB::select( DB::raw(" select 
+                                                usr.*, TIMESTAMPDIFF(YEAR, birth, CURDATE()) AS age, (select count(*) from contracts where status = 'A' and id_user = usr.id) as active_contracts,
+                                                (select count(*) from invoices where status = 'A' and due_date < curdate() and id_user = usr.id) as overdue_invoices
+                                            from 
+                                                users usr 
+                                            where 
+                                                usr.status in ('A','I') and usr.group in (".implode(',',$group).") and name like '%".$search."%' 
+                                            order by 
+                                                usr.status, usr.name"));
 
             $response = ['status' => 'success', 'data' => $return];
         }catch(Exception $e){

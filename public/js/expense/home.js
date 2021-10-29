@@ -6,7 +6,8 @@ $(document).ready(function () {
     // LISTAR DESPESAS
     function loadExpenses()
     {
-        let date = $("#date").val();
+        let date_ini = $("#date-ini").val();
+        let date_end = $("#date-end").val();
         Swal.queue([
             {
                 title: "Carregando...",
@@ -15,7 +16,8 @@ $(document).ready(function () {
                 onOpen: () => {
                     Swal.showLoading();
                     $.get(window.location.origin + "/despesas/listar", {
-                        date
+                        date_ini,
+                        date_end
                     })
                         .then(function (data) {
                             if (data.status == "success") {
@@ -359,7 +361,7 @@ $(document).ready(function () {
 
     });
 
-    $("#date").on("change", function(){
+    $("#date-ini, #date-end").on("change", function(){
         loadExpenses();
     });
 

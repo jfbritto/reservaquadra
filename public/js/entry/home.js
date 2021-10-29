@@ -5,7 +5,8 @@ $(document).ready(function () {
     // LISTAR PLANOS
     function loadEntries()
     {
-        let date = $("#date").val();
+        let date_ini = $("#date-ini").val();
+        let date_end = $("#date-end").val();
         Swal.queue([
             {
                 title: "Carregando...",
@@ -14,7 +15,8 @@ $(document).ready(function () {
                 onOpen: () => {
                     Swal.showLoading();
                     $.get(window.location.origin + "/entradas/listar", {
-                        date
+                        date_ini,
+                        date_end
                     })
                         .then(function (data) {
                             if (data.status == "success") {
@@ -39,8 +41,8 @@ $(document).ready(function () {
                                                 <td class="align-middle">${item.payment_method}</td>
                                                 <td class="align-middle">${item.payment_method_subtype}</td>
                                                 <td class="align-middle">${item.parcelas}</td>
-                                                <td class="align-middle">${item.fiscal_note}</td>
-                                                <td class="align-middle">${item.cliente}</td>
+                                                <td class="align-middle">${item.fiscal_note==null?`-`:item.fiscal_note}</td>
+                                                <td class="align-middle"><a href="/alunos/exibir/${item.id_user}">${item.cliente}</a></td>
                                             </tr>
                                         `);       
 
@@ -77,8 +79,8 @@ $(document).ready(function () {
                                                 <td class="align-middle">${item.payment_method}</td>
                                                 <td class="align-middle">${item.payment_method_subtype}</td>
                                                 <td class="align-middle">${item.parcela_paga}/${item.total_parcelas}</td>
-                                                <td class="align-middle">${item.fiscal_note}</td>
-                                                <td class="align-middle">${item.cliente}</td>
+                                                <td class="align-middle">${item.fiscal_note==null?`-`:item.fiscal_note}</td>
+                                                <td class="align-middle"><a href="/alunos/exibir/${item.id_user}">${item.cliente}</a></td>
                                             </tr>
                                         `);       
 
@@ -111,7 +113,7 @@ $(document).ready(function () {
         ]);
     }
 
-    $("#date").on("change", function(){
+    $("#date-ini, #date-end").on("change", function(){
         loadEntries();
     });
 

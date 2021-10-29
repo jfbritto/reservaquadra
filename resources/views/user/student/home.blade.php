@@ -51,7 +51,8 @@
                         <tr>
                             <th>Nome</th>
                             <th>Idade</th>
-                            <th>Contrato ativo</th>
+                            <th>Contrato Ativo</th>
+                            <th>Fat. Vencidas</th>
                             <th>Status</th>
                             <th></th>
                         </tr>

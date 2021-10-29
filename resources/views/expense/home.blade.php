@@ -37,13 +37,34 @@
     
     <div class="card">
         <div class="card-header border-0">
-            <h3 class="card-title"> <input type="date" class="form-control" name="date" id="date" value="{{date('Y-m-d')}}"> </h3>
-            <div class="card-tools">
-                <a href="#" class="btn btn-tool btn-sm" data-toggle="modal" data-target="#modalStoreExpense">
-                <i class="fas fa-plus"></i>
-                </a>
+    
+            <div class="row">
+                <div class="col-md-6">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label for="date-ini" style="padding-right: 15px;">De</label>
+                            <input type="date" class="form-control" name="date-ini" id="date-ini" value="{{date('Y-m-01')}}">
+                        </div>
+                        <div class="form-group mx-sm-3">
+                            <label for="date-end" style="padding-right: 15px;">a</label>
+                            <input type="date" class="form-control" name="date-end" id="date-end" value="{{date('Y-m-t')}}">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6 text-right">
+                    <div class="card-tools">
+                        <a href="#" class="btn btn-tool btn-sm" data-toggle="modal" data-target="#modalStoreExpense" style="margin-top: 1px;">
+                        <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
+
+
         </div>
+    </div>
+
+    <div class="card">
         <div class="card-body p-0">
             <div class="table-responsive">
                 <table class="table table-striped table-valign-middle table-hover table-sm">

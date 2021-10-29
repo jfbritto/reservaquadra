@@ -109,9 +109,10 @@ class ExpenseController extends Controller
     
     public function list() 
     {
-        $date = $_GET['date'];
+        $date_ini = $_GET['date_ini'];
+        $date_end = $_GET['date_end'];
 
-        $response = $this->expenseService->list($date);
+        $response = $this->expenseService->list($date_ini, $date_end);
 
         if($response['status'] == 'success')
             return response()->json(['status'=>'success', 'data'=>$response['data']], 200);

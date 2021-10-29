@@ -37,16 +37,28 @@
     
     <div class="card">
         <div class="card-header border-0">
-            <h3 class="card-title"> <input type="date" class="form-control" name="date" id="date" value="{{date('Y-m-d')}}"> </h3>
+
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="date-ini" style="padding-right: 15px;">De</label>
+                    <input type="date" class="form-control" name="date-ini" id="date-ini" value="{{date('Y-m-01')}}">
+                </div>
+                <div class="form-group mx-sm-3">
+                    <label for="date-end" style="padding-right: 15px;">a</label>
+                    <input type="date" class="form-control" name="date-end" id="date-end" value="{{date('Y-m-t')}}">
+                </div>
+                <!-- <button type="submit" class="btn btn-primary mb-2">Confirm identity</button> -->
+            </form>
+
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             
             <div class="card">
                 <div class="card-header border-0">
-                    Clientes que pagaram
+                    Clientes que pagaram no período selecionado
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
@@ -57,8 +69,8 @@
                                     <th>Vencimento</th>
                                     <th>Valor</th>
                                     <th>Método</th>
-                                    <th>Subtipo/Bandeira</th>
-                                    <th>Parcelas</th>
+                                    <th>Bandeira</th>
+                                    <th title="Parcelas">Parc.</th>
                                     <th>NF</th>
                                     <th>Cliente</th>
                                 </tr>
@@ -70,11 +82,11 @@
             </div>
 
         </div>
-        <div class="col-md-6">
+        <div class="col-md-12">
 
             <div class="card">
                 <div class="card-header border-0">
-                    Recebimentos esperados
+                    Recebimentos esperados para o período selecionado
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
@@ -85,8 +97,8 @@
                                     <th>Valor</th>
                                     <th>Taxa</th>
                                     <th>Método</th>
-                                    <th>Subtipo/Bandeira</th>
-                                    <th>Parcelas</th>
+                                    <th>Bandeira</th>
+                                    <th title="Parcelas">Parc.</th>
                                     <th>NF</th>
                                     <th>Cliente</th>
                                 </tr>
