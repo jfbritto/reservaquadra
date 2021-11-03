@@ -40,7 +40,7 @@ $(document).ready(function () {
 
                                     $("#list").append(`
                                         <tr>
-                                            <td class="align-middle text-center" colspan="12">Nenhum interesse cadastrado</td>
+                                            <td class="align-middle text-center" colspan="13">Nenhum interesse cadastrado</td>
                                         </tr>
                                     `);  
                                 }
