@@ -69,6 +69,34 @@ function objectiveName(val)
     return `${result[val]}`
 }
 
+// retorna o nome do status dos interesses
+function interestStatusName(val)
+{
+    const result = {
+            'A':'Pendente',
+            'DS':'Desistiu',
+            'NHD':'Sem horário',
+            'MA':'Marcou avaliação',
+            'STA':'Se tornou aluno',
+        };
+    
+    return `${result[val]}`
+}
+
+// retorna a classe do status dos interesses
+function interestStatusClass(val)
+{
+    const result = {
+            'A':'primary',
+            'DS':'danger',
+            'NHD':'warning',
+            'MA':'info',
+            'STA':'success',
+        };
+    
+    return `${result[val]}`
+}
+
 // retorna a periodicidade do plano pelo seu numero referente enviado
 function periodContractedDescription(val)
 {

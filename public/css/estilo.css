@@ -10,6 +10,13 @@
     justify-content: center;
 }
 
+.color-success {
+  color: #28a745;
+}
+
+.color-danger {
+  color: #dc3545;
+}
 
 @media (max-width: 650px)
 {

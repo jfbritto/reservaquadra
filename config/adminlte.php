@@ -398,6 +398,12 @@ return [
         //     'url'        => 'feriados',
         //     'can'        => 'admin',
         // ],
+        [
+            'text'       => 'Interesses',
+            'icon'       => 'fas fa-fw fa-address-book' ,
+            'url'        => 'interesses',
+            'can'        => 'admin',
+        ],
         // [
         //     'text'       => 'Reservas',
         //     'icon'       => 'fas fa-fw fa-clipboard-list' ,

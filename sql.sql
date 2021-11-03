@@ -318,6 +318,37 @@ CREATE TABLE IF NOT EXISTS `holidays` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `interests` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_company` INT NULL,
+  `name` VARCHAR(45) NULL,
+  `phone1` VARCHAR(45) NULL,
+  `phone2` VARCHAR(45) NULL,
+  `objective` VARCHAR(45) NULL,
+  `age` VARCHAR(5) NULL,
+  `sun` VARCHAR(5) NULL DEFAULT '0',
+  `sun_period` VARCHAR(5) NULL DEFAULT '0',
+  `mon` VARCHAR(5) NULL DEFAULT '0',
+  `mon_period` VARCHAR(5) NULL DEFAULT '0',
+  `tue` VARCHAR(5) NULL DEFAULT '0',
+  `tue_period` VARCHAR(5) NULL DEFAULT '0',
+  `wed` VARCHAR(5) NULL DEFAULT '0',
+  `wed_period` VARCHAR(5) NULL DEFAULT '0',
+  `thu` VARCHAR(5) NULL DEFAULT '0',
+  `thu_period` VARCHAR(5) NULL DEFAULT '0',
+  `fri` VARCHAR(5) NULL DEFAULT '0',
+  `fri_period` VARCHAR(5) NULL DEFAULT '0',
+  `sat` VARCHAR(5) NULL DEFAULT '0',
+  `sat_period` VARCHAR(5) NULL DEFAULT '0',
+  `all_days` VARCHAR(5) NULL DEFAULT '0',
+  `all_days_period` VARCHAR(5) NULL DEFAULT '0',
+  `status` VARCHAR(5) NOT NULL DEFAULT 'A',
+  `avaliation_date` DATE NULL,
+  `observation` TEXT NULL,
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
 
 -- seeder
 

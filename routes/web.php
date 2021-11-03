@@ -159,4 +159,13 @@ Route::group(['middleware' => ['admin']], function(){
     Route::post('/feriados/cadastrar', 'HolidayController@store');
     Route::put('/feriados/editar', 'HolidayController@update');
     Route::delete('/feriados/deletar', 'HolidayController@destroy');
+
+    //interesses
+    Route::get('/interesses', 'InterestController@index');
+    Route::get('/interesses/listar', 'InterestController@list');
+    Route::post('/interesses/cadastrar', 'InterestController@store');
+    Route::put('/interesses/editar', 'InterestController@update');
+    Route::put('/interesses/editar-status', 'InterestController@updateStatus');
+    Route::put('/interesses/marcar-avaliacao', 'InterestController@markAvaliation');
+    Route::delete('/interesses/deletar', 'InterestController@destroy');
 });
