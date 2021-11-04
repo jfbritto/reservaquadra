@@ -213,7 +213,7 @@
                         <a href="#" class="btn btn-tool btn-sm" id="" title="Listar contratos" style="display: none;">
                             <i class="fas fa-list"></i>
                         </a>
-                        <a href="#" class="btn btn-tool btn-sm" data-toggle="modal" data-target="#modalStoreContract" id="btn-new-contract" style="display: none;" title="Cadastrar contrato">
+                        <a href="#" class="btn btn-tool btn-sm" id="btn-new-contract" style="display: none;" title="Cadastrar contrato">
                             <i class="fas fa-plus"></i>
                         </a>
                     </div>
@@ -704,13 +704,25 @@
                                 <input type="number" required name="expiration_day" id="expiration_day" class="form-control" placeholder="Informe o melhor dia para o vencimento" max="30">
                             </div>
                         </div>
-                        <div class="col-md-12 price_per_month_box">
+                        <div class="col-md-4 price_per_month_box" style="display: none;">
                             <div class="form-group">
                                 <label for="price_per_month" id="price_per_month_label">Mensalidade</label>
                                 <input type="text" required readonly name="price_per_month" id="price_per_month" class="form-control money" placeholder="Informe o valor das mensalidades">
                             </div>
                         </div>
-                        <div class="col-md-6 parcels" style="display: none;">
+                        <div class="col-md-4 price_per_month_box" style="display: none;">
+                            <div class="form-group">
+                                <label for="discount_contract" id="discount_contract_label">Desconto</label>
+                                <input type="text" name="discount_contract" id="discount_contract" class="form-control money" placeholder="Informe o valor do desconto nas mensalidades">
+                            </div>
+                        </div>
+                        <div class="col-md-4 price_per_month_box" style="display: none;">
+                            <div class="form-group">
+                                <label for="final_value" id="final_value_label">Valor Final</label>
+                                <input type="text" readonly name="final_value" id="final_value" class="form-control money">
+                            </div>
+                        </div>
+                        <div class="col-md-3 parcels" style="display: none;">
                             <div class="form-group">
                                 <label for="parcel">Parcelas</label>
                                 <select name="parcel" id="parcel" class="form-control">
@@ -762,13 +774,25 @@
                                 <input type="number" required name="expiration_day_renew" id="expiration_day_renew" class="form-control" placeholder="Informe o melhor dia para o vencimento" max="30">
                             </div>
                         </div>
-                        <div class="col-md-12 price_per_month_box_renew">
+                        <div class="col-md-4 price_per_month_box_renew" style="display: none;">
                             <div class="form-group">
                                 <label for="price_per_month_renew" id="price_per_month_label_renew">Mensalidade</label>
                                 <input type="text" required readonly name="price_per_month_renew" id="price_per_month_renew" class="form-control money" placeholder="Informe o valor das mensalidades">
                             </div>
                         </div>
-                        <div class="col-md-6 parcels_renew" style="display: none;">
+                        <div class="col-md-4 price_per_month_box_renew" style="display: none;">
+                            <div class="form-group">
+                                <label for="discount_contract_renew">Desconto</label>
+                                <input type="text" name="discount_contract_renew" id="discount_contract_renew" class="form-control money" placeholder="Informe o valor do desconto nas mensalidades">
+                            </div>
+                        </div>
+                        <div class="col-md-4 price_per_month_box_renew" style="display: none;">
+                            <div class="form-group">
+                                <label for="final_value_renew">Valor Final</label>
+                                <input type="text" readonly name="final_value_renew" id="final_value_renew" class="form-control money">
+                            </div>
+                        </div>
+                        <div class="col-md-3 parcels_renew" style="display: none;">
                             <div class="form-group">
                                 <label for="parcel_renew">Parcelas</label>
                                 <select name="parcel_renew" id="parcel_renew" class="form-control">
@@ -776,6 +800,8 @@
                                 </select>
                             </div>
                         </div>
+
+
                     </div>
 
                 </form>

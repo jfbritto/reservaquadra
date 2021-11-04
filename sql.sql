@@ -114,6 +114,8 @@ CREATE TABLE IF NOT EXISTS `contracts` (
   `expiration_day` VARCHAR(5) NOT NULL,
   `status` VARCHAR(5) NOT NULL DEFAULT 'A',
   `price_per_month` DECIMAL(10,2) NOT NULL,
+  `discount` DECIMAL(10,2) NOT NULL DEFAULT 0,
+  `parcel` INT DEFAULT NULL,
   `cancel_date` DATETIME DEFAULT NULL,
   `id_user_canceled` INT DEFAULT NULL,
   `created_at` DATETIME NULL,

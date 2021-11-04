@@ -94,6 +94,7 @@
                             <thead>
                                 <tr>
                                     <th>Compensação</th>
+                                    <th>Pagamento</th>
                                     <th>Valor</th>
                                     <th>Taxa</th>
                                     <th>Método</th>

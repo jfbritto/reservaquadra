@@ -28,12 +28,19 @@ class ContractController extends Controller
             $response = $this->contractService->renew($data);
         }
 
+        // desconto
+        $discount_formated = 0;
+        if($request->discount){
+            $discount_formated = str_replace(".", "", trim($request->discount));
+            $discount_formated = str_replace(",", ".", $discount_formated);
+        }
+
         $parcel = null;
         if($request->months >= 12){
             $price_formated = str_replace(".", "", trim($request->price_per_month));
             $price_formated = str_replace(",", ".", $price_formated);
 
-            $price_formated = number_format(($price_formated/$request->parcel),2,".","");
+            $price_formated = number_format((($price_formated - $discount_formated)/$request->parcel),2,".","");
 
             $parcel = $request->parcel;
         }else{
@@ -51,6 +58,7 @@ class ContractController extends Controller
             'status' => "A",
             'price_per_month' => $price_formated,
             'parcel' => $parcel,
+            'discount' => $discount_formated,
         ];        
 
         $response = $this->contractService->store($data);
@@ -91,7 +99,7 @@ class ContractController extends Controller
                         'id_user' => trim($request->id_user),
                         'id_contract' => trim($response['data']->id),
                         'due_date' => $due_date,
-                        'price' => trim($price_formated),
+                        'price' => trim($price_formated-$discount_formated),
                         'generate_date' => date('Y-m-d H:i:s'),
                         'id_user_generated' => auth()->user()->id,
                         'id_type' => 1,

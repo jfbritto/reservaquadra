@@ -74,6 +74,7 @@ $(document).ready(function () {
                                         $("#list2").append(`
                                             <tr>
                                                 <td class="align-middle">${dateFormat(item.billing_date)}</td>
+                                                <td class="align-middle">${dateFormat(item.paid_date)}</td>
                                                 <td class="align-middle">R$ ${moneyFormat(item.price)}</td>
                                                 <td class="align-middle">R$ ${moneyFormat(item.tax)}</td>
                                                 <td class="align-middle">${item.payment_method}</td>
