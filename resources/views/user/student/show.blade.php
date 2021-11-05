@@ -26,6 +26,8 @@
 
 @section('content')
 
+    <div id="lista-debitos"></div>
+
     <div class="card">
         <div class="card-header border-0">
             <h3 class="card-title"> Dados do Aluno </h3>
@@ -1049,6 +1051,39 @@
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" form="formEditInvoice">Salvar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalInactivateUser">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Inativar aluno</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formInactivateUser">
+                    <div class="form-group">
+                        <label for="price_debit">Adicionar Débito</label>
+                        <input type="text" name="price_debit" id="price_debit" class="form-control money" placeholder="Informe o valor do débito">
+                        <input type="hidden" id="id_user_inativate">
+                    </div>
+                    <div class="form-group">
+                        <label for="observation">Observação</label>
+                        <textarea name="observation" id="observation" class="form-control" placeholder="Informe o motivo do débito"></textarea>
+                    </div>
+                </form>
+
+                <div class="alert alert-warning">
+                    Ao inativar o aluno, seu contrato e faturas serão automaticamente cancelados.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" form="formInactivateUser">Inativar</button>
             </div>
             </div>
         </div>

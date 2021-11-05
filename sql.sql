@@ -352,6 +352,18 @@ CREATE TABLE IF NOT EXISTS `interests` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
+CREATE TABLE IF NOT EXISTS `debts` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_company` INT NULL,
+  `id_user` INT NULL,
+  `price` DECIMAL(10,2) NOT NULL,
+  `observation` TEXT NULL,
+  `status` VARCHAR(5) NOT NULL DEFAULT 'A',
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
 -- seeder
 
 INSERT INTO companies (name, responsible, phone) value ('ViniTennis', 'Vinicius', '(27) 98813-3808');

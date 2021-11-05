@@ -119,9 +119,152 @@ $(document).ready(function () {
             status = "A";
         
 
+        if(status == "A"){
+            
+            Swal.fire({
+                title: 'Atenção!',
+                text: `Deseja realmente ${txt_status} o aluno?`,
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Sim',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Não'
+                }).then((result) => {
+                    if (result.value) {
+    
+                        Swal.queue([
+                            {
+                                title: "Carregando...",
+                                allowOutsideClick: false,
+                                allowEscapeKey: false,
+                                onOpen: () => {
+                                    Swal.showLoading();
+                                    $.ajax({
+                                        url: window.location.origin + "/alunos/mudar-status",
+                                        type: 'PUT',
+                                        data: {id,status}
+                                    })
+                                        .then(function (data) {
+                                            if (data.status == "success") {
+                                                            
+                                                showSuccess(`${txt_status_resposta} com sucesso!`, null, loadAll)
+                                            } else if (data.status == "error") {
+                                                showError(data.message)
+                                            }
+                                        })
+                                        .catch();
+                                },
+                            },
+                        ]);
+    
+                    }
+                })
+
+        }else{
+            $("#id_user_inativate").val(id);
+            $("#modalInactivateUser").modal("show")
+        }
+    });
+
+    // INATIVAR ALUNO ADICIONANDO DÉBITO
+    $("#formInactivateUser").submit(function (e) {
+        e.preventDefault();
+
+        Swal.queue([
+            {
+                title: "Carregando...",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                    $.ajax({
+                        url: window.location.origin + "/debitos/cadastrar",
+                        type: 'POST',
+                        data: {
+                            id_user: $("#id_user_inativate").val(),
+                            price: $("#price_debit").val(),
+                            observation: $("#observation").val(),
+                            inactivate_user: 1
+                        }
+                    })
+                        .then(function (data) {
+                            if (data.status == "success") {
+
+                                $("#formInactivateUser").each(function () {
+                                    this.reset();
+                                });
+                                
+                                $("#modalInactivateUser").modal("hide");
+
+                                showSuccess("Inativado com sucesso!", null, loadAll)
+                            } else if (data.status == "error") {
+                                showError(data.message)
+                            }
+                        })
+                        .catch();
+                },
+            },
+        ]);
+    });
+
+    // LISTAR DÉBITOS
+    function loadDebts()
+    {
+        Swal.queue([
+            {
+                title: "Carregando...",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                onOpen: () => {
+                    Swal.showLoading();
+                    $.get(window.location.origin + "/debitos/listar", {
+                        id_user:$("#id_usr").val()
+                    })
+                        .then(function (data) {
+                            if (data.status == "success") {
+
+                                Swal.close();
+
+                                $("#lista-debitos").html(``);
+
+                                if(data.data.length > 0){
+
+                                    data.data.forEach(item => { 
+
+                                        $("#lista-debitos").append(`
+                                            <div class="alert alert-warning" role="alert">
+                                                <h4 class="alert-heading">Débito registrado</h4>
+                                                <p>Valor: <strong>R$${moneyFormat(item.price)}</strong></p>
+                                                <p><a class="btn btn-success btn-sm btn-gera-fatura-debito" style="text-decoration: none" data-id="${item.id}" data-price="${item.price}" data-id_user="${item.id_user}">Gerar fatura</a></p>
+                                                <p class="mb-0"><strong>Observação: </strong>${item.observation}.</p>
+                                            </div>
+                                        `);
+
+                                    });
+
+
+                                }
+
+                            } else if (data.status == "error") {
+                                showError(data.message)
+                            }
+                        })
+                        .catch();
+                },
+            },
+        ]);
+    }
+
+    $("#lista-debitos").on("click", ".btn-gera-fatura-debito", function(){
+
+        let id_debit = $(this).data("id");
+        let id_user = $(this).data("id_user");
+        let price = $(this).data("price");
+
         Swal.fire({
             title: 'Atenção!',
-            text: `Deseja realmente ${txt_status} o aluno?`,
+            text: `Deseja gerar a fatura de debito no valor de ${moneyFormat(price)}?`,
             type: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -139,14 +282,14 @@ $(document).ready(function () {
                             onOpen: () => {
                                 Swal.showLoading();
                                 $.ajax({
-                                    url: window.location.origin + "/alunos/mudar-status",
+                                    url: window.location.origin + "/debitos/receber",
                                     type: 'PUT',
-                                    data: {id,status}
+                                    data: {id:id_debit,price,id_user}
                                 })
                                     .then(function (data) {
                                         if (data.status == "success") {
                                                         
-                                            showSuccess(`${txt_status_resposta} com sucesso!`, null, loadAll)
+                                            showSuccess(`Fatura criada com sucesso!`, null, loadAll)
                                         } else if (data.status == "error") {
                                             showError(data.message)
                                         }
@@ -1850,6 +1993,8 @@ $(document).ready(function () {
         loadPaymentMethods();
         //listar tipos de faturas
         loadInvoiceTypes();
+        // listar débitos
+        loadDebts();
     }
 
 });

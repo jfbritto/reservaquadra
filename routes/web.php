@@ -168,4 +168,11 @@ Route::group(['middleware' => ['admin']], function(){
     Route::put('/interesses/editar-status', 'InterestController@updateStatus');
     Route::put('/interesses/marcar-avaliacao', 'InterestController@markAvaliation');
     Route::delete('/interesses/deletar', 'InterestController@destroy');
+
+    //debitos
+    // Route::get('/debitos', 'DebtController@index');
+    Route::get('/debitos/listar', 'DebtController@list');
+    Route::post('/debitos/cadastrar', 'DebtController@store');
+    Route::put('/debitos/receber', 'DebtController@receive');
+    Route::delete('/debitos/deletar', 'DebtController@destroy');
 });
