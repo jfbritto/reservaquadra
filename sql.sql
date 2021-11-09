@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `zip_code` VARCHAR(45) NULL,
   `start_date` DATE NULL,
   `health_plan` VARCHAR(45) NULL,
-  `special care` TEXT NULL,
+  `special_care` TEXT NULL,
   `objective` VARCHAR(45) NULL,
   `how_met` VARCHAR(45) NULL,
   `responsible_name` VARCHAR(45) NULL,

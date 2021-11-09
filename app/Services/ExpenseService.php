@@ -123,7 +123,7 @@ class ExpenseService
             $date_fim = date('Y-m-d 23:59:59', strtotime($date_end));
 
             $return = DB::select( DB::raw(" select 
-                                                exp.*, coc.name as name_cost_center, ccs.name as name_cost_center_subtype
+                                                exp.*, coc.name as name_cost_center, ccs.name as name_cost_center_subtype, DATE_ADD(exp.due_date, INTERVAL 1 MONTH) as next_month, ccs.name as subtype_name
                                             from expenses exp 
                                                 join cost_centers coc on coc.id=exp.id_cost_center
                                                 join cost_center_subtypes ccs on ccs.id=exp.id_cost_center_subtype
@@ -132,7 +132,7 @@ class ExpenseService
                                                 exp.status != 'D' and
                                                 exp.due_date between '".$date_ini."' and '".$date_fim."' 
                                             order by 
-                                                exp.id_cost_center, exp.status desc"));
+                                                exp.id_cost_center, exp.id_cost_center_subtype, exp.status desc"));
 
             $response = ['status' => 'success', 'data' => $return];
         }catch(Exception $e){

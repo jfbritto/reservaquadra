@@ -72,12 +72,12 @@
                         <tr>
                             <th>Vencimento</th>
                             <th>Pagamento</th>
-                            <th>Centro de custo</th>
-                            <th>Subtipo</th>
-                            <th>Valor</th>
+                            <th style="min-width: 200px;">Centro de custo</th>
+                            <th style="min-width: 200px;">Subtipo</th>
+                            <th style="min-width: 120px;">Valor</th>
                             <th>Observação</th>
                             <th>Status</th>
-                            <th></th>
+                            <th style="width: 200px;"></th>
                         </tr>
                     </thead>
                     <tbody id="list"></tbody>
@@ -221,6 +221,65 @@
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary" form="formEditPlan">Salvar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modalDuplicateExpense">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Duplicar Despeza</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form id="formDuplicateExpense">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="due_date_duplicate">Vencimento</label>
+                                <input type="date" required name="due_date_duplicate" id="due_date_duplicate" class="form-control" value="{{date('Y-m-d')}}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="price_duplicate">Valor</label>
+                                <input type="text" required name="price_duplicate" id="price_duplicate" class="form-control money" placeholder="Informe o valor">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="id_cost_center_duplicate">Centro de custo</label>
+                                <select required name="id_cost_center_duplicate" id="id_cost_center_duplicate" class="form-control">
+                                    <option value="">-- Selecione --</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="id_cost_center_subtype_duplicate">Subtipo</label>
+                                <select required name="id_cost_center_subtype_duplicate" id="id_cost_center_subtype_duplicate" class="form-control">
+                                    <option value="">-- Selecione --</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="observation_duplicate">Observação</label>
+                                <textarea name="observation_duplicate" id="observation_duplicate" cols="30" rows="3" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" form="formDuplicateExpense">Salvar</button>
             </div>
             </div>
         </div>
