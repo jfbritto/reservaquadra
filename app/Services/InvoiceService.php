@@ -71,7 +71,7 @@ class InvoiceService
 
             $result = DB::table('invoices')
                         ->where('id', $data['id'])
-                        ->update(['fiscal_note' => $data['fiscal_note']]);
+                        ->update(['fiscal_note' => $data['fiscal_note'], 'fiscal_note_e' => $data['fiscal_note_e']]);
 
             DB::commit();
 

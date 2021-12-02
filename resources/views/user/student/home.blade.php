@@ -102,25 +102,25 @@
                                 <input type="email" name="email" id="email" class="form-control" placeholder="Informe o email">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label for="birth">Data de nascimento</label>
-                                <input type="date" required name="birth" id="birth" class="form-control" placeholder="">
+                                <input type="date" name="birth" id="birth" class="form-control" placeholder="">
                             </div>
                         </div>
-                        <div class="col-md-3 adulto">
+                        <div class="col-md-4 adulto">
                             <div class="form-group">
                                 <label for="cpf">CPF</label>
                                 <input type="text" name="cpf" id="cpf" class="form-control cpf" placeholder="Informe o CPF">
                             </div>
                         </div>
-                        <div class="col-md-3 adulto">
+                        <div class="col-md-2 adulto">
                             <div class="form-group">
                                 <label for="rg">RG</label>
                                 <input type="text" name="rg" id="rg" class="form-control" placeholder="Informe o RG">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label for="gender">Gênero</label>
                                 <select name="gender" id="gender" class="form-control">
@@ -129,6 +129,12 @@
                                     <option value="M">Masculino</option>
                                     <option value="O">Outro</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="nationality">Nacionalidade</label>
+                                <input type="text" name="nationality" id="nationality" class="form-control" placeholder="Ex: Brasileiro">
                             </div>
                         </div>
                         <div class="col-md-3 adulto">
@@ -201,19 +207,19 @@
                     <hr>
 
                     <div class="row">    
-                        <div class="col-md-3" style="display: none;">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label for="start_date">Data início</label>
                                 <input type="date" name="start_date" id="start_date" class="form-control" placeholder="" value="{{date('Y-m-d')}}">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label for="health_plan">Plano de saúde?</label>
                                 <input type="text" name="health_plan" id="health_plan" class="form-control" placeholder="Informe qual">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label for="special_care">Cuidado especial?</label>
                                 <input type="text" name="special_care" id="special_care" class="form-control" placeholder="Informe qual">
@@ -251,22 +257,22 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="responsible_name">Nome</label>
-                                <input type="text" name="responsible_name" id="responsible_name" class="form-control" placeholder="Informe o nome do responsável">
+                                <input type="text" name="responsible_name" id="responsible_name" class="form-control" placeholder="Nome do responsável">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="responsible_cpf">CPF</label>
-                                <input type="text" name="responsible_cpf" id="responsible_cpf" class="form-control cpf" placeholder="Informe o CPF do responsável">
+                                <input type="text" name="responsible_cpf" id="responsible_cpf" class="form-control cpf" placeholder="CPF do responsável">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="responsible_rg">RG</label>
-                                <input type="text" name="responsible_rg" id="responsible_rg" class="form-control" placeholder="Informe o RG do responsável">
+                                <input type="text" name="responsible_rg" id="responsible_rg" class="form-control" placeholder="RG do responsável">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="responsible_civil_status">Estado civil</label>
                                 <select name="responsible_civil_status" id="responsible_civil_status" class="form-control">
@@ -278,10 +284,16 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="responsible_nationality">Nacionalidade</label>
+                                <input type="text" name="responsible_nationality" id="responsible_nationality" class="form-control" placeholder="Nacionalidade do responsável">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="responsible_profession">Profissão</label>
-                                <input type="text" name="responsible_profession" id="responsible_profession" class="form-control" placeholder="Informe a profissão do responsável">
+                                <input type="text" name="responsible_profession" id="responsible_profession" class="form-control" placeholder="Profissão do responsável">
                             </div>
                         </div>
                     </div>

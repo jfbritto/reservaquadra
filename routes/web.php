@@ -119,6 +119,7 @@ Route::group(['middleware' => ['admin']], function(){
     Route::get('/despesas', 'ExpenseController@index');
     Route::get('/despesas/listar', 'ExpenseController@list');
     Route::post('/despesas/cadastrar', 'ExpenseController@store');
+    Route::put('/despesas/editar', 'ExpenseController@update');
     Route::put('/despesas/pagar', 'ExpenseController@pay');
     Route::delete('/despesas/deletar', 'ExpenseController@destroy');
 
@@ -175,4 +176,11 @@ Route::group(['middleware' => ['admin']], function(){
     Route::post('/debitos/cadastrar', 'DebtController@store');
     Route::put('/debitos/receber', 'DebtController@receive');
     Route::delete('/debitos/deletar', 'DebtController@destroy');
+
+    //fornecedores
+    Route::get('/fornecedores', 'ProviderController@index');
+    Route::get('/fornecedores/listar', 'ProviderController@list');
+    Route::post('/fornecedores/cadastrar', 'ProviderController@store');
+    Route::put('/fornecedores/editar', 'ProviderController@update');
+    Route::delete('/fornecedores/deletar', 'ProviderController@destroy');
 });

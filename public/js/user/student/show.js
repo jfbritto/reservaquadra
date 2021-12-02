@@ -37,11 +37,13 @@ $(document).ready(function () {
                                     $("#responsible_cpf").html(item.responsible_cpf);
                                     $("#responsible_civil_status").html(item.responsible_civil_status);
                                     $("#responsible_profession").html(item.responsible_profession);
+                                    $("#responsible_nationality").html(item.responsible_nationality);
                                     $("#responsible_address").html(`${item.responsible_address} ${item.responsible_address_number}, ${item.responsible_complement}. ${item.responsible_neighborhood}, ${item.responsible_city} - ${item.responsible_uf} | ${item.responsible_zip_code}`);
                                     
                                     $("#name").html(item.name);
                                     $("#email").html(item.email);
                                     $("#birth").html(dateFormat(item.birth));
+                                    $("#nationality").html(item.nationality);
                                     $("#cpf").html(item.cpf);
                                     $("#rg").html(item.rg);
                                     $("#civil_status").html(item.civil_status);
@@ -60,6 +62,7 @@ $(document).ready(function () {
                                     $("#cpf_edit").val(item.cpf);
                                     $("#rg_edit").val(item.rg);
                                     $("#civil_status_edit").val(item.civil_status).change();
+                                    $("#nationality_edit").val(item.nationality);
                                     $("#profession_edit").val(item.profession);
                                     $("#zip_code_edit").val(item.zip_code);
                                     $("#uf_edit").val(item.uf);
@@ -82,6 +85,7 @@ $(document).ready(function () {
                                     $("#responsible_cpf_edit").val(item.responsible_cpf);
                                     $("#responsible_rg_edit").val(item.responsible_rg);
                                     $("#responsible_civil_status_edit").val(item.responsible_civil_status).change();
+                                    $("#responsible_nationality_edit").val(item.responsible_nationality);
                                     $("#responsible_profession_edit").val(item.responsible_profession);
 
                                     $("#responsible_zip_code_edit").val(item.responsible_zip_code);
@@ -561,8 +565,8 @@ $(document).ready(function () {
         $("#final_value").val(moneyFormat($("#id_plan option:selected").data('price')))
         
         if($("#id_plan option:selected").data('months') >= 13){
-            $("#expiration_day").val("1");
-            $("#expiration_day").attr("disabled", true);
+            // $("#expiration_day").val("1");
+            // $("#expiration_day").attr("disabled", true);
 
             let price = 0;
             let select = 0;
@@ -922,8 +926,9 @@ $(document).ready(function () {
                                 <td class="align-middle">${dateFormat(item.due_date)}</td>
                                 <td class="align-middle">R$ ${moneyFormat(item.price)}</td>
                                 <td class="align-middle">${item.fiscal_note==null?`-`:item.fiscal_note}</td>
+                                <td class="align-middle">${item.fiscal_note_e==null?`-`:item.fiscal_note_e}</td>
                                 <td class="align-middle" style="text-align: right">
-                                    <a title="Editar" data-id="${item.id}" href="#" class="btn btn-warning btn-sm edit-invoice"><i class="fas fa-pen"></i></a>
+                                    <a title="Editar" data-id="${item.id}" data-fiscal_note="${item.fiscal_note}" data-fiscal_note_e="${item.fiscal_note_e}" href="#" class="btn btn-warning btn-sm edit-invoice"><i class="fas fa-pen"></i></a>
                                 </td>
                             </tr>
                         `);       
@@ -952,7 +957,12 @@ $(document).ready(function () {
     $("#list-all-invoices-modal").on("click", ".edit-invoice", function(){
 
         let id_invoice = $(this).data("id");
+        let fiscal_note = $(this).data("fiscal_note");
+        let fiscal_note_e = $(this).data("fiscal_note_e");
+
         $("#id_invoice_edit").val(id_invoice);
+        $("#fiscal_note").val(fiscal_note);
+        $("#fiscal_note_e").val(fiscal_note_e);
 
         $("#modalEditInvoice").modal("show");
     });
@@ -973,6 +983,7 @@ $(document).ready(function () {
                         type: 'PUT',
                         data: {
                             fiscal_note: $("#fiscal_note").val(),
+                            fiscal_note_e: $("#fiscal_note_e").val(),
                             id_invoice: $("#id_invoice_edit").val(),
                         }
                     })
@@ -1264,8 +1275,8 @@ $(document).ready(function () {
         $("#final_value_renew").val(moneyFormat($("#id_plan option:selected").data('price')))
 
         if($("#id_plan_renew option:selected").data('months') >= 13){
-            $("#expiration_day_renew").val("1");
-            $("#expiration_day_renew").attr("disabled", true);
+            // $("#expiration_day_renew").val("1");
+            // $("#expiration_day_renew").attr("disabled", true);
 
             let price = 0;
             let select = 0;
@@ -1595,6 +1606,7 @@ $(document).ready(function () {
                             cpf: $("#cpf_edit").val(),
                             rg: $("#rg_edit").val(),
                             civil_status: $("#civil_status_edit option:selected").val(),
+                            nationality: $("#nationality_edit").val(),
                             profession: $("#profession_edit").val(),
                             zip_code: $("#zip_code_edit").val(),
                             uf: $("#uf_edit").val(),
@@ -1617,6 +1629,7 @@ $(document).ready(function () {
                             responsible_cpf: $("#responsible_cpf_edit").val(),
                             responsible_rg: $("#responsible_rg_edit").val(),
                             responsible_civil_status: $("#responsible_civil_status_edit option:selected").val(),
+                            responsible_nationality: $("#responsible_nationality_edit").val(),
                             responsible_profession: $("#responsible_profession_edit").val(),
 
                             responsible_zip_code: $("#responsible_zip_code_edit").val(),

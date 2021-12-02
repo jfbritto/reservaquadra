@@ -378,6 +378,13 @@ return [
             'url'        => 'centros-de-custo',
             'can'        => 'admin',
         ],
+        [
+            'text'       => 'Fornecedores',
+            'icon'       => 'fas fa-fw fa-shipping-fast' ,
+            // 'icon_color' => 'green',
+            'url'        => 'fornecedores',
+            'can'        => 'admin',
+        ],
 
         // ['header' => 'OUTROS'],
         // [

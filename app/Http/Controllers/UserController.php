@@ -44,14 +44,17 @@ class UserController extends Controller
 
     public function storeStudent(Request $request)
     {
+        $birth = $request->birth!=""?$request->birth:null;
+
         $data = [
             'id_company' => auth()->user()->id_company,
             'name' => trim($request->name),
             'email' => trim($request->email),
-            'birth' => trim($request->birth),
+            'birth' => $birth,
             'cpf' => trim($request->cpf),
             'rg' => trim($request->rg),
             'civil_status' => trim($request->civil_status),
+            'nationality' => trim($request->nationality),
             'profession' => trim($request->profession),
             'zip_code' => trim($request->zip_code),
             'uf' => trim($request->uf),
@@ -73,6 +76,7 @@ class UserController extends Controller
             'responsible_cpf' => trim($request->responsible_cpf),
             'responsible_rg' => trim($request->responsible_rg),
             'responsible_civil_status' => trim($request->responsible_civil_status),
+            'responsible_nationality' => trim($request->responsible_nationality),
             'responsible_profession' => trim($request->responsible_profession),
             'responsible_zip_code' => trim($request->responsible_zip_code),
             'responsible_uf' => trim($request->responsible_uf),
@@ -146,16 +150,18 @@ class UserController extends Controller
 
     public function updateStudent(Request $request) 
     {
+        $birth = $request->birth!=""?$request->birth:null;
 
         $data = [
             'id' => trim($request->id),
             'name' => trim($request->name),
             'email' => trim($request->email),
-            'birth' => trim($request->birth),
+            'birth' => $birth,
             'cpf' => trim($request->cpf),
             'rg' => trim($request->rg),
             'civil_status' => trim($request->civil_status),
             'profession' => trim($request->profession),
+            'nationality' => trim($request->nationality),
             'zip_code' => trim($request->zip_code),
             'uf' => trim($request->uf),
             'city' => trim($request->city),
@@ -176,6 +182,7 @@ class UserController extends Controller
             'responsible_rg' => trim($request->responsible_rg),
             'responsible_civil_status' => trim($request->responsible_civil_status),
             'responsible_profession' => trim($request->responsible_profession),
+            'responsible_nationality' => trim($request->responsible_nationality),
             'responsible_zip_code' => trim($request->responsible_zip_code),
             'responsible_uf' => trim($request->responsible_uf),
             'responsible_city' => trim($request->responsible_city),

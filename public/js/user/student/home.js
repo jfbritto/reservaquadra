@@ -143,6 +143,7 @@ $(document).ready(function () {
                         cpf: $("#cpf").val(),
                         rg: $("#rg").val(),
                         civil_status: $("#civil_status option:selected").val(),
+                        nationality: $("#nationality").val(),
                         profession: $("#profession").val(),
                         zip_code: $("#zip_code").val(),
                         uf: $("#uf").val(),
@@ -165,6 +166,7 @@ $(document).ready(function () {
                         responsible_cpf: $("#responsible_cpf").val(),
                         responsible_rg: $("#responsible_rg").val(),
                         responsible_civil_status: $("#responsible_civil_status option:selected").val(),
+                        responsible_nationality: $("#responsible_nationality").val(),
                         responsible_profession: $("#responsible_profession").val(),
 
                         responsible_zip_code: $("#responsible_zip_code").val(),

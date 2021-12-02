@@ -47,6 +47,9 @@
                     <label for="date-end" style="padding-right: 15px;">a</label>
                     <input type="date" class="form-control" name="date-end" id="date-end" value="{{date('Y-m-t')}}">
                 </div>
+                <div class="form-group mx-sm-3">
+                    <a href="#" class="btn btn-primary" id="search">Buscar</a>
+                </div>
                 <!-- <button type="submit" class="btn btn-primary mb-2">Confirm identity</button> -->
             </form>
 
@@ -72,6 +75,7 @@
                                     <th>Bandeira</th>
                                     <th title="Parcelas">Parc.</th>
                                     <th>NF</th>
+                                    <th>NFE</th>
                                     <th>Cliente</th>
                                 </tr>
                             </thead>
@@ -101,6 +105,7 @@
                                     <th>Bandeira</th>
                                     <th title="Parcelas">Parc.</th>
                                     <th>NF</th>
+                                    <th>NFE</th>
                                     <th>Cliente</th>
                                 </tr>
                             </thead>

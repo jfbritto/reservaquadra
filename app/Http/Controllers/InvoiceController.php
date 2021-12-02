@@ -49,7 +49,8 @@ class InvoiceController extends Controller
     {
         $data = [
             'id' => trim($request->id_invoice),
-            'fiscal_note' => trim($request->fiscal_note)
+            'fiscal_note' => trim($request->fiscal_note),
+            'fiscal_note_e' => trim($request->fiscal_note_e),
         ];
 
         $response = $this->invoiceService->update($data);

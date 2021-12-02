@@ -66,6 +66,12 @@
                             <p class="text-muted" id="birth"></p>
 
                         </div>
+                        <div class="col-md-3 change-class">
+
+                            <strong><i class="fas fa-globe-americas mr-1"></i> Nacionalidade</strong>
+                            <p class="text-muted" id="nationality"></p>
+
+                        </div>
                         <div class="col-md-3 adulto">
 
                             <strong><i class="fas fa-user mr-1"></i> CPF</strong>
@@ -156,7 +162,7 @@
         <div class="card-body">
 
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
 
                     <strong><i class="fas fa-user mr-1"></i> Nome</strong>
                     <p class="text-muted" id="responsible_name"></p>
@@ -180,10 +186,16 @@
                     <p class="text-muted" id="responsible_civil_status"></p>
 
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
 
                     <strong><i class="fas fa-user-tie mr-1"></i> Profissão</strong>
                     <p class="text-muted" id="responsible_profession"></p>
+
+                </div>
+                <div class="col-md-2">
+
+                    <strong><i class="fas fa-globe-americas mr-1"></i> Nacionalidade</strong>
+                    <p class="text-muted" id="responsible_nationality"></p>
 
                 </div>
             </div>
@@ -379,25 +391,25 @@
                                 <input type="email" name="email_edit" id="email_edit" class="form-control" placeholder="Informe o email">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label for="birth_edit">Data de nascimento</label>
-                                <input type="date" required name="birth_edit" id="birth_edit" class="form-control" placeholder="">
+                                <input type="date" name="birth_edit" id="birth_edit" class="form-control" placeholder="">
                             </div>
                         </div>
-                        <div class="col-md-3 adulto">
+                        <div class="col-md-4 adulto">
                             <div class="form-group">
                                 <label for="cpf_edit">CPF</label>
                                 <input type="text" name="cpf_edit" id="cpf_edit" class="form-control cpf" placeholder="Informe o CPF">
                             </div>
                         </div>
-                        <div class="col-md-3 adulto">
+                        <div class="col-md-2 adulto">
                             <div class="form-group">
                                 <label for="rg_edit">RG</label>
                                 <input type="text" name="rg_edit" id="rg_edit" class="form-control" placeholder="Informe o RG">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label for="gender_edit">Gênero</label>
                                 <select name="gender_edit" id="gender_edit" class="form-control">
@@ -406,6 +418,12 @@
                                     <option value="M">Masculino</option>
                                     <option value="O">Outro</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="nationality_edit">Nacionalidade</label>
+                                <input type="text" name="nationality_edit" id="nationality_edit" class="form-control" placeholder="Ex: Brasileiro">
                             </div>
                         </div>
                         <div class="col-md-3 adulto">
@@ -478,19 +496,19 @@
                     <hr>
 
                     <div class="row">    
-                        <div class="col-md-3" style="display: none;">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label for="start_date_edit">Data início</label>
                                 <input type="date" name="start_date_edit" id="start_date_edit" class="form-control" placeholder="">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label for="health_plan_edit">Plano de saúde</label>
                                 <input type="text" name="health_plan_edit" id="health_plan_edit" class="form-control" placeholder="Informe o plano de saúde">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label for="special_care_edit">Cuidado especial?</label>
                                 <input type="text" name="special_care_edit" id="special_care_edit" class="form-control" placeholder="Informe qual">
@@ -538,13 +556,13 @@
                                 <input type="text" name="responsible_cpf_edit" id="responsible_cpf_edit" class="form-control cpf" placeholder="Informe o CPF do responsável">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="responsible_rg_edit">RG</label>
                                 <input type="text" name="responsible_rg_edit" id="responsible_rg_edit" class="form-control" placeholder="Informe o RG do responsável">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="responsible_civil_status_edit">Estado civil</label>
                                 <select name="responsible_civil_status_edit" id="responsible_civil_status_edit" class="form-control">
@@ -556,7 +574,13 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="responsible_nationality_edit">Nacionalidade</label>
+                                <input type="text" name="responsible_nationality_edit" id="responsible_nationality_edit" class="form-control" placeholder="Nacionalidade do responsável">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="responsible_profession_edit">Profissão</label>
                                 <input type="text" name="responsible_profession_edit" id="responsible_profession_edit" class="form-control" placeholder="Informe a profissão do responsável">
@@ -1019,6 +1043,7 @@
                                 <th>Vencimento</th>
                                 <th>Valor</th>
                                 <th>NF</th>
+                                <th>NFE</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -1044,8 +1069,12 @@
                 <form id="formEditInvoice">
                     <div class="form-group">
                         <label for="fiscal_note">Nº Nota Fiscal</label>
-                        <input type="text" name="fiscal_note" id="fiscal_note" class="form-control" placeholder="Informe o nº da nota">
+                        <input type="text" name="fiscal_note" id="fiscal_note" class="form-control" placeholder="Informe o nº">
                         <input type="hidden" id="id_invoice_edit">
+                    </div>
+                    <div class="form-group">
+                        <label for="fiscal_note_e">Nº Nota Fiscal Eletrônica</label>
+                        <input type="text" name="fiscal_note_e" id="fiscal_note_e" class="form-control" placeholder="Informe o nº">
                     </div>
                 </form>
             </div>

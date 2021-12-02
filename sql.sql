@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `rg` VARCHAR(45) NULL,
   `cpf` VARCHAR(45) NULL,
   `civil_status` VARCHAR(45) NULL,
+  `nationality` VARCHAR(45) NULL,
   `gender` VARCHAR(45) NULL,
   `profession` VARCHAR(45) NULL,
   `address` VARCHAR(45) NULL,
@@ -53,6 +54,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `responsible_rg` VARCHAR(45) NULL,
   `responsible_cpf` VARCHAR(45) NULL,
   `responsible_civil_status` VARCHAR(45) NULL,
+  `responsible_nationality` VARCHAR(45) NULL,
   `responsible_profession` VARCHAR(45) NULL,
   `responsible_address` VARCHAR(45) NULL,
   `responsible_address_number` VARCHAR(45) NULL,
@@ -65,6 +67,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` DATETIME NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
+
+alter table users add column nationality VARCHAR(45) DEFAULT NULL after civil_status;
+alter table users add column responsible_nationality VARCHAR(45) DEFAULT NULL after responsible_civil_status;
 
 CREATE TABLE IF NOT EXISTS `courts` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -157,6 +162,7 @@ CREATE TABLE IF NOT EXISTS `invoices` (
   `id_user_generated` INT NOT NULL,
   `status` VARCHAR(5) NOT NULL DEFAULT 'A',
   `fiscal_note` VARCHAR(50) DEFAULT NULL,
+  `fiscal_note_e` VARCHAR(50) DEFAULT NULL,
   `due_date` DATE NOT NULL,
   `price` DECIMAL(10,2) NOT NULL,
   `discount` DECIMAL(10,2) DEFAULT NULL,
@@ -173,6 +179,8 @@ CREATE TABLE IF NOT EXISTS `invoices` (
   `updated_at` DATETIME NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
+
+alter table invoices add column fiscal_note_e VARCHAR(50) DEFAULT NULL after fiscal_note;
 
 alter table invoices add column `id_payment_method_subtype_condition` INT NULL after id_payment_method_subtype;
 
@@ -279,6 +287,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `expenses` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_company` INT NOT NULL,
+  `id_provider` INT DEFAULT NULL,
   `generate_date` DATETIME NOT NULL,
   `id_user_generated` INT NOT NULL,
   `due_date` DATE NOT NULL,
@@ -289,11 +298,15 @@ CREATE TABLE IF NOT EXISTS `expenses` (
   `id_cost_center` INT NOT NULL,
   `id_cost_center_subtype` INT NOT NULL,
   `observation` TEXT DEFAULT NULL,
+  `nf` VARCHAR(50) DEFAULT NULL,
   `nfe` VARCHAR(50) DEFAULT NULL,
   `created_at` DATETIME NULL,
   `updated_at` DATETIME NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
+
+alter table invoices add column nf VARCHAR(50) DEFAULT NULL after observation;
+alter table expenses add column id_provider INT DEFAULT NULL after id_company;
 
 CREATE TABLE IF NOT EXISTS `phones` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -358,6 +371,16 @@ CREATE TABLE IF NOT EXISTS `debts` (
   `id_user` INT NULL,
   `price` DECIMAL(10,2) NOT NULL,
   `observation` TEXT NULL,
+  `status` VARCHAR(5) NOT NULL DEFAULT 'A',
+  `created_at` DATETIME NULL,
+  `updated_at` DATETIME NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `providers` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_company` INT NOT NULL,
+  `name` VARCHAR(30) NOT NULL,
   `status` VARCHAR(5) NOT NULL DEFAULT 'A',
   `created_at` DATETIME NULL,
   `updated_at` DATETIME NULL,

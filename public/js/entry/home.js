@@ -42,6 +42,7 @@ $(document).ready(function () {
                                                 <td class="align-middle">${item.payment_method_subtype}</td>
                                                 <td class="align-middle">${item.parcelas}</td>
                                                 <td class="align-middle">${item.fiscal_note==null?`-`:item.fiscal_note}</td>
+                                                <td class="align-middle">${item.fiscal_note_e==null?`-`:item.fiscal_note_e}</td>
                                                 <td class="align-middle"><a href="/alunos/exibir/${item.id_user}">${item.cliente}</a></td>
                                             </tr>
                                         `);       
@@ -81,6 +82,7 @@ $(document).ready(function () {
                                                 <td class="align-middle">${item.payment_method_subtype}</td>
                                                 <td class="align-middle">${item.parcela_paga}/${item.total_parcelas}</td>
                                                 <td class="align-middle">${item.fiscal_note==null?`-`:item.fiscal_note}</td>
+                                                <td class="align-middle">${item.fiscal_note_e==null?`-`:item.fiscal_note_e}</td>
                                                 <td class="align-middle"><a href="/alunos/exibir/${item.id_user}">${item.cliente}</a></td>
                                             </tr>
                                         `);       
@@ -114,7 +116,11 @@ $(document).ready(function () {
         ]);
     }
 
-    $("#date-ini, #date-end").on("change", function(){
+    // $("#date-ini, #date-end").on("change", function(){
+    //     loadEntries();
+    // });
+
+    $("#search").on("click", function(){
         loadEntries();
     });
 

@@ -24,8 +24,11 @@ class ExpenseController extends Controller
         $price_formated = str_replace(".", "", trim($request->price));
         $price_formated = str_replace(",", ".", $price_formated);
 
+        $provider = $request->id_provider!=""?$request->id_provider:null;
+
         $data = [
             'id_company' => auth()->user()->id_company,
+            'id_provider' => $provider,
             'generate_date' => date("Y-m-d H:i:s"),
             'id_user_generated' => auth()->user()->id,
             'due_date' => trim($request->due_date),
@@ -47,33 +50,30 @@ class ExpenseController extends Controller
         return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
     }
     
-    // public function update(Request $request) 
-    // {
-    //     $price_formated = str_replace(".", "", trim($request->price));
-    //     $price_formated = str_replace(",", ".", $price_formated);
+    public function update(Request $request) 
+    {
+        $price_formated = str_replace(".", "", trim($request->price));
+        $price_formated = str_replace(",", ".", $price_formated);
 
-    //     $annual_contract = 0;
-    //     if($request->months >= 12)
-    //         $annual_contract = 1;
+        $provider = $request->id_provider!=""?$request->id_provider:null;
         
-    //     $data = [
-    //         'id' => trim($request->id),
-    //         'name' => trim($request->name),
-    //         'age_range' => trim($request->age_range),
-    //         'day_period' => trim($request->day_period),
-    //         'lessons_per_week' => trim($request->lessons_per_week),
-    //         'annual_contract' => $annual_contract,
-    //         'months' => trim($request->months),
-    //         'price' => $price_formated,
-    //     ];
+        $data = [
+            'id' => trim($request->id),
+            'id_provider' => $provider,
+            'due_date' => trim($request->due_date),
+            'price' => trim($price_formated),
+            'id_cost_center' => trim($request->id_cost_center),
+            'id_cost_center_subtype' => trim($request->id_cost_center_subtype),
+            'observation' => trim($request->observation),
+        ];
 
-    //     $response = $this->expenseService->update($data);
+        $response = $this->expenseService->update($data);
 
-    //     if($response['status'] == 'success')
-    //         return response()->json(['status'=>'success'], 200);
+        if($response['status'] == 'success')
+            return response()->json(['status'=>'success'], 200);
 
-    //     return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
-    // }
+        return response()->json(['status'=>'error', 'message'=>$response['data']], 400);    
+    }
     
     public function pay(Request $request) 
     {
@@ -111,8 +111,10 @@ class ExpenseController extends Controller
     {
         $date_ini = $_GET['date_ini'];
         $date_end = $_GET['date_end'];
+        $provider_search = $_GET['provider_search'];
+        $cost_center_search = $_GET['cost_center_search'];
 
-        $response = $this->expenseService->list($date_ini, $date_end);
+        $response = $this->expenseService->list($date_ini, $date_end, $provider_search, $cost_center_search);
 
         if($response['status'] == 'success')
             return response()->json(['status'=>'success', 'data'=>$response['data']], 200);
