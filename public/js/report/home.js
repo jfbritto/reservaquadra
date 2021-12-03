@@ -39,6 +39,14 @@ $(document).ready(function () {
                                         }]
                                     },
                                     options: {
+                                        legend: {
+                                            display: false
+                                        },
+                                        title: {
+                                            display: true,
+                                            text: 'Faturamento esperado',
+                                            fontSize: 25
+                                        },
                                         responsive: true,
                                         scales: {
                                             y: {
@@ -94,6 +102,14 @@ $(document).ready(function () {
                                         }]
                                     },
                                     options: {
+                                        legend: {
+                                            display: false
+                                        },
+                                        title: {
+                                            display: true,
+                                            text: 'Despesas esperadas',
+                                            fontSize: 25
+                                        },
                                         responsive: true,
                                         scales: {
                                             y: {

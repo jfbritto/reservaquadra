@@ -1,5 +1,20 @@
 $(document).ready(function () {
 
+    const tabela = $('#table').DataTable({
+        "paging":   true,
+        "ordering": true,
+        "order": [],
+        "info":     true,
+        "searching":false,
+        language: {
+            url: '//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json'
+        },
+        dom: 'Bfrtip',
+        buttons: [
+            'excel', 'pdf', 'print'
+        ]
+    } );
+
     loadExpenses();
     loadProviders();
     loadCostCenter();
@@ -35,32 +50,68 @@ $(document).ready(function () {
 
                                 if(data.data.length > 0){
                                     
+                                    // data.data.forEach(item => {
+
+                                    //     $("#list").append(`
+                                    //         <tr>
+                                    //             <td class="align-middle">${dateFormat(item.due_date)}</td>
+                                    //             <td class="align-middle">${dateFormat(item.paid_date)}</td>
+                                    //             <td class="align-middle">${item.provider_name!=null?item.provider_name:''}</td>
+                                    //             <td class="align-middle">${item.name_cost_center}</td>
+                                    //             <td class="align-middle">${item.name_cost_center_subtype}</td>
+                                    //             <td class="align-middle">R$ ${moneyFormat(item.price)}</td>
+                                    //             <td class="align-middle">${item.observation}</td>
+                                    //             <td class="align-middle">${item.status=='P'?'<span class="badge badge-warning">Pendente</span>':'<span class="badge badge-success">Paga</span>'}</td>
+                                    //             <td class="align-middle" style="text-align: right">
+                                    //                 <a title="Editar" data-id="${item.id}" data-id_provider="${item.id_provider}" data-price="${item.price}" data-due_date="${item.due_date}" data-id_cost_center="${item.id_cost_center}" data-id_cost_center_subtype="${item.id_cost_center_subtype}" data-subtype_name="${item.subtype_name}" data-observation="${item.observation}" href="#" class="btn btn-warning edit-expense"><i class="fas fa-pencil-alt"></i></a>
+                                    //                 ${item.status=='P'?`<a title="Informar pagamento" data-id="${item.id}" href="#" class="btn btn-success pay-expense"><i class="fas fa-comment-dollar"></i></a>`:''}
+                                    //                 <a title="Duplicar despesa" data-id="${item.id}" data-next_month="${item.next_month}" data-id_provider="${item.id_provider}" data-price="${item.price}" data-id_cost_center="${item.id_cost_center}" data-id_cost_center_subtype="${item.id_cost_center_subtype}" data-subtype_name="${item.subtype_name}" data-observation="${item.observation}" href="#" class="btn btn-primary duplicate-expense"><i class="fas fa-copy"></i></a>
+                                    //                 <a title="Deletar" data-id="${item.id}" href="#" class="btn btn-danger delete-expense"><i class="fas fa-trash-alt"></i></a>
+                                    //             </td>
+                                    //         </tr>
+                                    //     `);       
+                                        
+
+                                    //     if(item.status == 'R')
+                                    //         tot_expenses_paid += parseFloat(item.price);
+
+                                    //     if(item.status == 'P')
+                                    //         tot_expenses_pendent += parseFloat(item.price);
+                                    // });
+
+                                    tabela.clear().draw();
+        
                                     data.data.forEach(item => {
 
-                                        $("#list").append(`
-                                            <tr>
-                                                <td class="align-middle">${dateFormat(item.due_date)}</td>
-                                                <td class="align-middle">${dateFormat(item.paid_date)}</td>
-                                                <td class="align-middle">${item.provider_name!=null?item.provider_name:''}</td>
-                                                <td class="align-middle">${item.name_cost_center}</td>
-                                                <td class="align-middle">${item.name_cost_center_subtype}</td>
-                                                <td class="align-middle">R$ ${moneyFormat(item.price)}</td>
-                                                <td class="align-middle">${item.observation}</td>
-                                                <td class="align-middle">${item.status=='P'?'<span class="badge badge-warning">Pendente</span>':'<span class="badge badge-success">Paga</span>'}</td>
-                                                <td class="align-middle" style="text-align: right">
-                                                    <a title="Editar" data-id="${item.id}" data-id_provider="${item.id_provider}" data-price="${item.price}" data-due_date="${item.due_date}" data-id_cost_center="${item.id_cost_center}" data-id_cost_center_subtype="${item.id_cost_center_subtype}" data-subtype_name="${item.subtype_name}" data-observation="${item.observation}" href="#" class="btn btn-warning edit-expense"><i class="fas fa-pencil-alt"></i></a>
-                                                    ${item.status=='P'?`<a title="Informar pagamento" data-id="${item.id}" href="#" class="btn btn-success pay-expense"><i class="fas fa-comment-dollar"></i></a>`:''}
-                                                    <a title="Duplicar despesa" data-id="${item.id}" data-next_month="${item.next_month}" data-id_provider="${item.id_provider}" data-price="${item.price}" data-id_cost_center="${item.id_cost_center}" data-id_cost_center_subtype="${item.id_cost_center_subtype}" data-subtype_name="${item.subtype_name}" data-observation="${item.observation}" href="#" class="btn btn-primary duplicate-expense"><i class="fas fa-copy"></i></a>
-                                                    <a title="Deletar" data-id="${item.id}" href="#" class="btn btn-danger delete-expense"><i class="fas fa-trash-alt"></i></a>
-                                                </td>
-                                            </tr>
-                                        `);       
+                                        tabela.row.add( [
+                                            dateFormat(item.due_date), 
+                                            dateFormat(item.paid_date), 
+                                            item.provider_name!=null?item.provider_name:'', 
+                                            item.name_cost_center, 
+                                            item.name_cost_center_subtype, 
+                                            moneyFormat(item.price), 
+                                            item.observation, 
+                                            item.status=='P'?'<span class="badge badge-warning">Pendente</span>':'<span class="badge badge-success">Paga</span>', 
+                                            `<a title="Editar" data-id="${item.id}" data-id_provider="${item.id_provider}" data-price="${item.price}" data-due_date="${item.due_date}" data-id_cost_center="${item.id_cost_center}" data-id_cost_center_subtype="${item.id_cost_center_subtype}" data-subtype_name="${item.subtype_name}" data-observation="${item.observation}" href="#" class="btn btn-warning edit-expense"><i class="fas fa-pencil-alt"></i></a>
+                                            ${item.status=='P'?`<a title="Informar pagamento" data-id="${item.id}" href="#" class="btn btn-success pay-expense"><i class="fas fa-comment-dollar"></i></a>`:''}
+                                            <a title="Duplicar despesa" data-id="${item.id}" data-next_month="${item.next_month}" data-id_provider="${item.id_provider}" data-price="${item.price}" data-id_cost_center="${item.id_cost_center}" data-id_cost_center_subtype="${item.id_cost_center_subtype}" data-subtype_name="${item.subtype_name}" data-observation="${item.observation}" href="#" class="btn btn-primary duplicate-expense"><i class="fas fa-copy"></i></a>
+                                            <a title="Deletar" data-id="${item.id}" href="#" class="btn btn-danger delete-expense"><i class="fas fa-trash-alt"></i></a>`, 
+                                        ]).draw();
 
                                         if(item.status == 'R')
                                             tot_expenses_paid += parseFloat(item.price);
 
                                         if(item.status == 'P')
                                             tot_expenses_pendent += parseFloat(item.price);
+
+                                    });
+
+                                    $("#table tbody tr").each(function() {
+                                        $(this).find('td:eq(3)').css('width','200px');
+                                        $(this).find('td:eq(4)').css('width','200px');
+                                        $(this).find('td:eq(5)').css('width','100px');
+                                        $(this).find('td:eq(6)').css('width','250px');
+                                        $(this).find('td:eq(8)').css('width','250px');
                                     });
 
                                 }else{

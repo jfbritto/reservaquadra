@@ -74,9 +74,9 @@
     </div>
 
     <div class="card">
-        <div class="card-body p-0">
+        <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-valign-middle table-hover table-sm">
+                <table class="table table-striped table-valign-middle table-hover table-sm" id="table">
                     <thead>
                         <tr>
                             <th>Vencimento</th>

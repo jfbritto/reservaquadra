@@ -61,11 +61,11 @@
             
             <div class="card">
                 <div class="card-header border-0">
-                    Clientes que pagaram no período selecionado
+                    Faturas pagas no período selecionado
                 </div>
-                <div class="card-body p-0">
+                <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped table-valign-middle table-hover table-sm">
+                        <table class="table table-striped table-valign-middle table-hover table-sm" id="table">
                             <thead>
                                 <tr>
                                     <th>Pagamento</th>
@@ -92,9 +92,9 @@
                 <div class="card-header border-0">
                     Recebimentos esperados para o período selecionado
                 </div>
-                <div class="card-body p-0">
+                <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-striped table-valign-middle table-hover table-sm">
+                        <table class="table table-striped table-valign-middle table-hover table-sm" id="table2">
                             <thead>
                                 <tr>
                                     <th>Compensação</th>
