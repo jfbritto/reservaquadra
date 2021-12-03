@@ -59,13 +59,6 @@
 
     </div>
 
-    <div class="card">
-        <div class="card-body">
-            <canvas id="myChart" width="400" ></canvas>
-        </div>
-    </div>
-
-
 @stop
 
 @section('js')
