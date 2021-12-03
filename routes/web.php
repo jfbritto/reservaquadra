@@ -183,4 +183,9 @@ Route::group(['middleware' => ['admin']], function(){
     Route::post('/fornecedores/cadastrar', 'ProviderController@store');
     Route::put('/fornecedores/editar', 'ProviderController@update');
     Route::delete('/fornecedores/deletar', 'ProviderController@destroy');
+
+    //relatórios
+    Route::get('/relatorios', 'ReportController@index');
+    Route::get('/relatorios/entradas', 'ReportController@entry');
+    Route::get('/relatorios/despesas', 'ReportController@expense');
 });

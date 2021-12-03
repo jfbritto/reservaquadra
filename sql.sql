@@ -305,7 +305,7 @@ CREATE TABLE IF NOT EXISTS `expenses` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-alter table invoices add column nf VARCHAR(50) DEFAULT NULL after observation;
+alter table expenses add column nf VARCHAR(50) DEFAULT NULL after observation;
 alter table expenses add column id_provider INT DEFAULT NULL after id_company;
 
 CREATE TABLE IF NOT EXISTS `phones` (
