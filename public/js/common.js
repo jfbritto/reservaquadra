@@ -243,7 +243,7 @@ $("#zip_code, #zip_code_edit, #responsible_zip_code, #responsible_zip_code_edit"
                 allowEscapeKey: false,
                 onOpen: () => {
                     Swal.showLoading();
-                    $.get(`http://viacep.com.br/ws/${zip_code}/json`, { })
+                    $.get(`https://viacep.com.br/ws/${zip_code}/json`, { })
                         .then(function (data) {
 
                             if(data.erro){
