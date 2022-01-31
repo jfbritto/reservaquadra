@@ -110,7 +110,7 @@ $(document).ready(function () {
 
                                     $("#list").append(`
                                         <tr>
-                                            <td class="align-middle text-center" colspan="8">Nenhuma entrada encontrada</td>
+                                            <td class="align-middle text-center" colspan="9">Nenhuma entrada encontrada</td>
                                         </tr>
                                     `);  
 
@@ -174,7 +174,7 @@ $(document).ready(function () {
 
                                     $("#list2").append(`
                                         <tr>
-                                            <td class="align-middle text-center" colspan="9">Nenhuma entrada encontrada</td>
+                                            <td class="align-middle text-center" colspan="10">Nenhuma entrada encontrada</td>
                                         </tr>
                                     `);  
 
