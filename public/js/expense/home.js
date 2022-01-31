@@ -111,7 +111,7 @@ $(document).ready(function () {
                                         $(this).find('td:eq(4)').css('width','200px');
                                         $(this).find('td:eq(5)').css('width','100px');
                                         $(this).find('td:eq(6)').css('width','250px');
-                                        $(this).find('td:eq(8)').css('width','250px');
+                                        $(this).find('td:eq(8)').css('width','250px').css('text-align','right');
                                     });
 
                                 }else{

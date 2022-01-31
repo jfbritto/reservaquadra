@@ -121,6 +121,8 @@ $(document).ready(function () {
 
                                 // ENTRADAS NO MÊS
 
+                                console.log(data.data)
+
                                 if(data.data.response2.length > 0){
                                     
                                     // data.data.response2.forEach(item => {
@@ -177,6 +179,8 @@ $(document).ready(function () {
                                     `);  
 
                                 }
+
+                                console.log(`valor: ${tot_billed}`)
 
                                 $("#tot-billed").html("R$ "+moneyFormat(tot_billed));
 

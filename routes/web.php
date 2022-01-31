@@ -16,7 +16,7 @@ Route::get('/listar-dias-disponiveis/{id}', 'ExternalController@listWeekDays');
 Route::get('/listar-horarios-disponiveis/{id}/{week_day}/{day}', 'ExternalController@listAvailableDayTimes');
 Route::post('/reservar-horario', 'ExternalController@store');
 
-Route::group(['middleware' => ['admin']], function(){
+Route::group(['middleware' => ['admin']], function () {
 
     //logout
     Route::post('/logout', 'AuthenticateController@logout');
@@ -50,7 +50,7 @@ Route::group(['middleware' => ['admin']], function(){
     Route::get('/contratos/listar/{id_student}', 'ContractController@list');
     Route::post('/contratos/cadastrar', 'ContractController@store');
     Route::delete('/contratos/cancelar', 'ContractController@destroy');
-    
+
     // faturas
     Route::get('/faturas/listar/{id_student}', 'InvoiceController@listNextOpen');
     Route::get('/faturas/listar-recebidas/{id_student}', 'InvoiceController@listReceivedsByStudent');
@@ -59,7 +59,7 @@ Route::group(['middleware' => ['admin']], function(){
     Route::post('/faturas/cadastrar', 'InvoiceController@store');
     Route::put('/faturas/editar', 'InvoiceController@update');
     Route::delete('/faturas/cancelar', 'InvoiceController@destroy');
-    
+
     // tipos faturas
     Route::get('/tipos-faturas', 'InvoiceTypeController@index');
     Route::get('/tipos-faturas/listar', 'InvoiceTypeController@list');
@@ -80,7 +80,7 @@ Route::group(['middleware' => ['admin']], function(){
     Route::get('/aulas-programadas/buscar', 'ScheduledClassesController@search');
     Route::post('/aulas-programadas/cadastrar', 'ScheduledClassesController@store');
     Route::delete('/aulas-programadas/deletar', 'ScheduledClassesController@destroy');
-    
+
     // aulas programadas resultado
     Route::get('/aulas-programadas-resultado/listar/{id}', 'ScheduledClassesResultController@list');
     Route::post('/aulas-programadas-resultado/cadastrar', 'ScheduledClassesResultController@store');
